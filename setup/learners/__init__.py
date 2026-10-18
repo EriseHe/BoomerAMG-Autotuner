@@ -1,4 +1,4 @@
-"""The setup learner used in the SISC online and matched-hierarchy studies."""
+"""Setup learner for online and matched-hierarchy studies."""
 
 from .linucb import SharedLinUCB
 

@@ -1,4 +1,4 @@
-"""Episode-cluster recursive LSTDQ used by the SISC studies."""
+"""Episode-cluster recursive LSTDQ."""
 
 from .config import RecursiveLstdqSpec
 from .controller import RecursiveLstdqController

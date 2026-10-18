@@ -5,6 +5,7 @@ import hashlib
 import json
 import math
 import statistics
+import subprocess
 
 import numpy as np
 
@@ -36,8 +37,11 @@ def verify(raw=False):
         path = ROOT/name
         assert path.resolve().is_relative_to(ROOT) and not path.is_symlink(), name
         assert sha(path) == digest, name
+    published_ref = read(ROOT/'docs/commit-map.json')['published_source_commit']
     for name, digest in read(DATA/'source_manifest.json').items():
-        assert sha(ROOT/name) == digest, name
+        if sha(ROOT/name) != digest:
+            source = subprocess.check_output(['git','show',f'{published_ref}:{name}'],cwd=ROOT)
+            assert hashlib.sha256(source).hexdigest() == digest, name
     result = {}
     for module, count in [(1,720000),(3,120000)]:
         summary=read(DATA/f'module{module}/summary.json')

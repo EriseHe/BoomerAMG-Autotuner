@@ -3,7 +3,7 @@ from __future__ import annotations
 from .artifacts import ROOT
 
 def execution_source_paths():
-    """Capture current submission source, excluding vendor and data artifacts."""
+    """Capture current project source, excluding vendor and data artifacts."""
     packages = (
         "experiments/paper_final",
         "experiments/paper_final/online",
