@@ -278,6 +278,12 @@ class GenericActionFeatureEncoder:
         self.categorical_dim = sum(
             len(levels) for levels in self.categorical_levels.values()
         )
+        self.descriptor_names = self.numeric_names + tuple(
+            f"{param.name}={value}"
+            for param in self.categorical_params
+            for value in self.categorical_levels[param.name]
+        )
+        self.descriptor_dim = len(self.descriptor_names)
         self.mixed_dim = self.numeric_dim * self.categorical_dim
         self.numeric_feature_dim = (
             self.numeric_dim
@@ -330,6 +336,9 @@ class GenericActionFeatureEncoder:
         """Encode a table containing only the numeric parameter prefix."""
 
         normalized = self._normalized_numeric_table(values, active=active)
+        return self._numeric_features(normalized)
+
+    def _numeric_features(self, normalized: np.ndarray) -> np.ndarray:
         pairwise = (
             np.column_stack(
                 [
@@ -346,7 +355,9 @@ class GenericActionFeatureEncoder:
             axis=1,
         )
 
-    def encode_action(self, params: Mapping[str, Any]) -> np.ndarray:
+    def _setup_components(
+        self, params: Mapping[str, Any]
+    ) -> tuple[np.ndarray, np.ndarray]:
         action = canonicalize_action_from_spec(params, self.parameter_spec)
 
         numeric_vals = []
@@ -370,26 +381,31 @@ class GenericActionFeatureEncoder:
                         )
                     )
 
-        numeric_features = self.encode_numeric_table(
+        normalized_numeric = self._normalized_numeric_table(
             np.asarray(numeric_vals, dtype=float).reshape(1, -1),
             active=np.asarray(numeric_active, dtype=bool).reshape(1, -1),
         )[0]
-        normalized_numeric = numeric_features[: self.numeric_dim]
         categorical = (
             np.concatenate(categorical_blocks, axis=0)
             if categorical_blocks
             else np.zeros(0, dtype=float)
         )
 
-        mixed_blocks = []
-        for cat_block in categorical_blocks:
-            for indicator in cat_block:
-                mixed_blocks.append(float(indicator) * normalized_numeric)
-        mixed = (
-            np.concatenate(mixed_blocks, axis=0)
-            if mixed_blocks
-            else np.zeros(0, dtype=float)
-        )
+        return normalized_numeric, categorical
+
+    def encode_setup(self, params: Mapping[str, Any]) -> np.ndarray:
+        """Shared scaled numerical and reference-category one-hot descriptors.
+
+        Solve control consumes these descriptors directly. Setup selection adds
+        its polynomial and interaction terms to exactly the same components.
+        """
+        numeric, categorical = self._setup_components(params)
+        return np.concatenate((numeric, categorical))
+
+    def encode_action(self, params: Mapping[str, Any]) -> np.ndarray:
+        normalized_numeric, categorical = self._setup_components(params)
+        numeric_features = self._numeric_features(normalized_numeric[None, :])[0]
+        mixed = (categorical[:, None] * normalized_numeric[None, :]).ravel()
 
         return np.concatenate(
             [numeric_features, categorical, mixed],

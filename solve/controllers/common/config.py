@@ -9,6 +9,7 @@ from solve.controllers.common.td_config import ExpectedSarsaLambdaConfig
 from .state_encoder import (
     CANONICAL_PROBLEM_CONTEXT,
     PROBLEM_CONTEXT_MODES,
+    STATE_ENCODING_VERSION,
     STATE_ENCODING_VERSIONS,
     SolveStateEncoder,
 )
@@ -103,7 +104,7 @@ class SolveStateSpec:
     time_scale_sec: float = 2.0e-3
     mode: str = "setup_full"
     problem_context_mode: str = CANONICAL_PROBLEM_CONTEXT
-    encoding_version: str = "legacy_v1"
+    encoding_version: str = STATE_ENCODING_VERSION
 
     def __post_init__(self) -> None:
         if self.encoding_version not in STATE_ENCODING_VERSIONS:
@@ -146,7 +147,7 @@ class SolveStateSpec:
             encoding_version=self.encoding_version,
             weight_bounds=(
                 (min(weights), max(weights))
-                if self.encoding_version == "space_aware_v2" and weights is not None
+                if weights is not None
                 else None
             ),
         )

@@ -17,6 +17,7 @@ from solve.controllers.common import (
     SolveStateSpec,
 )
 from solve.controllers.recursive_lstdq import RecursiveLstdqSpec
+from solve.controllers.common.state_encoder import STATE_ENCODING_VERSION
 from solve.registry import (
     ONLINE_SOLVE_KINDS,
     OnlineControllerBuildSpec,
@@ -435,7 +436,7 @@ class JointSolveSpec:
             max_cycles=max_cycles,
             c_max=float(problem.c_max),
             mode="setup_full",
-            encoding_version=str(raw.get("state_encoding", "legacy_v1")),
+            encoding_version=str(raw.get("state_encoding", STATE_ENCODING_VERSION)),
         )
         lstdq = mapping(raw.get("lstdq", {}), name="solve.lstdq")
         # Preserve the exact archived settings while fresh configs use only lstdq.

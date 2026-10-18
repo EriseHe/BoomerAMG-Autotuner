@@ -1,21 +1,18 @@
-"""Build the setup observation encoder for the official solve controller."""
+"""Build the setup feature map shared by setup selection and solve control."""
 
 from __future__ import annotations
-from dataclasses import replace
+from setup.learners.common import GenericActionFeatureEncoder
 from setup.space import (
-    DEFAULT_SETUP_PARAMS,
     SetupConfigurationSpace,
-    SetupObsEncoder,
     build_setup_parameter_spec,
 )
 
 
-def make_setup_obs_encoder(
+def make_setup_feature_encoder(
     *,
     configuration_space: SetupConfigurationSpace | None = None,
     parameter_resolution: int | None = None,
-    strict_categories: bool = False,
-) -> SetupObsEncoder:
+) -> GenericActionFeatureEncoder:
     parameter_spec, _fixed_params = build_setup_parameter_spec(
         tune_dim=7,
         tune7_variant="categorical",
@@ -31,20 +28,4 @@ def make_setup_obs_encoder(
         ),
         numeric_grids=configuration_space.numeric_grids if configuration_space else None,
     )
-    if strict_categories:
-        # The native default remains a valid observation even outside a grid.
-        parameter_spec = replace(
-            parameter_spec,
-            parameters=tuple(
-                replace(param, values=(*param.values, param.default))
-                if param.kind == "categorical" and param.default not in param.values
-                else param
-                for param in parameter_spec.parameters
-            ),
-        )
-    return SetupObsEncoder(
-        parameter_spec,
-        dict(DEFAULT_SETUP_PARAMS),
-        tuple(parameter_spec.parameter_names),
-        strict_categories=strict_categories,
-    )
+    return GenericActionFeatureEncoder(parameter_spec)

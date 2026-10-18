@@ -97,14 +97,14 @@ def _shared_protocol_metadata(
         "state_encoder": {
             "encoding_version": encoder.encoding_version,
             "weight_bounds": encoder.weight_bounds,
-            "setup_observed_keys": list(request.setup_obs_encoder.observed_keys),
+            "setup_observed_keys": list(request.setup_obs_encoder.parameter_spec.parameter_names),
+            "setup_descriptor_names": list(request.setup_obs_encoder.descriptor_names),
+            "setup_descriptor_dim": request.setup_obs_encoder.descriptor_dim,
+            "setup_categorical_encoding": "reference_one_hot",
             "setup_parameter_spec": (
                 asdict(request.setup_obs_encoder.parameter_spec)
                 if hasattr(request.setup_obs_encoder, "parameter_spec")
                 else None
-            ),
-            "strict_setup_categories": bool(
-                getattr(request.setup_obs_encoder, "strict_categories", False)
             ),
             "tol": float(request.state.tol),
             "max_cycles": int(request.state.max_cycles),

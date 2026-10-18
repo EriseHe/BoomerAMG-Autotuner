@@ -30,11 +30,12 @@ PROBLEM_CONTEXT_MODES = (
     DIFFUSION_ADVECTION_NO_MEAN_CONTEXT,
     *COMPACT_DIFFUSION_CONTEXT_INDICES,
 )
-STATE_ENCODING_VERSIONS = ("legacy_v1", "space_aware_v2")
+STATE_ENCODING_VERSION = "shared_setup_one_hot_tolerance_residuals"
+STATE_ENCODING_VERSIONS = (STATE_ENCODING_VERSION,)
 
 
 class SolveStateEncoder:
-    """Small bounded feature map for a stream of short AMG solve episodes."""
+    """Cycle observations with the setup learner's shared configuration features."""
 
     _CYCLE_BOUNDS = np.asarray([1, 2, 3, 5, 8, 12], dtype=int)
 
@@ -48,10 +49,13 @@ class SolveStateEncoder:
         mode: str = "full",
         setup_obs_encoder: Any | None = None,
         problem_context_mode: str = CANONICAL_PROBLEM_CONTEXT,
-        encoding_version: str = "legacy_v1",
+        encoding_version: str = STATE_ENCODING_VERSION,
         weight_bounds: tuple[float, float] | None = None,
     ) -> None:
         self.tol = float(tol)
+        if not math.isfinite(self.tol) or self.tol <= 0.0:
+            raise ValueError("Solve tolerance must be finite and positive")
+        self._log_tolerance = math.log(self.tol)
         self.max_cycles = int(max_cycles)
         self.c_max = float(c_max)
         self.time_scale_sec = float(time_scale_sec)
@@ -63,15 +67,14 @@ class SolveStateEncoder:
                 f"encoding_version must be one of {STATE_ENCODING_VERSIONS}"
             )
         self.weight_bounds = weight_bounds
-        if self.encoding_version == "space_aware_v2":
-            if weight_bounds is None or len(weight_bounds) != 2:
-                raise ValueError("space_aware_v2 requires actual action weight bounds")
-            low, high = map(float, weight_bounds)
-            if not all(math.isfinite(v) for v in (low, high)) or high < low:
-                raise ValueError("action weight bounds must be finite and ordered")
-            self.weight_bounds = (low, high)
-            self._weight_center = (low + high) / 2.0
-            self._weight_scale = (high - low) / 2.0 if high > low else 1.0
+        if weight_bounds is None or len(weight_bounds) != 2:
+            raise ValueError("The solve encoder requires actual action weight bounds")
+        low, high = map(float, weight_bounds)
+        if not all(math.isfinite(v) for v in (low, high)) or high < low:
+            raise ValueError("action weight bounds must be finite and ordered")
+        self.weight_bounds = (low, high)
+        self._weight_center = (low + high) / 2.0
+        self._weight_scale = (high - low) / 2.0 if high > low else 1.0
         self.problem_context_mode = str(problem_context_mode).strip().lower()
         if self.problem_context_mode not in PROBLEM_CONTEXT_MODES:
             raise ValueError(
@@ -125,7 +128,7 @@ class SolveStateEncoder:
                     raise ValueError(
                         "setup_full mode requires a setup observation encoder"
                     )
-                setup_dim = len(self.setup_obs_encoder.observed_keys)
+                setup_dim = self.setup_obs_encoder.descriptor_dim
             self.feature_dim = self._setup_offset + setup_dim
             self._cycle_features = None
         elif self.mode == "cycle_tabular":
@@ -154,16 +157,23 @@ class SolveStateEncoder:
         eps = 1.0e-30
         initial_residual_value = float(initial_residual)
         if self._cached_initial_residual != initial_residual_value:
+            if not math.isfinite(initial_residual_value) or initial_residual_value <= self.tol:
+                raise ValueError("An active solve requires initial_residual > tolerance")
+            initial_gap = math.log(initial_residual_value) - self._log_tolerance
+            if initial_gap <= 0.0:
+                raise ValueError("Initial log-residual gap must be positive")
+            self._cached_initial_gap = initial_gap
             self._cached_initial_residual = initial_residual_value
-            self._cached_initial_gap = max(
-                math.log(max(initial_residual_value, self.tol) / self.tol),
-                eps,
-            )
         initial_gap = self._cached_initial_gap
-        gap = math.log(max(float(residual), self.tol) / self.tol)
-        gap_fraction = min(max(gap / initial_gap, 0.0), 1.5)
-        log_ratio = math.log((float(residual) + eps) / (float(previous_residual) + eps))
-        log_ratio = min(max(log_ratio / 5.0, -1.0), 1.0)
+        if any(not math.isfinite(value) or value <= 0.0
+               for value in (float(residual), float(previous_residual))):
+            raise ValueError("Residual state observations must be finite and positive")
+        log_residual = math.log(float(residual))
+        log_previous_residual = math.log(float(previous_residual))
+        # Both features use the required log reduction G = log(r0 / tol).
+        # With no clipping, d_k = g_k - g_(k-1): contraction is negative.
+        gap_fraction = (log_residual - self._log_tolerance) / initial_gap
+        log_ratio = (log_residual - log_previous_residual) / initial_gap
         cycle_fraction = min(
             max(float(cycle) / max(1.0, float(self.max_cycles)), 0.0),
             1.0,
@@ -175,16 +185,10 @@ class SolveStateEncoder:
             )
             / 5.0
         )
-        if self.encoding_version == "legacy_v1":
-            weight = min(max((float(last_weight) - 1.4) / 0.4, -1.0), 1.5)
-        else:
-            weight = min(
-                max(
-                    (float(last_weight) - self._weight_center) / self._weight_scale,
-                    -1.0,
-                ),
-                1.0,
-            )
+        weight = min(
+            max((float(last_weight) - self._weight_center) / self._weight_scale, -1.0),
+            1.0,
+        )
 
         if self.problem_context_mode in STRESS_CONTEXT_FIELDS:
             resolved_context = validate_context(
@@ -256,14 +260,13 @@ class SolveStateEncoder:
         if self.mode == "setup_full":
             assert self.setup_obs_encoder is not None
             params = {} if setup_params is None else setup_params
-            setup_defaults = getattr(self.setup_obs_encoder, "defaults", {})
             setup_key = tuple(
-                params.get(key, setup_defaults.get(key, 0.0))
-                for key in self.setup_obs_encoder.observed_keys
+                params.get(param.name, param.default)
+                for param in self.setup_obs_encoder.parameter_spec.parameters
             )
             if self._cached_setup_key != setup_key:
                 setup_features = np.asarray(
-                    self.setup_obs_encoder.encode(params),
+                    self.setup_obs_encoder.encode_setup(params),
                     dtype=float,
                 )
                 self._cached_setup_features = setup_features

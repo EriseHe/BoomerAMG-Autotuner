@@ -114,14 +114,13 @@ class ControllerBundle:
         return summary
 
     def save(self, path: Path) -> None:
-        """Persist the native controller checkpoint without schema changes."""
+        """Persist the controller and its exact shared setup encoding."""
 
         self.controller.save(path)
-        if self.encoder.encoding_version != "legacy_v1":
-            path.with_suffix(path.suffix + ".encoder.json").write_text(
-                json.dumps(self._protocol_metadata["state_encoder"], indent=2) + "\n",
-                encoding="utf-8",
-            )
+        path.with_suffix(path.suffix + ".encoder.json").write_text(
+            json.dumps(self._protocol_metadata["state_encoder"], indent=2) + "\n",
+            encoding="utf-8",
+        )
 
     def load(self, path: Path) -> None:
         """Reject feature-incompatible checkpoints before changing learner state."""
@@ -131,7 +130,7 @@ class ControllerBundle:
             expected = json.loads(json.dumps(self._protocol_metadata["state_encoder"]))
             if json.loads(sidecar.read_text(encoding="utf-8")) != expected:
                 raise ValueError("Checkpoint state encoder does not match this bundle")
-        elif self.encoder.encoding_version != "legacy_v1":
+        else:
             raise ValueError(
                 "Versioned state encoder requires checkpoint encoder metadata"
             )

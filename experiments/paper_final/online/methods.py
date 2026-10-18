@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 from typing import Any, Dict, Mapping, Sequence
 import numpy as np
-from experiments.paper_final.online.controllers import make_setup_obs_encoder
+from experiments.paper_final.online.controllers import make_setup_feature_encoder
 from experiments.paper_final.online.method_spec import ComposableMethodSpec
 from experiments.paper_final.online.artifacts import _write_json_line
 from experiments.paper_final.online.case_loop import _method_stream_summary
@@ -495,21 +495,12 @@ def build_composable_solve_runtime(
                 resolved_controller_spec = replace(
                     typed_controller_spec, state=replace(typed_state, **state_overrides)
                 )
-            if (
-                getattr(typed_state, "encoding_version", "legacy_v1")
-                == "space_aware_v2"
-            ):
-                spaces = setup_configuration_spaces_from_args(args)
-                space = (
-                    spaces[method_spec.setup_space] if method_spec.setup_space else None
-                )
-                setup_encoder = make_setup_obs_encoder(
-                    configuration_space=space,
-                    parameter_resolution=getattr(args, "setup_param_resolution", None),
-                    strict_categories=True,
-                )
-            else:
-                setup_encoder = make_setup_obs_encoder()
+            spaces = setup_configuration_spaces_from_args(args)
+            space = spaces[method_spec.setup_space] if method_spec.setup_space else None
+            setup_encoder = make_setup_feature_encoder(
+                configuration_space=space,
+                parameter_resolution=getattr(args, "setup_param_resolution", None),
+            )
             bundle = build_online_solve_controller(
                 resolved_controller_spec,
                 setup_obs_encoder=setup_encoder,

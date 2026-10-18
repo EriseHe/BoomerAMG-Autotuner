@@ -20,6 +20,7 @@ from experiments.paper_final.recovery.execution import EpisodeRecorder, run_fixe
 from experiments.paper_final.recovery.joint_validation import execute_learned
 from experiments.paper_final.recovery import metrics as sweep
 from setup.space import DEFAULT_SETUP_PARAMS
+from solve.controllers.common.state_encoder import STATE_ENCODING_VERSION
 
 METHODS = ("default_setup_default_solve", "default_setup_lstdq", "bandit_default", "bandit_lstdq")
 LABELS = dict(zip(METHODS, ("Default", "Default + LSTDQ", "LinUCB", "LinUCB + LSTDQ")))
@@ -117,8 +118,8 @@ def validate_methods(spec):
     controllers = [by_name[name] for name in (METHODS[1], METHODS[3])]
     if len({(m.setup_space, m.solve_context) for m in controllers}) != 1:
         raise ValueError("Both solve controllers must have identical observation encodings")
-    if spec.solve.state.encoding_version != "space_aware_v2":
-        raise ValueError("The expanded search space requires the versioned solve encoder")
+    if spec.solve.state.encoding_version != STATE_ENCODING_VERSION:
+        raise ValueError("The expanded search space requires the shared one-hot solve encoder")
     if any(m.solve_activation_case != 0 for m in controllers):
         raise ValueError("Both LSTDQ controllers must start on the first input; prefixes are unsupported")
     return by_name
