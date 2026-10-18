@@ -178,13 +178,9 @@ class SolveStateEncoder:
             max(float(cycle) / max(1.0, float(self.max_cycles)), 0.0),
             1.0,
         )
-        cycle_time = (
-            min(
-                max(float(last_cycle_time) / max(self.time_scale_sec, eps), 0.0),
-                5.0,
-            )
-            / 5.0
-        )
+        # Preserve the existing 10 ms reference scale without merging longer
+        # cycles into a single saturated observation.
+        cycle_time = float(last_cycle_time) / (5.0 * max(self.time_scale_sec, eps))
         weight = min(
             max((float(last_weight) - self._weight_center) / self._weight_scale, -1.0),
             1.0,
