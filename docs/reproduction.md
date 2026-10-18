@@ -1,9 +1,9 @@
-# Reproducing the SISC studies
+# Reproducing the studies
 
 Run commands from the repository root in the activated Python environment.
 Install with `python -m pip install -e '.[artifacts]'` and build with
 `make -C hypre JOBS=4`; see the [README](../README.md) for native prerequisites.
-See the [organization report](sisc_repository_cleanup.md) for validation results
+See the [organization report](repository_cleanup.md) for validation results
 and environment limitations.
 
 ## Choose a study

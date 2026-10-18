@@ -3,7 +3,7 @@
 Reproducibility code for **Online Autotuning of BoomerAMG with Contextual Bandits
 and Reinforcement Learning**, by Erise He, Jonathan Wang, and Lance Ding.
 
-Code and frozen protocols for the SISC studies of online BoomerAMG autotuning:
+Code and frozen protocols for the studies of online BoomerAMG autotuning:
 shared context-action LinUCB selects hierarchy parameters, and recursive
 LSTDQ selects relaxation weights during the solve.
 
@@ -55,7 +55,7 @@ and Python wiring lives in `hypre/interfaces/` and `hypre/bindings/`.
 
 The following commands check the recorded experiment configuration and frozen
 inputs without running the full paper experiments. The recorded validation and
-environment limitations are in the [organization report](docs/sisc_repository_cleanup.md).
+environment limitations are in the [organization report](docs/repository_cleanup.md).
 
 Validate the formal online protocol without solving PDEs:
 
@@ -77,7 +77,7 @@ separate from the accepted September measurements.
 
 The full development and archive trees remain on
 [`online-bandit-rl`](https://github.com/EriseHe/RLTune-BoomerAMG/tree/online-bandit-rl)
-and [`cleanup/sisc-repository-20261004`](https://github.com/EriseHe/RLTune-BoomerAMG/tree/cleanup/sisc-repository-20261004).
+and [`cleanup/repository-20261004`](https://github.com/EriseHe/RLTune-BoomerAMG/tree/cleanup/repository-20261004).
 They are outside this submission tree.
 
 A license for the project-owned code has not yet been selected. HYPRE retains

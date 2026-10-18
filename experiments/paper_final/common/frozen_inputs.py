@@ -24,7 +24,7 @@ def verify_bundle(directory):
     """Check immutable accepted bytes and independently reconstruct choices."""
     directory = Path(directory)
     manifest = read(directory / "manifest.json")
-    if manifest["format"] != "sisc-run05-frozen-inputs-v1":
+    if manifest["format"] != "run05-frozen-inputs-v1":
         raise ValueError("Unsupported frozen-input bundle")
     expected = manifest["files_sha256"]
     actual = {

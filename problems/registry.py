@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""Scalar PDE identities and the shared learning contexts used by SISC."""
+"""Scalar PDE identities and the shared learning contexts used by project."""
 
 from dataclasses import dataclass
 from typing import Any, Mapping

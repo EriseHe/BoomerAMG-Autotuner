@@ -1,6 +1,6 @@
 # Setup phase
 
-The SISC studies select BoomerAMG hierarchy parameters with shared context-action
+The studies select BoomerAMG hierarchy parameters with shared context-action
 LinUCB. `registry.py` accepts `default` and `linucb`; it constructs the learner
 through the LinUCB factory. The native solver defaults remain in `space.py`.
 

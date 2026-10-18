@@ -119,5 +119,5 @@ implementation and its license notices remain preserved.
 
 Development tools and archives are retained on the
 [`online-bandit-rl`](https://github.com/EriseHe/RLTune-BoomerAMG/tree/online-bandit-rl)
-and [`cleanup/sisc-repository-20261004`](https://github.com/EriseHe/RLTune-BoomerAMG/tree/cleanup/sisc-repository-20261004)
+and [`cleanup/repository-20261004`](https://github.com/EriseHe/RLTune-BoomerAMG/tree/cleanup/repository-20261004)
 branches. The [reproduction guide](reproduction.md) describes only this submission.

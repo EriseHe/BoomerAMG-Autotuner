@@ -1,9 +1,9 @@
-# SISC repository organization
+# repository organization
 
 The `main` tree is the submission tree for Module 04 online autotuning and
 accepted Module 05 matched-hierarchy Run 05. The full organized development
 tree, historical experiments, diagnostic runners, readers and archives remain
-on `online-bandit-rl` and `cleanup/sisc-repository-20261004`.
+on `online-bandit-rl` and `cleanup/repository-20261004`.
 
 ## What changed
 

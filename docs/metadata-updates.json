@@ -1,0 +1,66 @@
+{
+  "format_version": 1,
+  "description": "Display labels and historical local paths were normalized. Recorded numerical measurements are unchanged. Digests connect the earlier files to their updated metadata.",
+  "files": [
+    {
+      "path": "README.md",
+      "before_sha256": "835a028874f84e30a2b9b442852ae86bc9583b82dab9a9a6bded6d87d0b8a8e2",
+      "after_sha256": "9560bac4a36f6632cae2421e7e0adf11ed2e62f3a16475582a3483b1e89e0ae7"
+    },
+    {
+      "path": "docs/repository_layout.md",
+      "before_sha256": "8195687b404f6567f0371ffc1b1b3e8039a354e2227113ca5b275e1deb51b916",
+      "after_sha256": "262d45f377b65952c6dada813885cb30afd14fa609dd8297df8d1ee017ee1705"
+    },
+    {
+      "path": "docs/reproduction.md",
+      "before_sha256": "b28e65fe1f91b30f39de3705fede4fc11e1a6669290a36be4c558cff6de340dd",
+      "after_sha256": "e9e83997f77d3c239954f189b9a1353e6b1aed77b15e5b3be745797d9b69075a"
+    },
+    {
+      "path": "docs/repository_cleanup.md",
+      "before_sha256": "4e224286d8fcacc6c2f92da3c5490227eb325c40670617b487eac7602eed4ca9",
+      "after_sha256": "df049613c4360140691ae77d63ff16d5e8b645de70502968f74d06f6479910b7"
+    },
+    {
+      "path": "experiments/paper_final/common/frozen_inputs.py",
+      "before_sha256": "f746646ec9545511fa73c7d5eb9648f35ff4cdff521e64b398446e081358c87a",
+      "after_sha256": "d4189c0a4731e5307fa231d3b777e60cecb4f5012ef7fc556b6a825d2018f37c"
+    },
+    {
+      "path": "experiments/paper_final/reproduction/matched_policy/frozen_inputs/manifest.json",
+      "before_sha256": "a4e1154e95b286f1056c259b6ff912ac99cf08354ce234ad858571135107fbe2",
+      "after_sha256": "0c3a0411e0e525c1fd4b4923c5c42db27b9cc83078c1ef13c659cd637714d3c7"
+    },
+    {
+      "path": "problems/registry.py",
+      "before_sha256": "cb892e3a399c9bcad79ce2ed965f741237dc2a8df2854be49caabfd9a1bc46e2",
+      "after_sha256": "da707ebcc180d376b71d921dfcb6906c615c94bd627d0050ae6ebd8656f73546"
+    },
+    {
+      "path": "setup/README.md",
+      "before_sha256": "d37c222e7d03f44f9c5aa682d6066d382c835abe89f211e4e5be7ba25c11f3ac",
+      "after_sha256": "80a01392bd7ad882b7594fee65068e4eac7c4cba47375cf241251b1a84af9f1e"
+    },
+    {
+      "path": "setup/__init__.py",
+      "before_sha256": "21c4d23c27af9bf4c1deba6bda5c7d746659cff42902dc85b516a19302209cf2",
+      "after_sha256": "83df02cb62959289b5e4bfa5c6923b585e680f6e82a3df142c746e00748c8975"
+    },
+    {
+      "path": "setup/learners/__init__.py",
+      "before_sha256": "bdeae6edb080d375ac0719382d0b61856cad14c40f43760e822fb64a311ec991",
+      "after_sha256": "73f444a4cd541423fdbbf70da88fcb7c1e9f1c169baccbb6bc7ab9e57b711891"
+    },
+    {
+      "path": "solve/README.md",
+      "before_sha256": "7aadabc660b1cce74ed39f049a693233d98114ec87b0dad0736470f5ba62c77a",
+      "after_sha256": "d1913c34d4c9b6925a6d7101192649d12c1738bdd2bd296bb4e378942ee70db9"
+    },
+    {
+      "path": "solve/controllers/recursive_lstdq/__init__.py",
+      "before_sha256": "29e028a635f020a249e99735b54b4eb83791a019053e1bc466653f1aba545b1f",
+      "after_sha256": "08c43ffaefde1ed152ccd4073444781b0b4a4e7dc4f472ec732eef26a90d114e"
+    }
+  ]
+}

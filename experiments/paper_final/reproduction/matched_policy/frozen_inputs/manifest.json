@@ -39,6 +39,6 @@
     "theory/period_two_minimax_verification_20260928.json": "8b4b823bd074d24ac6020b23ad15ccd316f8ae381f6b2df9714b0c82d81c591e",
     "theory/period_two_weighted_minimax_20260928.md": "f8062e663eb46afe65ee03df1bc03bd83c2b9ff0ad829abf3e36d41e3a574bae"
   },
-  "format": "sisc-run05-frozen-inputs-v1",
+  "format": "run05-frozen-inputs-v1",
   "purpose": "Exact accepted frozen inputs for independent retiming with current source; not the original prepared output or its measurements."
 }
