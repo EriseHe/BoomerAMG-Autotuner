@@ -30,14 +30,12 @@ PROBLEM_CONTEXT_MODES = (
     DIFFUSION_ADVECTION_NO_MEAN_CONTEXT,
     *COMPACT_DIFFUSION_CONTEXT_INDICES,
 )
-STATE_ENCODING_VERSION = "shared_setup_one_hot_tolerance_residuals"
+STATE_ENCODING_VERSION = "shared_setup_one_hot_tolerance_residuals_v2"
 STATE_ENCODING_VERSIONS = (STATE_ENCODING_VERSION,)
 
 
 class SolveStateEncoder:
     """Cycle observations with the setup learner's shared configuration features."""
-
-    _CYCLE_BOUNDS = np.asarray([1, 2, 3, 5, 8, 12], dtype=int)
 
     def __init__(
         self,
@@ -80,7 +78,6 @@ class SolveStateEncoder:
             raise ValueError(
                 f"problem_context_mode must be one of {PROBLEM_CONTEXT_MODES}"
             )
-        self.cycle_bins = int(self._CYCLE_BOUNDS.size + 1)
         if self.problem_context_mode in STRESS_CONTEXT_FIELDS:
             self.problem_context_fields = STRESS_CONTEXT_FIELDS[self.problem_context_mode]
             self.problem_feature_dim = len(self.problem_context_fields) - 1
@@ -110,8 +107,7 @@ class SolveStateEncoder:
             )
             self.problem_feature_dim = 4
         self._problem_offset = 7
-        self._cycle_offset = self._problem_offset + self.problem_feature_dim
-        self._setup_offset = self._cycle_offset + 2 * self.cycle_bins
+        self._setup_offset = self._problem_offset + self.problem_feature_dim
         self._cached_problem_key: tuple[float, ...] | None = None
         self._cached_problem_features = np.zeros(
             self.problem_feature_dim,
@@ -130,10 +126,6 @@ class SolveStateEncoder:
                     )
                 setup_dim = self.setup_obs_encoder.descriptor_dim
             self.feature_dim = self._setup_offset + setup_dim
-            self._cycle_features = None
-        elif self.mode == "cycle_tabular":
-            self.feature_dim = int(self.max_cycles + 1)
-            self._cycle_features = np.eye(self.feature_dim, dtype=float)
         else:
             raise ValueError(f"Unknown solve state mode: {self.mode}")
 
@@ -150,10 +142,6 @@ class SolveStateEncoder:
         setup_params: Dict[str, Any] | None = None,
         problem_context: Sequence[float] | np.ndarray | None = None,
     ) -> np.ndarray:
-        if self.mode == "cycle_tabular":
-            assert self._cycle_features is not None
-            return self._cycle_features[int(np.clip(cycle, 0, self.max_cycles))]
-
         eps = 1.0e-30
         initial_residual_value = float(initial_residual)
         if self._cached_initial_residual != initial_residual_value:
@@ -237,7 +225,6 @@ class SolveStateEncoder:
                     np.max(coeffs) - np.min(coeffs)
                 )
 
-        cycle_bin = int(np.searchsorted(self._CYCLE_BOUNDS, int(cycle), side="right"))
         features = np.zeros(self.feature_dim, dtype=float)
         features[:7] = (
             1.0,
@@ -248,11 +235,9 @@ class SolveStateEncoder:
             cycle_time,
             weight,
         )
-        features[self._problem_offset : self._cycle_offset] = (
+        features[self._problem_offset : self._setup_offset] = (
             self._cached_problem_features
         )
-        features[self._cycle_offset + cycle_bin] = 1.0
-        features[self._cycle_offset + self.cycle_bins + cycle_bin] = gap_fraction
         if self.mode == "setup_full":
             assert self.setup_obs_encoder is not None
             params = {} if setup_params is None else setup_params
@@ -276,10 +261,7 @@ class SolveStateEncoder:
 
     def constant_value_parameters(self, value: float) -> np.ndarray:
         parameters = np.zeros(self.feature_dim, dtype=float)
-        if self.mode == "cycle_tabular":
-            parameters.fill(float(value))
-        else:
-            parameters[0] = float(value)
+        parameters[0] = float(value)
         return parameters
 
     def _context_from_matrix_kwargs(
