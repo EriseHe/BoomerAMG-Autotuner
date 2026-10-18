@@ -1,6 +1,6 @@
 # Archived paper development
 
-These studies are research history outside the official SISC experiment tree.
+These studies are research history outside the official experiment tree.
 The current submission uses only the
 [official Module 04 and accepted Module 05 workflows](../../paper_final/README.md).
 

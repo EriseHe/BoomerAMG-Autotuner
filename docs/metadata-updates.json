@@ -1,0 +1,36 @@
+{
+  "format_version": 1,
+  "description": "Display labels and historical local paths were normalized. Recorded numerical measurements are unchanged. Digests connect the earlier files to their updated metadata.",
+  "files": [
+    {
+      "path": "docs/repository_cleanup_20261004.md",
+      "before_sha256": "c50dc0eef09d9bdb83ecf299ab45f514ef85d08aa48addb3aeb9b9b6631f7125",
+      "after_sha256": "0d4607ae81161f2fdb345ac1ab2c118aa300205f1920ba6e85f906c01b4ff43d"
+    },
+    {
+      "path": "docs/theory/cost_based_rl_activation_framework.md",
+      "before_sha256": "30b357190a0658ee09bad9336c9f3108fd9db8460f828d8aeaeab71b271a8078",
+      "after_sha256": "1be280048135ff78fd12d0339da5b2aa1fee94d4b966d7fd2fd41ec1e8b1d09e"
+    },
+    {
+      "path": "docs/theory/paper_completion_plan_20260915.md",
+      "before_sha256": "00f98e2a4bfdd1096e62954ad0b32fad2966fa4e474df2fd4bc4cc0b911bbe95",
+      "after_sha256": "849cda794f6abc9e609ae5b1e0350a81c956a6ef8f4be1e35c0e0f273595841e"
+    },
+    {
+      "path": "docs/theory/theory_review_and_revision_plan_20260915.md",
+      "before_sha256": "096be866bbb793572d857475aa91b29881561b550eabaca3845dfdfec51532cf",
+      "after_sha256": "41aeb2423a422a99a51b99be4ef1fdd1705e22bdc377b184def024d39d8bea9c"
+    },
+    {
+      "path": "experiments/archive/paper_development/README.md",
+      "before_sha256": "f7b3db2b7be967f87241049fb2ffea08c191f230dee8a9c564595ecb0b9ce0be",
+      "after_sha256": "3d384232d351906d061be518ecfd54cbbc25e0a92dd625f7767bef8945220f4a"
+    },
+    {
+      "path": "experiments/paper_final/README.md",
+      "before_sha256": "64914f170996e9fc70686ef261fe6742bed31ba833bd076654ef71e4f6dabb77",
+      "after_sha256": "4e517741291c124d3173e7d12c57918691ba4f2bdfdfab617e5dfdea917dcbef"
+    }
+  ]
+}

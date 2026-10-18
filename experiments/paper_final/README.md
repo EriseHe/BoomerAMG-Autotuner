@@ -1,6 +1,6 @@
 # Official paper experiments
 
-This directory contains the two studies used in the SISC submission: Module 04
+This directory contains the two studies used in the submission: Module 04
 online autotuning and accepted Module 05 matched-hierarchy Run 05.
 
 | Study | Entry point | Protocol |

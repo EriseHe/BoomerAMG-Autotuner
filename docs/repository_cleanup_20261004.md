@@ -1,6 +1,6 @@
 # Repository cleanup, October 4, 2026
 
-The development branch preserves the full research tree. The SISC `main` branch
+The development branch preserves the full research tree. The `main` branch
 is curated separately for official Module 04 online autotuning and Module 05
 matched-hierarchy evaluation; unrelated studies, runners, data, and archives
 belong on the development branch.
@@ -63,7 +63,7 @@ python scripts/check_repository.py --tests-only
 `--core-only` changes test-group selection only. Static checks still cover the
 maintained source, including the paper-development archive. Historical scientific
 test definitions, locked fixture hashes, and production protocol guards remain
-unchanged. Every test in a selected group remains required. The curated SISC main
+unchanged. Every test in a selected group remains required. The curated main
 tree has only the five required groups and its own separate check runner.
 
 ## Reproduction boundaries
