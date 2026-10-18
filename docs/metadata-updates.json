@@ -1,0 +1,21 @@
+{
+  "format_version": 1,
+  "description": "Display labels and historical local paths were normalized. Recorded numerical measurements are unchanged. Digests connect the earlier files to their updated metadata.",
+  "files": [
+    {
+      "path": "docs/theory/cost_based_rl_activation_framework.md",
+      "before_sha256": "30b357190a0658ee09bad9336c9f3108fd9db8460f828d8aeaeab71b271a8078",
+      "after_sha256": "1be280048135ff78fd12d0339da5b2aa1fee94d4b966d7fd2fd41ec1e8b1d09e"
+    },
+    {
+      "path": "docs/theory/paper_completion_plan_20260915.md",
+      "before_sha256": "cfd10cccc3f2dce3336078693144625409c972ae8ff4690e2e1401537edfb5d7",
+      "after_sha256": "bac623f2e6e6c1b8028d89dd76bd9ac914e940641f2c059519c4bc3a12d39897"
+    },
+    {
+      "path": "docs/theory/theory_review_and_revision_plan_20260915.md",
+      "before_sha256": "096be866bbb793572d857475aa91b29881561b550eabaca3845dfdfec51532cf",
+      "after_sha256": "41aeb2423a422a99a51b99be4ef1fdd1705e22bdc377b184def024d39d8bea9c"
+    }
+  ]
+}

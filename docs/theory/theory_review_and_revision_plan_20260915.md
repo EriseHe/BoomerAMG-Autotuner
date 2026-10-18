@@ -1,6 +1,6 @@
 # 理论审阅：two-grid 强化、可观测性与学习保证的边界
 
-2026-09-15。审阅对象：ChatGPT 对话 `6aa8e844-5584-83ea-a609-bacc227316b3` 的全部三轮对话，以及当前 SISC 修订稿。
+2026-09-15。审阅对象：ChatGPT 对话 `6aa8e844-5584-83ea-a609-bacc227316b3` 的全部三轮对话，以及当前 修订稿。
 
 对话附件中的 `theory_updated.tex`、`appendix_updated.tex`、`solve_updated.tex`、`experiments_updated.tex` 与当前 Overleaf 修订目录中的对应文件逐字一致。本笔记是理论评估和可供后续修改采用的推导；未替换论文主稿，未运行 PDE 实验。
 

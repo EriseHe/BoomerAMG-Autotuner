@@ -1,8 +1,8 @@
-# SISC 论文收尾计划：独立评估、理论整合与实验优先级
+# 论文收尾计划：独立评估、理论整合与实验优先级
 
 **2026-09-29 论文范围更新：** 按用户决定，论文保留原 Module 04 在线结果及原 Module 05 编号的 Run 05 matched-hierarchy 对照；从论文中完整移除基于新 Module 05 checkpoints 的新 Module 06 own-pair/crossed 实验。后者的已完成记录仅作历史存档，不再作为当前论文待整合或必跑证据。新增三张论文图来自刚完成的 Run 05／相应 minimax 数学：五方法节省、W1/per-instance/periodic/RL 四面板 action heatmap，以及 weighted-minimax 双面板图。
 
-日期：2026-09-15。代码基线：online-bandit-rl，13a507d。论文基线：Overleaf/SISC_submission/local_revision_20260915。
+日期：2026-09-15。代码基线：online-bandit-rl，13a507d。论文基线：Overleaf/submission/local_revision_20260915。
 
 最新模块安排：2026-09-28。**04 保留现有在线累计性能协议与已接受结果。05 改为 checkpoint 准备：一次共享 1000 题 W1 前缀，再分支进行 4000 题 solve-specific setup 训练；06 在 fresh inputs 上比较各自配套的冻结完整方法，并可附小型 crossed-hierarchy 机制比较。原 06–10 顺延为 07–11。**
 本次按用户授权执行一个 diffusion 60³ 训练 replicate。Default setup hierarchy 的 100 个独立 development inputs × 41 weights 校准已完成，选定 w_dev=1.40。用户随后要求丢弃已启动的四分支 run，并额外加入历史 learned-hierarchy fixed-grid 最优常数 1.60：当前五分支从头开始，不复用旧训练状态。十项集成测试已通过；最新 native 检查与执行状态见 05 入口。训练胜负或 payback 不是 05 的通过条件。
@@ -495,8 +495,6 @@ b_{\rm new}=\rho b_{\rm old}+b_e.
 
 ## 7. 论文结构、页数与引用
 
-当前 PDF 已独立核实为 32 页。SISC 官方要求超过 26 个 SIAM-template 页面会退回，推荐长度约 20 页；核心贡献的证明不能移到非核心 supplementary 来支撑一个不自足的主文。[官方作者指南](https://epubs.siam.org/journal/sisc/instructions-for-authors)
-
 因此，“加入新理论”的实际操作应是替换与合并：
 
 1. Introduction：聚焦 online cumulative-cost coupling；说明与已有 cycle-level PPO、scheduled relaxation 的差别。
@@ -516,11 +514,7 @@ b_{\rm new}=\rho b_{\rm old}+b_e.
 - 避免“首次 high–low”“首次 cycle-level multigrid RL”“首次任何形式 joint tuning”等过宽表述。已有 [cycle-level PPO 工作](https://arxiv.org/html/2407.15872v1)；[Learning to Relax](https://proceedings.iclr.cc/paper_files/paper/2024/file/8fcc228e94aa7e4773a27c6c2d886243-Paper-Conference.pdf) 的特定数值到可学习性联系可作为参照，不是当前实现已获得的保证。
 - 检查新增 cite key、作者/年份/版本、引用所支持的精确陈述；不重启全文 bibliography 重审工程。
 
-SISC 接受以理论或有力启发支持、并有详细数值验证的方法贡献；完整 RL 收敛定理不是普遍前提。仍需证明清晰的算法进展、准确性、效率与稳健性。[官方编辑政策](https://epubs.siam.org/journal/sisc/editorial-policy)
-
 ## 8. 建议时间顺序与收尾标准
-
-以官方 2026-09-30 截止为依据，下面是工作安排建议，不是尚未测量的计算时长承诺。[Special-section call](https://www.siam.org/publications/siam-news/articles/call-for-papers-sisc-iterative-and-multigrid-special-section/)
 
 | 时段 | 建议工作 |
 |---|---|
@@ -559,8 +553,8 @@ SISC 接受以理论或有力启发支持、并有详细数值验证的方法贡
 - [现有 frozen-cross 诊断](../../experiments/diagnostics/solve_control/diagnose_context_activation_crossed.py)
 - [共享前缀执行与完整状态恢复](../../experiments/joint/solve_control/joint_4k_execution.py)
 - [已有 clone helper](../../experiments/joint/solve_control/setup_aware_compare_common.py)
-- [当前理论源文件](/Users/erisehe/Documents/GitHub/Overleaf/SISC_submission/local_revision_20260915/sections/theory_updated.tex)
-- [当前证明 appendix](/Users/erisehe/Documents/GitHub/Overleaf/SISC_submission/local_revision_20260915/sections/appendix_updated.tex)
+- [当前理论源文件](/Users/erisehe/Documents/GitHub/Overleaf/submission/local_revision_20260915/sections/theory_updated.tex)
+- [当前证明 appendix](/Users/erisehe/Documents/GitHub/Overleaf/submission/local_revision_20260915/sections/appendix_updated.tex)
 - [用户提供的新增证明](/Users/erisehe/Downloads/additional_theorems.tex)
 - [用户提供的完整审阅](/Users/erisehe/Downloads/REVIEW.md)
 
