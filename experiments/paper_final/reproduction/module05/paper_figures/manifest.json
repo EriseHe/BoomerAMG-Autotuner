@@ -1,5 +1,5 @@
 {
-  "run": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh",
+  "run": "./results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh",
   "seeds": [
     1,
     2,
@@ -831,14 +831,14 @@
     "recorded_actions": true
   },
   "source_sha256": {
-    "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh/analysis/summary.json": "1b55bab557af0b61dfe2472e7439933a4c0a929ca7388155717388e3e7e5ea4b",
-    "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh/protocol.json": "b466d9cc11db41bb174984b9f19333f52fbbb399f4859a2d6fd55496e7bbefc8",
-    "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh/jobs_test.json": "8abcdd0f878919f2f21d5c1b415c1c548e18ba00d726efb992b353f6fce6dfa9",
-    "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh/selections.json": "6556809c64ddc2ff64842a93eb8e2a3a1dde031f15b21b90305b5b11c2de0c67",
-    "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh/raw/test/complete.json": "e93a9899ff8172ad460fe53e4a13a169690066799fd6120c3c7241f09f276c9a",
-    "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh/raw/test/worker_0.jsonl": "466b6379fb7ba6b530f988fa2eb209f818372491fb8fc8f3e5ab8d93e4ea3324",
-    "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh/raw/test/worker_1.jsonl": "83cbaebde243303e70bd2288c8ae2a09b9714638434cd2f54fd02dc53dd47815",
-    "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh/raw/test/worker_2.jsonl": "034a0ffa056956ecafceecc461e4978045b2d43e41e8134467e10c2a03ab5e02"
+    "./results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh/analysis/summary.json": "192ff4b87be2043390c829483c2faae1c402235bb923eff38592bc021d1b5fca",
+    "./results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh/protocol.json": "406e2477156652e4828be8bbbbb094c9a220972235c079234e2c871372d6f3c1",
+    "./results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh/jobs_test.json": "8abcdd0f878919f2f21d5c1b415c1c548e18ba00d726efb992b353f6fce6dfa9",
+    "./results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh/selections.json": "6556809c64ddc2ff64842a93eb8e2a3a1dde031f15b21b90305b5b11c2de0c67",
+    "./results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh/raw/test/complete.json": "e93a9899ff8172ad460fe53e4a13a169690066799fd6120c3c7241f09f276c9a",
+    "./results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh/raw/test/worker_0.jsonl": "466b6379fb7ba6b530f988fa2eb209f818372491fb8fc8f3e5ab8d93e4ea3324",
+    "./results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh/raw/test/worker_1.jsonl": "83cbaebde243303e70bd2288c8ae2a09b9714638434cd2f54fd02dc53dd47815",
+    "./results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh/raw/test/worker_2.jsonl": "034a0ffa056956ecafceecc461e4978045b2d43e41e8134467e10c2a03ab5e02"
   },
   "output_sha256": {
     "captions.txt": "20c89653d2763ec7a84274fae11bce6eae1791cc8533b88464913a006a266f10",
@@ -873,5 +873,5 @@
     "plot_05_matched_policy.py": "ccb364739136ced043e695da54754fd26b545c4fbfb8fd60f981d0538a4ad04e",
     "plot_data.npz": "436fb70847a6aec7aea830b3233614f666cce1045ae7750bf03045e54fa5938e"
   },
-  "reproduce": "python -m experiments.paper_final.plot_05_matched_policy /Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh"
+  "reproduce": "python -m experiments.paper_final.plot_05_matched_policy ./results/paper_final/05_policy/20261012_diffusion60_six_seeds_fresh"
 }

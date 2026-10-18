@@ -149,8 +149,8 @@
     "seed_batches": [
       {
         "batch": 1,
-        "output": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/06_recovery/20261012_type2_beta2_four_branches_zero_prefix_six_seeds/batches/batch_01",
-        "protocol_sha256": "3bf814f6845298f1dc604dba9fd520c2a144f529cc9822ea8e93efb2ffe48bd2",
+        "output": "./results/paper_final/06_recovery/20261012_type2_beta2_four_branches_zero_prefix_six_seeds/batches/batch_01",
+        "protocol_sha256": "15288f1be984d5ffbbab87d339ef2ea3ee6bda92d45fe9c009ef138d22bde968",
         "seeds": [
           "1",
           "2",
@@ -159,8 +159,8 @@
       },
       {
         "batch": 2,
-        "output": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/06_recovery/20261012_type2_beta2_four_branches_zero_prefix_six_seeds/batches/batch_02",
-        "protocol_sha256": "2ea3e156fe06fd5265c95e0b4b4a91fd564bb85e134082cfc86dd2177d395c0e",
+        "output": "./results/paper_final/06_recovery/20261012_type2_beta2_four_branches_zero_prefix_six_seeds/batches/batch_02",
+        "protocol_sha256": "d9da9c60c51deab9c3d53bf9251091c7c474a9f60b991fdde1cc2f5c766e0076",
         "seeds": [
           "4",
           "5",
@@ -179,7 +179,7 @@
     "shared_prefix": false,
     "source_commit": "b1291f88099e3abb336156ed5e74fd10430703fd",
     "source_commit_meaning": "Historical provenance of the verified unchanged frozen numerical source; configurations are new.",
-    "source_runtime": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261009_full_zero_prefix_6seeds_candidates1024/controls/official_runtime_20261011"
+    "source_runtime": "./results/paper_final/04_online/20261009_full_zero_prefix_6seeds_candidates1024/controls/official_runtime_20261011"
   },
   "rows": [
     {

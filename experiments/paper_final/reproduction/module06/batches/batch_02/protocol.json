@@ -48,33 +48,33 @@
   "stages": {
     "4": {
       "cases": 5000,
-      "config_sha256": "aa8143e2e8555e1e7614f3f2d851be61e8120ebd60db3fb7fa3ad7f23196823f",
+      "config_sha256": "321158ab9e756a3e65f4960a854928cc48b0b2b1e79359e67f463acd7a3466fc",
       "full_stream_sha256": "9a98cd94705795e2f67c99394a78fee8d4d81c8c5c70a74685175b1bbf69dc4e",
       "inputs_sha256": "5253732b086e1c913e9ef57af492413932b2b1c6608cc23d16bd1be7c2638056",
       "joint_activation_case": 0,
       "smoke": false,
-      "source_config": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/06_recovery/20261012_type2_beta2_four_branches_zero_prefix_six_seeds/batches/batch_02/seed_4/experiment_config.json",
-      "source_config_sha256": "aa8143e2e8555e1e7614f3f2d851be61e8120ebd60db3fb7fa3ad7f23196823f"
+      "source_config": "./results/paper_final/06_recovery/20261012_type2_beta2_four_branches_zero_prefix_six_seeds/batches/batch_02/seed_4/experiment_config.json",
+      "source_config_sha256": "321158ab9e756a3e65f4960a854928cc48b0b2b1e79359e67f463acd7a3466fc"
     },
     "5": {
       "cases": 5000,
-      "config_sha256": "99b1637b7bc2c53154d3ada9e5a5dfa4cf13e28dd9367b6b20780d28882f2cf2",
+      "config_sha256": "32a490651ff94f60e7c2dfc3d2229505aa491f5f89ac9d13e1edc78eb94f1566",
       "full_stream_sha256": "f91500d5563a74995defa02a3138a852c57bcabc702de3d8a951ed40e18434a9",
       "inputs_sha256": "7f5448937c916ca75ff7026bffa720e61aebcc75ceceb6578383124f4a64d649",
       "joint_activation_case": 0,
       "smoke": false,
-      "source_config": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/06_recovery/20261012_type2_beta2_four_branches_zero_prefix_six_seeds/batches/batch_02/seed_5/experiment_config.json",
-      "source_config_sha256": "99b1637b7bc2c53154d3ada9e5a5dfa4cf13e28dd9367b6b20780d28882f2cf2"
+      "source_config": "./results/paper_final/06_recovery/20261012_type2_beta2_four_branches_zero_prefix_six_seeds/batches/batch_02/seed_5/experiment_config.json",
+      "source_config_sha256": "32a490651ff94f60e7c2dfc3d2229505aa491f5f89ac9d13e1edc78eb94f1566"
     },
     "6": {
       "cases": 5000,
-      "config_sha256": "1ea48900c9ebd9447a20ffb9ad15fa3de2b4545233354b168d936a4f152a7656",
+      "config_sha256": "fa1155f6a13afc4a18e0c7ba102ca92888097fb9ae646b445d8a52c9e3dae5c8",
       "full_stream_sha256": "cfcb1d4385088cbd8e723a02d222cc0860a15b577ca219d3e2cec29dc222b6fa",
       "inputs_sha256": "be68a3966a48392d269d99ec46a301f6c16c5370177e85ff135e3e26f782ce51",
       "joint_activation_case": 0,
       "smoke": false,
-      "source_config": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/06_recovery/20261012_type2_beta2_four_branches_zero_prefix_six_seeds/batches/batch_02/seed_6/experiment_config.json",
-      "source_config_sha256": "1ea48900c9ebd9447a20ffb9ad15fa3de2b4545233354b168d936a4f152a7656"
+      "source_config": "./results/paper_final/06_recovery/20261012_type2_beta2_four_branches_zero_prefix_six_seeds/batches/batch_02/seed_6/experiment_config.json",
+      "source_config_sha256": "fa1155f6a13afc4a18e0c7ba102ca92888097fb9ae646b445d8a52c9e3dae5c8"
     }
   }
 }

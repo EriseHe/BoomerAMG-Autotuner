@@ -1,6 +1,6 @@
 {
   "cases": 100,
-  "config_path": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/20261012_modules04_06_sequence/module05.json",
+  "config_path": "./results/paper_final/20261012_modules04_06_sequence/module05.json",
   "evaluation_repetitions": 3,
   "name": "Fresh matched-policy evaluation: accepted diffusion60 six joint checkpoints",
   "periodic_pattern": [
@@ -40,12 +40,12 @@
   },
   "training_runs": [
     {
-      "config": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_1/experiment_config.json",
-      "controller_checkpoint": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_1/checkpoints/bandit_lstdq_final.npz",
-      "encoder": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_1/checkpoints/bandit_lstdq_final.npz.encoder.json",
+      "config": "./results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_1/experiment_config.json",
+      "controller_checkpoint": "./results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_1/checkpoints/bandit_lstdq_final.npz",
+      "encoder": "./results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_1/checkpoints/bandit_lstdq_final.npz.encoder.json",
       "method": "bandit_lstdq",
       "seed": 1,
-      "setup_checkpoint": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_1/final_bandit_states/bandit_lstdq.npz",
+      "setup_checkpoint": "./results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_1/final_bandit_states/bandit_lstdq.npz",
       "training_config": {
         "description": "Full Module 04: diffusion, 60 cubed, original paper stream seed 1, 5000 inputs, four independently measured branches. Both setup learners and both LSTDQ controllers start cold at input 1. Expanded no-endpoint space; Failure Model + adjacent setup recovery. Structured candidate pool: 1024; anchor/global/local/Sobol targets 128/384/384/128; elite cache 64 and eight local centers, matching the tested doubling configuration.",
         "failure_feedback": {
@@ -66,7 +66,7 @@
           }
         ],
         "name": "diffusion_60_zero_prefix_seed1_candidates1024",
-        "output_dir": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_1",
+        "output_dir": "./results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_1",
         "problem": {
           "advection": [
             0,
@@ -279,12 +279,12 @@
       }
     },
     {
-      "config": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_2/experiment_config.json",
-      "controller_checkpoint": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_2/checkpoints/bandit_lstdq_final.npz",
-      "encoder": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_2/checkpoints/bandit_lstdq_final.npz.encoder.json",
+      "config": "./results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_2/experiment_config.json",
+      "controller_checkpoint": "./results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_2/checkpoints/bandit_lstdq_final.npz",
+      "encoder": "./results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_2/checkpoints/bandit_lstdq_final.npz.encoder.json",
       "method": "bandit_lstdq",
       "seed": 2,
-      "setup_checkpoint": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_2/final_bandit_states/bandit_lstdq.npz",
+      "setup_checkpoint": "./results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_2/final_bandit_states/bandit_lstdq.npz",
       "training_config": {
         "description": "Full Module 04: diffusion, 60 cubed, original paper stream seed 2, 5000 inputs, four independently measured branches. Both setup learners and both LSTDQ controllers start cold at input 1. Expanded no-endpoint space; Failure Model + adjacent setup recovery. Structured candidate pool: 1024; anchor/global/local/Sobol targets 128/384/384/128; elite cache 64 and eight local centers, matching the tested doubling configuration.",
         "failure_feedback": {
@@ -305,7 +305,7 @@
           }
         ],
         "name": "diffusion_60_zero_prefix_seed2_candidates1024",
-        "output_dir": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_2",
+        "output_dir": "./results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_2",
         "problem": {
           "advection": [
             0,
@@ -518,12 +518,12 @@
       }
     },
     {
-      "config": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_3/experiment_config.json",
-      "controller_checkpoint": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_3/checkpoints/bandit_lstdq_final.npz",
-      "encoder": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_3/checkpoints/bandit_lstdq_final.npz.encoder.json",
+      "config": "./results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_3/experiment_config.json",
+      "controller_checkpoint": "./results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_3/checkpoints/bandit_lstdq_final.npz",
+      "encoder": "./results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_3/checkpoints/bandit_lstdq_final.npz.encoder.json",
       "method": "bandit_lstdq",
       "seed": 3,
-      "setup_checkpoint": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_3/final_bandit_states/bandit_lstdq.npz",
+      "setup_checkpoint": "./results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_3/final_bandit_states/bandit_lstdq.npz",
       "training_config": {
         "description": "Full Module 04: diffusion, 60 cubed, original paper stream seed 3, 5000 inputs, four independently measured branches. Both setup learners and both LSTDQ controllers start cold at input 1. Expanded no-endpoint space; Failure Model + adjacent setup recovery. Structured candidate pool: 1024; anchor/global/local/Sobol targets 128/384/384/128; elite cache 64 and eight local centers, matching the tested doubling configuration.",
         "failure_feedback": {
@@ -544,7 +544,7 @@
           }
         ],
         "name": "diffusion_60_zero_prefix_seed3_candidates1024",
-        "output_dir": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_3",
+        "output_dir": "./results/paper_final/04_online/20261009_diffusion60_seeds1to3_1024_repeat01/seed_3",
         "problem": {
           "advection": [
             0,
@@ -757,12 +757,12 @@
       }
     },
     {
-      "config": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_4/experiment_config.json",
-      "controller_checkpoint": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_4/checkpoints/bandit_lstdq_final.npz",
-      "encoder": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_4/checkpoints/bandit_lstdq_final.npz.encoder.json",
+      "config": "./results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_4/experiment_config.json",
+      "controller_checkpoint": "./results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_4/checkpoints/bandit_lstdq_final.npz",
+      "encoder": "./results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_4/checkpoints/bandit_lstdq_final.npz.encoder.json",
       "method": "bandit_lstdq",
       "seed": 4,
-      "setup_checkpoint": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_4/final_bandit_states/bandit_lstdq.npz",
+      "setup_checkpoint": "./results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_4/final_bandit_states/bandit_lstdq.npz",
       "training_config": {
         "description": "Full Module 04: diffusion, 60 cubed, original paper stream seed 4, 5000 inputs, four independently measured branches. Both setup learners and both LSTDQ controllers start cold at input 1. Expanded no-endpoint space; Failure Model + adjacent setup recovery. Structured candidate pool: 1024; anchor/global/local/Sobol targets 128/384/384/128; elite cache 64 and eight local centers, matching the tested doubling configuration.",
         "failure_feedback": {
@@ -783,7 +783,7 @@
           }
         ],
         "name": "diffusion_60_zero_prefix_seed4_candidates1024",
-        "output_dir": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_4",
+        "output_dir": "./results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_4",
         "problem": {
           "advection": [
             0,
@@ -996,12 +996,12 @@
       }
     },
     {
-      "config": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_5/experiment_config.json",
-      "controller_checkpoint": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_5/checkpoints/bandit_lstdq_final.npz",
-      "encoder": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_5/checkpoints/bandit_lstdq_final.npz.encoder.json",
+      "config": "./results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_5/experiment_config.json",
+      "controller_checkpoint": "./results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_5/checkpoints/bandit_lstdq_final.npz",
+      "encoder": "./results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_5/checkpoints/bandit_lstdq_final.npz.encoder.json",
       "method": "bandit_lstdq",
       "seed": 5,
-      "setup_checkpoint": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_5/final_bandit_states/bandit_lstdq.npz",
+      "setup_checkpoint": "./results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_5/final_bandit_states/bandit_lstdq.npz",
       "training_config": {
         "description": "Full Module 04: diffusion, 60 cubed, original paper stream seed 5, 5000 inputs, four independently measured branches. Both setup learners and both LSTDQ controllers start cold at input 1. Expanded no-endpoint space; Failure Model + adjacent setup recovery. Structured candidate pool: 1024; anchor/global/local/Sobol targets 128/384/384/128; elite cache 64 and eight local centers, matching the tested doubling configuration.",
         "failure_feedback": {
@@ -1022,7 +1022,7 @@
           }
         ],
         "name": "diffusion_60_zero_prefix_seed5_candidates1024",
-        "output_dir": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_5",
+        "output_dir": "./results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_5",
         "problem": {
           "advection": [
             0,
@@ -1235,12 +1235,12 @@
       }
     },
     {
-      "config": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_6/experiment_config.json",
-      "controller_checkpoint": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_6/checkpoints/bandit_lstdq_final.npz",
-      "encoder": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_6/checkpoints/bandit_lstdq_final.npz.encoder.json",
+      "config": "./results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_6/experiment_config.json",
+      "controller_checkpoint": "./results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_6/checkpoints/bandit_lstdq_final.npz",
+      "encoder": "./results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_6/checkpoints/bandit_lstdq_final.npz.encoder.json",
       "method": "bandit_lstdq",
       "seed": 6,
-      "setup_checkpoint": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_6/final_bandit_states/bandit_lstdq.npz",
+      "setup_checkpoint": "./results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_6/final_bandit_states/bandit_lstdq.npz",
       "training_config": {
         "description": "Full Module 04: diffusion, 60 cubed, original paper stream seed 6, 5000 inputs, four independently measured branches. Both setup learners and both LSTDQ controllers start cold at input 1. Expanded no-endpoint space; Failure Model + adjacent setup recovery. Structured candidate pool: 1024; anchor/global/local/Sobol targets 128/384/384/128; elite cache 64 and eight local centers, matching the tested doubling configuration.",
         "failure_feedback": {
@@ -1261,7 +1261,7 @@
           }
         ],
         "name": "diffusion_60_zero_prefix_seed6_candidates1024",
-        "output_dir": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_6",
+        "output_dir": "./results/paper_final/04_online/20261010_diffusion60_seeds4to6_1024_repeat01/seed_6",
         "problem": {
           "advection": [
             0,

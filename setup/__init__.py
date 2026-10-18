@@ -1,4 +1,4 @@
-"""Setup-phase LinUCB construction and parameter spaces for the SISC studies."""
+"""Setup-phase LinUCB construction and parameter spaces for the studies."""
 
 from .registry import (
     COMPOSABLE_SETUP_KINDS,

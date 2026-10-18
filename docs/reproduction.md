@@ -80,7 +80,7 @@ must never be resumed or overwritten.
 
 The compact bundle contains the current Module 04 and Module 05 SVG/PNG figures.
 The paper-generation scripts are under `tools/paper/` and in the local
-SISC-Overleaf repository. They read the official registry and verify the saved
+manuscript repository. They read the official registry and verify the saved
 records. Module 04's illustrative Default residual replay is retained under
 `module04/figure_evidence/`. Module 06 has no paper figure.
 

@@ -41,7 +41,7 @@
     }
   ],
   "name": "module06_type2_60_seed2_beta2_zero_prefix",
-  "output_dir": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/06_recovery/20261012_type2_beta2_four_branches_zero_prefix_six_seeds/batches/batch_01/seed_2",
+  "output_dir": "./results/paper_final/06_recovery/20261012_type2_beta2_four_branches_zero_prefix_six_seeds/batches/batch_01/seed_2",
   "problem": {
     "c_max": 0.1,
     "c_min": 0.0001,

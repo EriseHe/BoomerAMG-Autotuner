@@ -16,7 +16,7 @@
       "experiment": "diffusion_40",
       "inputs": 15000,
       "output": "batches/batch_01/diffusion_40",
-      "protocol_sha256": "c798d9bd1fb72a91f5bc7c813266df1ac12a9c1297d24d964eb722349c8e6d64",
+      "protocol_sha256": "e96727689783536d01828ada1a27ef75c554ad3c0d83cd36daf3b3ed75c5abc5",
       "seeds": [
         "1",
         "2",
@@ -28,7 +28,7 @@
       "experiment": "advection_40",
       "inputs": 15000,
       "output": "batches/batch_01/advection_40",
-      "protocol_sha256": "74462c8860876c9be01a945a4c970146d51eb527e931585ec411f16552a48613",
+      "protocol_sha256": "979180c1c59a4bdeaa3fcf79f93e124f7fc432ec85a7de32f36f31a03ed02bca",
       "seeds": [
         "1",
         "2",
@@ -40,7 +40,7 @@
       "experiment": "diffusion_60",
       "inputs": 15000,
       "output": "batches/batch_01/diffusion_60",
-      "protocol_sha256": "2ef55234c5ee4ba3ca5cb93472e9d421d76ce640f1d21134010fd6b7b9e18eda",
+      "protocol_sha256": "2989b224c4adbea23f73946d17878e722ceb85087319472ac2756fa391afcace",
       "seeds": [
         "1",
         "2",
@@ -52,7 +52,7 @@
       "experiment": "advection_60",
       "inputs": 15000,
       "output": "batches/batch_01/advection_60",
-      "protocol_sha256": "40e818aa504aeb696047158d90ac7702e0014046578f2a1d5a425f97103464a8",
+      "protocol_sha256": "9a8f87a66ab961ddbacf00d2b5bce1df6ebfc09619ef87f7f5a3bf1c14bc32bb",
       "seeds": [
         "1",
         "2",
@@ -64,7 +64,7 @@
       "experiment": "diffusion_80",
       "inputs": 15000,
       "output": "batches/batch_01/diffusion_80",
-      "protocol_sha256": "9207e34846c116b7e05e48716f025189de2abff2a2a551e37f3e8fd488aa2d94",
+      "protocol_sha256": "353a22d1a593cc86af501cced99cdd0642b8258b4ab1d61b770497f84cbcab2d",
       "seeds": [
         "1",
         "2",
@@ -76,7 +76,7 @@
       "experiment": "advection_80",
       "inputs": 15000,
       "output": "batches/batch_01/advection_80",
-      "protocol_sha256": "a9e2ea2f2b7760dbed94157a95a40e7fff0cf79a73d50dcc7e28effca173a2f9",
+      "protocol_sha256": "9d6d114f6aceb68b052ad60cc10085c3c1508bc0d8616c8bcdf97710d2d2f4d1",
       "seeds": [
         "1",
         "2",
@@ -88,7 +88,7 @@
       "experiment": "diffusion_40",
       "inputs": 15000,
       "output": "batches/batch_02/diffusion_40",
-      "protocol_sha256": "3bc6b08700d33bb1713cc8899ef10ad236c38e47873ed50a0a683d2ceef3a41c",
+      "protocol_sha256": "34c6fec91080313ae6afe35b10524ba1dfb84de01978a7193ec5c51bd1009e32",
       "seeds": [
         "4",
         "5",
@@ -100,7 +100,7 @@
       "experiment": "advection_40",
       "inputs": 15000,
       "output": "batches/batch_02/advection_40",
-      "protocol_sha256": "958b0bbb7d80812ed5cd0d9687673cdd0a334c6e0ee9248fe82f85cf9198fda3",
+      "protocol_sha256": "e5a982e72970daafd07845e922e69c2f69a47474a6acb953edc380b198eeff8a",
       "seeds": [
         "4",
         "5",
@@ -112,7 +112,7 @@
       "experiment": "diffusion_60",
       "inputs": 15000,
       "output": "batches/batch_02/diffusion_60",
-      "protocol_sha256": "3bef951139f74561714170a0babe22b082c908fab6563ccf43418c21e750e79f",
+      "protocol_sha256": "cab31b7cda3d0def3dcf00fae3a3b928f5b584b61f54765d038f3a161a4cc673",
       "seeds": [
         "4",
         "5",
@@ -124,7 +124,7 @@
       "experiment": "advection_60",
       "inputs": 15000,
       "output": "batches/batch_02/advection_60",
-      "protocol_sha256": "b592c5318d3c2aae1fa0d2bfba5649e415db690113a4c68c9db897835370a00f",
+      "protocol_sha256": "fe55f30cfa96bfc7cafe2c3d348c4180ddbfde0a5e9d8e1e4ad9260f7945ceae",
       "seeds": [
         "4",
         "5",
@@ -136,7 +136,7 @@
       "experiment": "diffusion_80",
       "inputs": 15000,
       "output": "batches/batch_02/diffusion_80",
-      "protocol_sha256": "519e69d46017ad1aa5df185e2db856c4d3248659307cb47f7814c624f5c2cb81",
+      "protocol_sha256": "53330061227d66ccb8735a16a5d292f6d103daceac86a5513d910a7fdd0c2397",
       "seeds": [
         "4",
         "5",
@@ -148,7 +148,7 @@
       "experiment": "advection_80",
       "inputs": 15000,
       "output": "batches/batch_02/advection_80",
-      "protocol_sha256": "ce0648f97d2e845d54365798631cd586a6246fdefeb3abbb5498df8c593ef385",
+      "protocol_sha256": "c43c014a48b248e75626a9e6704ab93c8fbd14a2203e394141d717f64eb63ac7",
       "seeds": [
         "4",
         "5",

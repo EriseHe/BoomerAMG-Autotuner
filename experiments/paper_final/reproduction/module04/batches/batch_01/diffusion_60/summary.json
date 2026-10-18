@@ -196,32 +196,32 @@
     "stages": {
       "1": {
         "cases": 5000,
-        "config_sha256": "48d3a05807e97fa7f0af5ba2e2e50986051c8f173cfe6e4e29f5d7c70fc680ed",
+        "config_sha256": "c9ef8ccbe7795bac04efb02cbec4648c921fa3937fa55b43855b150ccd349bb0",
         "full_stream_sha256": "e79ce1e088712599abd69a0b6b48cfbea54fbcf6c684b057353bd64af38ec823",
         "inputs_sha256": "7d81cd5823543850569d6b57d79db01a5f6d7f12e9c963b793947c728d670e18",
         "joint_activation_case": 0,
         "smoke": false,
-        "source_config": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/experiments/paper_final/04_online/20261009_full_zero_prefix_1024/diffusion_60/seed_1.json",
+        "source_config": "./experiments/paper_final/04_online/20261009_full_zero_prefix_1024/diffusion_60/seed_1.json",
         "source_config_sha256": "31ade50137ef74f8541f39a97fb2d953639ec9104fa1e9318c7db81ae5306846"
       },
       "2": {
         "cases": 5000,
-        "config_sha256": "2ea93e40db40145a06bf9781c7d59551ec812ee61704107399c289154d7960d0",
+        "config_sha256": "23412c311925e436778c283c82646131e114554a9c7db57df2391b7163bdfad1",
         "full_stream_sha256": "7e1fe1b87108d45207bbc031c9955dcc8309c944b25e99bfba05a2857f500789",
         "inputs_sha256": "5dd99f68d71630e09beae7daabce1789a07c0606c87720393d8094581f1c04db",
         "joint_activation_case": 0,
         "smoke": false,
-        "source_config": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/experiments/paper_final/04_online/20261009_full_zero_prefix_1024/diffusion_60/seed_2.json",
+        "source_config": "./experiments/paper_final/04_online/20261009_full_zero_prefix_1024/diffusion_60/seed_2.json",
         "source_config_sha256": "7e5f1f5accd136ccc076670abed8395ee3f74fae21f4102d3d38e1965aae757f"
       },
       "3": {
         "cases": 5000,
-        "config_sha256": "5970841323c34e3d42b9548327e4383dd2013f939fdad0b3aa2d0daee034ff12",
+        "config_sha256": "54019d700a0c1a8891cb0ce3f48cc69c1baad28e909f1fe2b44dc39913552b85",
         "full_stream_sha256": "93b9f0207a5ba8c5f01f93dbd257cc5d66e307be8800bcab04e3d025aed23353",
         "inputs_sha256": "3eb66f8ad983a3532f16cabf1ae8b5c6f4328a40035e5d3060b028f5f6df37f1",
         "joint_activation_case": 0,
         "smoke": false,
-        "source_config": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/experiments/paper_final/04_online/20261009_full_zero_prefix_1024/diffusion_60/seed_3.json",
+        "source_config": "./experiments/paper_final/04_online/20261009_full_zero_prefix_1024/diffusion_60/seed_3.json",
         "source_config_sha256": "c267df779f06004b781d714ecf60e316b718197d7f660ac2db0fc3b41e4544dd"
       }
     }

@@ -41,7 +41,7 @@
     }
   ],
   "name": "diffusion_80_zero_prefix_seed2_candidates1024",
-  "output_dir": "/Users/erisehe/.codex/worktrees/sisc-submission/RLTune-BoomerAMG/results/paper_final/04_online/20261012_diffusion80_seeds1to3_1024_repeat01/seed_2",
+  "output_dir": "./results/paper_final/04_online/20261012_diffusion80_seeds1to3_1024_repeat01/seed_2",
   "problem": {
     "advection": [
       0,

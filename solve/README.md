@@ -1,6 +1,6 @@
 # Solve phase
 
-The SISC studies use recursive LSTDQ to select relaxation weights after each
+The studies use recursive LSTDQ to select relaxation weights after each
 AMG cycle. `registry.py` accepts `default`, `fixed`, and `recursive_lstdq`.
 
 - `controllers/recursive_lstdq/`: the single episode-cluster controller,
