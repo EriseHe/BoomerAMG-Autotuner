@@ -1,6 +1,6 @@
-# SISC 论文收尾计划：独立评估、理论整合与实验优先级
+# 论文收尾计划：独立评估、理论整合与实验优先级
 
-日期：2026-09-15。代码基线：online-bandit-rl，13a507d。论文基线：Overleaf/SISC_submission/local_revision_20260915。
+日期：2026-09-15。代码基线：online-bandit-rl，13a507d。论文基线：Overleaf/submission/local_revision_20260915。
 
 状态更新：2026-09-16。01、02 与单 seed 的 03 均已完成；04 尚未启动。
 报告、图表和阅读顺序见[总入口](../../experiments/paper_final/README.md)。
@@ -444,8 +444,6 @@ b_{\rm new}=\rho b_{\rm old}+b_e.
 
 ## 7. 论文结构、页数与引用
 
-当前 PDF 已独立核实为 32 页。SISC 官方要求超过 26 个 SIAM-template 页面会退回，推荐长度约 20 页；核心贡献的证明不能移到非核心 supplementary 来支撑一个不自足的主文。[官方作者指南](https://epubs.siam.org/journal/sisc/instructions-for-authors)
-
 因此，“加入新理论”的实际操作应是替换与合并：
 
 1. Introduction：聚焦 online cumulative-cost coupling；说明与已有 cycle-level PPO、scheduled relaxation 的差别。
@@ -465,11 +463,7 @@ b_{\rm new}=\rho b_{\rm old}+b_e.
 - 避免“首次 high–low”“首次 cycle-level multigrid RL”“首次任何形式 joint tuning”等过宽表述。已有 [cycle-level PPO 工作](https://arxiv.org/html/2407.15872v1)；[Learning to Relax](https://proceedings.iclr.cc/paper_files/paper/2024/file/8fcc228e94aa7e4773a27c6c2d886243-Paper-Conference.pdf) 的特定数值到可学习性联系可作为参照，不是当前实现已获得的保证。
 - 检查新增 cite key、作者/年份/版本、引用所支持的精确陈述；不重启全文 bibliography 重审工程。
 
-SISC 接受以理论或有力启发支持、并有详细数值验证的方法贡献；完整 RL 收敛定理不是普遍前提。仍需证明清晰的算法进展、准确性、效率与稳健性。[官方编辑政策](https://epubs.siam.org/journal/sisc/editorial-policy)
-
 ## 8. 建议时间顺序与收尾标准
-
-以官方 2026-09-30 截止为依据，下面是工作安排建议，不是尚未测量的计算时长承诺。[Special-section call](https://www.siam.org/publications/siam-news/articles/call-for-papers-sisc-iterative-and-multigrid-special-section/)
 
 | 时段 | 建议工作 |
 |---|---|
@@ -508,8 +502,8 @@ SISC 接受以理论或有力启发支持、并有详细数值验证的方法贡
 - [现有 frozen-cross 诊断](../../experiments/diagnostics/solve_control/diagnose_context_activation_crossed.py)
 - [共享前缀执行与完整状态恢复](../../experiments/joint/solve_control/joint_4k_execution.py)
 - [已有 clone helper](../../experiments/joint/solve_control/setup_aware_compare_common.py)
-- [当前理论源文件](/Users/erisehe/Documents/GitHub/Overleaf/SISC_submission/local_revision_20260915/sections/theory_updated.tex)
-- [当前证明 appendix](/Users/erisehe/Documents/GitHub/Overleaf/SISC_submission/local_revision_20260915/sections/appendix_updated.tex)
+- [当前理论源文件](/Users/erisehe/Documents/GitHub/Overleaf/submission/local_revision_20260915/sections/theory_updated.tex)
+- [当前证明 appendix](/Users/erisehe/Documents/GitHub/Overleaf/submission/local_revision_20260915/sections/appendix_updated.tex)
 - [用户提供的新增证明](/Users/erisehe/Downloads/additional_theorems.tex)
 - [用户提供的完整审阅](/Users/erisehe/Downloads/REVIEW.md)
 
