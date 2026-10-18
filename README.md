@@ -1,7 +1,7 @@
 # RLTune-BoomerAMG
 
 Code and data for **Online Autotuning of BoomerAMG with Contextual Bandits and
-Reinforcement Learning**, by Erise He, Jonathan Wang, and Lance Ding.
+Reinforcement Learning**, by Xudong He, Ruiyu Wang, and Yilang Ding, Rui Peng Li, and Yuanzhe Xi
 
 | Module | Study | Data |
 |---|---|---|
