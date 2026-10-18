@@ -1,0 +1,27 @@
+{
+  "changes": [
+    "Incrementally maintain the derived inverse-times-covariance product for scoring",
+    "Preserve memory layout in rollback and episode matrix copies",
+    "Remove construction of an unused state-lift matrix"
+  ],
+  "unchanged": [
+    "Shared reference-one-hot setup encoding",
+    "43-dimensional diffusion state and 387-dimensional state-action feature vector",
+    "LSTDQ update and episode covariance equations",
+    "Confidence scores, action basis and exploration rules",
+    "Timing-accounting definitions"
+  ],
+  "unit_tests_passed": 20,
+  "native_cases_passed": 6,
+  "replayed_transitions": 112959,
+  "sampled_score_and_greedy_action_checks": 1165,
+  "benchmark_reduction_pct": {
+    "default_setup_lstdq": 21.554681233103157,
+    "bandit_lstdq": 13.604271125089884
+  },
+  "benchmark_scope": "Median of five alternating before/after controller replays of the first 200 recorded inputs; encoding and native AMG execution excluded.",
+  "full_native_experiment_rerun": false,
+  "extra_cache_bytes_per_controller": 1198152,
+  "paper_changed": false,
+  "pushed": false
+}

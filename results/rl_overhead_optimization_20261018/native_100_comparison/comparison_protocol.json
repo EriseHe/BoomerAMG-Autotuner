@@ -1,0 +1,39 @@
+{
+  "baseline_source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/results/rl_overhead_optimization_20261018/baseline",
+  "changed_source_files": [
+    "solve/controllers/recursive_lstdq/controller.py",
+    "solve/controllers/recursive_lstdq/common.py"
+  ],
+  "inputs_per_branch": 100,
+  "learning": "Cold start, learning enabled in every run",
+  "methods": [
+    "default_setup_default_solve",
+    "default_setup_lstdq",
+    "bandit_default",
+    "bandit_lstdq"
+  ],
+  "native_execution": "One serial single-thread worker per run; no concurrent benchmark workers",
+  "pairing": "Same first 100 inputs, candidate schedule, method order, and RNG seeds",
+  "prepared_at": "2026-10-18T20:55:28.185397+00:00",
+  "repetitions": 2,
+  "run_order": [
+    [
+      1,
+      "before"
+    ],
+    [
+      1,
+      "after"
+    ],
+    [
+      2,
+      "after"
+    ],
+    [
+      2,
+      "before"
+    ]
+  ],
+  "seed": "1",
+  "timing": "Recorded native setup/solve time plus measured setup and solve learner overhead"
+}

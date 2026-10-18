@@ -1,0 +1,8 @@
+{
+  "commit": "42fba35faddb55b41b3b83734374b57454728fda",
+  "pushed": true,
+  "files": [
+    "solve/controllers/common/state_encoder.py"
+  ],
+  "test_passed": true
+}

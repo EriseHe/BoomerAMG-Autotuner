@@ -1,0 +1,10 @@
+{
+  "ablated_dim": 29,
+  "all_other_features_exactly_equal": true,
+  "cycle_bin_groups_absent": true,
+  "cycle_time_feature_retained": true,
+  "new_encoding_version": "shared_setup_one_hot_tolerance_residuals_without_cycle_bins",
+  "original_dim": 43,
+  "passed": true,
+  "states_checked": 1898
+}

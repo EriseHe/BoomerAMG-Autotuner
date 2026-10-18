@@ -1,0 +1,52 @@
+{
+  "ablated_joint_dim": 378,
+  "ablated_state_dim": 42,
+  "execution": "Six serial, single-thread workers; four branches per worker.",
+  "inputs_per_branch": 1000,
+  "learning": "Cold start; online learning active from input 1 for all learned branches.",
+  "limits": "Short cold-start diagnostic, not a long-run or policy-equivalence claim.",
+  "methods": [
+    "default_setup_default_solve",
+    "default_setup_lstdq",
+    "bandit_default",
+    "bandit_lstdq"
+  ],
+  "native_cost_and_controller_overhead_in_reward": true,
+  "only_source_change": "solve/controllers/common/state_encoder.py",
+  "original_joint_dim": 387,
+  "original_state_dim": 43,
+  "pairing": "Same stream prefix, candidate schedule, method order, seeds and hyperparameters within each pair.",
+  "prepared_at": "2026-10-18T21:41:35.098837+00:00",
+  "run_order": [
+    [
+      1,
+      "with_time"
+    ],
+    [
+      1,
+      "without_time"
+    ],
+    [
+      2,
+      "without_time"
+    ],
+    [
+      2,
+      "with_time"
+    ],
+    [
+      3,
+      "with_time"
+    ],
+    [
+      3,
+      "without_time"
+    ]
+  ],
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "timing": "Measured native setup and solve plus setup and controller overhead."
+}

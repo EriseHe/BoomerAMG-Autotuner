@@ -1,0 +1,78 @@
+{
+  "state_features": 43,
+  "joint_features": 387,
+  "methods": {
+    "default_setup_lstdq": {
+      "benchmark_inputs": 200,
+      "repetitions": 5,
+      "timings_sec": {
+        "reference": [
+          0.5052289580053184,
+          0.4890899170131888,
+          0.49377112500951625,
+          0.493606332980562,
+          0.5132709169993177
+        ],
+        "optimized": [
+          0.3885785420134198,
+          0.382958417001646,
+          0.38713737498619594,
+          0.3879935000149999,
+          0.3873403329926077
+        ]
+      },
+      "median_sec": {
+        "reference": 0.49377112500951625,
+        "optimized": 0.3873403329926077
+      },
+      "controller_time_reduction_pct": 21.554681233103157,
+      "equivalence": {
+        "transitions": 43235,
+        "score_checks": 446,
+        "greedy_actions_match": true,
+        "max_absolute_errors_mean_uncertainty_score": [
+          0.0,
+          5.6850140914277425e-16,
+          1.137111238502797e-15
+        ],
+        "original_checkpoint_reproduced": true
+      }
+    },
+    "bandit_lstdq": {
+      "benchmark_inputs": 200,
+      "repetitions": 5,
+      "timings_sec": {
+        "reference": [
+          2.0188165419967845,
+          1.9338062919850927,
+          1.932921833009459,
+          1.9601861250121146,
+          1.9334777500189375
+        ],
+        "optimized": [
+          1.6974503329838626,
+          1.6472327079973184,
+          1.6707260409893934,
+          1.703731208021054,
+          1.6531906249874737
+        ]
+      },
+      "median_sec": {
+        "reference": 1.9338062919850927,
+        "optimized": 1.6707260409893934
+      },
+      "controller_time_reduction_pct": 13.604271125089884,
+      "equivalence": {
+        "transitions": 69724,
+        "score_checks": 719,
+        "greedy_actions_match": true,
+        "max_absolute_errors_mean_uncertainty_score": [
+          0.0,
+          2.8193593293313057e-15,
+          5.6387186586626115e-15
+        ],
+        "original_checkpoint_reproduced": true
+      }
+    }
+  }
+}

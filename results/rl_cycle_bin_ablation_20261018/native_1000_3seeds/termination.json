@@ -1,0 +1,8 @@
+{
+  "stopped_at": "2026-10-18T23:02:06.333968+00:00",
+  "reason": "Proceed with requested production removal of cycle-bin features. Preserve completed comparisons.",
+  "signaled_processes": [
+    49168,
+    50203
+  ]
+}

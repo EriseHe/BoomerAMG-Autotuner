@@ -1,0 +1,249 @@
+{
+  "scope": "Controller replay of the same first 100 recorded diffusion40 inputs, actions, native costs, overhead costs, and update durations. State encoding and native execution excluded. Removing time changes learned values; this is not a policy-performance test. Source files unchanged.",
+  "removed_state_index": 5,
+  "state_dimensions": [
+    43,
+    42
+  ],
+  "joint_dimensions": [
+    387,
+    378
+  ],
+  "repetitions": 9,
+  "methods": {
+    "default_setup_lstdq": {
+      "inputs": 100,
+      "cycles": 1017,
+      "measurements": {
+        "with_time": [
+          {
+            "seconds": 0.1994969169900287,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          },
+          {
+            "seconds": 0.19964645800064318,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          },
+          {
+            "seconds": 0.19864887499716133,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          },
+          {
+            "seconds": 0.20064429100602865,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          },
+          {
+            "seconds": 0.20347833400592208,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          },
+          {
+            "seconds": 0.1996912919858005,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          },
+          {
+            "seconds": 0.1994004999869503,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          },
+          {
+            "seconds": 0.21167700001387857,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          },
+          {
+            "seconds": 0.2029288329940755,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          }
+        ],
+        "without_time": [
+          {
+            "seconds": 0.19204408299992792,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          },
+          {
+            "seconds": 0.1892470000020694,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          },
+          {
+            "seconds": 0.18876258400268853,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          },
+          {
+            "seconds": 0.1905949999927543,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          },
+          {
+            "seconds": 0.1915083749918267,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          },
+          {
+            "seconds": 0.18698691600002348,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          },
+          {
+            "seconds": 0.1876709159987513,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          },
+          {
+            "seconds": 0.1892371669819113,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          },
+          {
+            "seconds": 0.1923091250064317,
+            "inverse_rebuilds": 0,
+            "samples": 1017
+          }
+        ]
+      },
+      "median_seconds": {
+        "with_time": 0.1996912919858005,
+        "without_time": 0.1892470000020694
+      },
+      "reduction_percent": 5.230219044540885,
+      "median_paired_reduction_percent": 5.233217887747776,
+      "paired_reduction_percent": [
+        3.7358141181065396,
+        5.20893688909837,
+        4.9767666666192145,
+        5.008510814280975,
+        5.882670050633987,
+        6.362008007179587,
+        5.8824245621082465,
+        10.60097839184041,
+        5.233217887747776
+      ]
+    },
+    "bandit_lstdq": {
+      "inputs": 100,
+      "cycles": 4831,
+      "measurements": {
+        "with_time": [
+          {
+            "seconds": 0.8871107919840142,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          },
+          {
+            "seconds": 0.8939793750178069,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          },
+          {
+            "seconds": 0.9351913749997038,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          },
+          {
+            "seconds": 0.8920892080059275,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          },
+          {
+            "seconds": 0.9144261250039563,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          },
+          {
+            "seconds": 0.9542421670048498,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          },
+          {
+            "seconds": 0.8966140419943258,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          },
+          {
+            "seconds": 0.9043277500022668,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          },
+          {
+            "seconds": 0.9251263750193175,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          }
+        ],
+        "without_time": [
+          {
+            "seconds": 0.8324399589910172,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          },
+          {
+            "seconds": 0.8337296249810606,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          },
+          {
+            "seconds": 0.8437940420117229,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          },
+          {
+            "seconds": 0.8379276670166291,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          },
+          {
+            "seconds": 0.8493144999956712,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          },
+          {
+            "seconds": 0.9286449589999393,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          },
+          {
+            "seconds": 0.8460260830179323,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          },
+          {
+            "seconds": 0.8479639999859501,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          },
+          {
+            "seconds": 0.8579137089836877,
+            "inverse_rebuilds": 0,
+            "samples": 4831
+          }
+        ]
+      },
+      "median_seconds": {
+        "with_time": 0.9043277500022668,
+        "without_time": 0.8460260830179323
+      },
+      "reduction_percent": 6.4469620648253345,
+      "median_paired_reduction_percent": 6.2326684121078335,
+      "paired_reduction_percent": [
+        6.162796517301549,
+        6.739501125017133,
+        9.773115474681305,
+        6.071314449635013,
+        7.1204904614906255,
+        2.6824645661231217,
+        5.642110942616007,
+        6.2326684121078335,
+        7.265241576776615
+      ]
+    }
+  }
+}

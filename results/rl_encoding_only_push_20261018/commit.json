@@ -1,0 +1,20 @@
+{
+  "commit": "58f92bd46db59a78bef3c8548647a1408c40f265",
+  "base": "96e634b46354efde2a2c0bef1f48141e7891bd85",
+  "files": [
+    "setup/learners/common/action_features.py",
+    "setup/space.py",
+    "experiments/paper_final/online/controllers.py",
+    "experiments/paper_final/online/methods.py",
+    "solve/controllers/common/config.py",
+    "solve/controllers/common/factory.py",
+    "solve/controllers/common/state_encoder.py",
+    "solve/controllers/common/types.py",
+    "experiments/paper_final/online/configuration.py",
+    "experiments/paper_final/online/factorial.py",
+    "experiments/paper_final/run_online.py"
+  ],
+  "validated": true,
+  "pushed": true,
+  "working_files_preserved": true
+}

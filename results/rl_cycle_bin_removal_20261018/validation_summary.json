@@ -1,0 +1,83 @@
+{
+  "encoder": {
+    "cycle_time_retained": true,
+    "encoding_version": "shared_setup_one_hot_tolerance_residuals_v2",
+    "identical_to_tested_reduced_encoding": true,
+    "passed": true,
+    "state_features": 29,
+    "states_checked": 33481
+  },
+  "native": {
+    "branches": 4,
+    "inputs_per_branch": 10,
+    "joint_features": 261,
+    "methods": {
+      "bandit_default": {
+        "cases": 10,
+        "cycles": 560,
+        "failures": 0,
+        "fallbacks": 0,
+        "first_failures": 8,
+        "native_fallback_sec": 0.0,
+        "native_sec": 1.4157449999999991,
+        "random_actions": 0,
+        "rl_actions": 0,
+        "total_sec": 1.461154709942759,
+        "zero_selected_score_fraction": null
+      },
+      "bandit_lstdq": {
+        "cases": 10,
+        "cycles": 575,
+        "failures": 0,
+        "fallbacks": 0,
+        "first_failures": 8,
+        "native_fallback_sec": 0.0,
+        "native_sec": 1.491822999999995,
+        "random_actions": 165,
+        "rl_actions": 575,
+        "total_sec": 1.6234423335223893,
+        "zero_selected_score_fraction": 0.09391304347826086
+      },
+      "default_setup_default_solve": {
+        "cases": 10,
+        "cycles": 128,
+        "failures": 0,
+        "fallbacks": 0,
+        "first_failures": 0,
+        "native_fallback_sec": 0.0,
+        "native_sec": 0.759945999999998,
+        "random_actions": 0,
+        "rl_actions": 0,
+        "total_sec": 0.759945999999998,
+        "zero_selected_score_fraction": null
+      },
+      "default_setup_lstdq": {
+        "cases": 10,
+        "cycles": 123,
+        "failures": 0,
+        "fallbacks": 0,
+        "first_failures": 0,
+        "native_fallback_sec": 0.0,
+        "native_sec": 0.753153999999999,
+        "random_actions": 29,
+        "rl_actions": 123,
+        "total_sec": 0.7742379119681613,
+        "zero_selected_score_fraction": 0.06504065040650407
+      }
+    },
+    "state_features": 29
+  },
+  "passed": true,
+  "unit_tests": {
+    "solve": 17,
+    "frozen_feedback": 4,
+    "passed": true
+  },
+  "active_cycle_bin_references": 0,
+  "changed_files": {
+    "solve/README.md": "292e4b45951d3fc04c3e3749c031d438e94c9b4e375fde2b79d732a8c8289537",
+    "solve/tests/test_lstdq_scoring_equivalence.py": "2d02b5a0872d5532ef17343833240a8e5283232974e64b1412ce57fe8a947043",
+    "solve/tests/test_shared_setup_and_costs.py": "2182a4073b4d5cc2ef9b661870a323c72c153b8ccff8a115f224fe120c610bd8",
+    "solve/controllers/common/state_encoder.py": "ba130b2a1d631406ae7cc006e3922b73b0563b879578218b393c3dadc9ddfde4"
+  }
+}

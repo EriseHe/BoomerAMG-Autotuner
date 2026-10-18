@@ -1,0 +1,9 @@
+{
+  "name": "Cycle-bin feature diagnostic seed 1",
+  "seeds": [
+    {
+      "config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/results/shared_setup_tolerance_diffusion40_5000_3seeds_20261018/seed_1/experiment_config.json",
+      "label": "1"
+    }
+  ]
+}

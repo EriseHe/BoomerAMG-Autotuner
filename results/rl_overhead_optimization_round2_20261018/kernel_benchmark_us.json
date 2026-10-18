@@ -1,0 +1,8 @@
+{
+  "current_einsum": 19.115333998342976,
+  "buffer_einsum": 24.968624988105148,
+  "sparse_gather": 48.972791992127895,
+  "dense_blas": 77.09254199289717,
+  "current_action_quadratic": 1.8606670200824738,
+  "buffer_action_quadratic": 1.4300000038929284
+}

@@ -1,0 +1,9 @@
+{
+  "ablated_dim": 42,
+  "all_other_features_exactly_equal": true,
+  "new_encoding_version": "shared_setup_one_hot_tolerance_residuals_without_cycle_time",
+  "original_dim": 43,
+  "passed": true,
+  "states_checked": 1898,
+  "time_feature_absent": true
+}

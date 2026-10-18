@@ -1,0 +1,24 @@
+{
+  "commit": "8d591e109de03537027d5676d5bc5baccc2b82ab",
+  "working_tree_files": {
+    "README.md": "b471cbb151a9c8048a642e9dea56ca8eb85a1aac45e9d7044699e5c7d0fc46c0",
+    "docs/experiments.md": "8f336a797890fe0217e182a2c48de52410661796ca726da02d671acf846015f7",
+    "experiments/paper_final/common/online_inputs.py": "e007fa99623702abb40be79b6717198a18ab4943df6a080e3b36b89ab1cc26d7",
+    "experiments/paper_final/online/configuration.py": "2670e0f5ffade4d507063504934adc6891dc5d2564e6c36a0e1ad4d9db73a64d",
+    "experiments/paper_final/online/factorial.py": "b0b664517c472797c6cee3c8410555e23200656c939f6f00f00f2b5abffda9c6",
+    "experiments/paper_final/plot_online.py": "9711e4978854dbb40746847a6e2dde6e6426de6f9354ba546fd25246b6178dd1",
+    "experiments/paper_final/recovery/audit.py": "0aebf67a954cd3a787c067a9ecff2159b8bdaeab7ce1c972f1a07bd75ce61356",
+    "experiments/paper_final/recovery/execution.py": "e65796d4bec1b883460fccf4bd0c3ee359d057826ad5e679874976ca5bb3c423",
+    "experiments/paper_final/recovery/joint_validation.py": "30b8e8213ce6c77cf20aec0674e1338abd3cab925877be72f89c73b69b02116a",
+    "experiments/paper_final/recovery/metrics.py": "385ad9502ab664c094f4ce1d05eac61fa8fdfb66ce8add28274416284b4ba695",
+    "experiments/paper_final/recovery/retry_comparison.py": "6a9e98b2f3fb2a6bfce7c3e45c4a19ddcfbfe32f7fba445473219e5ab68d54a0",
+    "experiments/paper_final/run_online.py": "16275ff6a1aacbb45d7367900defd438fad3d9a2a3eeb585af4a61764fe95c02",
+    "solve/README.md": "fc6cde0e6966ddac573cff65cae034c6841ab09e822d85948163549c7f8e3ca8",
+    "solve/controllers/recursive_lstdq/common.py": "c4b35b6a4b848050924952f697c8d224c27886baa977df08948793fda0655731",
+    "solve/controllers/recursive_lstdq/controller.py": "139c11ae90d52fe164fb8fd2a4d286f7d994ecccbe51e0394384663d2eeb134b",
+    "solve/controllers/recursive_lstdq/factory.py": "32555a07144984fb2802be0c19e04c7dc6c3cb2456b0394fed4c124391a8fc7e",
+    "solve/core/episode.py": "5475713d2d8f1e5948f7afcccb3a11365eedc06391d45e66b12f6986e8787a5f",
+    "tools/verify_data.py": "b670d6a5177575d69c8f51a21093c31099a829c635e6c911f9ab07cc8e8a80b9"
+  },
+  "test_source": "Main working tree including pending algorithm and Module 4 changes."
+}

@@ -1,0 +1,54 @@
+{
+  "ablated_joint_dim": 261,
+  "ablated_state_dim": 29,
+  "cycle_time_feature_retained_in_both_versions": true,
+  "execution": "Six serial, single-thread workers; four branches per worker.",
+  "inputs_per_branch": 1000,
+  "learning": "Cold start; online learning active from input 1 for all learned branches.",
+  "limits": "Short cold-start diagnostic, not a long-run or policy-equivalence claim.",
+  "methods": [
+    "default_setup_default_solve",
+    "default_setup_lstdq",
+    "bandit_default",
+    "bandit_lstdq"
+  ],
+  "native_cost_and_controller_overhead_in_reward": true,
+  "only_source_change": "solve/controllers/common/state_encoder.py",
+  "original_joint_dim": 387,
+  "original_state_dim": 43,
+  "pairing": "Same stream prefix, candidate schedule, method order, seeds and hyperparameters within each pair.",
+  "prepared_at": "2026-10-18T22:32:36.264380+00:00",
+  "removed_features": "7 cycle-bin indicators and 7 residual-gap by cycle-bin interactions",
+  "run_order": [
+    [
+      1,
+      "with_bins"
+    ],
+    [
+      1,
+      "without_bins"
+    ],
+    [
+      2,
+      "without_bins"
+    ],
+    [
+      2,
+      "with_bins"
+    ],
+    [
+      3,
+      "with_bins"
+    ],
+    [
+      3,
+      "without_bins"
+    ]
+  ],
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "timing": "Measured native setup and solve plus setup and controller overhead."
+}

@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "smoother_profile": "l1_jacobi_direct_coarse",
+  "cases": [
+    {
+      "method": "default_setup_lstdq",
+      "input": 1,
+      "failed": false,
+      "cycles": 8,
+      "residual": 3.737910202531875e-07
+    },
+    {
+      "method": "default_setup_lstdq",
+      "input": 2,
+      "failed": false,
+      "cycles": 9,
+      "residual": 2.1645562236676735e-07
+    },
+    {
+      "method": "default_setup_lstdq",
+      "input": 3,
+      "failed": false,
+      "cycles": 9,
+      "residual": 6.66346230869779e-07
+    },
+    {
+      "method": "bandit_lstdq",
+      "input": 1,
+      "failed": false,
+      "cycles": 9,
+      "residual": 1.1468095453401218e-07
+    },
+    {
+      "method": "bandit_lstdq",
+      "input": 2,
+      "failed": false,
+      "cycles": 11,
+      "residual": 5.652168547771464e-07
+    },
+    {
+      "method": "bandit_lstdq",
+      "input": 3,
+      "failed": false,
+      "cycles": 9,
+      "residual": 8.764068885196684e-07
+    }
+  ],
+  "earlier_harness_issue": "An earlier smoke invocation omitted configure_smoother_profile; those mismatched-configuration results are superseded."
+}

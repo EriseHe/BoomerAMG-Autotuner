@@ -1,0 +1,355 @@
+{
+  "inputs_per_branch": 1000,
+  "interpretation": "Short online-learning diagnostic; runtime feedback can change policies. Same seeds do not eliminate runtime-driven variation. No long-run inference.",
+  "pairing_audit": {
+    "1": {
+      "with_time": {
+        "candidate_hashes": {
+          "bandit_default": "13faa6fc748c5e67c3866a13adea8d34d1f89f2a0bc6229ad0182127b8aa1e4c",
+          "bandit_lstdq": "13faa6fc748c5e67c3866a13adea8d34d1f89f2a0bc6229ad0182127b8aa1e4c"
+        },
+        "inputs_sha256": "d734c44895ebc460e5cab3f45da559db568a076d627046f7f42cccbda25d6781"
+      },
+      "without_time": {
+        "candidate_hashes": {
+          "bandit_default": "13faa6fc748c5e67c3866a13adea8d34d1f89f2a0bc6229ad0182127b8aa1e4c",
+          "bandit_lstdq": "13faa6fc748c5e67c3866a13adea8d34d1f89f2a0bc6229ad0182127b8aa1e4c"
+        },
+        "inputs_sha256": "d734c44895ebc460e5cab3f45da559db568a076d627046f7f42cccbda25d6781"
+      }
+    },
+    "2": {
+      "with_time": {
+        "candidate_hashes": {
+          "bandit_default": "816c14b8ec612cafd7bbb0fb74ff114ecfed40e769db368c3b8186f994479ec4",
+          "bandit_lstdq": "816c14b8ec612cafd7bbb0fb74ff114ecfed40e769db368c3b8186f994479ec4"
+        },
+        "inputs_sha256": "d7d8131d32a52931b910eddce63205ec119cd594753603015be809d002196310"
+      },
+      "without_time": {
+        "candidate_hashes": {
+          "bandit_default": "816c14b8ec612cafd7bbb0fb74ff114ecfed40e769db368c3b8186f994479ec4",
+          "bandit_lstdq": "816c14b8ec612cafd7bbb0fb74ff114ecfed40e769db368c3b8186f994479ec4"
+        },
+        "inputs_sha256": "d7d8131d32a52931b910eddce63205ec119cd594753603015be809d002196310"
+      }
+    },
+    "3": {
+      "with_time": {
+        "candidate_hashes": {
+          "bandit_default": "4e30b86c609782a4c8f606d25c8a4063ef7392f3a0a57c05fc51b1abc736f7c2",
+          "bandit_lstdq": "4e30b86c609782a4c8f606d25c8a4063ef7392f3a0a57c05fc51b1abc736f7c2"
+        },
+        "inputs_sha256": "705d3c4a5fda39dd169f21478917c621380556a6e42a8bad771046278feedeba"
+      },
+      "without_time": {
+        "candidate_hashes": {
+          "bandit_default": "4e30b86c609782a4c8f606d25c8a4063ef7392f3a0a57c05fc51b1abc736f7c2",
+          "bandit_lstdq": "4e30b86c609782a4c8f606d25c8a4063ef7392f3a0a57c05fc51b1abc736f7c2"
+        },
+        "inputs_sha256": "705d3c4a5fda39dd169f21478917c621380556a6e42a8bad771046278feedeba"
+      }
+    }
+  },
+  "passed": true,
+  "production_source_unchanged": true,
+  "results": [
+    {
+      "failures": {
+        "with_time": 0,
+        "without_time": 0
+      },
+      "fallbacks": {
+        "with_time": 0,
+        "without_time": 0
+      },
+      "mean_per_1000_inputs": {
+        "with_time": {
+          "controller_decision_sec": 0.0,
+          "controller_feature_sec": 0.0,
+          "controller_update_sec": 0.0,
+          "cycles": 12671.333333333334,
+          "failed_primary_attempts": 0,
+          "first_failures": 0,
+          "native_sec": 73.82635900000001,
+          "native_setup_sec": 51.58503933333357,
+          "native_solve_sec": 22.241319666666453,
+          "primary_attempts": 1000,
+          "retries": 0,
+          "rl_overhead_sec": 0.0,
+          "setup_overhead_sec": 0.0,
+          "total_sec": 73.82635900000001
+        },
+        "without_time": {
+          "controller_decision_sec": 0.0,
+          "controller_feature_sec": 0.0,
+          "controller_update_sec": 0.0,
+          "cycles": 12671.333333333334,
+          "failed_primary_attempts": 0,
+          "first_failures": 0,
+          "native_sec": 74.18281466666711,
+          "native_setup_sec": 51.84553933333385,
+          "native_solve_sec": 22.337275333333267,
+          "primary_attempts": 1000,
+          "retries": 0,
+          "rl_overhead_sec": 0.0,
+          "setup_overhead_sec": 0.0,
+          "total_sec": 74.18281466666711
+        }
+      },
+      "method": "default_setup_default_solve",
+      "paired": [
+        {
+          "cycle_change": 0,
+          "default_normalized_reduction_pct": 0.0,
+          "retries_change": 0,
+          "seed": 1,
+          "total_reduction_pct": -0.8900338440495759
+        },
+        {
+          "cycle_change": 0,
+          "default_normalized_reduction_pct": 0.0,
+          "retries_change": 0,
+          "seed": 2,
+          "total_reduction_pct": 0.08106659471486255
+        },
+        {
+          "cycle_change": 0,
+          "default_normalized_reduction_pct": 0.0,
+          "retries_change": 0,
+          "seed": 3,
+          "total_reduction_pct": -0.6448314598811677
+        }
+      ],
+      "pooled_rl_overhead_us_per_action": {
+        "with_time": null,
+        "without_time": null
+      },
+      "total_reduction_pct": -0.4828298069895265
+    },
+    {
+      "failures": {
+        "with_time": 0,
+        "without_time": 0
+      },
+      "fallbacks": {
+        "with_time": 0,
+        "without_time": 0
+      },
+      "mean_per_1000_inputs": {
+        "with_time": {
+          "controller_decision_sec": 0.7769305948168039,
+          "controller_feature_sec": 0.23116027210683873,
+          "controller_update_sec": 1.1035476806476556,
+          "cycles": 8998.333333333334,
+          "failed_primary_attempts": 0,
+          "first_failures": 0,
+          "native_sec": 67.47046500000026,
+          "native_setup_sec": 51.68157833333325,
+          "native_solve_sec": 15.78888666666702,
+          "primary_attempts": 1000,
+          "retries": 0,
+          "rl_overhead_sec": 2.541333777558369,
+          "setup_overhead_sec": 0.0,
+          "total_sec": 70.01179877755864
+        },
+        "without_time": {
+          "controller_decision_sec": 0.7616094820550643,
+          "controller_feature_sec": 0.23337960420758463,
+          "controller_update_sec": 1.0440976207513206,
+          "cycles": 9032.666666666666,
+          "failed_primary_attempts": 0,
+          "first_failures": 0,
+          "native_sec": 67.8220950000012,
+          "native_setup_sec": 51.9410613333334,
+          "native_solve_sec": 15.881033666667799,
+          "primary_attempts": 1000,
+          "retries": 0,
+          "rl_overhead_sec": 2.452189243582931,
+          "setup_overhead_sec": 0.0,
+          "total_sec": 70.27428424358413
+        }
+      },
+      "method": "default_setup_lstdq",
+      "paired": [
+        {
+          "cycle_change": -14,
+          "default_normalized_reduction_pct": 0.2683422970314875,
+          "retries_change": 0,
+          "seed": 1,
+          "total_reduction_pct": -0.6193032097566054
+        },
+        {
+          "cycle_change": 98,
+          "default_normalized_reduction_pct": -0.005623910251761899,
+          "retries_change": 0,
+          "seed": 2,
+          "total_reduction_pct": 0.0754472435756326
+        },
+        {
+          "cycle_change": 19,
+          "default_normalized_reduction_pct": 0.060473995919752,
+          "retries_change": 0,
+          "seed": 3,
+          "total_reduction_pct": -0.5839675086106944
+        }
+      ],
+      "pooled_rl_overhead_us_per_action": {
+        "with_time": 282.4227202324544,
+        "without_time": 271.48009929695155
+      },
+      "total_reduction_pct": -0.3749160435935428
+    },
+    {
+      "failures": {
+        "with_time": 0,
+        "without_time": 0
+      },
+      "fallbacks": {
+        "with_time": 0,
+        "without_time": 0
+      },
+      "mean_per_1000_inputs": {
+        "with_time": {
+          "controller_decision_sec": 0.0,
+          "controller_feature_sec": 0.0,
+          "controller_update_sec": 0.0,
+          "cycles": 28562.333333333332,
+          "failed_primary_attempts": 194.66666666666666,
+          "first_failures": 194.66666666666666,
+          "native_sec": 75.13219333333289,
+          "native_setup_sec": 30.909673999999697,
+          "native_solve_sec": 44.22251933333319,
+          "primary_attempts": 1194.6666666666667,
+          "retries": 194.66666666666666,
+          "rl_overhead_sec": 0.0,
+          "setup_overhead_sec": 3.0293001509368573,
+          "total_sec": 78.16149348426974
+        },
+        "without_time": {
+          "controller_decision_sec": 0.0,
+          "controller_feature_sec": 0.0,
+          "controller_update_sec": 0.0,
+          "cycles": 29062,
+          "failed_primary_attempts": 192.66666666666666,
+          "first_failures": 192.66666666666666,
+          "native_sec": 75.34884700000009,
+          "native_setup_sec": 30.10138333333346,
+          "native_solve_sec": 45.24746366666663,
+          "primary_attempts": 1192.6666666666667,
+          "retries": 192.66666666666666,
+          "rl_overhead_sec": 0.0,
+          "setup_overhead_sec": 3.058281762515738,
+          "total_sec": 78.40712876251582
+        }
+      },
+      "method": "bandit_default",
+      "paired": [
+        {
+          "cycle_change": 1644,
+          "default_normalized_reduction_pct": 0.17553033015283992,
+          "retries_change": -5,
+          "seed": 1,
+          "total_reduction_pct": -0.7129412345518116
+        },
+        {
+          "cycle_change": 112,
+          "default_normalized_reduction_pct": -0.790870134598376,
+          "retries_change": 1,
+          "seed": 2,
+          "total_reduction_pct": -0.7091624083967796
+        },
+        {
+          "cycle_change": -257,
+          "default_normalized_reduction_pct": 1.1123851909462967,
+          "retries_change": -2,
+          "seed": 3,
+          "total_reduction_pct": 0.47472674073140153
+        }
+      ],
+      "pooled_rl_overhead_us_per_action": {
+        "with_time": null,
+        "without_time": null
+      },
+      "total_reduction_pct": -0.31426635712317186
+    },
+    {
+      "failures": {
+        "with_time": 0,
+        "without_time": 0
+      },
+      "fallbacks": {
+        "with_time": 0,
+        "without_time": 0
+      },
+      "mean_per_1000_inputs": {
+        "with_time": {
+          "controller_decision_sec": 1.3878502235359822,
+          "controller_feature_sec": 0.396105594651696,
+          "controller_update_sec": 2.2129415923942966,
+          "cycles": 22987.666666666668,
+          "failed_primary_attempts": 119,
+          "first_failures": 119,
+          "native_sec": 59.65968900000006,
+          "native_setup_sec": 26.602791999999813,
+          "native_solve_sec": 33.05689700000025,
+          "primary_attempts": 1119,
+          "retries": 119,
+          "rl_overhead_sec": 5.719608094863361,
+          "setup_overhead_sec": 3.0194854663083484,
+          "total_sec": 68.39878256117177
+        },
+        "without_time": {
+          "controller_decision_sec": 1.2924752788288363,
+          "controller_feature_sec": 0.3782372521527577,
+          "controller_update_sec": 1.9935199334674205,
+          "cycles": 22406.333333333332,
+          "failed_primary_attempts": 124,
+          "first_failures": 123.66666666666667,
+          "native_sec": 59.7504903333325,
+          "native_setup_sec": 26.904383333333232,
+          "native_solve_sec": 32.846106999999265,
+          "primary_attempts": 1124,
+          "retries": 124,
+          "rl_overhead_sec": 5.363382314690777,
+          "setup_overhead_sec": 3.0199469706761497,
+          "total_sec": 68.13381961869942
+        }
+      },
+      "method": "bandit_lstdq",
+      "paired": [
+        {
+          "cycle_change": -560,
+          "default_normalized_reduction_pct": -2.7466282059090075,
+          "retries_change": 14,
+          "seed": 1,
+          "total_reduction_pct": -3.6611079705613836
+        },
+        {
+          "cycle_change": -568,
+          "default_normalized_reduction_pct": 2.330608669463907,
+          "retries_change": 8,
+          "seed": 2,
+          "total_reduction_pct": 2.4097859190943094
+        },
+        {
+          "cycle_change": -616,
+          "default_normalized_reduction_pct": 2.8966231912983864,
+          "retries_change": -7,
+          "seed": 3,
+          "total_reduction_pct": 2.270470069028907
+        }
+      ],
+      "pooled_rl_overhead_us_per_action": {
+        "with_time": 248.8120337657886,
+        "without_time": 239.3690317331756
+      },
+      "total_reduction_pct": 0.3873796178102795
+    }
+  ],
+  "seeds": [
+    1,
+    2,
+    3
+  ]
+}

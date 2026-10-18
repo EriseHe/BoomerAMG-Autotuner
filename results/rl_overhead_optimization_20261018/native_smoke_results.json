@@ -1,0 +1,50 @@
+[
+  {
+    "method": "default_setup_lstdq",
+    "input": 1,
+    "failed": true,
+    "cycles": 34,
+    "failure_reason": "exception:AMGNativeError:solve_step failed with native code -4",
+    "residual": 2.7419300363047013e+136
+  },
+  {
+    "method": "default_setup_lstdq",
+    "input": 2,
+    "failed": true,
+    "cycles": 25,
+    "failure_reason": "exception:AMGNativeError:solve_step failed with native code -4",
+    "residual": 3.7901100925498164e+147
+  },
+  {
+    "method": "default_setup_lstdq",
+    "input": 3,
+    "failed": true,
+    "cycles": 44,
+    "failure_reason": "exception:AMGNativeError:solve_step failed with native code -4",
+    "residual": 8.047942265664899e+145
+  },
+  {
+    "method": "bandit_lstdq",
+    "input": 1,
+    "failed": true,
+    "cycles": 15,
+    "failure_reason": "exception:AMGNativeError:solve_step failed with native code -4",
+    "residual": 2.0389007784146182e+141
+  },
+  {
+    "method": "bandit_lstdq",
+    "input": 2,
+    "failed": true,
+    "cycles": 45,
+    "failure_reason": "exception:AMGNativeError:solve_step failed with native code -4",
+    "residual": 4.25878920107554e+142
+  },
+  {
+    "method": "bandit_lstdq",
+    "input": 3,
+    "failed": true,
+    "cycles": 50,
+    "failure_reason": "max_cycles_reached_without_convergence",
+    "residual": 1.623721249582891e+104
+  }
+]

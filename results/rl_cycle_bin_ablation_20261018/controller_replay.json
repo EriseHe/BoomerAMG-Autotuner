@@ -1,0 +1,497 @@
+{
+  "scope": "Fixed-trajectory controller timing; this is not a policy-performance experiment.",
+  "included": [
+    "state encoding",
+    "action scoring and exploration",
+    "LSTDQ updates",
+    "per-problem and per-attempt snapshots",
+    "episode start/finish"
+  ],
+  "excluded": [
+    "native solver",
+    "bandit computation",
+    "trajectory logging",
+    "per-operation timer instrumentation",
+    "controller construction"
+  ],
+  "fixed_across_variants": [
+    "observations",
+    "executed actions",
+    "assigned costs",
+    "recorded update durations",
+    "setup one-hot descriptors",
+    "residual normalization",
+    "cycle-time feature"
+  ],
+  "removed_features": [
+    "7 cycle-bin indicators",
+    "7 residual-gap by cycle-bin interactions"
+  ],
+  "state_dimensions": [
+    43,
+    29
+  ],
+  "joint_dimensions": [
+    387,
+    261
+  ],
+  "dense_matrix_entries": [
+    149769,
+    68121
+  ],
+  "dense_matrix_entry_reduction_pct": 54.51595457003786,
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "inputs_per_seed": 1000,
+  "repetitions_per_seed": 3,
+  "threads": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1"
+  },
+  "source_manifest": {
+    "solve/__init__.py": "e95f88df845e58fd946b18adff628faf09a044aa64b500a425c8e2738a94028f",
+    "solve/controllers/__init__.py": "8466e65c41ee327cc0f4d679d54c0bf65e983efd5eda2858a2605885ee934f88",
+    "solve/controllers/common/__init__.py": "8b0de38301dcd0c3ee85301aaeca2ced2c851b4360c892bc77716bf76287dffa",
+    "solve/controllers/common/action_space.py": "7ed72a15d14ddedfdbda39325e390e52af3905a6c572e481caee91691c527263",
+    "solve/controllers/common/config.py": "e591d26370960aa29ea00c5641248c7e5b2d5f70249ff64260bd57b5be6dfe07",
+    "solve/controllers/common/factory.py": "63b12c2261777f8cfb693c07303b664aa98aa28f32584886527047af5ce59455",
+    "solve/controllers/common/linear_lcb.py": "a238bc259062875946cb4b538f05754cc5137a3a3c51a1511578955235c08d7a",
+    "solve/controllers/common/state_encoder.py": "1585c474d742ea2dc29ab952bae8c666175791e114f5f1a7572dc79951b53d21",
+    "solve/controllers/common/td_config.py": "712c8649a5609653e9348e8d10a7f68402844e63d7c227ced5e3a350433337ca",
+    "solve/controllers/common/types.py": "4ec1fb28e52818f1399066076fd732e909ba74d3ea79107ba3cdda59c88ee8e1",
+    "solve/controllers/recursive_lstdq/__init__.py": "29e028a635f020a249e99735b54b4eb83791a019053e1bc466653f1aba545b1f",
+    "solve/controllers/recursive_lstdq/common.py": "c4b35b6a4b848050924952f697c8d224c27886baa977df08948793fda0655731",
+    "solve/controllers/recursive_lstdq/config.py": "58726de4ea1c61aa327d7834ddf75a191add90abcbebd66a72b6b22830bc0f43",
+    "solve/controllers/recursive_lstdq/controller.py": "139c11ae90d52fe164fb8fd2a4d286f7d994ecccbe51e0394384663d2eeb134b",
+    "solve/controllers/recursive_lstdq/factory.py": "32555a07144984fb2802be0c19e04c7dc6c3cb2456b0394fed4c124391a8fc7e",
+    "solve/core/__init__.py": "7f38b4c329f5741a8ae41dbd7b8601a5066912350732301c804afb7ea0354d0c",
+    "solve/core/episode.py": "5475713d2d8f1e5948f7afcccb3a11365eedc06391d45e66b12f6986e8787a5f",
+    "solve/core/outcomes.py": "d2bb5fad2ec4ddebef713aa9b3b0b12357743d46f8676454ece7705b5135a97c",
+    "solve/registry.py": "15569eda277f56bbdb15997abfe47cd2430d323c30a9be417cfc7cc2df1c7c27",
+    "solve/tests/test_lstdq_scoring_equivalence.py": "cb1eb68fda142a31d9adc1801d935ae51c06aea3ddc9aa87c5afe18b9fdc2d33",
+    "solve/tests/test_shared_setup_and_costs.py": "baffd7225b740ab8d2b4a1abdca3c7c374d717d92e980e0dac3cf02da9680777"
+  },
+  "runs": [
+    {
+      "inputs": 1000,
+      "cycles": 9001,
+      "recorded_total_seconds": 69.52478052786576,
+      "recorded_rl_overhead_seconds": 2.611830527865095,
+      "trajectory_sha256": "8a3df166d16571e72cc0e1c2e6ef541becfeac8e9ee0533b7d98c6fd81b151f7",
+      "encoder_projection_exact": true,
+      "seed": 1,
+      "method": "default_setup_lstdq",
+      "measurements": {
+        "with_bins": [
+          {
+            "seconds": 1.9816979579918552,
+            "samples": 9001,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387,
+            "baseline_checkpoint_reproduced": true
+          },
+          {
+            "seconds": 1.9731841669999994,
+            "samples": 9001,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387
+          },
+          {
+            "seconds": 1.960534416983137,
+            "samples": 9001,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387
+          }
+        ],
+        "without_bins": [
+          {
+            "seconds": 1.1625533750047907,
+            "samples": 9001,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          },
+          {
+            "seconds": 1.1654065840120893,
+            "samples": 9001,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          },
+          {
+            "seconds": 1.168615749978926,
+            "samples": 9001,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          }
+        ]
+      },
+      "median_seconds": {
+        "with_bins": 1.9731841669999994,
+        "without_bins": 1.1654065840120893
+      },
+      "reduction_pct": 40.937769342435146
+    },
+    {
+      "inputs": 1000,
+      "cycles": 23272,
+      "recorded_total_seconds": 66.7569997597742,
+      "recorded_rl_overhead_seconds": 5.871398598479573,
+      "trajectory_sha256": "4d5de913643c380841216189a4923f29c7fbb2f279fa41e90d9f2348bb68c189",
+      "encoder_projection_exact": true,
+      "seed": 1,
+      "method": "bandit_lstdq",
+      "measurements": {
+        "with_bins": [
+          {
+            "seconds": 4.903571458009537,
+            "samples": 23272,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387,
+            "baseline_checkpoint_reproduced": true
+          },
+          {
+            "seconds": 4.883673582982738,
+            "samples": 23272,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387
+          },
+          {
+            "seconds": 4.869994000007864,
+            "samples": 23272,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387
+          }
+        ],
+        "without_bins": [
+          {
+            "seconds": 2.9812314590089954,
+            "samples": 23272,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          },
+          {
+            "seconds": 2.954775582998991,
+            "samples": 23272,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          },
+          {
+            "seconds": 3.021551415993599,
+            "samples": 23272,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          }
+        ]
+      },
+      "median_seconds": {
+        "with_bins": 4.883673582982738,
+        "without_bins": 2.9812314590089954
+      },
+      "reduction_pct": 38.95514496715836
+    },
+    {
+      "inputs": 1000,
+      "cycles": 8982,
+      "recorded_total_seconds": 70.31221855750823,
+      "recorded_rl_overhead_seconds": 2.503382557508303,
+      "trajectory_sha256": "80f0dde9e4805cf9cfc7835c69ed2484b57eedd28c15ce36aa06e007913d749d",
+      "encoder_projection_exact": true,
+      "seed": 2,
+      "method": "default_setup_lstdq",
+      "measurements": {
+        "with_bins": [
+          {
+            "seconds": 1.9853854170069098,
+            "samples": 8982,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387,
+            "baseline_checkpoint_reproduced": true
+          },
+          {
+            "seconds": 1.9867455000057817,
+            "samples": 8982,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387
+          },
+          {
+            "seconds": 2.01934904200607,
+            "samples": 8982,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387
+          }
+        ],
+        "without_bins": [
+          {
+            "seconds": 1.1622705830086488,
+            "samples": 8982,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          },
+          {
+            "seconds": 1.1687235000135843,
+            "samples": 8982,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          },
+          {
+            "seconds": 1.167602708999766,
+            "samples": 8982,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          }
+        ]
+      },
+      "median_seconds": {
+        "with_bins": 1.9867455000057817,
+        "without_bins": 1.167602708999766
+      },
+      "reduction_pct": 41.23038360996071
+    },
+    {
+      "inputs": 1000,
+      "cycles": 22758,
+      "recorded_total_seconds": 68.70051621369241,
+      "recorded_rl_overhead_seconds": 5.600303502462339,
+      "trajectory_sha256": "1f66028534676f71e881abb9f9d2b468eab3619f91f16a150772c765d2b9270f",
+      "encoder_projection_exact": true,
+      "seed": 2,
+      "method": "bandit_lstdq",
+      "measurements": {
+        "with_bins": [
+          {
+            "seconds": 4.827685458003543,
+            "samples": 22758,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387,
+            "baseline_checkpoint_reproduced": true
+          },
+          {
+            "seconds": 4.824981040990679,
+            "samples": 22758,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387
+          },
+          {
+            "seconds": 4.889542333985446,
+            "samples": 22758,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387
+          }
+        ],
+        "without_bins": [
+          {
+            "seconds": 2.939315916999476,
+            "samples": 22758,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          },
+          {
+            "seconds": 2.983356459008064,
+            "samples": 22758,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          },
+          {
+            "seconds": 2.9616377080092207,
+            "samples": 22758,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          }
+        ]
+      },
+      "median_seconds": {
+        "with_bins": 4.827685458003543,
+        "without_bins": 2.9616377080092207
+      },
+      "reduction_pct": 38.65305157569263
+    },
+    {
+      "inputs": 1000,
+      "cycles": 9012,
+      "recorded_total_seconds": 70.19839724730191,
+      "recorded_rl_overhead_seconds": 2.508788247301709,
+      "trajectory_sha256": "ff9192ec5d8cfc33733b07706547b1ed8e4a7786de7ba0b9ee69d0a9a1daae26",
+      "encoder_projection_exact": true,
+      "seed": 3,
+      "method": "default_setup_lstdq",
+      "measurements": {
+        "with_bins": [
+          {
+            "seconds": 2.000553416990442,
+            "samples": 9012,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387,
+            "baseline_checkpoint_reproduced": true
+          },
+          {
+            "seconds": 2.0051067500025965,
+            "samples": 9012,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387
+          },
+          {
+            "seconds": 2.0128860830154736,
+            "samples": 9012,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387
+          }
+        ],
+        "without_bins": [
+          {
+            "seconds": 1.1672800419910345,
+            "samples": 9012,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          },
+          {
+            "seconds": 1.178974541981006,
+            "samples": 9012,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          },
+          {
+            "seconds": 1.178516165993642,
+            "samples": 9012,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          }
+        ]
+      },
+      "median_seconds": {
+        "with_bins": 2.0051067500025965,
+        "without_bins": 1.178516165993642
+      },
+      "reduction_pct": 41.22426818461831
+    },
+    {
+      "inputs": 1000,
+      "cycles": 22933,
+      "recorded_total_seconds": 69.73883171004869,
+      "recorded_rl_overhead_seconds": 5.687122183648171,
+      "trajectory_sha256": "322be7be28d21aff43065a0b4d8548463b70205bdf897a2136a4334ed387e45a",
+      "encoder_projection_exact": true,
+      "seed": 3,
+      "method": "bandit_lstdq",
+      "measurements": {
+        "with_bins": [
+          {
+            "seconds": 4.941337791009573,
+            "samples": 22933,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387,
+            "baseline_checkpoint_reproduced": true
+          },
+          {
+            "seconds": 4.921849583013682,
+            "samples": 22933,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387
+          },
+          {
+            "seconds": 4.914345291996142,
+            "samples": 22933,
+            "inverse_rebuilds": 0,
+            "feature_dim": 43,
+            "joint_dim": 387
+          }
+        ],
+        "without_bins": [
+          {
+            "seconds": 3.0200426249939483,
+            "samples": 22933,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          },
+          {
+            "seconds": 3.0282948749954812,
+            "samples": 22933,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          },
+          {
+            "seconds": 3.004298249987187,
+            "samples": 22933,
+            "inverse_rebuilds": 0,
+            "feature_dim": 29,
+            "joint_dim": 261
+          }
+        ]
+      },
+      "median_seconds": {
+        "with_bins": 4.921849583013682,
+        "without_bins": 3.0200426249939483
+      },
+      "reduction_pct": 38.64008694177209
+    }
+  ],
+  "aggregate": {
+    "default_setup_lstdq": {
+      "mean_of_seed_median_seconds": {
+        "with_bins": 1.9883454723361258,
+        "without_bins": 1.1705084863351658
+      },
+      "controller_replay_reduction_pct": 41.13153359813653,
+      "saved_seconds_per_1000_inputs": 0.81783698600096,
+      "recorded_total_seconds_per_1000_inputs": 70.01179877755864,
+      "fixed_trajectory_total_reduction_estimate_pct": 1.1681416565219103,
+      "seed_reduction_pct": [
+        40.937769342435146,
+        41.23038360996071,
+        41.22426818461831
+      ]
+    },
+    "bandit_lstdq": {
+      "mean_of_seed_median_seconds": {
+        "with_bins": 4.8777362079999875,
+        "without_bins": 2.987637264004055
+      },
+      "controller_replay_reduction_pct": 38.749511318303284,
+      "saved_seconds_per_1000_inputs": 1.8900989439959326,
+      "recorded_total_seconds_per_1000_inputs": 68.39878256117177,
+      "fixed_trajectory_total_reduction_estimate_pct": 2.763351734083193,
+      "seed_reduction_pct": [
+        38.95514496715836,
+        38.65305157569263,
+        38.64008694177209
+      ]
+    }
+  },
+  "production_source_unchanged": true
+}

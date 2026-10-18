@@ -1,0 +1,9 @@
+{
+  "name": "Cycle feature cleanup native validation",
+  "seeds": [
+    {
+      "config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/results/rl_cycle_bin_removal_20261018/smoke_config.json",
+      "label": "1"
+    }
+  ]
+}

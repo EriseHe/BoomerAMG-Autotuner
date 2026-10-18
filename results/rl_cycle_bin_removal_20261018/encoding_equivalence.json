@@ -1,0 +1,8 @@
+{
+  "cycle_time_retained": true,
+  "encoding_version": "shared_setup_one_hot_tolerance_residuals_v2",
+  "identical_to_tested_reduced_encoding": true,
+  "passed": true,
+  "state_features": 29,
+  "states_checked": 33481
+}

@@ -1,0 +1,133 @@
+{
+  "inputs_per_branch": 100,
+  "interpretation": "Short online-learning test; measured timing feeds back into both learners, so selected configurations and cycle counts may differ.",
+  "passed": true,
+  "repetitions": 2,
+  "results": [
+    {
+      "final_failures": {
+        "after": 0,
+        "before": 0
+      },
+      "mean_per_100_inputs": {
+        "after": {
+          "cycles": 1267,
+          "native_sec": 7.283978999999993,
+          "rl_overhead_sec": 0.0,
+          "setup_overhead_sec": 0.0,
+          "total_sec": 7.283978999999993
+        },
+        "before": {
+          "cycles": 1267,
+          "native_sec": 7.266628499999986,
+          "rl_overhead_sec": 0.0,
+          "setup_overhead_sec": 0.0,
+          "total_sec": 7.266628499999986
+        }
+      },
+      "method": "default_setup_default_solve",
+      "paired_total_reduction_pct": [
+        -1.0946200715335364,
+        0.5977201976662516
+      ],
+      "rl_overhead_reduction_pct": null,
+      "total_reduction_pct": -0.23876960271200787
+    },
+    {
+      "final_failures": {
+        "after": 0,
+        "before": 0
+      },
+      "mean_per_100_inputs": {
+        "after": {
+          "cycles": 1007.5,
+          "native_sec": 6.834172999999955,
+          "rl_overhead_sec": 0.28082902419555467,
+          "setup_overhead_sec": 0.0,
+          "total_sec": 7.11500202419551
+        },
+        "before": {
+          "cycles": 970,
+          "native_sec": 6.7586114999999705,
+          "rl_overhead_sec": 0.3664418246044079,
+          "setup_overhead_sec": 0.0,
+          "total_sec": 7.125053324604378
+        }
+      },
+      "method": "default_setup_lstdq",
+      "paired_total_reduction_pct": [
+        -0.38661073469794527,
+        0.6638446991943825
+      ],
+      "rl_overhead_reduction_pct": 23.363272055878582,
+      "total_reduction_pct": 0.14106982714303662
+    },
+    {
+      "final_failures": {
+        "after": 0,
+        "before": 0
+      },
+      "mean_per_100_inputs": {
+        "after": {
+          "cycles": 5709,
+          "native_sec": 14.935067499999995,
+          "rl_overhead_sec": 0.0,
+          "setup_overhead_sec": 0.47801034309668466,
+          "total_sec": 15.41307784309668
+        },
+        "before": {
+          "cycles": 5618.5,
+          "native_sec": 14.415426500000006,
+          "rl_overhead_sec": 0.0,
+          "setup_overhead_sec": 0.4680599627317861,
+          "total_sec": 14.883486462731792
+        }
+      },
+      "method": "bandit_default",
+      "paired_total_reduction_pct": [
+        -5.8117274164415145,
+        -1.4370921986379903
+      ],
+      "rl_overhead_reduction_pct": null,
+      "total_reduction_pct": -3.5582481409244027
+    },
+    {
+      "final_failures": {
+        "after": 0,
+        "before": 0
+      },
+      "mean_per_100_inputs": {
+        "after": {
+          "cycles": 4840,
+          "native_sec": 12.747139499999918,
+          "rl_overhead_sec": 1.1402158878627233,
+          "setup_overhead_sec": 0.4334471191832563,
+          "total_sec": 14.320802507045897
+        },
+        "before": {
+          "cycles": 5090.5,
+          "native_sec": 12.885333000000042,
+          "rl_overhead_sec": 1.4038365398155292,
+          "setup_overhead_sec": 0.4488507799396757,
+          "total_sec": 14.738020319755247
+        }
+      },
+      "method": "bandit_lstdq",
+      "paired_total_reduction_pct": [
+        9.97055737283662,
+        -4.908091439442619
+      ],
+      "rl_overhead_reduction_pct": 18.778586001718335,
+      "total_reduction_pct": 2.830894541175921
+    }
+  ],
+  "seed": "1",
+  "pairing_audit": {
+    "passed": true,
+    "identical_inputs": true,
+    "identical_configs_except_output_path": true,
+    "identical_candidate_schedules": true,
+    "identical_native_libraries": true,
+    "four_execution_audits_passed": true
+  }
+}
