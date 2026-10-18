@@ -266,7 +266,7 @@ class SolveStateEncoder:
                     self.setup_obs_encoder.encode(params),
                     dtype=float,
                 )
-                self._cached_setup_features = np.clip(setup_features, -2.0, 2.0)
+                self._cached_setup_features = setup_features
                 self._cached_setup_key = setup_key
             features[self._setup_offset :] = self._cached_setup_features
         if features.size != self.feature_dim:
