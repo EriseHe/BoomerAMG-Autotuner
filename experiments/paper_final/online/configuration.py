@@ -39,6 +39,7 @@ TOP_LEVEL_KEYS = {
     "reporting",
     "failure_feedback",
     "evaluation",
+    "frozen_stream",
 }
 SETUP_KEYS = {
     "parameter_resolution",
@@ -516,6 +517,12 @@ class FrozenEvaluationSpec:
                    5000, raw.get("explore", False))
 
 
+def evaluation_index_offset(args):
+    evaluation = getattr(args, "evaluation", None)
+    return (evaluation.training_cases if evaluation is not None
+            and not getattr(args, "continuous_stream", False) else 0)
+
+
 @dataclass(frozen=True)
 class JointExperimentSpec:
     schema_version: int
@@ -531,6 +538,7 @@ class JointExperimentSpec:
     reporting: ReportingSpec
     failure_penalty_sec: float | None = None
     evaluation: FrozenEvaluationSpec | None = None
+    frozen_stream: StreamSpec | None = None
 
 
 @dataclass(frozen=True)
@@ -586,6 +594,7 @@ class JointExperimentRuntimeConfig:
     setup_candidate_pool_size: int | None = None
     aot_structured_quotas: Mapping[str, int] | None = None
     evaluation: FrozenEvaluationSpec | None = None
+    continuous_stream: bool = False
 
 
 def parse_joint_experiment_config(
@@ -643,6 +652,12 @@ def parse_joint_experiment_config(
         raise ValueError(
             "The official online study learns setup from the first problem"
         )
+    frozen_stream = (StreamSpec.from_mapping(mapping(config["frozen_stream"], name="frozen_stream"))
+                     if "frozen_stream" in config else None)
+    if frozen_stream is not None and ("evaluation" in config or stream.online_cases != 5000
+            or frozen_stream.online_cases != 1000 or frozen_stream.warmup_cases
+            or frozen_stream.instance_offset != 625):
+        raise ValueError("A continuous Module 1 stream requires 5,000 learning inputs and 1,000 held-out frozen inputs")
     return JointExperimentSpec(
         schema_version=schema_version,
         name=str(config.get("name", "")),
@@ -658,6 +673,7 @@ def parse_joint_experiment_config(
         failure_penalty_sec=None,
         evaluation=(FrozenEvaluationSpec.from_mapping(mapping(config["evaluation"], name="evaluation"))
                     if "evaluation" in config else None),
+        frozen_stream=frozen_stream,
     )
 
 

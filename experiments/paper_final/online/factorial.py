@@ -15,7 +15,7 @@ import numpy as np
 
 from experiments.paper_final.common.artifacts import digest
 from experiments.paper_final.online.case_loop import report_online_outcome
-from experiments.paper_final.online.configuration import DEFAULT_STRUCTURED_QUOTAS
+from experiments.paper_final.online.configuration import DEFAULT_STRUCTURED_QUOTAS, evaluation_index_offset
 from experiments.paper_final.recovery.execution import EpisodeRecorder, run_fixed_case
 from experiments.paper_final.recovery.joint_validation import execute_learned
 from experiments.paper_final.recovery import metrics as sweep
@@ -83,6 +83,11 @@ def audit_execution(output):
                 if activation == 0:
                     assert boundary["fixed_controller_steps"] == 0
                     assert set(boundary["setup_observations"].values()) == {0}
+        if config.get("frozen_stream") and result["cases"] > protocol["stages"][label]["freeze_after"]:
+            freeze = read(stage/"freeze_boundary.json")
+            assert freeze["passed"] and freeze["after_input"] == 5000
+            assert freeze["pid"] == next(iter(pids))
+            assert read(stage/"frozen_state_audit.json")["passed"]
         seeds[label] = dict(passed=True, measured_method_cases=len(events),
                             logical_method_cases=4 * result["cases"], copied_prefix_rows=0,
                             worker_pid=pids.pop(), serial_execution=True, complete_seeded_orders=True,
@@ -227,8 +232,9 @@ def execute(runtime, index, previous):
     row.update(method=runtime.name, shared_prefix=False, online_index=index)
     evaluation = getattr(runtime.args, "evaluation", None)
     if evaluation is not None:
-        row.update(problem_index=evaluation.training_cases+index+1,
-                   stream_index=evaluation.training_cases+index,
+        offset = evaluation_index_offset(runtime.args)
+        row.update(problem_index=offset+index+1,
+                   stream_index=offset+index,
                    frozen_evaluation=True)
         if row["outcome"]["bandit_update_committed"] or row["outcome"]["controller_update_committed"]:
             raise ValueError("Frozen evaluation updated a learner")

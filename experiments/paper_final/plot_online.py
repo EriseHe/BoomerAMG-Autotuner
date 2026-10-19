@@ -408,6 +408,11 @@ def generate(run, *, output=None, illustrative_seed=None):
             for text in fig.texts:
                 if "from problem 1" in text.get_text():
                     text.set_text("Frozen policies; held-out inputs 5,001–6,000")
+    if config.get("frozen_stream"):
+        for _, fig in figures:
+            for ax in fig.axes:
+                if ax.get_xlabel() == "Problem index":
+                    ax.axvline(5000.5, color="#555555", ls=":", lw=.8)
     metadata = {"Title": f"Module {module_number} {family} {grid}: four branches",
                 "Author": "RLTune-BoomerAMG", "Subject": "Figures from saved trajectories; no experiment rerun"}
     with PdfPages(output / f"module{module_number}_paper_figures.pdf", metadata=metadata) as pdf:
@@ -427,6 +432,8 @@ def generate(run, *, output=None, illustrative_seed=None):
                           f"The dotted line marks joint LSTDQ activation at problem {activation + 1}; Default + LSTDQ is active from problem 1.")
     if config.get("evaluation"):
         activation_caption = "Both learners are frozen at the final Module 1 checkpoint; these are held-out evaluation inputs 5,001–6,000."
+    if config.get("frozen_stream"):
+        activation_caption = "One continuous worker stream: learning on inputs 1–5,000, then both learners frozen with epsilon exploration disabled on held-out inputs 5,001–6,000. Inference overhead is measured in both phases."
     prefix_caption = ("A single measured setup prefix is included once in each setup continuation's budget; the learned setup state is copied at the activation boundary." if protocol.get("shared_prefix") else
                       "All four branches are measured independently from input one.")
     dispersion_caption = (f"mean ± sample SD across {len(seeds)} seed-level mean costs" if len(seeds) > 1 else

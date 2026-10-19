@@ -8,6 +8,7 @@ import time
 import numpy as np
 
 from experiments.paper_final.common.artifacts import digest
+from experiments.paper_final.online.configuration import evaluation_index_offset
 from experiments.paper_final.online.case_loop import report_online_outcome
 from experiments.paper_final.recovery.execution import EpisodeRecorder
 from experiments.paper_final.recovery.retry_comparison import run_deferred_case
@@ -59,7 +60,7 @@ def execute_learned(runtime, index, previous_update, *, feedback_mode, activatio
     args=runtime.args
     evaluation = getattr(args, "evaluation", None)
     learn = evaluation is None
-    schedule_index = index + (evaluation.training_cases if evaluation else 0)
+    schedule_index = index + evaluation_index_offset(args)
     mkw,context=runtime.stream[index]
     active=runtime.bundle is not None and index>=activation_case
     recorder,snapshot_runtime=None,0.0
