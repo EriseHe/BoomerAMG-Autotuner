@@ -16,16 +16,6 @@ class _FactorizedLstdqScoring:
         self.feature_dim = int(feature_dim)
         self.basis_dim = int(self.action_basis.shape[1])
         self.joint_dim = int(self.basis_dim * self.feature_dim)
-        self.state_lift = np.zeros(
-            (self.basis_dim, self.joint_dim),
-            dtype=float,
-        )
-        self._state_lift_blocks = self.state_lift.reshape(
-            self.basis_dim,
-            self.basis_dim,
-            self.feature_dim,
-        )
-        self._basis_indices = np.arange(self.basis_dim, dtype=int)
 
     def prepare_state(self, features: np.ndarray) -> np.ndarray:
         state = np.asarray(features, dtype=float)
@@ -33,12 +23,6 @@ class _FactorizedLstdqScoring:
             raise ValueError(
                 f"Expected {self.feature_dim} state features, got {state.shape}"
             )
-        self.state_lift.fill(0.0)
-        self._state_lift_blocks[
-            self._basis_indices,
-            self._basis_indices,
-            :,
-        ] = state
         return state
 
     def means(self, theta: np.ndarray, state: np.ndarray) -> np.ndarray:

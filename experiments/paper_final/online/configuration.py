@@ -78,6 +78,7 @@ SEED_KEYS = {"base", "bandit", "controller", "method_order"}
 REPORTING_KEYS = {"progress_every", "rolling_window", "generate_plots"}
 SOLVE_KEYS = {
     "state_encoding",
+    "cost_target",
     "smoother_profile",
     "action_grid",
     "rbf",
@@ -408,6 +409,8 @@ class JointSolveSpec:
         cls, raw: Mapping[str, Any], *, problem: ProblemSpec, solve_kinds: Iterable[str]
     ) -> "JointSolveSpec":
         reject_unknown_keys(raw, SOLVE_KEYS, name="solve")
+        if raw.get("cost_target", "native_plus_controller") != "native_plus_controller":
+            raise ValueError("Fresh solve runs require cost_target=native_plus_controller")
         smoother_profile = str(raw.get("smoother_profile", "legacy_l1_jacobi"))
         if smoother_profile not in SMOOTHER_PROFILES:
             raise ValueError(

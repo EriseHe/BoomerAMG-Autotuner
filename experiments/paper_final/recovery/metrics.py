@@ -21,6 +21,8 @@ TRACE_FIELDS = (
     "cycle_explored", "cycle_epsilons", "cycle_selected_uncertainties",
     "cycle_selected_q_values", "cycle_selection_scores", "cycle_forced_default_actions",
     "td_errors", "postfit_td_errors",
+    "cycle_assigned_costs", "cycle_feature_times", "cycle_decision_times",
+    "cycle_update_time_estimates", "cycle_update_times",
 )
 
 
@@ -74,6 +76,7 @@ def audit_case(row, beta, *, variant=VARIANT, feedback_mode="attempt_2T"):
         if not row["rl_active"] and (attempt["rl_episode_recorded"] or attempt["cycle_actions"]):
             raise ValueError("RL ran during the setup-only prefix")
         if row["rl_active"]:
+            audit_cycle_costs(attempt)
             arrays = [attempt[key] for key in (
                 "cycle_actions", "cycle_selected_q_values", "cycle_selected_uncertainties",
                 "cycle_selection_scores", "cycle_explored", "cycle_forced_default_actions")]
@@ -84,6 +87,24 @@ def audit_case(row, beta, *, variant=VARIANT, feedback_mode="attempt_2T"):
                     raise ValueError("Invalid per-cycle beta diagnostics")
                 if not math.isclose(max(q-beta*width, 0.0), score, rel_tol=1e-8, abs_tol=1e-10):
                     raise ValueError("Recorded score does not match the branch beta")
+
+
+def audit_cycle_costs(attempt):
+    """Validate the recorded controller charges without changing evaluation time."""
+    if "cycle_assigned_costs" not in attempt:
+        return  # Archived native-cost runs use their original trace schema.
+    names = ("cycle_times", "cycle_assigned_costs", "cycle_feature_times",
+             "cycle_decision_times", "cycle_update_time_estimates", "cycle_update_times")
+    arrays = [attempt[name] for name in names]
+    if len({len(values) for values in arrays}) != 1:
+        raise ValueError("Incomplete per-cycle controller cost diagnostics")
+    for native, assigned, features, decision, estimate, actual_update in zip(*arrays):
+        if any(not math.isfinite(value) or value < 0 for value in
+               (native, assigned, features, decision, estimate, actual_update)):
+            raise ValueError("Invalid controller cost or runtime")
+        if not math.isclose(assigned, native + features + decision + estimate,
+                            rel_tol=1e-10, abs_tol=1e-12):
+            raise ValueError("RL target differs from native plus assigned controller cost")
 
 
 def metrics(records):

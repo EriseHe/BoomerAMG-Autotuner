@@ -58,6 +58,7 @@ class RecordedEpisode:
     attempt_index: int
     initial_weight: float | None
     transitions: list[dict[str, Any]] = field(default_factory=list)
+    update_runtimes: list[float] = field(default_factory=list)
     committed: bool = False
 
 
@@ -94,6 +95,10 @@ class EpisodeRecorder:
         self.current.committed = bool(learned)
         return result
 
+    def record_update_runtime(self, duration):
+        self.controller.record_update_runtime(duration)
+        self.current.update_runtimes.append(float(duration))
+
     def restore_learning_state(self, state):
         # run_td_episode may reject an exceptional attempt independently.
         if self.current is not None:
@@ -124,11 +129,16 @@ class EpisodeRecorder:
         replayed = 0
         for episode in episodes:
             self.controller.start_episode(initial_environment_weight=episode.initial_weight)
-            for transition in episode.transitions:
+            if len(episode.transitions) != len(episode.update_runtimes):
+                raise ValueError("Missing measured runtime for a recorded RL update")
+            for transition, duration in zip(episode.transitions, episode.update_runtimes):
                 target = dict(transition)
                 if target["terminal"]:
                     target["cost"] += additions[episode.attempt_index]
                 self.controller.update(**target)
+                # Retain the executed update measurements once. Replay replaces
+                # the targets; its own bookkeeping time is evaluation overhead.
+                self.controller.record_update_runtime(duration)
                 replayed += 1
             self.controller.finish_episode(learned=True)
         (self.controller._default_first_action_pending,

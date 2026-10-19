@@ -38,6 +38,11 @@ class _EpisodeTrace:
     cycle_residuals: list[float] = field(default_factory=list)
     cycle_residual_ratios: list[float] = field(default_factory=list)
     cycle_times: list[float] = field(default_factory=list)
+    cycle_assigned_costs: list[float] = field(default_factory=list)
+    cycle_feature_times: list[float] = field(default_factory=list)
+    cycle_decision_times: list[float] = field(default_factory=list)
+    cycle_update_time_estimates: list[float] = field(default_factory=list)
+    cycle_update_times: list[float] = field(default_factory=list)
     cycle_explored: list[bool] = field(default_factory=list)
     cycle_greedy_indices: list[int] = field(default_factory=list)
     cycle_epsilons: list[float] = field(default_factory=list)
@@ -62,6 +67,11 @@ class _EpisodeTrace:
         weight: float,
         residual: float,
         native_cycle_time: float,
+        assigned_cost: float,
+        feature_time: float,
+        decision_time: float,
+        update_time_estimate: float,
+        update_time: float,
         residual_ratio: float | None = None,
         selection: Mapping[str, Any] | None = None,
     ) -> None:
@@ -74,6 +84,11 @@ class _EpisodeTrace:
         if residual_ratio is not None:
             self.cycle_residual_ratios.append(float(residual_ratio))
         self.cycle_times.append(float(native_cycle_time))
+        self.cycle_assigned_costs.append(float(assigned_cost))
+        self.cycle_feature_times.append(float(feature_time))
+        self.cycle_decision_times.append(float(decision_time))
+        self.cycle_update_time_estimates.append(float(update_time_estimate))
+        self.cycle_update_times.append(float(update_time))
         if selection is not None:
             self.cycle_explored.append(bool(selection["explored"]))
             self.cycle_greedy_indices.append(int(selection["greedy_index"]))
@@ -108,6 +123,11 @@ class _EpisodeTrace:
             "cycle_residuals": self.cycle_residuals,
             "cycle_residual_ratios": self.cycle_residual_ratios,
             "cycle_times": self.cycle_times,
+            "cycle_assigned_costs": self.cycle_assigned_costs,
+            "cycle_feature_times": self.cycle_feature_times,
+            "cycle_decision_times": self.cycle_decision_times,
+            "cycle_update_time_estimates": self.cycle_update_time_estimates,
+            "cycle_update_times": self.cycle_update_times,
             "cycle_explored": self.cycle_explored,
             "cycle_greedy_indices": self.cycle_greedy_indices,
             "cycle_epsilons": self.cycle_epsilons,
@@ -145,14 +165,14 @@ def _run_recovery(
 
 
 def _terminal_transition_cost(
-    native_cycle_cost: float,
+    assigned_cycle_cost: float,
     recovery: RecoveryOutcome,
     *,
     retain_failed_episodes: bool,
     failure_penalty_sec: float | None,
 ) -> float:
-    """Charge recovery to the learning target, leaving native targets intact."""
-    cost = float(native_cycle_cost)
+    """Add optional recovery feedback without altering recorded execution time."""
+    cost = float(assigned_cycle_cost)
     if recovery.fallback is not None and (
         retain_failed_episodes or not recovery.unrecovered_failure
     ):
@@ -258,6 +278,7 @@ def run_td_episode(
     last_weight = initial_environment_weight
     selection: Dict[str, Any] = {}
     pending_action: tuple[int, float, Dict[str, Any]] | None = None
+    pending_decision_runtime = 0.0
     recovery: RecoveryOutcome | None = None
     episode_started = False
     learning_snapshot = None
@@ -283,6 +304,7 @@ def run_td_episode(
             previous_residual = initial_residual
             last_weight = initial_environment_weight
             last_cycle_time = 0.0
+            first_cycle_time = None
             lifecycle_started = time.perf_counter()
             try:
                 controller.start_episode(
@@ -302,8 +324,10 @@ def run_td_episode(
                 cycle=0,
                 last_weight=last_weight,
                 last_cycle_time=last_cycle_time,
+                first_cycle_time=first_cycle_time,
             )
-            feature_runtime += float(time.perf_counter() - feature_started)
+            current_feature_runtime = float(time.perf_counter() - feature_started)
+            feature_runtime += current_feature_runtime
             if retain_failed_episodes and not np.all(np.isfinite(features)):
                 raise InvalidObservationError("Nonfinite initial controller features")
 
@@ -317,10 +341,21 @@ def run_td_episode(
                         cycle=cycle,
                         include_metadata=record_action_metadata,
                     )
-                    decision_runtime += float(time.perf_counter() - decision_started)
+                    current_decision_runtime = float(time.perf_counter() - decision_started)
+                    decision_runtime += current_decision_runtime
                 else:
                     action_index, action_value, selection = pending_action
+                    current_decision_runtime = pending_decision_runtime
                     pending_action = None
+                # The current update has not run yet. Charge its causal runtime
+                # estimate; keep actual measured time separate for evaluation.
+                update_time_estimate = (
+                    float(controller.estimated_update_runtime_sec) if learn else 0.0
+                )
+                current_update_runtime = 0.0
+                controller_cost = (
+                    current_feature_runtime + current_decision_runtime + update_time_estimate
+                )
                 weight = controller.environment_weight(
                     int(action_index),
                     float(last_weight),
@@ -378,7 +413,7 @@ def run_td_episode(
                         retain_failed_episodes or not recovery.unrecovered_failure
                     )
                     transition_cost = _terminal_transition_cost(
-                        failed_step_runtime,
+                        failed_step_runtime + controller_cost,
                         recovery,
                         retain_failed_episodes=retain_failed_episodes,
                         failure_penalty_sec=failure_penalty_sec,
@@ -397,9 +432,11 @@ def run_td_episode(
                                 native_cycle_cost=None,
                                 residual_ratio=None,
                             )
-                            update_runtime += float(
+                            current_update_runtime = float(
                                 time.perf_counter() - update_started
                             )
+                            update_runtime += current_update_runtime
+                            controller.record_update_runtime(current_update_runtime)
                             trace.record_update(controller, td_error)
                     trace.record_cycle(
                         action_index=action_index,
@@ -407,9 +444,17 @@ def run_td_episode(
                         weight=weight,
                         residual=residual,
                         native_cycle_time=failed_step_runtime,
+                        assigned_cost=transition_cost,
+                        feature_time=current_feature_runtime,
+                        decision_time=current_decision_runtime,
+                        update_time_estimate=update_time_estimate,
+                        update_time=current_update_runtime,
+                        selection=selection if record_action_metadata else None,
                     )
                     break
                 cycle_time = float(cycle_time)
+                if cycle == 0:
+                    first_cycle_time = cycle_time
                 solve_runtime += cycle_time
                 iterations = cycle + 1
                 native_status = env.last_step.status
@@ -436,8 +481,10 @@ def run_td_episode(
                         cycle=iterations,
                         last_weight=float(weight),
                         last_cycle_time=cycle_time,
+                        first_cycle_time=first_cycle_time,
                     )
-                    feature_runtime += float(time.perf_counter() - feature_started)
+                    next_feature_runtime = float(time.perf_counter() - feature_started)
+                    feature_runtime += next_feature_runtime
                     if retain_failed_episodes and not np.all(
                         np.isfinite(next_features)
                     ):
@@ -445,7 +492,7 @@ def run_td_episode(
                             "Nonfinite successor controller features"
                         )
 
-                transition_cost = float(cycle_time)
+                transition_cost = cycle_time + controller_cost
                 residual_ratio = (
                     float(residual_new) / float(residual)
                     if np.isfinite(float(residual_new))
@@ -482,7 +529,7 @@ def run_td_episode(
                         require_valid_observation=retain_failed_episodes,
                     )
                     transition_cost = _terminal_transition_cost(
-                        cycle_time,
+                        transition_cost,
                         recovery,
                         retain_failed_episodes=retain_failed_episodes,
                         failure_penalty_sec=failure_penalty_sec,
@@ -502,7 +549,8 @@ def run_td_episode(
                         cycle=iterations,
                         include_metadata=record_action_metadata,
                     )
-                    decision_runtime += float(time.perf_counter() - decision_started)
+                    pending_decision_runtime = float(time.perf_counter() - decision_started)
+                    decision_runtime += pending_decision_runtime
                     next_action_index = int(pending_action[0])
                 learning_allowed = bool(
                     retain_failed_episodes
@@ -525,7 +573,9 @@ def run_td_episode(
                         native_cycle_cost=cycle_time,
                         residual_ratio=residual_ratio,
                     )
-                    update_runtime += float(time.perf_counter() - update_started)
+                    current_update_runtime = float(time.perf_counter() - update_started)
+                    update_runtime += current_update_runtime
+                    controller.record_update_runtime(current_update_runtime)
                     trace.record_update(controller, td_error)
 
                 trace.record_cycle(
@@ -534,11 +584,17 @@ def run_td_episode(
                     weight=weight,
                     residual=residual_new,
                     native_cycle_time=cycle_time,
+                    assigned_cost=transition_cost,
+                    feature_time=current_feature_runtime,
+                    decision_time=current_decision_runtime,
+                    update_time_estimate=update_time_estimate,
+                    update_time=current_update_runtime,
                     residual_ratio=residual_ratio,
                     selection=selection if record_action_metadata else None,
                 )
                 if next_features is not None:
                     features = next_features
+                    current_feature_runtime = next_feature_runtime
                 previous_residual = float(residual)
                 residual = float(residual_new)
                 last_weight = float(weight)
