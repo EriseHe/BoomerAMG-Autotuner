@@ -1,0 +1,17 @@
+{
+  "name": "Module 1: frozen advection_40",
+  "seeds": [
+    {
+      "config": "../configurations/advection_40/seed_4.json",
+      "label": "4"
+    },
+    {
+      "config": "../configurations/advection_40/seed_5.json",
+      "label": "5"
+    },
+    {
+      "config": "../configurations/advection_40/seed_6.json",
+      "label": "6"
+    }
+  ]
+}

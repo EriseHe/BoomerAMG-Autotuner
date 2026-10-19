@@ -65,8 +65,8 @@ def audit_default_case(row):
         raise ValueError("Default baseline contains learner runtime")
 
 
-def audit_case(row, beta, *, variant=VARIANT, feedback_mode="attempt_2T"):
-    audit([dict(row, problem_index=1)], variant, feedback_mode=feedback_mode)
+def audit_case(row, beta, *, variant=VARIANT, feedback_mode="attempt_2T", learn=True):
+    audit([dict(row, problem_index=1)], variant, feedback_mode=feedback_mode, learn=learn)
     out = row["outcome"]
     if out.get("replayed_transitions", 0) or out.get("target_replay_runtime", 0.0):
         raise ValueError("No-recovery-cost branch performed a target replay")

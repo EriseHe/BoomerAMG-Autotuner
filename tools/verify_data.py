@@ -6,6 +6,7 @@ import json
 import math
 import statistics
 import subprocess
+import gzip
 
 import numpy as np
 
@@ -37,9 +38,20 @@ def verify(raw=False):
         path = ROOT/name
         assert path.resolve().is_relative_to(ROOT) and not path.is_symlink(), name
         assert sha(path) == digest, name
+    frozen = DATA/'module1/frozen'
+    protocol = read(DATA/'module1/protocol.json')
+    assert protocol['cases_per_seed'] == 6000
+    assert protocol['training_cases_per_seed'] == 5000
+    assert protocol['frozen_cases_per_seed'] == 1000
+    assert protocol['phases']['online']['global_cases'] == [1,5000]
+    assert protocol['phases']['frozen']['global_cases'] == [5001,6000]
+    assert protocol['phases']['online']['model_updates'] is True
+    assert protocol['phases']['frozen']['model_updates'] is False
+    assert protocol['phases']['frozen']['rl_epsilon_exploration'] is False
     published_ref = read(ROOT/'docs/commit-map.json')['published_source_commit']
     for name, digest in read(DATA/'source_manifest.json').items():
         if sha(ROOT/name) != digest:
+            assert published_ref, name
             source = subprocess.check_output(['git','show',f'{published_ref}:{name}'],cwd=ROOT)
             assert hashlib.sha256(source).hexdigest() == digest, name
     result = {}
@@ -97,6 +109,42 @@ def verify(raw=False):
                 values=100*(1-totals[:,4,field]/totals[:,i,field])
                 close(values.mean(),row['mean_pct']);close(values.std(ddof=1),row['sample_sd_pct'])
     result['module2']=summary['audit']
+    if (frozen/'protocol.json').exists():
+        protocol=read(frozen/'protocol.json')
+        assert protocol['module']==1 and protocol['phase']=='frozen' and protocol['model_updates'] is False
+        assert protocol['evaluation_global_cases']==[5001,6000]
+        assert protocol['native_sha256']==read(DATA/'module1/protocol.json')['native_sha256']
+        for name,digest in read(frozen/'manifest.json').items():
+            assert sha(ROOT/name)==digest,name
+        captures=read(frozen/'inputs/manifest.json')['streams']
+        configs=list((frozen/'configurations').rglob('*.json'))
+        assert len(configs)==len(captures)==36
+        for path in configs:
+            cfg=read(path);ev=cfg['evaluation'];original=read(ROOT/ev['training_configuration'])
+            assert ev['training_cases']==5000 and ev['explore'] is False
+            for key in ('problem','setup','solve','methods','seeds','failure_feedback'):
+                assert cfg[key]==original[key],(path,key)
+            stream=cfg['stream'];assert (stream['cases'],stream['instance_offset'],stream['cases_per_seed'])==(1000,625,125)
+            entry=captures[stream['expected_sha256']]
+            payload=gzip.decompress((frozen/'inputs'/entry['file']).read_bytes())
+            assert hashlib.sha256(payload).hexdigest()==stream['expected_sha256']
+            assert len(payload.splitlines())==1000
+        complete=(frozen/'summary.json').exists()
+        if complete:
+            rows=read(frozen/'summary.json')['rows']
+            assert sum(r['cases'] for r in rows if r['window']=='full')==144000
+            for path in (frozen/'arrays').glob('*.npz'):
+                with np.load(path,allow_pickle=False) as a:
+                    assert a['timings_sec'].shape==(6,4,1000,6)
+                    assert a['problem_indices'].tolist()==list(range(5001,6001))
+                    t=a['timings_sec']
+                    np.testing.assert_allclose(t[...,0]+t[...,1],t[...,2],atol=1e-8)
+                    np.testing.assert_allclose(t[...,2]+t[...,3]+t[...,4],t[...,5],atol=1e-8)
+        result['module1'].update(training_method_cases=720000,
+            method_cases=720000+(144000 if complete else 0),
+            training_cases_per_seed=5000, frozen_cases_per_seed=1000,
+            cases_per_seed=6000, frozen_method_cases=144000 if complete else 0,
+            frozen={'trained_runs':36,'evaluation_cases_per_run':1000,'learners_frozen':True,'measurements_complete':complete})
     checked=0
     if raw:
         for name,record in read(DATA/'raw_files.json')['files'].items():

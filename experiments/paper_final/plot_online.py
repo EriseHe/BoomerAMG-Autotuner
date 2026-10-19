@@ -59,6 +59,7 @@ def read_run(root):
         config_path = stage / "experiment_config.json"
         sources[str(config_path)] = sha(config_path)
         config = json.loads(config_path.read_text())
+        index_offset = config.get("evaluation", {}).get("training_cases", 0)
         result = json.loads((stage / "result.json").read_text())
         configs.append(config)
         n = protocol["stages"][seed]["cases"]
@@ -79,7 +80,7 @@ def read_run(root):
                     digest.update(line)
                     row = json.loads(line)
                     assert i < n and row["online_index"] == i
-                    assert row["problem_index"] == i + 1 and row["method"] == method
+                    assert row["problem_index"] == index_offset + i + 1 and row["method"] == method
                     input_digest.update(json.dumps(
                         [row["mkw"], row["context"]], sort_keys=True,
                         separators=(",", ":"), allow_nan=False).encode())
@@ -378,6 +379,7 @@ def generate(run, *, output=None, illustrative_seed=None):
     kind = config["problem"]["kind"]
     family = "Diffusion–advection" if "advection" in kind or "convection" in kind else "Diffusion"
     title = family + " " + (rf"${grid[0]}^3$" if len(set(grid)) == 1 else " × ".join(map(str, grid)))
+    module_number = 1
     style()
     output.mkdir(parents=True, exist_ok=True)
     figures = [
@@ -393,9 +395,22 @@ def generate(run, *, output=None, illustrative_seed=None):
     for i, label in enumerate(seeds):
         figures.append(("cumulative_times_seed" + label, plot_cumulative(a[i], label, title, activation)))
         figures.append(("learned_cycle_weights_seed" + label, plot_weights(w[i], label, title, activation)))
-    metadata = {"Title": f"Module 1 {family} {grid}: four branches",
+    if config.get("evaluation"):
+        from matplotlib.ticker import FuncFormatter
+        offset = config["evaluation"]["training_cases"]
+        for _, fig in figures:
+            for ax in fig.axes:
+                if ax.get_xlabel() == "Problem index":
+                    ax.xaxis.set_major_formatter(FuncFormatter(lambda value, position: f'{value+offset:g}'))
+                for text in ax.texts:
+                    if "from problem 1" in text.get_text():
+                        text.set_text("Frozen policy")
+            for text in fig.texts:
+                if "from problem 1" in text.get_text():
+                    text.set_text("Frozen policies; held-out inputs 5,001–6,000")
+    metadata = {"Title": f"Module {module_number} {family} {grid}: four branches",
                 "Author": "RLTune-BoomerAMG", "Subject": "Figures from saved trajectories; no experiment rerun"}
-    with PdfPages(output / "module1_paper_figures.pdf", metadata=metadata) as pdf:
+    with PdfPages(output / f"module{module_number}_paper_figures.pdf", metadata=metadata) as pdf:
         for name, fig in figures:
             fig.savefig(output / f"{name}.pdf", dpi=600, metadata=metadata)
             fig.savefig(output / f"{name}.png", dpi=260)
@@ -410,12 +425,14 @@ def generate(run, *, output=None, illustrative_seed=None):
     n = a.shape[2]
     activation_caption = ("Both LSTDQ branches are active from problem 1." if activation == 0 else
                           f"The dotted line marks joint LSTDQ activation at problem {activation + 1}; Default + LSTDQ is active from problem 1.")
+    if config.get("evaluation"):
+        activation_caption = "Both learners are frozen at the final Module 1 checkpoint; these are held-out evaluation inputs 5,001–6,000."
     prefix_caption = ("A single measured setup prefix is included once in each setup continuation's budget; the learned setup state is copied at the activation boundary." if protocol.get("shared_prefix") else
                       "All four branches are measured independently from input one.")
     dispersion_caption = (f"mean ± sample SD across {len(seeds)} seed-level mean costs" if len(seeds) > 1 else
                           "the single seed-level mean cost; sample SD is unavailable")
     captions = (
-        f"These figures use Module 1 {family} {grid}, {n} inputs per seed, seeds {', '.join(seeds)}, and all four branches. {prefix_caption}\n"
+        f"These figures use Module {module_number} {family} {grid}, {n} inputs per seed, seeds {', '.join(seeds)}, and all four branches. {prefix_caption}\n"
         f"Detailed illustration: seed {seed}. Selection: {selection}. This selected run is not a typical-run estimate.\n\n"
         f"cumulative_times: (a) Cumulative native time; (b) percentage reduction against the paired Default, computed from exact prefix totals without smoothing. All attempted inputs are retained, including final failures if any. Native time includes every setup/solve attempt and recovery, and excludes learner overhead. Legend values are full-stream seconds. {activation_caption}\n\n"
         f"runtime_breakdown: Mean time for the full stream" + (" and final 1000 problems" if n > 1000 else "") +
@@ -425,6 +442,9 @@ def generate(run, *, output=None, illustrative_seed=None):
         "cumulative_times_all_seeds: Exact cumulative native time and paired percentage reduction for every seed, using the same conventions as cumulative_times.\n"
         "joint_lstdq_heatmaps_all_seeds: Recorded joint-controller first-attempt weights for every seed with identical axes; blanks follow first-attempt termination. Individual learned_cycle_weights_seed* figures also show Default + LSTDQ.\n"
     )
+    if config.get("evaluation"):
+        captions = captions.replace("Random exploration is included", "Epsilon exploration is disabled; learner parameters are frozen")
+        captions = captions.replace("from input one", "from held-out input 5,001")
     (output / "captions.txt").write_text(captions)
     start = max(0, a.shape[2] - 1000, activation)
     count, mean, residual_mean = cycle_profiles(w[selected, :, start:], residuals[selected, :, start:]) if start < a.shape[2] else (None, None, None)

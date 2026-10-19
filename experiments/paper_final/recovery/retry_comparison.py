@@ -121,7 +121,7 @@ def use_retry_rule(model, rule):
 
 def run_deferred_case(*, policy, parameter_space, context, solver,
                       fallback_solver, variant, previous_update, before_attempt,
-                      feedback_mode, recorder=None, snapshot_runtime=0.0):
+                      feedback_mode, recorder=None, snapshot_runtime=0.0, learn=True):
     """Resolve adjacent or full remaining costs once, after the case finishes.
 
     Successful attempts receive their own cost. Executed default fallback time
@@ -166,8 +166,11 @@ def run_deferred_case(*, policy, parameter_space, context, solver,
             costs.append(attempt.end_to_end_runtime_sec + selections[-1] + previous_update)
             loss_runtime += time.perf_counter()-tick
             tick = time.perf_counter()
-            observations.append(model.defer_cost(attempt.succeeded))
-            update_runtime += time.perf_counter()-tick
+            if learn:
+                observations.append(model.defer_cost(attempt.succeeded))
+                update_runtime += time.perf_counter()-tick
+            else:
+                model.cancel_pending()
             if attempt.succeeded:
                 break
         if not attempts[-1].succeeded:
@@ -177,12 +180,14 @@ def run_deferred_case(*, policy, parameter_space, context, solver,
         sequence = costs + ([] if fallback is None else [fallback.end_to_end_runtime_sec])
         targets = [cost if attempt.succeeded else sum(sequence[i:i+2]
             if feedback_mode == "adjacent_delayed" else sequence[i:])
-            for i, (attempt, cost) in enumerate(zip(attempts, costs))]
-        loss_runtime += time.perf_counter()-tick
+            for i, (attempt, cost) in enumerate(zip(attempts, costs))] if learn else [None]*len(attempts)
+        if learn:
+            loss_runtime += time.perf_counter()-tick
         tick = time.perf_counter()
         for observation, target in zip(observations, targets):
             model.resolve_cost(observation, target)
-        update_runtime += time.perf_counter()-tick
+        if learn:
+            update_runtime += time.perf_counter()-tick
         finalization_runtime = 0.0
         if recorder is not None:
             tick = time.perf_counter()
@@ -192,7 +197,7 @@ def run_deferred_case(*, policy, parameter_space, context, solver,
                 raise AssertionError("Recovery expense entered the no-recovery RL target")
     except Exception:
         model.cancel_pending()
-        if recorder is not None:
+        if recorder is not None and recorder.snapshot is not None:
             recorder.controller.restore_learning_state(recorder.snapshot)
         raise
 
@@ -201,7 +206,7 @@ def run_deferred_case(*, policy, parameter_space, context, solver,
     for field in ("runtime", "solve_runtime", "infer_runtime"):
         outcome[field] += controller_extra
     outcome.update(failure_feedback_mode=feedback_mode, failure_penalty_sec=0.0,
-        bandit_update_committed=True, bandit_observation_count=len(attempts),
+        bandit_update_committed=learn, bandit_observation_count=len(attempts) if learn else 0,
         bandit_learning_cost=targets[-1],
         controller_update_committed=bool(not outcome["failed"] and recorder is not None
             and any(e.committed for e in recorder.episodes)),
