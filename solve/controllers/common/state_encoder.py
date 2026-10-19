@@ -54,6 +54,8 @@ class SolveStateEncoder:
             raise ValueError("Solve tolerance must be finite and positive")
         self._log_tolerance = math.log(self.tol)
         self.max_cycles = int(max_cycles)
+        if self.max_cycles <= 0:
+            raise ValueError("max_cycles must be positive")
         self.c_max = float(c_max)
         self.mode = str(mode).strip().lower()
         self.setup_obs_encoder = setup_obs_encoder
@@ -161,10 +163,7 @@ class SolveStateEncoder:
         # With no clipping, d_k = g_k - g_(k-1): contraction is negative.
         gap_fraction = (log_residual - self._log_tolerance) / initial_gap
         log_ratio = (log_residual - log_previous_residual) / initial_gap
-        cycle_fraction = min(
-            max(float(cycle) / max(1.0, float(self.max_cycles)), 0.0),
-            1.0,
-        )
+        cycle_fraction = float(cycle) / float(self.max_cycles)
         # The first native cycle sets a fixed reference for this attempt.
         # Before it executes, no timing observation is available.
         if cycle == 0:
@@ -180,10 +179,7 @@ class SolveStateEncoder:
             cycle_time = previous_time / float(first_cycle_time)
             if not math.isfinite(cycle_time):
                 raise ValueError("The native cycle-time ratio must be finite")
-        weight = min(
-            max((float(last_weight) - self._weight_center) / self._weight_scale, -1.0),
-            1.0,
-        )
+        weight = (float(last_weight) - self._weight_center) / self._weight_scale
 
         if self.problem_context_mode in STRESS_CONTEXT_FIELDS:
             resolved_context = validate_context(
