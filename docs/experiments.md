@@ -40,6 +40,9 @@ LSTDQ epsilon exploration is disabled during evaluation; its trained confidence
 score remains unchanged. LinUCB also retains its trained confidence rule. RNG
 tie-breaking, per-solve execution counters, and the deterministic candidate
 schedule cursor may advance; no model or candidate statistics are updated.
+Setup selection, candidate scoring, and solve-controller overhead are still
+measured and included in total recorded time. Both setup and solve updates are
+disabled, so their update time is zero. Native time remains separate.
 
 Each of the eight original sampling streams contributes its next 125 child
 instances, at indices 625–749, shuffled with the original shuffle seed. The
@@ -66,6 +69,12 @@ command is only needed when generating a fresh set. Each frozen configuration
 identifies its matching 5,000-input training configuration and checkpoints.
 Use checkpoints with the same algorithm and state encoding as their training
 run; archived measurements retain their original configuration and source hashes.
+For a fresh rerun, point `evaluation.checkpoint_directory` at the matching
+completed training seed directory and `evaluation.training_configuration` at
+its `experiment_config.json`. The runner verifies the completed run's source,
+native build, input/configuration hashes, and audited checkpoint/trajectory
+hashes before freezing it. Released checkpoints retain their original inventory
+checks.
 
 The final frozen queue summary is saved under `results/module1/frozen` and
 `data/module1/frozen`.

@@ -151,6 +151,38 @@ def input_rows(runtime, cases):
             for i, (mkw, context) in enumerate(runtime.stream[:cases])]
 
 
+def training_inventory(source):
+    """Read pinned released artifacts or the audited output of a fresh full run."""
+    if source.is_relative_to((ROOT/"data/official").resolve()):
+        return read(ROOT/"data/raw_files.json")["files"]
+    output = source.parent
+    protocol = read(output/"protocol.json")
+    result = read(source/"result.json")
+    label = source.name.removeprefix("seed_")
+    checks = protocol["stages"][label]
+    if (read(output/"status.json")["status"] != "complete"
+            or read(source/"status.json")["status"] != "complete"
+            or not result["complete"] or not result["passed"]
+            or result["cases"] != 5000 or checks["cases"] != 5000
+            or protocol.get("frozen_evaluation")):
+        raise ValueError("Frozen evaluation requires a complete audited 5,000-input training run")
+    if (read(output/"source_manifest.json") != source_hashes()
+            or protocol["native_sha256"] != sweep.native_hashes()):
+        raise ValueError("Frozen evaluation must use the training source and native build")
+    if file_hash(source/"experiment_config.json") != checks["config_sha256"]:
+        raise ValueError("Training configuration changed")
+    if digest(list(read_records(source/"inputs.jsonl"))) != checks["inputs_sha256"]:
+        raise ValueError("Training inputs changed")
+    hashes = dict(result["checkpoint_sha256"])
+    for name in factorial.METHODS:
+        audit = result["audits"][name]
+        if audit["cases"] != 5000:
+            raise ValueError("Training branch is incomplete")
+        hashes[f"trajectories/{name}.jsonl"] = audit["trajectory_sha256"]
+    return {str((source/name).relative_to(ROOT.resolve())): {"sha256": sha}
+            for name, sha in hashes.items()}
+
+
 def prepare_evaluation(runtime, stage):
     """Pin released training artifacts and prove evaluation inputs are disjoint."""
     evaluation = runtime.args.evaluation
@@ -162,7 +194,7 @@ def prepare_evaluation(runtime, stage):
             raise ValueError(f"Frozen evaluation changed the Module 1 {key} settings")
     if sweep.native_hashes() != read(ROOT/"data/module1/protocol.json")["native_sha256"]:
         raise ValueError("Frozen evaluation requires the matching Module 1 native build")
-    inventory = read(ROOT/"data/raw_files.json")["files"]
+    inventory = training_inventory(source)
     sources, histories = {}, {}
     for name in factorial.METHODS:
         relative = (f"final_bandit_states/{name}.npz" if name in factorial.METHODS[2:] else None)
