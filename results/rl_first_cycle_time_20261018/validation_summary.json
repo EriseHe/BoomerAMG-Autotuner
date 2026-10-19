@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "staged_unit_checks": 19,
+  "local_unit_checks": 23,
+  "native": {
+    "inputs_per_branch": 10,
+    "branches": 4,
+    "passed": true,
+    "state_features": 29,
+    "encoding_version": "shared_setup_one_hot_tolerance_residuals_v3"
+  },
+  "earlier_optimization_preserved": {
+    "solve/controllers/recursive_lstdq/controller.py": true,
+    "solve/controllers/recursive_lstdq/common.py": true,
+    "solve/controllers/common/linear_lcb.py": true
+  },
+  "interrupted_round_changes_applied": false,
+  "learning_cost": "native_plus_controller",
+  "cycle_time_feature": "q_0=0; q_k=c_native_(k-1)/c_native_0, reset per attempt; no clipping",
+  "full_experiment_rerun": false,
+  "staged_tree": "ffafb852f473a826769be0450823d5588f5d0b99",
+  "commit": "012e78f321e7edaaf4f807ed5bc016548b4b8ed8"
+}

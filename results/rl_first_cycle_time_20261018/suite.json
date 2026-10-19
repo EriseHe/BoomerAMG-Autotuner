@@ -1,0 +1,9 @@
+{
+  "name": "First-cycle normalization development smoke",
+  "seeds": [
+    {
+      "label": "1",
+      "config": "config.json"
+    }
+  ]
+}

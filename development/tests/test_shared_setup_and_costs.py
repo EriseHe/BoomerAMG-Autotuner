@@ -83,11 +83,12 @@ class SharedSetupTests(unittest.TestCase):
                       trunc_factor=.95, P_max_elmts=16, interp_type=17)
         features = encoder.encode(mkw=dict(nx=40, ny=40, nz=40, k=1., c=10., a0=100.),
             setup_params=params, initial_residual=1., residual=1., previous_residual=1.,
-            cycle=0, last_weight=1., last_cycle_time=0.)
+            cycle=0, last_weight=1., last_cycle_time=0., first_cycle_time=None)
         np.testing.assert_array_equal(features[-19:], shared.encode_setup(params))
         self.assertGreater(np.max(np.abs(features[-19:])), 2.)
         self.assertEqual(encoder.feature_dim, 29)
-        for obsolete in ('space_aware_v2', 'shared_setup_one_hot_tolerance_residuals'):
+        for obsolete in ('space_aware_v2', 'shared_setup_one_hot_tolerance_residuals',
+                         'shared_setup_one_hot_tolerance_residuals_v2'):
             with self.subTest(encoding=obsolete), self.assertRaises(ValueError):
                 SolveStateSpec(tol=1e-6, max_cycles=50, c_max=1000,
                                encoding_version=obsolete)
@@ -96,9 +97,9 @@ class SharedSetupTests(unittest.TestCase):
         encoder = bundle().encoder
         kwargs = dict(mkw=dict(nx=40, ny=40, nz=40, k=1., c=10., a0=100.),
             setup_params=DEFAULT_SETUP_PARAMS, initial_residual=1., residual=.1,
-            previous_residual=1., last_weight=1., last_cycle_time=.02)
-        reference = encoder.encode(**kwargs, cycle=0)
-        for cycle in range(encoder.max_cycles + 1):
+            previous_residual=1., last_weight=1., last_cycle_time=.02, first_cycle_time=.02)
+        reference = encoder.encode(**kwargs, cycle=1)
+        for cycle in range(1, encoder.max_cycles + 1):
             features = encoder.encode(**kwargs, cycle=cycle)
             self.assertAlmostEqual(features[1], cycle / encoder.max_cycles)
             np.testing.assert_array_equal(np.delete(features, 1), np.delete(reference, 1))
@@ -122,7 +123,7 @@ class SharedSetupTests(unittest.TestCase):
             self.assertEqual(restored.controller.update_runtime_count, 1)
             sidecar = path.with_suffix('.npz.encoder.json')
             metadata = json.loads(sidecar.read_text())
-            outdated = dict(metadata, encoding_version='shared_setup_one_hot_tolerance_residuals')
+            outdated = dict(metadata, encoding_version='shared_setup_one_hot_tolerance_residuals_v2')
             sidecar.write_text(json.dumps(outdated))
             with self.assertRaisesRegex(ValueError, 'state encoder does not match'):
                 restored.load(path)
@@ -136,22 +137,39 @@ class SharedSetupTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 controller.record_update_runtime(invalid)
 
-    def test_cycle_time_preserves_scale_and_distinguishes_long_cycles(self):
+    def test_cycle_time_is_relative_to_first_cycle_without_clipping(self):
         encoder = bundle().encoder
         kwargs = dict(mkw=dict(nx=40, ny=40, nz=40, k=1., c=10., a0=100.),
             setup_params=DEFAULT_SETUP_PARAMS, initial_residual=1., residual=.1,
-            previous_residual=1., cycle=1, last_weight=1.)
+            previous_residual=1., cycle=2, last_weight=1., first_cycle_time=.02)
         reference = encoder.encode(**kwargs, last_cycle_time=0.)
-        for duration, expected in ((.005, .5), (.01, 1.), (.02, 2.), (.03, 3.)):
+        for duration, expected in ((.005, .25), (.01, .5), (.02, 1.), (.06, 3.)):
             features = encoder.encode(**kwargs, last_cycle_time=duration)
             self.assertAlmostEqual(features[5], expected)
             np.testing.assert_array_equal(np.delete(features, 5), np.delete(reference, 5))
+            scaled = encoder.encode(**dict(kwargs, first_cycle_time=.2), last_cycle_time=10 * duration)
+            np.testing.assert_allclose(features, scaled, rtol=1e-14, atol=1e-14)
+        self.assertEqual(encoder.encode(**dict(kwargs, cycle=0, first_cycle_time=None),
+                                        last_cycle_time=0.)[5], 0.)
+        self.assertEqual(encoder.encode(**dict(kwargs, cycle=1), last_cycle_time=.02)[5], 1.)
+
+    def test_cycle_time_rejects_invalid_reference_without_a_fixed_fallback(self):
+        encoder = bundle().encoder
+        kwargs = dict(mkw=dict(nx=40, ny=40, nz=40, k=1., c=10., a0=100.),
+            setup_params=DEFAULT_SETUP_PARAMS, initial_residual=1., residual=.1,
+            previous_residual=1., cycle=1, last_weight=1., last_cycle_time=.02)
+        for invalid in (None, 0., -1., float('inf'), float('nan')):
+            with self.subTest(reference=invalid), self.assertRaises(ValueError):
+                encoder.encode(**kwargs, first_cycle_time=invalid)
+        for invalid in (-1., float('inf'), float('nan')):
+            with self.subTest(duration=invalid), self.assertRaises(ValueError):
+                encoder.encode(**dict(kwargs, last_cycle_time=invalid), first_cycle_time=.02)
 
     def test_residual_features_share_tolerance_scale_and_telescope(self):
         encoder = bundle().encoder
         kwargs = dict(mkw=dict(nx=40, ny=40, nz=40, k=1., c=10., a0=100.),
             setup_params=DEFAULT_SETUP_PARAMS, initial_residual=1.,
-            last_weight=1., last_cycle_time=.002)
+            last_weight=1., last_cycle_time=.002, first_cycle_time=.002)
         residuals = (1., .1, 1e-3, 1e6, 1e-6, 1e-9)
         expected_gaps = (1., 5/6, .5, 2., 0., -.5)
         last_gap = 1.
@@ -172,7 +190,8 @@ class SharedSetupTests(unittest.TestCase):
             mode='setup_full', setup_obs_encoder=setup_encoder(),
             problem_context_mode='diffusion3d', weight_bounds=(1., 3.))
         kwargs = dict(mkw=dict(nx=40, ny=40, nz=40, k=1., c=10., a0=100.),
-            setup_params=DEFAULT_SETUP_PARAMS, cycle=2, last_weight=1., last_cycle_time=.002)
+            setup_params=DEFAULT_SETUP_PARAMS, cycle=2, last_weight=1., last_cycle_time=.002,
+            first_cycle_time=.002)
         first = original.encode(**kwargs, initial_residual=1., residual=1e-3, previous_residual=.1)
         second = scaled.encode(**kwargs, initial_residual=1000., residual=1., previous_residual=100.)
         np.testing.assert_allclose(first, second, rtol=1e-14, atol=1e-14)
@@ -181,7 +200,7 @@ class SharedSetupTests(unittest.TestCase):
         encoder = bundle().encoder
         kwargs = dict(mkw=dict(nx=40, ny=40, nz=40, k=1., c=10., a0=100.),
             setup_params=DEFAULT_SETUP_PARAMS, initial_residual=1., cycle=1,
-            last_weight=1., last_cycle_time=.002)
+            last_weight=1., last_cycle_time=.002, first_cycle_time=.002)
         features = encoder.encode(**kwargs, residual=1e200, previous_residual=1e-200)
         self.assertTrue(np.all(np.isfinite(features)))
         self.assertAlmostEqual(features[4], 400/6)
@@ -244,8 +263,9 @@ class TimedEncoder:
 
 
 class Environment:
-    def __init__(self, *, fail=False, error=False):
+    def __init__(self, *, fail=False, error=False, cycle_times=(.02, .03, .04)):
         self.cycles = 0
+        self.cycle_times = cycle_times
         self.fail, self.error = fail, error
         self.last_step = SimpleNamespace(status=SolveStatus.CONTINUE)
 
@@ -265,10 +285,35 @@ class Environment:
                                  solve_runtime_sec=.02)
         if self.cycles == 3:
             self.last_step.status = SolveStatus.MAX_CYCLES if self.fail else SolveStatus.CONVERGED
-        return (.1 if self.fail or self.cycles < 3 else 1e-7), .01 + .01 * self.cycles
+        return (.1 if self.fail or self.cycles < 3 else 1e-7), self.cycle_times[self.cycles - 1]
 
 
 class CostAccountingTests(unittest.TestCase):
+    def test_first_cycle_reference_is_attempt_local_and_native_only(self):
+        used = bundle()
+        original_encode = used.encoder.encode
+        observations = []
+        def record_state(**kwargs):
+            features = original_encode(**kwargs)
+            observations.append((kwargs['cycle'], kwargs['first_cycle_time'], features[5]))
+            return features
+        # Reuse both learners across attempts, with different native time scales.
+        for durations, expected in (((.02, .03, .04), [0., 1., 1.5]),
+                                    ((.10, .04, .02), [0., 1., .4])):
+            observations.clear()
+            used.controller.record_update_runtime(.75)
+            with patch.object(used.encoder, 'encode', side_effect=record_state), \
+                 patch('solve.core.episode.create_env', return_value=Environment(cycle_times=durations)):
+                result = run_td_episode(
+                    mkw=dict(nx=40, ny=40, nz=40, k=1., c=10., a0=100.),
+                    params=DEFAULT_SETUP_PARAMS, controller=used.controller, encoder=used.encoder,
+                    solve_tol=1e-6, solve_max_cycles=3, learn=True, explore=False,
+                    failure_penalty_sec=0.)
+            np.testing.assert_allclose([v[2] for v in observations], expected)
+            self.assertEqual([v[1] for v in observations], [None, durations[0], durations[0]])
+            self.assertEqual(result['cycle_times'], list(durations))
+            self.assertGreater(result['cycle_assigned_costs'][0], durations[0] + .75)
+
     def run_episode(self, *, learn=True, fail=False, error=False, recorder=False):
         clock = Clock()
         controller = TimedController(clock)

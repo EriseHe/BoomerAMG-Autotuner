@@ -1,5 +1,5 @@
 {
-  "commit": "8d591e109de03537027d5676d5bc5baccc2b82ab",
+  "commit": "012e78f321e7edaaf4f807ed5bc016548b4b8ed8",
   "working_tree_files": {
     "README.md": "b471cbb151a9c8048a642e9dea56ca8eb85a1aac45e9d7044699e5c7d0fc46c0",
     "docs/experiments.md": "8f336a797890fe0217e182a2c48de52410661796ca726da02d671acf846015f7",
@@ -13,12 +13,8 @@
     "experiments/paper_final/recovery/metrics.py": "385ad9502ab664c094f4ce1d05eac61fa8fdfb66ce8add28274416284b4ba695",
     "experiments/paper_final/recovery/retry_comparison.py": "6a9e98b2f3fb2a6bfce7c3e45c4a19ddcfbfe32f7fba445473219e5ab68d54a0",
     "experiments/paper_final/run_online.py": "16275ff6a1aacbb45d7367900defd438fad3d9a2a3eeb585af4a61764fe95c02",
-    "solve/README.md": "fc6cde0e6966ddac573cff65cae034c6841ab09e822d85948163549c7f8e3ca8",
-    "solve/controllers/recursive_lstdq/common.py": "c4b35b6a4b848050924952f697c8d224c27886baa977df08948793fda0655731",
-    "solve/controllers/recursive_lstdq/controller.py": "139c11ae90d52fe164fb8fd2a4d286f7d994ecccbe51e0394384663d2eeb134b",
-    "solve/controllers/recursive_lstdq/factory.py": "32555a07144984fb2802be0c19e04c7dc6c3cb2456b0394fed4c124391a8fc7e",
-    "solve/core/episode.py": "5475713d2d8f1e5948f7afcccb3a11365eedc06391d45e66b12f6986e8787a5f",
     "tools/verify_data.py": "b670d6a5177575d69c8f51a21093c31099a829c635e6c911f9ab07cc8e8a80b9"
   },
-  "test_source": "Main working tree including pending algorithm and Module 4 changes."
+  "test_source": "19 RL checks and the four-branch native smoke passed against the committed main tree. All 23 checks passed against the main working tree, including four pending Module 4 checks.",
+  "focused_validation": "results/rl_first_cycle_time_20261018/validation_summary.json"
 }

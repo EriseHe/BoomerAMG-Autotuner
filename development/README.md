@@ -6,10 +6,12 @@ and frozen evaluation. Official experiment runners do not import or execute
 them. The scoring-equivalence check compares the controller with the direct
 matrix expression; it adds no work to an official solver run.
 
-Some checks cover pending algorithm and Module 4 changes in the local `main`
-working tree. Those changes are not all included in the published bin-removal
-commit. `validation-source.json` records the source files used for validation.
-Run these checks against that working tree:
+The RL checks cover the published first-cycle time normalization and
+overhead-inclusive learning cost. The earlier completed scoring optimization
+is retained; the interrupted follow-up round introduced no controller changes.
+The frozen-evaluation checks additionally cover pending Module 4 changes in the
+local `main` working tree. `validation-source.json` records the tested revision
+and pending source files. Run the checks against that working tree:
 
 ```sh
 cd /path/to/RLTune-BoomerAMG
