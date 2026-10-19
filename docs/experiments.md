@@ -8,6 +8,19 @@ workers, one per seed, with four independent cold methods from case 1.
 
 Module 1 has two consecutive phases per seed: 5,000 online-learning inputs
 (1–5,000), followed by 1,000 frozen-evaluation inputs (5,001–6,000).
+Fresh runs use one worker process and one uninterrupted loop for all 6,000
+inputs. Add the matching held-out configuration's `stream` object as the
+top-level `frozen_stream` alongside the original 5,000-input `stream`. The
+runner concatenates these pinned blocks without reshuffling the training
+prefix, allocates the continuing candidate schedule, and disables both
+learners in place after input 5,000. It preserves the live objects, RNG,
+history, and caches; it neither rebuilds the learners nor reloads checkpoints
+at that boundary. Epsilon exploration is disabled for the last 1,000 inputs,
+while inference overhead continues to be measured. Summaries include separate
+`learning` and `frozen` windows as well as the complete stream, and the final
+audit checks that learned state stayed unchanged after the boundary.
+
+The supplied archived configurations describe the original 5,000-input runs.
 For each JSON file in `data/module1/suites/`, prepare and run the learning phase
 sequentially. For example:
 
@@ -71,7 +84,7 @@ Use checkpoints with the same algorithm and state encoding as their training
 run; archived measurements retain their original configuration and source hashes.
 For a fresh rerun, point `evaluation.checkpoint_directory` at the matching
 completed training seed directory and `evaluation.training_configuration` at
-its `experiment_config.json`. The runner verifies the completed run's source,
+its `experiment_config.json`. The runner verifies the completed run's model source,
 native build, input/configuration hashes, and audited checkpoint/trajectory
 hashes before freezing it. Released checkpoints retain their original inventory
 checks.

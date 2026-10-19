@@ -16,7 +16,7 @@ class TrainingInventoryTests(unittest.TestCase):
         self.source = self.root / 'results/training/seed_1'
         self.output = self.source.parent
         self.stack.enter_context(patch.object(runner, 'ROOT', self.root))
-        self.stack.enter_context(patch.object(runner, 'source_hashes', return_value={'code': 'source'}))
+        self.stack.enter_context(patch.object(runner, 'source_hashes', return_value={'solve/controller.py': 'source'}))
         self.stack.enter_context(patch.object(runner.sweep, 'native_hashes', return_value={'native': 'library'}))
         runner.dump(self.source / 'experiment_config.json', {'setup': 'matching'})
         (self.source / 'inputs.jsonl').write_text('{"input":1}\n')
@@ -24,7 +24,7 @@ class TrainingInventoryTests(unittest.TestCase):
             stages={'1': dict(cases=5000, config_sha256=runner.file_hash(self.source / 'experiment_config.json'),
                 inputs_sha256=runner.digest([{'input': 1}]))})
         runner.dump(self.output / 'protocol.json', self.protocol)
-        runner.dump(self.output / 'source_manifest.json', {'code': 'source'})
+        runner.dump(self.output / 'source_manifest.json', {'solve/controller.py': 'source'})
         runner.dump(self.output / 'status.json', {'status': 'complete'})
         runner.dump(self.source / 'status.json', {'status': 'complete'})
         runner.dump(self.source / 'result.json', dict(complete=True, passed=True, cases=5000,
@@ -48,10 +48,10 @@ class TrainingInventoryTests(unittest.TestCase):
             runner.training_inventory(self.source)
 
     def test_changed_training_source_and_input_are_rejected(self):
-        runner.dump(self.output / 'source_manifest.json', {'code': 'different'})
+        runner.dump(self.output / 'source_manifest.json', {'solve/controller.py': 'different'})
         with self.assertRaisesRegex(ValueError, 'training source'):
             runner.training_inventory(self.source)
-        runner.dump(self.output / 'source_manifest.json', {'code': 'source'})
+        runner.dump(self.output / 'source_manifest.json', {'solve/controller.py': 'source'})
         (self.source / 'inputs.jsonl').write_text('{"input":2}\n')
         with self.assertRaisesRegex(ValueError, 'Training inputs changed'):
             runner.training_inventory(self.source)

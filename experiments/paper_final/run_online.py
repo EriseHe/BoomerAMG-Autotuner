@@ -33,7 +33,8 @@ from experiments.paper_final.common.artifacts import (
     ROOT, dump, read, digest, file_hash, ready, now, write_csv, read_records, checkpoint_payload_hash,
 )
 from experiments.paper_final.common.frozen_inputs import execution_source_paths
-from experiments.paper_final.online.configuration import parse_joint_experiment_config, runtime_config_from_spec
+from experiments.paper_final.online.configuration import (parse_joint_experiment_config,
+    runtime_config_from_spec, FrozenEvaluationSpec, evaluation_index_offset)
 from experiments.paper_final.online.case_loop import build_paired_instance_stream, configure_paired_environment
 from experiments.paper_final.online.methods import (
     build_named_setup_branches, build_composable_solve_runtime, resolve_composable_study,
@@ -142,11 +143,30 @@ def decode(raw, directory):
     stream, manifest = build_paired_instance_stream(args)
     if not args.expected_stream_hash or args.expected_stream_hash != manifest["sha256"]:
         raise ValueError("A pinned, matching input stream hash is required")
-    return SimpleNamespace(spec=spec, args=args, stream=stream, manifest=manifest)
+    freeze_after = None
+    if spec.frozen_stream is not None:
+        frozen_spec = replace(spec, stream=spec.frozen_stream, frozen_stream=None)
+        frozen_args = runtime_config_from_spec(frozen_spec)
+        configure_paired_environment(frozen_args)
+        heldout, heldout_manifest = build_paired_instance_stream(frozen_args)
+        if not frozen_args.expected_stream_hash or frozen_args.expected_stream_hash != heldout_manifest["sha256"]:
+            raise ValueError("A pinned, matching frozen input stream hash is required")
+        old_keys = {digest(mkw) for mkw, _ in stream}
+        new_keys = {digest(mkw) for mkw, _ in heldout}
+        if len(stream) != 5000 or len(heldout) != 1000 or len(new_keys) != 1000 or old_keys.intersection(new_keys):
+            raise ValueError("Continuous frozen inputs must be new, unique held-out problems")
+        freeze_after = len(stream)
+        stream = stream + heldout
+        from experiments.paper_final.common.online_inputs import canonical_stream_bytes
+        manifest = dict(sha256=hashlib.sha256(canonical_stream_bytes(stream)).hexdigest(),
+            training_stream=manifest, frozen_stream=heldout_manifest, training_cases=freeze_after,
+            cases=len(stream), continuous=True)
+        args = replace(args, online_cases=len(stream), continuous_stream=True)
+    return SimpleNamespace(spec=spec, args=args, stream=stream, manifest=manifest, freeze_after=freeze_after)
 
 
 def input_rows(runtime, cases):
-    offset = runtime.args.evaluation.training_cases if runtime.args.evaluation else 0
+    offset = evaluation_index_offset(runtime.args)
     return [dict(problem_index=offset+i+1, mkw=mkw, context=context.tolist())
             for i, (mkw, context) in enumerate(runtime.stream[:cases])]
 
@@ -166,9 +186,12 @@ def training_inventory(source):
             or result["cases"] != 5000 or checks["cases"] != 5000
             or protocol.get("frozen_evaluation")):
         raise ValueError("Frozen evaluation requires a complete audited 5,000-input training run")
-    if (read(output/"source_manifest.json") != source_hashes()
+    model_prefixes = ("setup/", "solve/", "problems/", "hypre/")
+    model_sources = lambda hashes: {k:v for k,v in hashes.items() if k.startswith(model_prefixes)}
+    training_models = model_sources(read(output/"source_manifest.json"))
+    if (not training_models or training_models != model_sources(source_hashes())
             or protocol["native_sha256"] != sweep.native_hashes()):
-        raise ValueError("Frozen evaluation must use the training source and native build")
+        raise ValueError("Frozen evaluation must use the training source for models and the native build")
     if file_hash(source/"experiment_config.json") != checks["config_sha256"]:
         raise ValueError("Training configuration changed")
     if digest(list(read_records(source/"inputs.jsonl"))) != checks["inputs_sha256"]:
@@ -246,23 +269,25 @@ def reject_frozen_update(*args, **kwargs):
     raise RuntimeError("A learner update was attempted during frozen Module 1 evaluation")
 
 
-def frozen_state_audit(stage, runtimes):
+def frozen_state_audit(stage, runtimes, *, continuous=False):
     """Compare every learned checkpoint payload before and after evaluation."""
     audit = {}
     for name, runtime in runtimes.items():
         pairs = []
         if runtime.bundle is not None:
-            pairs.append((stage/f"initial_controllers/{name}.npz", stage/f"checkpoints/{name}_final.npz",
+            prefix = "frozen_initial_controllers" if continuous else "initial_controllers"
+            pairs.append((stage/f"{prefix}/{name}.npz", stage/f"checkpoints/{name}_final.npz",
                           ("rng_state", "default_first_action_pending", "forced_initial_action_count")))
         if hasattr(runtime, "branch"):
-            pairs.append((stage/f"initial_bandit_states/{name}.npz", stage/f"final_bandit_states/{name}.npz",
+            prefix = "frozen_initial_bandit_states" if continuous else "initial_bandit_states"
+            pairs.append((stage/f"{prefix}/{name}.npz", stage/f"final_bandit_states/{name}.npz",
                           ("rng_state", "candidate_schedule_cursor", "metadata")))
         for initial, final, excluded in pairs:
             before = checkpoint_payload_hash(initial, exclude=excluded)
             after = checkpoint_payload_hash(final, exclude=excluded)
             relative = (f"checkpoints/{name}_final.npz" if 'initial_controllers' in str(initial)
                         else f"final_bandit_states/{name}.npz")
-            released = checkpoint_payload_hash(stage/"training_checkpoints"/relative, exclude=excluded)
+            released = before if continuous else checkpoint_payload_hash(stage/"training_checkpoints"/relative, exclude=excluded)
             if before != released:
                 raise ValueError(f"Initial learner differs from the released Module 1 checkpoint: {name}")
             if before != after:
@@ -270,6 +295,37 @@ def frozen_state_audit(stage, runtimes):
             audit[str(final.relative_to(stage))] = dict(passed=True, learned_state_sha256=after,
                 excluded_execution_state=list(excluded))
     return dict(passed=True, updates=0, checkpoints=audit)
+
+
+def freeze_live_runtimes(stage, runtimes, training_cases):
+    """Disable learning in place, preserving models, RNG, history and caches."""
+    identities = {}
+    for name, runtime in runtimes.items():
+        identities[name] = dict(runtime=id(runtime), controller=id(runtime.bundle.controller) if runtime.bundle else None,
+                                setup_model=id(runtime.branch.policy.model) if hasattr(runtime, "branch") else None)
+        runtime.args = replace(runtime.args, evaluation=FrozenEvaluationSpec(stage, stage/"experiment_config.json",
+                               training_cases=training_cases, explore=False))
+        if hasattr(runtime, "branch"):
+            model = runtime.branch.policy.model
+            if model._last_arm is not None or model._last_phi is not None:
+                raise ValueError("Unresolved setup observation at the freeze boundary")
+            directory = stage/"frozen_initial_bandit_states"
+            directory.mkdir(exist_ok=True)
+            model.save_mutable_state(directory/f"{name}.npz")
+            for field in ("update", "defer_cost", "resolve_cost"):
+                setattr(model, field, reject_frozen_update)
+            for field in ("A_inv", "b", "failure_b"):
+                getattr(model, field).setflags(write=False)
+        if runtime.bundle is not None:
+            directory = stage/"frozen_initial_controllers"
+            directory.mkdir(exist_ok=True)
+            runtime.bundle.save(directory/f"{name}.npz")
+            runtime.bundle.controller.update = reject_frozen_update
+            for field in ("theta", "a_matrix", "a_inverse", "b", "episode_moment_covariance"):
+                getattr(runtime.bundle.controller, field).setflags(write=False)
+    dump(stage/"freeze_boundary.json", dict(passed=True, pid=os.getpid(), after_input=training_cases,
+         next_input=training_cases+1, models_reinitialized=False, checkpoints_reloaded=False,
+         model_updates=False, epsilon_exploration=False, measure_overhead=True, identities=identities))
 
 
 def prepare_all(suite_directory, output, *, cases=None):
@@ -383,17 +439,23 @@ def prepare(suite_path, output, *, cases=None):
         raw = copy.deepcopy(read(config_path))
         stage = output/f"seed_{label}"
         stage.mkdir()
-        count = int(raw["stream"]["online_cases"] if cases is None else cases)
-        if count < 1 or count > int(raw["stream"]["online_cases"]):
+        declared_cases = int(raw["stream"]["online_cases"]) + int(raw.get("frozen_stream", {}).get("online_cases", 0))
+        count = declared_cases if cases is None else int(cases)
+        if count < 1 or count > declared_cases:
             raise ValueError("Case count exceeds the declared stream")
         raw["output_dir"] = str(stage)
         runtime = decode(raw, stage)
         frozen = runtime.args.evaluation is not None
         if protocol.setdefault("frozen_evaluation", frozen) != frozen:
             raise ValueError("Do not mix training and frozen evaluation in one suite")
+        if protocol.setdefault("continuous_stream", runtime.freeze_after is not None) != (runtime.freeze_after is not None):
+            raise ValueError("Do not mix continuous and separate-stage streams in one suite")
         if frozen:
             protocol["learning_start"] = "Final Module 1 checkpoints; all learning disabled"
         protocol["phase"] = "frozen" if frozen else "online"
+        if runtime.freeze_after is not None:
+            protocol.update(phase="continuous", continuous_stream=True, freeze_after=runtime.freeze_after,
+                            learning_inputs=[1, runtime.freeze_after], frozen_inputs=[runtime.freeze_after+1, len(runtime.stream)])
         joint_method = next(m for m in runtime.spec.methods if m.name == "bandit_lstdq")
         if runtime.args.warmup_cases or runtime.args.aot_max_selections_per_case != 3:
             raise ValueError("Expected cold starts and three candidate rows per input")
@@ -406,7 +468,8 @@ def prepare(suite_path, output, *, cases=None):
         rows = input_rows(runtime, count)
         (stage/"inputs.jsonl").write_text("".join(json.dumps(row)+"\n" for row in rows))
         dump(stage/"status.json", dict(status="prepared", processed=0, cases=count))
-        protocol["stages"][label] = dict(cases=count, smoke=count != int(raw["stream"]["online_cases"]),
+        protocol["stages"][label] = dict(cases=count, smoke=count != declared_cases,
+            freeze_after=runtime.freeze_after,
             joint_activation_case=joint_method.solve_activation_case,
             config_sha256=file_hash(stage/"experiment_config.json"),
             source_config=str(config_path.resolve()), source_config_sha256=file_hash(config_path),
@@ -545,7 +608,8 @@ def worker(output, label):
             time.sleep(0.2)
         rows = {name: [] for name in factorial.METHODS}
         previous = dict.fromkeys(factorial.METHODS, 0.0)
-        offset = first.args.evaluation.training_cases if first.args.evaluation else 0
+        offset = evaluation_index_offset(first.args)
+        freeze_after = protocol["stages"][label].get("freeze_after")
         orders = factorial.balanced_orders(cases+offset, first.args.method_order_seed)[offset:]
         factorial.audit_independence(runtimes, allow_trained=bool(offset))
         dump(stage/"activation_audit.json", dict(passed=True, problem_index=offset+1, frozen_evaluation=bool(offset),
@@ -557,6 +621,11 @@ def worker(output, label):
         started = time.perf_counter()
         with (stage/"execution.jsonl").open("w") as schedule:
             for index, order in enumerate(orders):
+                if freeze_after is not None and index == freeze_after:
+                    for handle in handles.values():
+                        handle.flush()
+                    schedule.flush()
+                    freeze_live_runtimes(stage, runtimes, freeze_after)
                 for rank, name in enumerate(order):
                     begin = time.monotonic_ns()
                     row, previous[name] = factorial.execute(runtimes[name], index, previous[name])
@@ -587,12 +656,13 @@ def worker(output, label):
             controller = controller_summary(runtime)
             if runtime.bundle is not None and not offset:
                 audit_controller_counts(rows[name], controller)
-            model = screen.audit_final_model(runtime, rows[name]) if hasattr(runtime, "branch") and not offset else None
+            model_records = rows[name][:freeze_after] if freeze_after is not None else rows[name]
+            model = screen.audit_final_model(runtime, model_records) if hasattr(runtime, "branch") and not offset else None
             final_audits[name] = dict(controller=controller, model=model,
                 cases=len(rows[name]), trajectory_sha256=file_hash(stage/"trajectories"/f"{name}.jsonl"))
         save_checkpoints(stage, runtimes, "final")
-        if offset:
-            dump(stage/"frozen_state_audit.json", frozen_state_audit(stage, runtimes))
+        if offset or (freeze_after is not None and cases > freeze_after):
+            dump(stage/"frozen_state_audit.json", frozen_state_audit(stage, runtimes, continuous=not bool(offset)))
         check_frozen(output)
         checkpoint_hashes = {str(path.relative_to(stage)): file_hash(path)
             for directory in (stage/"checkpoints", stage/"final_bandit_states")
@@ -627,6 +697,11 @@ def analyze(output):
                          for name, values in records.items()}
         cases = result["cases"]
         windows = {"full": (0, cases), "first_1000": (0, min(1000, cases))}
+        freeze_after = protocol["stages"][label].get("freeze_after")
+        if freeze_after is not None:
+            windows["learning"] = (0, min(freeze_after, cases))
+            if cases > freeze_after:
+                windows["frozen"] = (freeze_after, cases)
         activation = next(m.get("solve_activation_case", 0) for m in read(stage/"experiment_config.json")["methods"] if m["id"] == "bandit_lstdq")
         if activation < cases:
             windows["joint"] = (activation, cases)

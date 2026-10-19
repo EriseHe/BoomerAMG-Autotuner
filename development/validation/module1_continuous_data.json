@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "modules": {
+    "module1": {
+      "method_cases": 864000,
+      "seeds": 6,
+      "training_method_cases": 720000,
+      "training_cases_per_seed": 5000,
+      "frozen_cases_per_seed": 1000,
+      "cases_per_seed": 6000,
+      "frozen_method_cases": 144000,
+      "frozen": {
+        "trained_runs": 36,
+        "evaluation_cases_per_run": 1000,
+        "learners_frozen": true,
+        "measurements_complete": true
+      }
+    },
+    "module3": {
+      "method_cases": 120000,
+      "seeds": 6
+    },
+    "module2": {
+      "evaluation_failures": 0,
+      "evaluation_trials": 8535,
+      "exact_coverage": true,
+      "fresh_scan_trials": 29520,
+      "recovered_evaluations": 30
+    }
+  },
+  "raw_files_verified": 0
+}

@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-19T12:56:04.741615+00:00",
+  "base_commit": "bb2b3f6902029d64d09a06a1faf19afc12ef24dd",
+  "tests": 38,
+  "passed": true,
+  "native_test": "Five-input four-branch diagnostic with a shortened freeze boundary; initialized once, same worker PID, no learned-state changes, inference overhead measured.",
+  "official_protocol": {
+    "learning": [
+      1,
+      5000
+    ],
+    "frozen": [
+      5001,
+      6000
+    ],
+    "one_process": true,
+    "no_checkpoint_reload": true
+  },
+  "logs": [
+    "development/validation/module1_continuous_tests.txt",
+    "development/validation/module1_continuous_data.json"
+  ]
+}
