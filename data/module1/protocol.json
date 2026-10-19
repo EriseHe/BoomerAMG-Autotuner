@@ -1,6 +1,6 @@
 {
   "module": 1,
-  "cases_per_seed": 5000,
+  "cases_per_seed": 6000,
   "seeds": [
     1,
     2,
@@ -45,5 +45,27 @@
     "hypre/install/lib/libHYPRE.300.dylib": "c4ade67c2d6b2d4a3e69554808de3910cd13c42dae93d9312fa4493f89c04e21",
     "hypre/install/lib/libHYPRE.dylib": "c4ade67c2d6b2d4a3e69554808de3910cd13c42dae93d9312fa4493f89c04e21",
     "hypre/interfaces/libamg_runtime.dylib": "15daee59e89d17a77131e4a092bff431846b0dcbf5a2003b7e21f5447fd65ff3"
+  },
+  "training_cases_per_seed": 5000,
+  "frozen_cases_per_seed": 1000,
+  "phases": {
+    "online": {
+      "global_cases": [
+        1,
+        5000
+      ],
+      "model_updates": true,
+      "rl_epsilon_exploration": true
+    },
+    "frozen": {
+      "global_cases": [
+        5001,
+        6000
+      ],
+      "model_updates": false,
+      "rl_epsilon_exploration": false,
+      "checkpoint_boundary": 5000,
+      "protocol": "data/module1/frozen/protocol.json"
+    }
   }
 }

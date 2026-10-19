@@ -5,10 +5,9 @@ Reinforcement Learning**, by Xudong He, Ruiyu Wang, and Yilang Ding, Rui Peng Li
 
 | Module | Study | Data |
 |---|---|---|
-| 1 | Diffusion and advection at 40³, 60³, and 80³; six seeds; 5,000 cases per seed | [module1](data/module1) |
+| 1 | Diffusion and advection at 40³, 60³, and 80³; six seeds; 5,000 learning inputs followed by 1,000 frozen inputs per seed | [module1](data/module1) |
 | 2 | Six frozen checkpoints; 100 evaluation cases; 41 weights; five policies | [module2](data/module2) |
 | 3 | Variable-flow 60³; six seeds; 5,000 cases per seed | [module3](data/module3) |
-| 4 | Frozen Module 1 learners; 1,000 new inputs per trained run, cases 5,001–6,000 | [module4](data/module4) |
 
 ## Reproduce the tables and figures
 

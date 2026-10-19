@@ -379,7 +379,7 @@ def generate(run, *, output=None, illustrative_seed=None):
     kind = config["problem"]["kind"]
     family = "Diffusion–advection" if "advection" in kind or "convection" in kind else "Diffusion"
     title = family + " " + (rf"${grid[0]}^3$" if len(set(grid)) == 1 else " × ".join(map(str, grid)))
-    module_number = 4 if config.get("evaluation") else 1
+    module_number = 1
     style()
     output.mkdir(parents=True, exist_ok=True)
     figures = [

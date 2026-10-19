@@ -1,0 +1,34 @@
+test_fallback_and_unrecovered_failure_preserve_model (test_frozen_feedback.FrozenFeedbackTests) ... ok
+test_frozen_recorder_needs_no_learning_snapshot (test_frozen_feedback.FrozenFeedbackTests) ... ok
+test_frozen_reselection_excludes_failures_and_stops_on_success (test_frozen_feedback.FrozenFeedbackTests) ... ok
+test_success_does_not_update (test_frozen_feedback.FrozenFeedbackTests) ... ok
+test_nonsymmetric_inverse_and_inverse_rebuild (test_lstdq_scoring_equivalence.ScoringEquivalenceTests) ... ok
+test_scores_match_dense_formula_through_updates_and_episode_commits (test_lstdq_scoring_equivalence.ScoringEquivalenceTests) ... ok
+test_snapshot_restore_and_checkpoint_rebuild_derived_cache (test_lstdq_scoring_equivalence.ScoringEquivalenceTests) ... ok
+test_cli_exposes_frozen_phase_without_a_separate_module (test_module1_frozen_phase.ModuleOneFrozenTests) ... ok
+test_frozen_input_indices_continue_at_5001 (test_module1_frozen_phase.ModuleOneFrozenTests) ... ok
+test_frozen_inputs_and_measurements_are_unchanged_by_reorganization (test_module1_frozen_phase.ModuleOneFrozenTests) ... ok
+test_frozen_settings_and_checkpoints_match_each_training_run (test_module1_frozen_phase.ModuleOneFrozenTests) ... ok
+test_new_frozen_artifacts_refresh_both_manifests (test_module1_frozen_phase.ModuleOneFrozenTests) ... ok
+test_protocol_has_5000_learning_and_1000_frozen_inputs (test_module1_frozen_phase.ModuleOneFrozenTests) ... ok
+test_first_cycle_reference_is_attempt_local_and_native_only (test_shared_setup_and_costs.CostAccountingTests) ... ok
+test_frozen_solve_does_not_charge_or_change_update_estimate (test_shared_setup_and_costs.CostAccountingTests) ... ok
+test_native_exception_retains_assigned_cost_diagnostics (test_shared_setup_and_costs.CostAccountingTests) ... ok
+test_previous_update_is_charged_once_without_double_counting (test_shared_setup_and_costs.CostAccountingTests) ... ok
+test_successful_default_fallback_retains_only_learned_updates (test_shared_setup_and_costs.CostAccountingTests) ... ok
+test_terminal_failure_retains_cost_then_whole_input_failure_rolls_back (test_shared_setup_and_costs.CostAccountingTests) ... ok
+test_categories_are_indicators_and_inactive_values_are_masked (test_shared_setup_and_costs.SharedSetupTests) ... ok
+test_checkpoint_and_rollback_preserve_causal_estimator (test_shared_setup_and_costs.SharedSetupTests) ... ok
+test_cycle_count_only_changes_its_normalized_scalar (test_shared_setup_and_costs.SharedSetupTests) ... ok
+test_cycle_time_is_relative_to_first_cycle_without_clipping (test_shared_setup_and_costs.SharedSetupTests) ... ok
+test_cycle_time_rejects_invalid_reference_without_a_fixed_fallback (test_shared_setup_and_costs.SharedSetupTests) ... ok
+test_matches_factorized_bandit_features (test_shared_setup_and_costs.SharedSetupTests) ... ok
+test_residual_features_share_tolerance_scale_and_telescope (test_shared_setup_and_costs.SharedSetupTests) ... ok
+test_residual_normalization_handles_large_finite_ratios (test_shared_setup_and_costs.SharedSetupTests) ... ok
+test_residual_normalization_is_invariant_to_consistent_units (test_shared_setup_and_costs.SharedSetupTests) ... ok
+test_solve_uses_unclipped_shared_descriptors (test_shared_setup_and_costs.SharedSetupTests) ... ok
+
+----------------------------------------------------------------------
+Ran 29 tests in 0.224s
+
+OK

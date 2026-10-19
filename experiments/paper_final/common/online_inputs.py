@@ -82,7 +82,7 @@ def load_recorded_online_stream(
         return None
     directory = STREAM_DIRECTORY
     manifest = json.loads((directory/"manifest.json").read_text(encoding="utf-8"))
-    heldout = STREAM_DIRECTORY.parent.parent/"module4/inputs"
+    heldout = STREAM_DIRECTORY.parent/"frozen/inputs"
     if expected_hash not in manifest["streams"] and (heldout/"manifest.json").exists():
         directory = heldout
         manifest = json.loads((directory/"manifest.json").read_text(encoding="utf-8"))

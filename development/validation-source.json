@@ -1,36 +1,44 @@
 {
-  "commit": "f3ce66da9af977ec7e3bb2f080ba2c68b40b9fb0",
-  "development_base_commit": "2a8fe3a558b6639ff0a30c6c304f53d94ec04c0d",
-  "validated_at": "2026-10-19T07:34:59.534718+00:00",
-  "test_source": "Self-contained codex/development checkout, including pending Module 4 source. No imports from the main working tree are needed.",
+  "commit": "9c04e6554ce037b740bd2ba38b7c124ecb838e2d",
+  "validated_at": "2026-10-19T07:50:18.609755+00:00",
+  "test_source": "Self-contained codex/development checkout. Frozen evaluation is the second phase of Module 1; no experiment was rerun.",
   "working_tree_files": {
-    "README.md": "b471cbb151a9c8048a642e9dea56ca8eb85a1aac45e9d7044699e5c7d0fc46c0",
-    "docs/experiments.md": "8f336a797890fe0217e182a2c48de52410661796ca726da02d671acf846015f7",
-    "experiments/paper_final/common/online_inputs.py": "e007fa99623702abb40be79b6717198a18ab4943df6a080e3b36b89ab1cc26d7",
-    "experiments/paper_final/online/configuration.py": "2670e0f5ffade4d507063504934adc6891dc5d2564e6c36a0e1ad4d9db73a64d",
-    "experiments/paper_final/online/factorial.py": "b0b664517c472797c6cee3c8410555e23200656c939f6f00f00f2b5abffda9c6",
-    "experiments/paper_final/plot_online.py": "9711e4978854dbb40746847a6e2dde6e6426de6f9354ba546fd25246b6178dd1",
-    "experiments/paper_final/recovery/audit.py": "0aebf67a954cd3a787c067a9ecff2159b8bdaeab7ce1c972f1a07bd75ce61356",
-    "experiments/paper_final/recovery/execution.py": "e65796d4bec1b883460fccf4bd0c3ee359d057826ad5e679874976ca5bb3c423",
-    "experiments/paper_final/recovery/joint_validation.py": "30b8e8213ce6c77cf20aec0674e1338abd3cab925877be72f89c73b69b02116a",
-    "experiments/paper_final/recovery/metrics.py": "385ad9502ab664c094f4ce1d05eac61fa8fdfb66ce8add28274416284b4ba695",
-    "experiments/paper_final/recovery/retry_comparison.py": "6a9e98b2f3fb2a6bfce7c3e45c4a19ddcfbfe32f7fba445473219e5ab68d54a0",
-    "experiments/paper_final/run_online.py": "16275ff6a1aacbb45d7367900defd438fad3d9a2a3eeb585af4a61764fe95c02",
-    "tools/verify_data.py": "b670d6a5177575d69c8f51a21093c31099a829c635e6c911f9ab07cc8e8a80b9"
+    "README.md": "a07d851e5c87528da10455e9e655159d8b882ed34a46091dac26d6b62e002c6a",
+    "data/README.md": "4235f2d68edcc85e6da9c3670b26f9b31dc21e6947a239a7671d34b63d53a91d",
+    "data/manifest.json": "c698285519c610835b4a1752662d9f408d3d02bf312c646649cac84c82836185",
+    "data/module1/protocol.json": "dca6e90913db31d24bdf3d49c5379e5ceb68878245c520c674da14054d6069cf",
+    "docs/experiments.md": "5a81e2e07534e6a1279c68849b5fec5ce1e358bee74fa71a70bdf44c41b7850e",
+    "experiments/paper_final/common/online_inputs.py": "5f8e7782c33a831ef380206290a759d9fe70a49f3111cccece7cc587d0876d9a",
+    "experiments/paper_final/online/configuration.py": "a5b1b526a9482bb15defb200130058407d2ff9e9575a14a500464fbbe98faf9e",
+    "experiments/paper_final/plot_online.py": "6621d9c1df1ec4fb94703bf8db0e2dc1ff1160f0d9bd11b9e369185b7edaf72a",
+    "experiments/paper_final/run_online.py": "e0e1fc49cde77db69e7ad92595d8696a68be1dfd7bff636a47ff6485bab8629b",
+    "tools/verify_data.py": "c7212232b9f7961723b44240d8bfd770323ab2ad30fb10569332764fe7ebf561"
   },
-  "pending_module4_source": "development/pending_module4_source.json",
+  "frozen_evaluation_source": "development/frozen_evaluation_source.json",
   "checks": {
     "development_unittests": {
       "passed": true,
-      "tests": 23,
-      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 PYTHONPATH=. python -m unittest discover -s development/tests -p test_*.py -v"
+      "tests": 29,
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 PYTHONPATH=. python -m unittest discover -s development/tests -p test_*.py -v",
+      "log": "development/validation/module1_frozen_tests.txt"
     },
     "data_verification": {
       "passed": true,
       "modules": {
         "module1": {
-          "method_cases": 720000,
-          "seeds": 6
+          "method_cases": 864000,
+          "seeds": 6,
+          "training_method_cases": 720000,
+          "training_cases_per_seed": 5000,
+          "frozen_cases_per_seed": 1000,
+          "cases_per_seed": 6000,
+          "frozen_method_cases": 144000,
+          "frozen": {
+            "trained_runs": 36,
+            "evaluation_cases_per_run": 1000,
+            "learners_frozen": true,
+            "measurements_complete": true
+          }
         },
         "module3": {
           "method_cases": 120000,
@@ -42,24 +50,17 @@
           "exact_coverage": true,
           "fresh_scan_trials": 29520,
           "recovered_evaluations": 30
-        },
-        "module4": {
-          "trained_runs": 36,
-          "evaluation_cases_per_run": 1000,
-          "learners_frozen": true,
-          "measurements_complete": true
         }
       },
       "raw_files_verified": 0
     },
-    "redundant_guard_removal": {
-      "valid_cycle_weight_combinations": 2091,
-      "feature_values_identical": true,
-      "main_commit": "f3ce66da9af977ec7e3bb2f080ba2c68b40b9fb0"
-    }
+    "migration": "development/validation/module1_frozen_migration.json"
   },
   "previous_validation": {
-    "commit": "012e78f321e7edaaf4f807ed5bc016548b4b8ed8",
+    "commit": "f3ce66da9af977ec7e3bb2f080ba2c68b40b9fb0",
+    "development_base_commit": "2a8fe3a558b6639ff0a30c6c304f53d94ec04c0d",
+    "validated_at": "2026-10-19T07:34:59.534718+00:00",
+    "test_source": "Self-contained codex/development checkout, including pending Module 4 source. No imports from the main working tree are needed.",
     "working_tree_files": {
       "README.md": "b471cbb151a9c8048a642e9dea56ca8eb85a1aac45e9d7044699e5c7d0fc46c0",
       "docs/experiments.md": "8f336a797890fe0217e182a2c48de52410661796ca726da02d671acf846015f7",
@@ -75,7 +76,65 @@
       "experiments/paper_final/run_online.py": "16275ff6a1aacbb45d7367900defd438fad3d9a2a3eeb585af4a61764fe95c02",
       "tools/verify_data.py": "b670d6a5177575d69c8f51a21093c31099a829c635e6c911f9ab07cc8e8a80b9"
     },
-    "test_source": "19 RL checks and the four-branch native smoke passed against the committed main tree. All 23 checks passed against the main working tree, including four pending Module 4 checks.",
-    "focused_validation": "results/rl_first_cycle_time_20261018/validation_summary.json"
+    "pending_module4_source": "development/pending_module4_source.json",
+    "checks": {
+      "development_unittests": {
+        "passed": true,
+        "tests": 23,
+        "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 PYTHONPATH=. python -m unittest discover -s development/tests -p test_*.py -v"
+      },
+      "data_verification": {
+        "passed": true,
+        "modules": {
+          "module1": {
+            "method_cases": 720000,
+            "seeds": 6
+          },
+          "module3": {
+            "method_cases": 120000,
+            "seeds": 6
+          },
+          "module2": {
+            "evaluation_failures": 0,
+            "evaluation_trials": 8535,
+            "exact_coverage": true,
+            "fresh_scan_trials": 29520,
+            "recovered_evaluations": 30
+          },
+          "module4": {
+            "trained_runs": 36,
+            "evaluation_cases_per_run": 1000,
+            "learners_frozen": true,
+            "measurements_complete": true
+          }
+        },
+        "raw_files_verified": 0
+      },
+      "redundant_guard_removal": {
+        "valid_cycle_weight_combinations": 2091,
+        "feature_values_identical": true,
+        "main_commit": "f3ce66da9af977ec7e3bb2f080ba2c68b40b9fb0"
+      }
+    },
+    "previous_validation": {
+      "commit": "012e78f321e7edaaf4f807ed5bc016548b4b8ed8",
+      "working_tree_files": {
+        "README.md": "b471cbb151a9c8048a642e9dea56ca8eb85a1aac45e9d7044699e5c7d0fc46c0",
+        "docs/experiments.md": "8f336a797890fe0217e182a2c48de52410661796ca726da02d671acf846015f7",
+        "experiments/paper_final/common/online_inputs.py": "e007fa99623702abb40be79b6717198a18ab4943df6a080e3b36b89ab1cc26d7",
+        "experiments/paper_final/online/configuration.py": "2670e0f5ffade4d507063504934adc6891dc5d2564e6c36a0e1ad4d9db73a64d",
+        "experiments/paper_final/online/factorial.py": "b0b664517c472797c6cee3c8410555e23200656c939f6f00f00f2b5abffda9c6",
+        "experiments/paper_final/plot_online.py": "9711e4978854dbb40746847a6e2dde6e6426de6f9354ba546fd25246b6178dd1",
+        "experiments/paper_final/recovery/audit.py": "0aebf67a954cd3a787c067a9ecff2159b8bdaeab7ce1c972f1a07bd75ce61356",
+        "experiments/paper_final/recovery/execution.py": "e65796d4bec1b883460fccf4bd0c3ee359d057826ad5e679874976ca5bb3c423",
+        "experiments/paper_final/recovery/joint_validation.py": "30b8e8213ce6c77cf20aec0674e1338abd3cab925877be72f89c73b69b02116a",
+        "experiments/paper_final/recovery/metrics.py": "385ad9502ab664c094f4ce1d05eac61fa8fdfb66ce8add28274416284b4ba695",
+        "experiments/paper_final/recovery/retry_comparison.py": "6a9e98b2f3fb2a6bfce7c3e45c4a19ddcfbfe32f7fba445473219e5ab68d54a0",
+        "experiments/paper_final/run_online.py": "16275ff6a1aacbb45d7367900defd438fad3d9a2a3eeb585af4a61764fe95c02",
+        "tools/verify_data.py": "b670d6a5177575d69c8f51a21093c31099a829c635e6c911f9ab07cc8e8a80b9"
+      },
+      "test_source": "19 RL checks and the four-branch native smoke passed against the committed main tree. All 23 checks passed against the main working tree, including four pending Module 4 checks.",
+      "focused_validation": "results/rl_first_cycle_time_20261018/validation_summary.json"
+    }
   }
 }

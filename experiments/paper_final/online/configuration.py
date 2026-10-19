@@ -511,7 +511,7 @@ class FrozenEvaluationSpec:
         if type(raw.get("explore", False)) is not bool:
             raise ValueError("evaluation.explore must be a boolean")
         if int(raw.get("training_cases", 5000)) != 5000:
-            raise ValueError("Module 4 requires the final 5,000-case Module 1 checkpoints")
+            raise ValueError("Frozen evaluation requires the final 5,000-case Module 1 checkpoints")
         return cls(Path(raw["checkpoint_directory"]), Path(raw["training_configuration"]),
                    5000, raw.get("explore", False))
 

@@ -1,6 +1,6 @@
 Start algorithm changes, tests, scripts, and diagnostic experiments on
 `codex/development`, and validate them there. Promote only selected, validated
-algorithm changes and official Module 1–4 runner updates to `main`. Keep tests,
+algorithm changes and official Module 1–3 runner updates to `main`. Keep tests,
 diagnostic scripts, and unofficial experiment records on development; do not
 merge the complete development branch into main. After promotion, merge any
 main changes back into development so development contains the released code.
@@ -13,8 +13,8 @@ matrix expression; it adds no work to an official solver run.
 The RL checks cover the published first-cycle time normalization and
 overhead-inclusive learning cost. The earlier completed scoring optimization
 is retained; the interrupted follow-up round introduced no controller changes.
-The frozen-evaluation checks additionally cover pending Module 4 changes now
-included on development. `pending_module4_source.json` records their source
+The frozen-evaluation checks cover Module 1's 1,000-input frozen phase.
+`frozen_evaluation_source.json` records the original source
 snapshot, and `validation-source.json` records the validation. The development
 checkout is self-contained; run the checks there:
 
@@ -34,7 +34,7 @@ original run assumptions and must be checked before another run.
 
 The cycle-bin comparison has five completed runs out of six; the final
 without-bins run for seed 3 was interrupted. It is not a completed three-seed
-paired study. None of these diagnostics replace the official Module 1–4 data.
+paired study. None of these diagnostics replace the official Module 1–3 data.
 
 The completed `results/module1_diffusion60_restart_5000_3seeds_20261018` rerun
 also belongs to development. Its selected analysis scripts, configurations,
