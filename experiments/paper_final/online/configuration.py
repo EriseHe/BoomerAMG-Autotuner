@@ -38,6 +38,7 @@ TOP_LEVEL_KEYS = {
     "methods",
     "reporting",
     "failure_feedback",
+    "evaluation",
 }
 SETUP_KEYS = {
     "parameter_resolution",
@@ -498,6 +499,24 @@ class JointSolveSpec:
 
 
 @dataclass(frozen=True)
+class FrozenEvaluationSpec:
+    checkpoint_directory: Path
+    training_configuration: Path
+    training_cases: int = 5000
+    explore: bool = False
+
+    @classmethod
+    def from_mapping(cls, raw):
+        reject_unknown_keys(raw, {"checkpoint_directory", "training_configuration", "training_cases", "explore"}, name="evaluation")
+        if type(raw.get("explore", False)) is not bool:
+            raise ValueError("evaluation.explore must be a boolean")
+        if int(raw.get("training_cases", 5000)) != 5000:
+            raise ValueError("Module 4 requires the final 5,000-case Module 1 checkpoints")
+        return cls(Path(raw["checkpoint_directory"]), Path(raw["training_configuration"]),
+                   5000, raw.get("explore", False))
+
+
+@dataclass(frozen=True)
 class JointExperimentSpec:
     schema_version: int
     name: str
@@ -511,6 +530,7 @@ class JointExperimentSpec:
     methods: tuple[ComposableMethodSpec, ...]
     reporting: ReportingSpec
     failure_penalty_sec: float | None = None
+    evaluation: FrozenEvaluationSpec | None = None
 
 
 @dataclass(frozen=True)
@@ -565,6 +585,7 @@ class JointExperimentRuntimeConfig:
     failure_penalty_sec: float | None = None
     setup_candidate_pool_size: int | None = None
     aot_structured_quotas: Mapping[str, int] | None = None
+    evaluation: FrozenEvaluationSpec | None = None
 
 
 def parse_joint_experiment_config(
@@ -635,6 +656,8 @@ def parse_joint_experiment_config(
         methods=methods,
         reporting=reporting,
         failure_penalty_sec=None,
+        evaluation=(FrozenEvaluationSpec.from_mapping(mapping(config["evaluation"], name="evaluation"))
+                    if "evaluation" in config else None),
     )
 
 
@@ -691,5 +714,6 @@ def runtime_config_from_spec(spec: JointExperimentSpec) -> JointExperimentRuntim
         setup_configuration_spaces=dict(spec.setup.configuration_spaces),
         solve_controller_specs=dict(solve.controller_specs),
         joint_experiment_spec=spec,
+        evaluation=spec.evaluation,
         failure_penalty_sec=spec.failure_penalty_sec,
     )

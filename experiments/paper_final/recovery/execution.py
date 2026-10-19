@@ -65,9 +65,10 @@ class RecordedEpisode:
 class EpisodeRecorder:
     """Record executed updates so delayed targets replace, rather than duplicate, data."""
 
-    def __init__(self, controller):
+    def __init__(self, controller, *, learn=True):
         self.controller = controller
-        self.snapshot = controller.snapshot_learning_state()
+        self.learning_enabled = learn
+        self.snapshot = controller.snapshot_learning_state() if learn else None
         self.episodes: list[RecordedEpisode] = []
         self.attempt_index = 0
         self.current = None
@@ -106,6 +107,8 @@ class EpisodeRecorder:
         return self.controller.restore_learning_state(state)
 
     def finalize(self, attempts, fallback, *, include_recovery):
+        if not self.learning_enabled:
+            return [0.0] * len(attempts), 0
         success = attempts[-1].succeeded or (fallback is not None and fallback.succeeded)
         additions = [0.0] * len(attempts)
         if not success:
@@ -168,7 +171,8 @@ def run_fixed_case(solver, recorder, snapshot_runtime, include_recovery, *, fall
         additions, replayed = recorder.finalize(attempts, fallback, include_recovery=include_recovery)
         finalization = time.perf_counter() - started
     except BaseException:
-        recorder.controller.restore_learning_state(recorder.snapshot)
+        if recorder.snapshot is not None:
+            recorder.controller.restore_learning_state(recorder.snapshot)
         raise
     extra = snapshot_runtime + finalization
     out = recovery.to_result()

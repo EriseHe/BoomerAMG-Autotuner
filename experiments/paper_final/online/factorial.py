@@ -55,7 +55,9 @@ def audit_execution(output):
         for relative, expected in result["checkpoint_sha256"].items():
             assert file_hash(stage / relative) == expected
         activation = next(m.get("solve_activation_case", 0) for m in config["methods"] if m["id"] == METHODS[3])
-        orders = balanced_orders(result["cases"], config["seeds"]["method_order"])
+        evaluation = config.get("evaluation")
+        index_offset = evaluation["training_cases"] if evaluation else 0
+        orders = balanced_orders(result["cases"]+index_offset, config["seeds"]["method_order"])[index_offset:]
         events = list(read_records(stage / "execution.jsonl"))
         assert len(events) == sum(map(len, orders))
         offset, previous_end, pids = 0, 0, set()
@@ -73,11 +75,14 @@ def audit_execution(output):
         assert initial["passed"] and initial["independence"]["passed"]
         boundary = read(stage / "activation_audit.json") if activation < result["cases"] else None
         if boundary is not None:
-            assert boundary["passed"] and boundary["problem_index"] == activation + 1
-            assert boundary["joint_controller_steps"] == 0
-            if activation == 0:
-                assert boundary["fixed_controller_steps"] == 0
-                assert set(boundary["setup_observations"].values()) == {0}
+            assert boundary["passed"] and boundary["problem_index"] == index_offset + activation + 1
+            if evaluation:
+                assert boundary["frozen_evaluation"] and read(stage/"frozen_state_audit.json")["passed"]
+            else:
+                assert boundary["joint_controller_steps"] == 0
+                if activation == 0:
+                    assert boundary["fixed_controller_steps"] == 0
+                    assert set(boundary["setup_observations"].values()) == {0}
         seeds[label] = dict(passed=True, measured_method_cases=len(events),
                             logical_method_cases=4 * result["cases"], copied_prefix_rows=0,
                             worker_pid=pids.pop(), serial_execution=True, complete_seeded_orders=True,
@@ -132,8 +137,10 @@ def execute_fixed_rl(runtime, index):
 
     started = time.perf_counter()
     mkw, context = runtime.stream[index]
+    evaluation = getattr(runtime.args, "evaluation", None)
+    learn = evaluation is None
     tick = time.perf_counter()
-    recorder = EpisodeRecorder(runtime.bundle.controller)
+    recorder = EpisodeRecorder(runtime.bundle.controller, learn=learn)
     snapshot_runtime = time.perf_counter() - tick
     traces = []
 
@@ -141,7 +148,7 @@ def execute_fixed_rl(runtime, index):
         raw = run_td_episode(mkw=dict(mkw), params=dict(DEFAULT_SETUP_PARAMS),
             controller=recorder, encoder=runtime.bundle.encoder, problem_context=context,
             solve_tol=runtime.args.tol, solve_max_cycles=runtime.args.max_cycles,
-            learn=True, explore=True, record_action_metadata=True,
+            learn=learn, explore=True if learn else evaluation.explore, record_action_metadata=True,
             fallback_attempt=None, failure_penalty_sec=0.0)
         raw["recovery_protocol_applied"] = False
         traces.append(raw)
@@ -218,6 +225,13 @@ def execute(runtime, index, previous):
     else:
         row = sweep.execute_default_case(runtime, index)
     row.update(method=runtime.name, shared_prefix=False, online_index=index)
+    evaluation = getattr(runtime.args, "evaluation", None)
+    if evaluation is not None:
+        row.update(problem_index=evaluation.training_cases+index+1,
+                   stream_index=evaluation.training_cases+index,
+                   frozen_evaluation=True)
+        if row["outcome"]["bandit_update_committed"] or row["outcome"]["controller_update_committed"]:
+            raise ValueError("Frozen evaluation updated a learner")
     return row, previous
 
 
@@ -277,7 +291,7 @@ def audit_features(runtime):
                 action_catalog=model.actions.description())
 
 
-def audit_independence(runtimes):
+def audit_independence(runtimes, *, allow_trained=False):
     models = [runtimes[name].branch.policy.model for name in METHODS[2:]]
     for key in ("A_inv", "b", "failure_b"):
         if np.shares_memory(getattr(models[0], key), getattr(models[1], key)):
@@ -291,7 +305,7 @@ def audit_independence(runtimes):
             raise ValueError(f"Solve controllers share {key}")
     if controllers[0].rng is controllers[1].rng:
         raise ValueError("Solve controllers share RNG")
-    if any(c.steps or c.episodes for c in controllers) or any(m.t for m in models):
+    if not allow_trained and (any(c.steps or c.episodes for c in controllers) or any(m.t for m in models)):
         raise ValueError("Learners trained before measurement")
     encodings = [bundle.protocol_metadata()["state_encoder"] for bundle in bundles]
     if digest(encodings[0]) != digest(encodings[1]):

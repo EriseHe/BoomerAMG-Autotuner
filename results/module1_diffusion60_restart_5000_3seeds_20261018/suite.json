@@ -1,0 +1,17 @@
+{
+  "name": "Module 1 diffusion 60 updated algorithm restart, seeds 1-3",
+  "seeds": [
+    {
+      "label": "1",
+      "config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/results/module1_diffusion60_restart_5000_3seeds_20261018/configurations/seed_1.json"
+    },
+    {
+      "label": "2",
+      "config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/results/module1_diffusion60_restart_5000_3seeds_20261018/configurations/seed_2.json"
+    },
+    {
+      "label": "3",
+      "config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/results/module1_diffusion60_restart_5000_3seeds_20261018/configurations/seed_3.json"
+    }
+  ]
+}

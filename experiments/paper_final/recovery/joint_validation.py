@@ -57,12 +57,15 @@ def execute_learned(runtime, index, previous_update, *, feedback_mode, activatio
 
     started=time.perf_counter()
     args=runtime.args
+    evaluation = getattr(args, "evaluation", None)
+    learn = evaluation is None
+    schedule_index = index + (evaluation.training_cases if evaluation else 0)
     mkw,context=runtime.stream[index]
     active=runtime.bundle is not None and index>=activation_case
     recorder,snapshot_runtime=None,0.0
     if active:
         tick=time.perf_counter()
-        recorder=EpisodeRecorder(runtime.bundle.controller)
+        recorder=EpisodeRecorder(runtime.bundle.controller, learn=learn)
         snapshot_runtime=time.perf_counter()-tick
     traces=[]
     def native(params):
@@ -74,7 +77,8 @@ def execute_learned(runtime, index, previous_update, *, feedback_mode, activatio
         else:
             raw=run_td_episode(mkw=dict(mkw),params=dict(params),controller=recorder,
                 encoder=runtime.bundle.encoder,problem_context=context,
-                solve_tol=args.tol,solve_max_cycles=args.max_cycles,learn=True,explore=True,
+                solve_tol=args.tol,solve_max_cycles=args.max_cycles,learn=learn,
+                explore=True if learn else evaluation.explore,
                 record_action_metadata=True,fallback_attempt=None,failure_penalty_sec=0.0)
             raw["recovery_protocol_applied"]=False
         traces.append(raw)
@@ -87,9 +91,9 @@ def execute_learned(runtime, index, previous_update, *, feedback_mode, activatio
     result=run_deferred_case(policy=runtime.branch.policy,
         parameter_space=runtime.branch.parameter_space,context=learner_context,
         solver=solve,fallback_solver=lambda:native(DEFAULT_SETUP_PARAMS),variant=sweep.VARIANT,
-        previous_update=previous_update,before_attempt=lambda attempt:runtime.rows.before_attempt(index,attempt),
-        feedback_mode=feedback_mode,recorder=recorder,snapshot_runtime=snapshot_runtime)
-    runtime.rows.finish_case(index)
+        previous_update=previous_update,before_attempt=lambda attempt:runtime.rows.before_attempt(schedule_index,attempt),
+        feedback_mode=feedback_mode,recorder=recorder,snapshot_runtime=snapshot_runtime,learn=learn)
+    runtime.rows.finish_case(schedule_index)
     for attempt,raw in zip(result.outcome["primary_attempts"],traces):
         attempt.update({key:raw.get(key,[]) for key in sweep.TRACE_FIELDS})
     out=report_online_outcome(result.outcome,bandit_timing=result.timing)
@@ -98,7 +102,7 @@ def execute_learned(runtime, index, previous_update, *, feedback_mode, activatio
         context=context.tolist(),params=result.params,outcome=out,rl_active=active,
         shared_prefix=index<activation_case,selection_diagnostics=model.selection_diagnostics[diagnostic_start:])
     beta=None if runtime.bundle is None else runtime.bundle.controller.spec.uncertainty_beta
-    sweep.audit_case(row,beta,variant=sweep.VARIANT,feedback_mode=feedback_mode)
+    sweep.audit_case(row,beta,variant=sweep.VARIANT,feedback_mode=feedback_mode,learn=learn)
     if len(row["selection_diagnostics"])!=out["primary_attempt_count"]:
         raise ValueError("Missing setup selection diagnostic")
     return row,result.update_runtime_sec

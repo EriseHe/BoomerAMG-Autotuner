@@ -1,0 +1,17 @@
+{
+  "name": "Module 4: frozen diffusion_80",
+  "seeds": [
+    {
+      "config": "../configurations/diffusion_80/seed_4.json",
+      "label": "4"
+    },
+    {
+      "config": "../configurations/diffusion_80/seed_5.json",
+      "label": "5"
+    },
+    {
+      "config": "../configurations/diffusion_80/seed_6.json",
+      "label": "6"
+    }
+  ]
+}

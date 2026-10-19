@@ -1,0 +1,6 @@
+{
+  "scope": "Generated plotting script and figure artifacts only; recorded measurements and frozen execution sources are unchanged.",
+  "correction": "Keep panel headings separate from bar-value labels in the runtime breakdown.",
+  "before_sha256": "f5e39ac2647d19a70636793b0513dcc32b4fca4fbaa8efe5ef3bf07f32527396",
+  "after_sha256": "80a00afbaba84c0fe69c717c218f6dc4bd4c6883e62ddae61db4a57aa30d49a3"
+}

@@ -35,3 +35,45 @@ Scan all 41 weights on 100 independent cases, freeze global/per-case choices,
 then independently evaluate five policy roles with three repetitions. Identical
 execution cells are shared. Continuation costs exclude the common primary setup
 and include recovery costs; inclusive costs also include controller work.
+
+## Module 4: frozen deployment after Module 1
+
+Module 4 uses the same `run_online` runner, samplers, four branches, setup search,
+confidence scores, retry budgets, smoother, tolerances, native build, and timing
+definitions as Module 1. It loads each branch's final released checkpoint after
+5,000 training inputs, including the LinUCB failure model, candidate statistics,
+elite cache, RNG, and last training setup anchor. LSTDQ weights and covariance
+are restored from the matching branch checkpoint.
+
+All learner updates are disabled. Learned arrays are read-only, update entry
+points raise an error, and the final audit compares every learned checkpoint
+payload with both its initial state and the released Module 1 checkpoint.
+LSTDQ epsilon exploration is disabled during evaluation; its trained confidence
+score remains unchanged. LinUCB also retains its trained confidence rule. RNG
+tie-breaking, per-solve execution counters, and the deterministic candidate
+schedule cursor may advance; no model or candidate statistics are updated.
+
+Each of the eight original sampling streams contributes its next 125 child
+instances, at indices 625–749, shuffled with the original shuffle seed. The
+training inputs are preserved; extending and reshuffling the original training
+pool would change that prefix. All 1,000 evaluation inputs are pinned and
+checked against all six training streams of the same PDE/grid combination.
+Evaluation rows have global problem indices 5,001–6,000. Setup candidate rows
+and method execution orders also continue at the 5,000-input boundary.
+
+All six seeds are evaluated for diffusion and advection at 40³, 60³, and 80³:
+36 trained runs and 144,000 independently measured method/input cases.
+Run the twelve suites sequentially, with three single-thread seed workers per
+suite. The existing runner can prepare and execute this queue:
+
+```sh
+# Generate configurations and pinned inputs once, when adding the experiment.
+python -m experiments.paper_final.run_online prepare-module4
+python -m experiments.paper_final.run_online prepare-all --suite data/module4/suites --output results/module4
+python -m experiments.paper_final.run_online run-all --output results/module4
+```
+
+The final queue summary is saved under `results/module4` and `data/module4`.
+Each suite retains raw trajectories, source/native hashes, checkpoint copies,
+held-out-input checks, and frozen-state audits. Original Module 1 measurements
+and checkpoints are never overwritten.

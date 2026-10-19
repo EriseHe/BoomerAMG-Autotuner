@@ -2,7 +2,7 @@
 from __future__ import annotations
 import math
 
-def audit(records, variant, *, feedback_mode="attempt_2T"):
+def audit(records, variant, *, feedback_mode="attempt_2T", learn=True):
     if feedback_mode not in ("attempt_2T", "adjacent_delayed", "suffix_delayed"):
         raise ValueError("Unknown setup feedback mode")
     for index, record in enumerate(records):
@@ -25,11 +25,17 @@ def audit(records, variant, *, feedback_mode="attempt_2T"):
         if variant.default_fallback and attempts[-1]["status"] != "success" and not out["fallback_used"]:
             raise ValueError("Missing required default fallback after learned failure")
         committed = not out["failed"]
-        if not out["bandit_update_committed"] or out["bandit_observation_count"] != len(attempts):
+        if learn and (not out["bandit_update_committed"] or out["bandit_observation_count"] != len(attempts)):
             raise ValueError("Every valid learned attempt must update the setup model")
+        if not learn and (out["bandit_update_committed"] or out["bandit_observation_count"] or out["controller_update_committed"]):
+            raise ValueError("Frozen evaluation updated a learner")
         if out["failure_feedback_mode"] != feedback_mode:
             raise ValueError("Setup feedback differs from the requested protocol")
         for i, attempt in enumerate(attempts):
+            if not learn:
+                if attempt["learning_cost"] is not None or attempt["rl_episode_recorded"]:
+                    raise ValueError("Frozen evaluation retained a training observation")
+                continue
             expected_target = attempt["attempt_cost"]
             if attempt["status"] != "success":
                 if feedback_mode == "attempt_2T":

@@ -80,9 +80,12 @@ def load_recorded_online_stream(
     expected_hash = str(getattr(args, "expected_stream_hash", "") or "").strip()
     if not expected_hash:
         return None
-    manifest = json.loads(
-        (STREAM_DIRECTORY / "manifest.json").read_text(encoding="utf-8")
-    )
+    directory = STREAM_DIRECTORY
+    manifest = json.loads((directory/"manifest.json").read_text(encoding="utf-8"))
+    heldout = STREAM_DIRECTORY.parent.parent/"module4/inputs"
+    if expected_hash not in manifest["streams"] and (heldout/"manifest.json").exists():
+        directory = heldout
+        manifest = json.loads((directory/"manifest.json").read_text(encoding="utf-8"))
     if manifest.get("format_version") != 1:
         raise ValueError("Unsupported recorded online input format")
     entry: Mapping[str, Any] | None = manifest["streams"].get(expected_hash)
@@ -102,7 +105,7 @@ def load_recorded_online_stream(
     filename = f"{expected_hash}.jsonl.gz"
     if entry["file"] != filename:
         raise ValueError("Recorded stream filename does not match its identity")
-    compressed = (STREAM_DIRECTORY / filename).read_bytes()
+    compressed = (directory / filename).read_bytes()
     if hashlib.sha256(compressed).hexdigest() != entry["compressed_sha256"]:
         raise ValueError("Recorded stream compressed file hash mismatch")
     payload = gzip.decompress(compressed)
