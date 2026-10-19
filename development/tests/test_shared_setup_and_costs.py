@@ -350,6 +350,9 @@ class CostAccountingTests(unittest.TestCase):
         self.assertEqual(controller.estimated_update_runtime_sec, .2)
         self.assertEqual(controller.update_runtime_count, 1)
         self.assertFalse(result['controller_update_committed'])
+        self.assertAlmostEqual(result['feature_runtime'], .006)
+        self.assertAlmostEqual(result['decision_runtime'], .012)
+        self.assertGreater(result['infer_runtime'], 0.)
 
     def test_terminal_failure_retains_cost_then_whole_input_failure_rolls_back(self):
         controller, recorder, result = self.run_episode(fail=True, recorder=True)
