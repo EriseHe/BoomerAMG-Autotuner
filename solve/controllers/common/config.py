@@ -101,7 +101,6 @@ class SolveStateSpec:
     tol: float
     max_cycles: int
     c_max: float
-    time_scale_sec: float = 2.0e-3
     mode: str = "setup_full"
     problem_context_mode: str = CANONICAL_PROBLEM_CONTEXT
     encoding_version: str = STATE_ENCODING_VERSION
@@ -115,11 +114,6 @@ class SolveStateSpec:
             raise ValueError("max_cycles must be positive")
         if not math.isfinite(float(self.c_max)) or float(self.c_max) <= 0.0:
             raise ValueError("c_max must be finite and positive")
-        if (
-            not math.isfinite(float(self.time_scale_sec))
-            or float(self.time_scale_sec) <= 0.0
-        ):
-            raise ValueError("time_scale_sec must be finite and positive")
         if str(self.mode).strip().lower() != "setup_full":
             raise ValueError("online solve controllers require setup_full state")
         if (
@@ -140,7 +134,6 @@ class SolveStateSpec:
             tol=float(self.tol),
             max_cycles=int(self.max_cycles),
             c_max=float(self.c_max),
-            time_scale_sec=float(self.time_scale_sec),
             mode=str(self.mode),
             setup_obs_encoder=setup_obs_encoder,
             problem_context_mode=str(self.problem_context_mode),

@@ -30,7 +30,7 @@ PROBLEM_CONTEXT_MODES = (
     DIFFUSION_ADVECTION_NO_MEAN_CONTEXT,
     *COMPACT_DIFFUSION_CONTEXT_INDICES,
 )
-STATE_ENCODING_VERSION = "shared_setup_one_hot_tolerance_residuals_v2"
+STATE_ENCODING_VERSION = "shared_setup_one_hot_tolerance_residuals_v3"
 STATE_ENCODING_VERSIONS = (STATE_ENCODING_VERSION,)
 
 
@@ -43,7 +43,6 @@ class SolveStateEncoder:
         tol: float,
         max_cycles: int,
         c_max: float,
-        time_scale_sec: float = 2.0e-3,
         mode: str = "full",
         setup_obs_encoder: Any | None = None,
         problem_context_mode: str = CANONICAL_PROBLEM_CONTEXT,
@@ -55,8 +54,9 @@ class SolveStateEncoder:
             raise ValueError("Solve tolerance must be finite and positive")
         self._log_tolerance = math.log(self.tol)
         self.max_cycles = int(max_cycles)
+        if self.max_cycles <= 0:
+            raise ValueError("max_cycles must be positive")
         self.c_max = float(c_max)
-        self.time_scale_sec = float(time_scale_sec)
         self.mode = str(mode).strip().lower()
         self.setup_obs_encoder = setup_obs_encoder
         self.encoding_version = str(encoding_version)
@@ -139,6 +139,7 @@ class SolveStateEncoder:
         cycle: int,
         last_weight: float,
         last_cycle_time: float,
+        first_cycle_time: float | None,
         setup_params: Dict[str, Any] | None = None,
         problem_context: Sequence[float] | np.ndarray | None = None,
     ) -> np.ndarray:
@@ -162,17 +163,23 @@ class SolveStateEncoder:
         # With no clipping, d_k = g_k - g_(k-1): contraction is negative.
         gap_fraction = (log_residual - self._log_tolerance) / initial_gap
         log_ratio = (log_residual - log_previous_residual) / initial_gap
-        cycle_fraction = min(
-            max(float(cycle) / max(1.0, float(self.max_cycles)), 0.0),
-            1.0,
-        )
-        # Preserve the existing 10 ms reference scale without merging longer
-        # cycles into a single saturated observation.
-        cycle_time = float(last_cycle_time) / (5.0 * max(self.time_scale_sec, eps))
-        weight = min(
-            max((float(last_weight) - self._weight_center) / self._weight_scale, -1.0),
-            1.0,
-        )
+        cycle_fraction = float(cycle) / float(self.max_cycles)
+        # The first native cycle sets a fixed reference for this attempt.
+        # Before it executes, no timing observation is available.
+        if cycle == 0:
+            cycle_time = 0.0
+        else:
+            if (first_cycle_time is None
+                    or not math.isfinite(float(first_cycle_time))
+                    or float(first_cycle_time) <= 0.0):
+                raise ValueError("The first native cycle time must be finite and positive")
+            previous_time = float(last_cycle_time)
+            if not math.isfinite(previous_time) or previous_time < 0.0:
+                raise ValueError("The preceding native cycle time must be finite and nonnegative")
+            cycle_time = previous_time / float(first_cycle_time)
+            if not math.isfinite(cycle_time):
+                raise ValueError("The native cycle-time ratio must be finite")
+        weight = (float(last_weight) - self._weight_center) / self._weight_scale
 
         if self.problem_context_mode in STRESS_CONTEXT_FIELDS:
             resolved_context = validate_context(

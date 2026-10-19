@@ -22,7 +22,10 @@ def build_recursive_lstdq_controller(
         controller_type=RecursiveLstdqController,
         epsilon_enabled=True,
         protocol_details={
-            "target": "completion cost with executed-next-action LSTDQ(lambda)",
+            "target": "assigned native-plus-controller cycle cost with executed-next-action LSTDQ(lambda)",
+            "cost_target": "native_plus_controller",
+            "update_overhead_estimator": "most recent retained per-transition update time; initially zero",
+            "episode_boundary_overhead": "evaluation only",
             "ridge": float(spec.ridge),
             "uncertainty_beta": float(spec.uncertainty_beta),
             "uncertainty": ("episode-cluster post-fit sandwich covariance"),

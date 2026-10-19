@@ -173,6 +173,7 @@ def audit_rl_traces(row, beta):
     for attempt in out["primary_attempts"]:
         if attempt.get("rl_recovery_cost") not in (None, 0.0):
             raise ValueError("Recovery cost entered an RL target")
+        sweep.audit_cycle_costs(attempt)
         keys = ("cycle_actions", "cycle_selected_q_values", "cycle_selected_uncertainties",
                 "cycle_selection_scores", "cycle_explored", "cycle_forced_default_actions")
         arrays = [attempt[key] for key in keys]

@@ -21,7 +21,7 @@ from solve.controllers.common.td_config import ExpectedSarsaLambdaConfig
 from .common import _FactorizedLstdqScoring
 from .config import RecursiveLstdqSpec
 
-_RECURSIVE_LSTDQ_CHECKPOINT_VERSION = 2
+_RECURSIVE_LSTDQ_CHECKPOINT_VERSION = 3
 _INVERSE_DENOMINATOR_CEILING = 1.0 / np.sqrt(np.finfo(float).eps)
 
 
@@ -66,6 +66,8 @@ class RecursiveLstdqController(_SharedActionLcbController):
         self.inverse_rebuild_count = 0
         self.inverse_is_valid = True
         self.last_postfit_td_error = 0.0
+        self.last_update_runtime_sec = 0.0
+        self.update_runtime_count = 0
         use_rank_one_blas = _blas_dger is not None
         if use_rank_one_blas:
             self.a_matrix = np.asfortranarray(self.a_matrix)
@@ -81,7 +83,13 @@ class RecursiveLstdqController(_SharedActionLcbController):
                 self.episode_moment_covariance
             )
         self.episode_moment_count = 0
-        self._episode_a_start = self.a_matrix.copy()
+        # Cache A^{-1} Omega for the sandwich score. Both changes to A^{-1}
+        # and episode-moment additions to Omega admit exact rank-one updates.
+        # This is derived computation state, not an additional learned model.
+        self._inverse_moment = np.asfortranarray(
+            self.a_inverse @ self.episode_moment_covariance
+        )
+        self._episode_a_start = self.a_matrix.copy(order="K")
         self._episode_b_start = self.b.copy()
         self._episode_score = np.empty(self.joint_dim, dtype=float)
         self._episode_active = False
@@ -93,6 +101,18 @@ class RecursiveLstdqController(_SharedActionLcbController):
     @property
     def requires_next_action(self) -> bool:
         return True
+
+    @property
+    def estimated_update_runtime_sec(self) -> float:
+        """Carry the most recent retained transition-update time forward."""
+        return self.last_update_runtime_sec
+
+    def record_update_runtime(self, duration: float) -> None:
+        duration = float(duration)
+        if not np.isfinite(duration) or duration < 0.0:
+            raise ValueError("Controller update runtime must be finite and nonnegative")
+        self.last_update_runtime_sec = duration
+        self.update_runtime_count += 1
 
     def start_episode(self, *, initial_environment_weight: float | None = None) -> None:
         self.trace.fill(0.0)
@@ -131,6 +151,15 @@ class RecursiveLstdqController(_SharedActionLcbController):
         # Preserve the Fortran layout used by the BLAS updates.
         self.a_inverse[:] = inverse
         self.inverse_rebuild_count += 1
+        self._refresh_inverse_moment()
+
+    def _refresh_inverse_moment(self) -> None:
+        """Reconstruct the derived score cache after a nonincremental restore."""
+        np.matmul(
+            self.a_inverse,
+            self.episode_moment_covariance,
+            out=self._inverse_moment,
+        )
 
     def _restore_inverse_validity(self, state: Any) -> None:
         """Read the validity flag, or audit a checkpoint predating the flag."""
@@ -202,6 +231,7 @@ class RecursiveLstdqController(_SharedActionLcbController):
         if self.inverse_is_valid:
             projected_trace = self.a_inverse @ self.trace
             projected_difference = difference @ self.a_inverse
+            projected_moment_difference = difference @ self._inverse_moment
             denominator = 1.0 + float(difference @ projected_trace)
         _rank_one_accumulate(self.a_matrix, self.trace, difference)
         self.b += float(cost) * self.trace
@@ -219,6 +249,12 @@ class RecursiveLstdqController(_SharedActionLcbController):
                 self.a_inverse,
                 projected_trace,
                 projected_difference,
+                denominator=denominator,
+            )
+            _rank_one_inverse_accumulate(
+                self._inverse_moment,
+                projected_trace,
+                projected_moment_difference,
                 denominator=denominator,
             )
             # Algebraically identical to theta = A_new^-1 b_new, without a
@@ -250,9 +286,13 @@ class RecursiveLstdqController(_SharedActionLcbController):
         projected_lift = np.einsum(
             "f,afj->aj", state, inverse_blocks, optimize=False
         )
-        reduced_covariance = (
-            projected_lift @ self.episode_moment_covariance
-        ) @ projected_lift.T
+        moment_blocks = self._inverse_moment.reshape(
+            self._factorized_scoring.basis_dim, self.feature_dim, self.joint_dim
+        )
+        projected_moment = np.einsum(
+            "f,afj->aj", state, moment_blocks, optimize=False
+        )
+        reduced_covariance = projected_moment @ projected_lift.T
         reduced_covariance = 0.5 * (
             reduced_covariance + reduced_covariance.T
         )
@@ -338,6 +378,11 @@ class RecursiveLstdqController(_SharedActionLcbController):
                 self._episode_score,
                 self._episode_score,
             )
+            _rank_one_accumulate(
+                self._inverse_moment,
+                self.a_inverse @ self._episode_score,
+                self._episode_score,
+            )
             if not np.all(np.isfinite(self.episode_moment_covariance)):
                 raise FloatingPointError(
                     "LSTDQ episode moment covariance became non-finite"
@@ -351,12 +396,12 @@ class RecursiveLstdqController(_SharedActionLcbController):
         state = self._snapshot_common_learning_state()
         state.update(
             {
-                "a_matrix": self.a_matrix.copy(),
-                "a_inverse": self.a_inverse.copy(),
+                "a_matrix": self.a_matrix.copy(order="K"),
+                "a_inverse": self.a_inverse.copy(order="K"),
                 "b": self.b.copy(),
                 "theta": self.theta.copy(),
                 "episode_moment_covariance": (
-                    self.episode_moment_covariance.copy()
+                    self.episode_moment_covariance.copy(order="K")
                 ),
                 "episode_moment_count": int(self.episode_moment_count),
                 "trace": self.trace.copy(),
@@ -364,7 +409,9 @@ class RecursiveLstdqController(_SharedActionLcbController):
                 "inverse_rebuild_count": int(self.inverse_rebuild_count),
                 "inverse_is_valid": bool(self.inverse_is_valid),
                 "last_postfit_td_error": float(self.last_postfit_td_error),
-                "episode_a_start": self._episode_a_start.copy(),
+                "last_update_runtime_sec": float(self.last_update_runtime_sec),
+                "update_runtime_count": int(self.update_runtime_count),
+                "episode_a_start": self._episode_a_start.copy(order="K"),
                 "episode_b_start": self._episode_b_start.copy(),
                 "episode_active": bool(self._episode_active),
             }
@@ -386,6 +433,8 @@ class RecursiveLstdqController(_SharedActionLcbController):
         self.sample_count = int(state["sample_count"])
         self.inverse_rebuild_count = int(state["inverse_rebuild_count"])
         self.last_postfit_td_error = float(state["last_postfit_td_error"])
+        self.last_update_runtime_sec = float(state["last_update_runtime_sec"])
+        self.update_runtime_count = int(state["update_runtime_count"])
         self._episode_a_start[:] = np.asarray(
             state["episode_a_start"],
             dtype=float,
@@ -396,6 +445,7 @@ class RecursiveLstdqController(_SharedActionLcbController):
         )
         self._episode_active = bool(state["episode_active"])
         self._restore_inverse_validity(state)
+        self._refresh_inverse_moment()
 
     def save(self, path: Path) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -420,6 +470,8 @@ class RecursiveLstdqController(_SharedActionLcbController):
                 self.last_postfit_td_error,
                 dtype=float,
             ),
+            last_update_runtime_sec=np.asarray(self.last_update_runtime_sec, dtype=float),
+            update_runtime_count=np.asarray(self.update_runtime_count, dtype=np.int64),
             checkpoint_version=np.asarray(
                 _RECURSIVE_LSTDQ_CHECKPOINT_VERSION,
                 dtype=np.int64,
@@ -431,8 +483,11 @@ class RecursiveLstdqController(_SharedActionLcbController):
     def load(self, path: Path, *, restore_counters: bool = True) -> Dict[str, Any]:
         with np.load(path, allow_pickle=False) as payload:
             version = int(payload["checkpoint_version"].item())
-            if version not in (1, _RECURSIVE_LSTDQ_CHECKPOINT_VERSION):
-                raise ValueError("LSTDQ checkpoint version does not match")
+            if version != _RECURSIVE_LSTDQ_CHECKPOINT_VERSION:
+                raise ValueError(
+                    "LSTDQ checkpoint predates the shared one-hot, overhead-aware "
+                    "controller; start a fresh training run"
+                )
             if json.loads(str(payload["config"].item())) != _json_dataclass(
                 self.config
             ):
@@ -459,8 +514,11 @@ class RecursiveLstdqController(_SharedActionLcbController):
             self.last_postfit_td_error = float(
                 payload["last_postfit_td_error"].item()
             )
+            self.last_update_runtime_sec = float(payload["last_update_runtime_sec"].item())
+            self.update_runtime_count = int(payload["update_runtime_count"].item())
             self._load_common(payload, restore_counters=restore_counters)
             self._restore_inverse_validity(payload)
+            self._refresh_inverse_moment()
         self.trace.fill(0.0)
         self._episode_a_start[:] = self.a_matrix
         self._episode_b_start[:] = self.b
@@ -484,6 +542,8 @@ class RecursiveLstdqController(_SharedActionLcbController):
             "inverse_rebuild_count": int(self.inverse_rebuild_count),
             "inverse_is_valid": bool(self.inverse_is_valid),
             "stored_transition_count": 0,
+            "update_runtime_count": int(self.update_runtime_count),
+            "estimated_update_runtime_sec": float(self.estimated_update_runtime_sec),
         }
 
 
