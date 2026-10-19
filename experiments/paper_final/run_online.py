@@ -439,12 +439,12 @@ def prepare(suite_path, output, *, cases=None):
         raw = copy.deepcopy(read(config_path))
         stage = output/f"seed_{label}"
         stage.mkdir()
-        declared_cases = int(raw["stream"]["online_cases"]) + int(raw.get("frozen_stream", {}).get("online_cases", 0))
+        raw["output_dir"] = str(stage)
+        runtime = decode(raw, stage)
+        declared_cases = len(runtime.stream)
         count = declared_cases if cases is None else int(cases)
         if count < 1 or count > declared_cases:
             raise ValueError("Case count exceeds the declared stream")
-        raw["output_dir"] = str(stage)
-        runtime = decode(raw, stage)
         frozen = runtime.args.evaluation is not None
         if protocol.setdefault("frozen_evaluation", frozen) != frozen:
             raise ValueError("Do not mix training and frozen evaluation in one suite")

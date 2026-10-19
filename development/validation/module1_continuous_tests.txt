@@ -2,8 +2,8 @@ test_continuous_and_standalone_frozen_indices_differ (test_continuous_module1.Co
 test_freeze_preserves_live_objects_and_guards_every_update (test_continuous_module1.ContinuousModuleOneTests) ... ok
 test_invalid_phase_lengths_are_rejected (test_continuous_module1.ContinuousModuleOneTests) ... ok
 test_native_worker_crosses_boundary_in_one_process_with_overhead (test_continuous_module1.ContinuousModuleOneTests) ... Prepared seed 4: 5 cases; frozen evaluation=False
-{"stage": "aot_candidate_schedule", "status": "preparing", "directory": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/continuous_native_validation_j7d0_gj3/run/seed_4/aot_candidate_schedules/expanded_no_endpoints/structured512", "rounds": 15, "pool_size": 1024, "estimated_MiB": 0.05859375}
-{"stage": "aot_candidate_schedule", "status": "preparing", "directory": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/continuous_native_validation_j7d0_gj3/run/seed_4/aot_candidate_schedules/expanded_no_endpoints/structured512", "completed_rounds": 15, "total_rounds": 15}
+{"stage": "aot_candidate_schedule", "status": "preparing", "directory": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/continuous_native_validation_dpi5bj6y/run/seed_4/aot_candidate_schedules/expanded_no_endpoints/structured512", "rounds": 15, "pool_size": 1024, "estimated_MiB": 0.05859375}
+{"stage": "aot_candidate_schedule", "status": "preparing", "directory": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/continuous_native_validation_dpi5bj6y/run/seed_4/aot_candidate_schedules/expanded_no_endpoints/structured512", "completed_rounds": 15, "total_rounds": 15}
 seed 4: 5/5
 ok
 test_stream_preserves_both_pinned_blocks_without_reshuffling (test_continuous_module1.ContinuousModuleOneTests) ... ok
@@ -42,6 +42,6 @@ test_new_run_uses_audited_checkpoint_and_trajectory_hashes (test_training_invent
 test_released_training_still_uses_original_inventory (test_training_inventory.TrainingInventoryTests) ... ok
 
 ----------------------------------------------------------------------
-Ran 38 tests in 3.931s
+Ran 38 tests in 4.015s
 
 OK
