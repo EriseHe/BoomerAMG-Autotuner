@@ -30,8 +30,14 @@ PROBLEM_CONTEXT_MODES = (
     DIFFUSION_ADVECTION_NO_MEAN_CONTEXT,
     *COMPACT_DIFFUSION_CONTEXT_INDICES,
 )
-STATE_ENCODING_VERSION = "shared_setup_one_hot_tolerance_residuals_v3"
-STATE_ENCODING_VERSIONS = (STATE_ENCODING_VERSION,)
+STATE_ENCODING = "shared_context"
+
+
+def canonical_state_encoding(value: str) -> str:
+    # The previous label describes this exact feature map in existing trained models.
+    if value in (STATE_ENCODING, "shared_setup_one_hot_tolerance_residuals_v3"):
+        return STATE_ENCODING
+    raise ValueError(f"Unsupported state encoding; use '{STATE_ENCODING}'")
 
 
 class SolveStateEncoder:
@@ -46,7 +52,7 @@ class SolveStateEncoder:
         mode: str = "full",
         setup_obs_encoder: Any | None = None,
         problem_context_mode: str = CANONICAL_PROBLEM_CONTEXT,
-        encoding_version: str = STATE_ENCODING_VERSION,
+        encoding: str = STATE_ENCODING,
         weight_bounds: tuple[float, float] | None = None,
     ) -> None:
         self.tol = float(tol)
@@ -59,11 +65,7 @@ class SolveStateEncoder:
         self.c_max = float(c_max)
         self.mode = str(mode).strip().lower()
         self.setup_obs_encoder = setup_obs_encoder
-        self.encoding_version = str(encoding_version)
-        if self.encoding_version not in STATE_ENCODING_VERSIONS:
-            raise ValueError(
-                f"encoding_version must be one of {STATE_ENCODING_VERSIONS}"
-            )
+        self.encoding = canonical_state_encoding(encoding)
         self.weight_bounds = weight_bounds
         if weight_bounds is None or len(weight_bounds) != 2:
             raise ValueError("The solve encoder requires actual action weight bounds")

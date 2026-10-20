@@ -1,0 +1,29 @@
+{
+  "validated_at": "2026-10-20T03:12:15.143353+00:00",
+  "state_encoding": "shared_context",
+  "tests": 41,
+  "passed": true,
+  "feature_formulas_unchanged": true,
+  "trained_model_compatibility_preserved": true,
+  "module2_connected_to_real_run": false,
+  "module2_validation": {
+    "source": "temporary synthetic source models",
+    "cases": 2,
+    "scan_weights": 2,
+    "workers": 1,
+    "steps": [
+      "validate",
+      "prepare",
+      "scan",
+      "evaluate",
+      "read_study"
+    ],
+    "native_solves_during_prepare": 0,
+    "learners_frozen": true
+  },
+  "active_configs": {
+    "module1_seeds": 36,
+    "module3_seeds": 6
+  },
+  "log": "development/validation/shared_context_tests.txt"
+}

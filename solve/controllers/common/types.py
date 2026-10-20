@@ -10,7 +10,7 @@ from typing import Any, Callable, Mapping, Sequence
 from hypre.bindings import AttemptOutcome
 from hypre.bindings.recovery import validate_failure_penalty
 
-from .state_encoder import SolveStateEncoder, normalize_problem_context
+from .state_encoder import SolveStateEncoder, normalize_problem_context, canonical_state_encoding
 
 
 FallbackAttempt = Callable[[], Mapping[str, Any] | AttemptOutcome]
@@ -128,11 +128,20 @@ class ControllerBundle:
         sidecar = path.with_suffix(path.suffix + ".encoder.json")
         if sidecar.exists():
             expected = json.loads(json.dumps(self._protocol_metadata["state_encoder"]))
-            if json.loads(sidecar.read_text(encoding="utf-8")) != expected:
+            saved = json.loads(sidecar.read_text(encoding="utf-8"))
+            try:
+                previous_name = saved.pop("encoding_version", None)
+                name = saved.get("name", previous_name)
+                saved["name"] = canonical_state_encoding(name)
+                if previous_name is not None and canonical_state_encoding(previous_name) != saved["name"]:
+                    raise ValueError("Conflicting checkpoint encoder names")
+            except ValueError as error:
+                raise ValueError("Checkpoint state encoder does not match this bundle") from error
+            if saved != expected:
                 raise ValueError("Checkpoint state encoder does not match this bundle")
         else:
             raise ValueError(
-                "Versioned state encoder requires checkpoint encoder metadata"
+                "Checkpoint is missing its state encoder description"
             )
         self.controller.load(path)
 

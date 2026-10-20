@@ -48,7 +48,7 @@ from experiments.paper_final.recovery import model_audit as screen
 from experiments.paper_final.recovery.observations import observed_model
 from experiments.paper_final.recovery.controller_audit import audit_controller_counts
 from setup.space import DEFAULT_SETUP_PARAMS
-from solve.controllers.common.state_encoder import STATE_ENCODING_VERSION
+from solve.controllers.common.state_encoder import STATE_ENCODING
 
 
 def source_hashes():
@@ -424,7 +424,7 @@ def prepare(suite_path, output, *, cases=None):
         default_attempts=1, rl_recovery_cost=False, rl_whole_case_failure_rollback=True,
         rl_cost_target="native_plus_controller",
         rl_update_time_charge="most recent retained transition-update time; initially zero",
-        solve_state_encoding=STATE_ENCODING_VERSION,
+        solve_state_encoding=STATE_ENCODING,
         setup_failure_observation_retention=True, failure_score_beta=2.0,
         shared_prefix=False, copied_measurements=False, exact_default=DEFAULT_SETUP_PARAMS,
         learning_start="Both setup learners and both LSTDQ controllers start cold at input 1",

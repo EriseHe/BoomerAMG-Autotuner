@@ -69,7 +69,7 @@ def worker(output, phase, worker_id):
     protocol = a.read(output / "protocol.json")
     if phase == "test" and not (output / "selection_complete.json").is_file():
         raise ValueError("Complete fresh scans and freeze selections before evaluation")
-    run_frozen_worker(output, phase, worker_id, protocol["max_workers"], run_number=5,
+    run_frozen_worker(output, phase, worker_id, protocol["max_workers"], run_number=2,
                       verify=verify, policy=FrozenRuntime(output))
 
 
@@ -238,13 +238,13 @@ def run(output, *, scan_only=False):
                 preflight(output)
             workers = a.read(output / "protocol.json")["max_workers"]
             if not (output / "raw/scan/complete.json").is_file():
-                run_frozen_phase(output, "scan", runner_module=RUNNER, run_number=5, workers=workers)
+                run_frozen_phase(output, "scan", runner_module=RUNNER, run_number=2, workers=workers)
             select(output)
             if scan_only:
                 a.dump(output / "status.json", {"status": "scanned", "selections_frozen": True})
                 return
             if not (output / "raw/test/complete.json").is_file():
-                run_frozen_phase(output, "test", runner_module=RUNNER, run_number=5, workers=workers)
+                run_frozen_phase(output, "test", runner_module=RUNNER, run_number=2, workers=workers)
             result = analyze(output)
             a.dump(output / "complete.json", {"at": a.now(), "status": "complete", "audit": result["audit"]})
             a.dump(output / "status.json", {"status": "complete", "audit": result["audit"]})

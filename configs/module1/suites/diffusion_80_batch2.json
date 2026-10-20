@@ -1,0 +1,17 @@
+{
+  "name": "Module 1: diffusion_80",
+  "seeds": [
+    {
+      "config": "../diffusion_80/seed_4.json",
+      "label": "4"
+    },
+    {
+      "config": "../diffusion_80/seed_5.json",
+      "label": "5"
+    },
+    {
+      "config": "../diffusion_80/seed_6.json",
+      "label": "6"
+    }
+  ]
+}

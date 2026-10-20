@@ -14,7 +14,7 @@ from experiments.paper_final import run_online as runner
 from experiments.paper_final.online.configuration import (
     FrozenEvaluationSpec, evaluation_index_offset, parse_joint_experiment_config,
 )
-from solve.controllers.common.state_encoder import STATE_ENCODING_VERSION
+from solve.controllers.common.state_encoder import STATE_ENCODING
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def configuration():
     raw = runner.read(ROOT/'data/module1/configurations/diffusion_60/seed_4.json')
-    raw['solve']['state_encoding'] = STATE_ENCODING_VERSION
+    raw['solve']['state_encoding'] = STATE_ENCODING
     raw['solve']['cost_target'] = 'native_plus_controller'
     raw['frozen_stream'] = runner.read(ROOT/'data/module1/frozen/configurations/diffusion_60/seed_4.json')['stream']
     return raw

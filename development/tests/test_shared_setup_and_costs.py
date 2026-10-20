@@ -43,6 +43,22 @@ def bundle():
 
 
 class SharedSetupTests(unittest.TestCase):
+    def test_trained_models_load_with_the_permanent_name(self):
+        original = bundle()
+        self.assertEqual(original.encoder.encoding, 'shared_context')
+        with TemporaryDirectory() as directory:
+            path = Path(directory)/'controller.npz'
+            original.save(path)
+            sidecar = path.with_suffix('.npz.encoder.json')
+            metadata = json.loads(sidecar.read_text())
+            self.assertEqual(metadata.pop('name'), 'shared_context')
+            metadata['encoding_version'] = 'shared_setup_one_hot_tolerance_residuals_v3'
+            sidecar.write_text(json.dumps(metadata))
+            restored = bundle()
+            restored.load(path)
+            np.testing.assert_array_equal(restored.controller.theta, original.controller.theta)
+            self.assertEqual(restored.encoder.encoding, 'shared_context')
+
     def test_matches_factorized_bandit_features(self):
         encoder = setup_encoder()
         catalog = CompactActionCatalog(encoder.parameter_spec)
@@ -91,7 +107,7 @@ class SharedSetupTests(unittest.TestCase):
                          'shared_setup_one_hot_tolerance_residuals_v2'):
             with self.subTest(encoding=obsolete), self.assertRaises(ValueError):
                 SolveStateSpec(tol=1e-6, max_cycles=50, c_max=1000,
-                               encoding_version=obsolete)
+                               encoding=obsolete)
 
     def test_cycle_count_only_changes_its_normalized_scalar(self):
         encoder = bundle().encoder
