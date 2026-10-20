@@ -1,49 +1,39 @@
 # RLTune-BoomerAMG
 
-Code and data for **Online Autotuning of BoomerAMG with Contextual Bandits and
-Reinforcement Learning**, by Xudong He, Ruiyu Wang, Yilang Ding, Rui Peng Li,
-and Yuanzhe Xi.
+Online Autotuning of BoomerAMG with Contextual Bandits and Reinforcement Learning,
+by Xudong He, Ruiyu Wang, Yilang Ding, Rui Peng Li, and Yuanzhe Xi.
 
-| Module | Study | Data |
+The setup learner selects an AMG configuration. The solve controller adapts
+relaxation using the **shared context**: problem information, shared setup
+features, and normalized cycle observations. The encoder is named
+`shared_context`.
+
+| Module | Study | Configuration |
 |---|---|---|
-| 1 | Diffusion and advection at 40³, 60³, and 80³; six seeds; 5,000 learning inputs followed by 1,000 frozen inputs per seed | [module1](data/module1) |
-| 2 | Six frozen checkpoints; 100 evaluation cases; 41 weights; five policies | [module2](data/module2) |
-| 3 | Variable-flow 60³; six seeds; 5,000 cases per seed | [module3](data/module3) |
+| 1 | Six seeds per diffusion/advection grid; 5,000 learning inputs and 1,000 frozen inputs in one continuous stream | [Module 1](configs/module1/suites) |
+| 2 | Compare frozen LSTDQ with fixed and periodic relaxation on matched hierarchies | [Module 2](docs/experiments.md#module-2-matched-policy-evaluation) |
+| 3 | Six 5,000-input variable-flow streams at 60³ | [Module 3](configs/module3/suites) |
 
-## Reproduce the tables and figures
+## Install
 
-With Python 3.10 or later:
+Use Python 3.10 or later, MPI, CMake, Make, and a C/C++ compiler:
 
 ```sh
 python -m pip install -e .
-python tools/verify_data.py
-python tools/reproduce.py --output output/paper
-```
-
-The output contains the paper figures and tables computed from the released
-measurements. This does not require a native HYPRE build. Use a new output
-folder for each invocation.
-
-## Run the experiments
-
-Build HYPRE and the native interface with CMake, Make, a C/C++ compiler, and MPI:
-
-```sh
 make -C hypre JOBS=4
 ```
 
-The released Module 1--3 configurations and checkpoints use the archived
-`space_aware_v2` state encoding. The controller on the current `main` branch
-accepts only `shared_setup_one_hot_tolerance_residuals_v3`, so those archived
-configurations are not directly runnable from current `main`. The exact source
-revision associated with the released measurements is recorded in
-`docs/commit-map.json`; do not silently reinterpret the released checkpoints
-with the v3 encoder.
+## Run
 
-[Experiment instructions](docs/experiments.md) give the commands and timing
-definitions. Full local trajectories are stored under `data/official/module1`,
-`module2`, and `module3` and are excluded from Git. Verify them, when available,
-with `python tools/verify_data.py --raw`.
+[Experiment instructions](docs/experiments.md) describe the commands, timing,
+and evaluation protocol. Active configurations are in `configs/`. After Module 1
+finishes, Module 2 takes explicit paths to its trained seed directories. It is
+not connected to any particular run. Checkpoint loading checks the complete
+feature description before loading learned parameters.
+
+Each run writes its own trajectories, checkpoints, source hashes, summaries,
+and figures under `results/`. Native solver time and total time including
+learner/controller overhead are reported separately.
 
 HYPRE retains its [copyright](hypre/source/COPYRIGHT),
 [license](hypre/source/LICENSE-MIT), and [notices](hypre/source/NOTICE).

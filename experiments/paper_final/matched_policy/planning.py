@@ -74,8 +74,8 @@ def freeze_hierarchies(output, cfg, inputs):
         with np.load(directory / "setup_original.npz", allow_pickle=False) as state:
             if int(state.get("checkpoint_version", np.asarray(1))) != 4:
                 raise ValueError(
-                    f"Seed {seed}: fresh studies require a current setup checkpoint (version 4). "
-                    "Use the released Module 2 configuration and checkpoints."
+                    f"Seed {seed}: incompatible setup checkpoint. "
+                    "Use a trained Module 1 setup model."
                 )
             copied = {k: state[k].copy() for k in state.files}
         copied["candidate_schedule_cursor"] = np.asarray(0, dtype=np.int64)
@@ -171,7 +171,7 @@ def prepare(config, output):
     count = round(len(inputs) * float(cfg["scan_repeat_fraction"]))
     extra = sorted(random.Random(cfg["seeds"]["repeats"]).sample([r["case_id"] for r in inputs], count))
     protocol = {
-        "module": "05", "format": "matched-policy-fresh-v1", "name": cfg["name"],
+        "module": 2, "format": "matched_policy", "name": cfg["name"],
         "methods": list(METHODS), "labels": LABELS, "training_seeds": [s["seed"] for s in cfg["training_runs"]],
         "problem": cfg["problem"], "test_cases": len(inputs), "repetitions_per_case": cfg["evaluation_repetitions"],
         "scan_repetitions": cfg["scan_repetitions"], "scan_extra_repetitions": cfg["scan_extra_repetitions"],
@@ -200,6 +200,6 @@ def prepare(config, output):
     a.dump(output / "prepared.json", {"at": a.now(), "files_sha256": {name: a.file_hash(output / name) for name in files},
                                       "execution_environment": policy.environment_identity(environment)})
     a.dump(output / "status.json", {"status": "prepared", "native_solves_executed": 0})
-    a.emit(output, "Fresh Module 2 prepared", seeds=protocol["training_seeds"], cases=len(inputs),
+    a.emit(output, "Module 2 prepared", seeds=protocol["training_seeds"], cases=len(inputs),
            scan_trials=sum(len(j["policy_order"]) for j in a.read(output / "jobs_scan.json")))
     return protocol

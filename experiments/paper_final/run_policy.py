@@ -1,4 +1,4 @@
-"""Fresh Module 2: explicit sources -> freeze -> scan -> select -> evaluate."""
+"""Module 2: freeze trained models, scan weights, and evaluate matched policies."""
 
 from __future__ import annotations
 
@@ -45,10 +45,19 @@ def main():
         print(f"Configuration written: {args.config.resolve()}")
         return
     if args.command == "validate":
+        configure_single_thread()
         cfg = load_config(args.config)
+        from experiments.paper_final.common.frozen_policy import build_bundle
+        encoders = []
+        for source in cfg["training_runs"]:
+            bundle = build_bundle(source["training_config"], source["method"],
+                                  Path(source["controller_checkpoint"]), beta=cfg["rl_beta"])
+            encoders.append(dict(seed=source["seed"], state_encoding=bundle.encoder.encoding,
+                                 state_features=bundle.encoder.feature_dim))
         print(json.dumps({"valid": True, "seed_labels": [s["seed"] for s in cfg["training_runs"]],
                           "cases": cfg["cases"], "weights": len(cfg["weights"]), "solver": cfg["solver"],
-                          "problem": cfg["problem"], "native_solves_executed": 0}, indent=2))
+                          "problem": cfg["problem"], "controllers": encoders,
+                          "native_solves_executed": 0}, indent=2))
         return
     configure_single_thread()
     if args.command == "prepare":

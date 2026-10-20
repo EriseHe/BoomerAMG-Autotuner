@@ -95,7 +95,7 @@ def _shared_protocol_metadata(
         "family": str(family),
         "state": str(request.state.mode),
         "state_encoder": {
-            "encoding_version": encoder.encoding_version,
+            "name": encoder.encoding,
             "weight_bounds": encoder.weight_bounds,
             "setup_observed_keys": list(request.setup_obs_encoder.parameter_spec.parameter_names),
             "setup_descriptor_names": list(request.setup_obs_encoder.descriptor_names),

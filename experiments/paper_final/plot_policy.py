@@ -32,7 +32,7 @@ def read_study(root):
         return json.loads((root / name).read_text())
     summary = read("analysis/summary.json")
     protocol = read("protocol.json")
-    assert protocol["format"] == "matched-policy-fresh-v1" and tuple(protocol["methods"]) == METHODS
+    assert protocol["format"] in ("matched_policy", "matched-policy-fresh-v1") and tuple(protocol["methods"]) == METHODS
     assert summary["protocol"] == protocol and summary["audit"]["exact_coverage"]
     jobs = read("jobs_test.json")
     marker = read("raw/test/complete.json")

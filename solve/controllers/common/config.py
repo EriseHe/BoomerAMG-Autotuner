@@ -9,8 +9,8 @@ from solve.controllers.common.td_config import ExpectedSarsaLambdaConfig
 from .state_encoder import (
     CANONICAL_PROBLEM_CONTEXT,
     PROBLEM_CONTEXT_MODES,
-    STATE_ENCODING_VERSION,
-    STATE_ENCODING_VERSIONS,
+    STATE_ENCODING,
+    canonical_state_encoding,
     SolveStateEncoder,
 )
 
@@ -103,11 +103,10 @@ class SolveStateSpec:
     c_max: float
     mode: str = "setup_full"
     problem_context_mode: str = CANONICAL_PROBLEM_CONTEXT
-    encoding_version: str = STATE_ENCODING_VERSION
+    encoding: str = STATE_ENCODING
 
     def __post_init__(self) -> None:
-        if self.encoding_version not in STATE_ENCODING_VERSIONS:
-            raise ValueError(f"encoding_version must be one of {STATE_ENCODING_VERSIONS}")
+        object.__setattr__(self, "encoding", canonical_state_encoding(self.encoding))
         if not math.isfinite(float(self.tol)) or float(self.tol) <= 0.0:
             raise ValueError("solve tolerance must be finite and positive")
         if int(self.max_cycles) <= 0:
@@ -137,7 +136,7 @@ class SolveStateSpec:
             mode=str(self.mode),
             setup_obs_encoder=setup_obs_encoder,
             problem_context_mode=str(self.problem_context_mode),
-            encoding_version=self.encoding_version,
+            encoding=self.encoding,
             weight_bounds=(
                 (min(weights), max(weights))
                 if weights is not None
