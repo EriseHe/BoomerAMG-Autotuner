@@ -32,6 +32,8 @@ Candidate scoring, setup selection, and solve-controller overhead are measured
 in both phases. Frozen inputs have no setup or RL update work. Native time
 includes every setup/solve attempt, retry, and fallback. Total recorded time
 also includes learner/controller work; assembly and file I/O are excluded.
+LSTDQ learns from native cycle execution time only. Controller overhead remains
+included in total-runtime evaluation and the setup bandit's cost feedback.
 Summaries report separate `learning` and `frozen` windows and the full stream.
 
 The configurations use confidence coefficient 2, 1,024 setup candidates,

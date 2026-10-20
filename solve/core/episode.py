@@ -347,15 +347,10 @@ def run_td_episode(
                     action_index, action_value, selection = pending_action
                     current_decision_runtime = pending_decision_runtime
                     pending_action = None
-                # The current update has not run yet. Charge its causal runtime
-                # estimate; keep actual measured time separate for evaluation.
-                update_time_estimate = (
-                    float(controller.estimated_update_runtime_sec) if learn else 0.0
-                )
+                # Learn native cycle cost. Controller work is measured separately
+                # for total-runtime evaluation and setup-bandit feedback.
+                update_time_estimate = 0.0
                 current_update_runtime = 0.0
-                controller_cost = (
-                    current_feature_runtime + current_decision_runtime + update_time_estimate
-                )
                 weight = controller.environment_weight(
                     int(action_index),
                     float(last_weight),
@@ -413,7 +408,7 @@ def run_td_episode(
                         retain_failed_episodes or not recovery.unrecovered_failure
                     )
                     transition_cost = _terminal_transition_cost(
-                        failed_step_runtime + controller_cost,
+                        failed_step_runtime,
                         recovery,
                         retain_failed_episodes=retain_failed_episodes,
                         failure_penalty_sec=failure_penalty_sec,
@@ -492,7 +487,7 @@ def run_td_episode(
                             "Nonfinite successor controller features"
                         )
 
-                transition_cost = cycle_time + controller_cost
+                transition_cost = cycle_time
                 residual_ratio = (
                     float(residual_new) / float(residual)
                     if np.isfinite(float(residual_new))

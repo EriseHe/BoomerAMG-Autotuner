@@ -90,7 +90,7 @@ def audit_case(row, beta, *, variant=VARIANT, feedback_mode="attempt_2T", learn=
 
 
 def audit_cycle_costs(attempt):
-    """Validate the recorded controller charges without changing evaluation time."""
+    """Verify native-only RL targets while retaining measured overhead diagnostics."""
     if "cycle_assigned_costs" not in attempt:
         return  # Archived native-cost runs use their original trace schema.
     names = ("cycle_times", "cycle_assigned_costs", "cycle_feature_times",
@@ -102,9 +102,11 @@ def audit_cycle_costs(attempt):
         if any(not math.isfinite(value) or value < 0 for value in
                (native, assigned, features, decision, estimate, actual_update)):
             raise ValueError("Invalid controller cost or runtime")
-        if not math.isclose(assigned, native + features + decision + estimate,
+        if not math.isclose(assigned, native,
                             rel_tol=1e-10, abs_tol=1e-12):
-            raise ValueError("RL target differs from native plus assigned controller cost")
+            raise ValueError("RL target differs from native cycle cost")
+        if estimate != 0.0:
+            raise ValueError("Native-cycle RL targets must not charge estimated update time")
 
 
 def metrics(records):
