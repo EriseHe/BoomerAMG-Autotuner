@@ -1,4 +1,4 @@
-"""Behavioral checks for shared setup features and causal RL cost accounting."""
+"""Behavioral checks for shared setup features and native-only RL cost accounting."""
 from __future__ import annotations
 
 import json
@@ -328,7 +328,8 @@ class CostAccountingTests(unittest.TestCase):
             np.testing.assert_allclose([v[2] for v in observations], expected)
             self.assertEqual([v[1] for v in observations], [None, durations[0], durations[0]])
             self.assertEqual(result['cycle_times'], list(durations))
-            self.assertGreater(result['cycle_assigned_costs'][0], durations[0] + .75)
+            self.assertEqual(result['cycle_assigned_costs'], list(durations))
+            self.assertGreater(result['infer_runtime'], 0.)
 
     def run_episode(self, *, learn=True, fail=False, error=False, recorder=False):
         clock = Clock()
@@ -343,10 +344,10 @@ class CostAccountingTests(unittest.TestCase):
                 learn=learn, explore=False, record_action_metadata=True, failure_penalty_sec=0.)
         return controller, used, result
 
-    def test_previous_update_is_charged_once_without_double_counting(self):
+    def test_native_targets_exclude_overhead_while_evaluation_measures_it(self):
         controller, _, result = self.run_episode()
-        np.testing.assert_allclose(controller.executed_costs, [.024, .041, .055])
-        np.testing.assert_allclose(result['cycle_update_time_estimates'], [0., .005, .007])
+        np.testing.assert_allclose(controller.executed_costs, [.02, .03, .04])
+        np.testing.assert_allclose(result['cycle_update_time_estimates'], [0., 0., 0.])
         np.testing.assert_allclose(result['cycle_update_times'], [.005, .007, .009])
         np.testing.assert_allclose(result['cycle_assigned_costs'], controller.executed_costs)
         self.assertEqual(controller.selections, 3)
@@ -385,13 +386,13 @@ class CostAccountingTests(unittest.TestCase):
         fallback = AttemptOutcome.from_mapping(dict(runtime=10., setup_runtime=2.,
             solve_runtime=8., failed=False, iterations=5, residual_norm=1e-7))
         recorder.finalize([AttemptOutcome.from_mapping(result)], fallback, include_recovery=False)
-        np.testing.assert_allclose(controller.executed_costs, [.024, .041, .055])
+        np.testing.assert_allclose(controller.executed_costs, [.02, .03, .04])
         self.assertEqual(controller.update_runtime_count, 3)
         self.assertAlmostEqual(controller.estimated_update_runtime_sec, .009)
 
     def test_native_exception_retains_assigned_cost_diagnostics(self):
         controller, _, result = self.run_episode(error=True)
-        np.testing.assert_allclose(controller.executed_costs, [.024])
+        np.testing.assert_allclose(controller.executed_costs, [.02])
         self.assertEqual(len(result['cycle_selected_q_values']), 1)
         self.assertTrue(result['failed'])
         self.assertEqual(controller.update_runtime_count, 1)

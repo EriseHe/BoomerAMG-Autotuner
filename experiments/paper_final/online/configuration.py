@@ -411,8 +411,8 @@ class JointSolveSpec:
         cls, raw: Mapping[str, Any], *, problem: ProblemSpec, solve_kinds: Iterable[str]
     ) -> "JointSolveSpec":
         reject_unknown_keys(raw, SOLVE_KEYS, name="solve")
-        if raw.get("cost_target", "native_plus_controller") != "native_plus_controller":
-            raise ValueError("Fresh solve runs require cost_target=native_plus_controller")
+        if raw.get("cost_target", "native_cycle") != "native_cycle":
+            raise ValueError("Fresh solve runs require cost_target=native_cycle")
         smoother_profile = str(raw.get("smoother_profile", "legacy_l1_jacobi"))
         if smoother_profile not in SMOOTHER_PROFILES:
             raise ValueError(

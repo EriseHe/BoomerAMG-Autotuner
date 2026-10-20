@@ -11,7 +11,7 @@ them. The scoring-equivalence check compares the controller with the direct
 matrix expression; it adds no work to an official solver run.
 
 The RL checks cover the published first-cycle time normalization and
-overhead-inclusive learning cost. The earlier completed scoring optimization
+native-only learning cost with separately measured controller overhead. The earlier completed scoring optimization
 is retained; the interrupted follow-up round introduced no controller changes.
 The frozen-evaluation checks cover Module 1's 1,000-input frozen phase.
 `frozen_evaluation_source.json` records the original source
