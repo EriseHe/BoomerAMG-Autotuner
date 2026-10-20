@@ -1,7 +1,8 @@
 # RLTune-BoomerAMG
 
 Code and data for **Online Autotuning of BoomerAMG with Contextual Bandits and
-Reinforcement Learning**, by Xudong He, Ruiyu Wang, and Yilang Ding, Rui Peng Li, and Yuanzhe Xi
+Reinforcement Learning**, by Xudong He, Ruiyu Wang, Yilang Ding, Rui Peng Li,
+and Yuanzhe Xi.
 
 | Module | Study | Data |
 |---|---|---|
@@ -30,6 +31,14 @@ Build HYPRE and the native interface with CMake, Make, a C/C++ compiler, and MPI
 ```sh
 make -C hypre JOBS=4
 ```
+
+The released Module 1--3 configurations and checkpoints use the archived
+`space_aware_v2` state encoding. The controller on the current `main` branch
+accepts only `shared_setup_one_hot_tolerance_residuals_v3`, so those archived
+configurations are not directly runnable from current `main`. The exact source
+revision associated with the released measurements is recorded in
+`docs/commit-map.json`; do not silently reinterpret the released checkpoints
+with the v3 encoder.
 
 [Experiment instructions](docs/experiments.md) give the commands and timing
 definitions. Full local trajectories are stored under `data/official/module1`,

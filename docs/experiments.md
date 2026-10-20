@@ -1,5 +1,12 @@
 # Experiments
 
+> **Compatibility note:** the released Module 1--3 configurations and
+> checkpoints use `space_aware_v2`, while the controller on current `main`
+> accepts only `shared_setup_one_hot_tolerance_residuals_v3`. The commands below
+> document the released experiment workflow, but the archived configurations
+> require the source revision recorded in `docs/commit-map.json`. Do not load
+> the released v2 checkpoints into the v3 controller.
+
 Run commands from the repository root after installing the package and building
 HYPRE. Use fresh output directories. Each online suite uses three single-thread
 workers, one per seed, with four independent cold methods from case 1.
