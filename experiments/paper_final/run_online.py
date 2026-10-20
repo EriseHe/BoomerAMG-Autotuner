@@ -4,8 +4,9 @@ Prepare freezes configs, paired inputs, source and native-library hashes.
 Run refuses partial state and releases workers only after all are ready.
 All four branches are measured independently from input one. Both setup learners
 and both LSTDQ controllers start cold; no prefix, copied solves or state forks.
-Module 1's frozen phase evaluates inputs 5,001-6,000 from the matching final
-5,000-input checkpoints, with learning and epsilon exploration disabled.
+Module 1 continues through held-out inputs 5,001-6,000 in the same worker,
+freezing both learners after input 5,000 and disabling epsilon exploration.
+Controller and setup-selection overhead remain measured in both phases.
 """
 from __future__ import annotations
 
