@@ -164,14 +164,3 @@ def source_differences(manifest):
         for name, expected in manifest.items()
         if not (ROOT / name).is_file() or file_hash(ROOT / name) != expected
     ]
-
-
-def presentation_source_paths():
-    """Current rendering sources, separate from frozen numerical provenance."""
-    return {
-        "experiments/paper_final/plot_05_policy_minimax.py",
-        "experiments/paper_final/common/__init__.py",
-        "experiments/paper_final/common/artifacts.py",
-        "experiments/paper_final/common/figure_style.py",
-        "experiments/paper_final/common/scientific_transforms.py",
-    }
