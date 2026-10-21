@@ -684,7 +684,7 @@ def worker(output, label):
 
 def analyze(output):
     protocol = read(output/"protocol.json")
-    table, series = [], {}
+    table = []
     for label in protocol["seeds"]:
         stage = output/f"seed_{label}"
         result = read(stage/"result.json")
@@ -694,8 +694,6 @@ def analyze(output):
             if file_hash(stage/"trajectories"/f"{name}.jsonl") != result["audits"][name]["trajectory_sha256"]:
                 raise ValueError(f"Measured trajectory changed for seed {label}: {name}")
         records = {name: list(read_records(stage/"trajectories"/f"{name}.jsonl")) for name in factorial.METHODS}
-        series[label] = {name: np.asarray([row["outcome"]["runtime"] for row in values])
-                         for name, values in records.items()}
         cases = result["cases"]
         windows = {"full": (0, cases), "first_1000": (0, min(1000, cases))}
         freeze_after = protocol["stages"][label].get("freeze_after")
@@ -742,46 +740,13 @@ def analyze(output):
     text += ["", "Per-input trajectories and final setup/controller checkpoints are in each seed directory. Source and native hashes, feature checks, activation checks and batch reconstruction of both setup regressions passed."]
     (output/"report.md").write_text("\n".join(text)+"\n")
     factorial.audit_execution(output)
-    plot_results(output, series)
     from experiments.paper_final.plot_online import generate
     figures = generate(output)
     with (output/"report.md").open("a") as handle:
-        module_number = 1
-        handle.write(f"\n[Paper figures](paper_figures/module{module_number}_paper_figures.pdf) · [Joint LSTDQ heat maps](paper_figures/joint_lstdq_heatmaps_all_seeds.png) · [Plot data and provenance](paper_figures/manifest.json)\n")
+        kind = read(output/f"seed_{protocol['seeds'][0]}"/"experiment_config.json")["problem"]["kind"]
+        module_number = 3 if kind.startswith("rs_") else 1
+        handle.write(f"\n[Paper figures](paper_figures/module{module_number}_paper_figures.pdf) · [Plot data and provenance](paper_figures/manifest.json)\n")
     return table
-
-
-def plot_results(output, series):
-    from experiments.paper_final.common.figure_style import apply_style, plt
-    apply_style()
-    colors = ("#686868", "#009e73", "#e69f00", "#0072b2")
-    fig, axes = plt.subplots(len(series), 2, figsize=(10, 2.6*len(series)), squeeze=False)
-    for (label, methods), row in zip(series.items(), axes):
-        n = len(methods[factorial.METHODS[0]])
-        config = read(output/f"seed_{label}"/"experiment_config.json")
-        index_offset = config.get("evaluation", {}).get("training_cases", 0)
-        x = np.arange(1, n+1) + index_offset
-        reference = np.cumsum(methods[factorial.METHODS[0]])
-        for (name, values), color in zip(methods.items(), colors):
-            cumulative = np.cumsum(values)
-            row[0].plot(x, cumulative, color=color, label=factorial.LABELS[name])
-            if name != factorial.METHODS[0]:
-                row[1].plot(x, 100*(1-cumulative/reference), color=color)
-        for ax in row:
-            activation = next(m.get("solve_activation_case", 0) for m in read(output/f"seed_{label}"/"experiment_config.json")["methods"] if m["id"] == "bandit_lstdq")
-            if 0 < activation < n:
-                ax.axvline(activation + .5, color="#555555", ls=":", lw=.8)
-            ax.grid(alpha=.2)
-            ax.set_xlabel("Problem index")
-        row[0].set(title=f"Seed {label}: cumulative native time", ylabel="Seconds")
-        row[1].set(title=f"Seed {label}: cumulative reduction vs Default", ylabel="Reduction (%)")
-        row[1].axhline(0, color="#686868", lw=.6)
-    handles, labels = axes[0,0].get_legend_handles_labels()
-    fig.legend(handles, labels, loc="upper center", ncol=4, frameon=False)
-    fig.tight_layout(rect=(0,0,1,.96))
-    for extension in ("png", "pdf", "svg"):
-        fig.savefig(output/f"learning_curves.{extension}", dpi=180, bbox_inches="tight")
-    plt.close(fig)
 
 
 def launch(output):

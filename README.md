@@ -12,7 +12,7 @@ features, and normalized cycle observations. The encoder is named
 |---|---|---|
 | Module 1, Part 1: online learning | Inputs 1–5,000; LinUCB and LSTDQ learn from input one | [Module 1 suites](configs/module1/suites) |
 | Module 1, Part 2: frozen evaluation | Inputs 5,001–6,000; retain the Part 1 models, disable updates and RL exploration | [Module 1 suites](configs/module1/suites) |
-| Module 2: matched policy evaluation | Use selected trained Module 1 models to compare frozen LSTDQ with fixed and periodic relaxation on matched hierarchies | [Module 2 instructions](docs/experiments.md#module-2-matched-policy-evaluation) |
+| Module 2: matched policy evaluation | Use selected trained Module 1 models to compare frozen LSTDQ with fixed and periodic relaxation on matched hierarchies | [Module 2 instructions](experiments/README.md#module-2-matched-policy-evaluation) |
 | Module 3: variable flow | Six independent 5,000-input learning streams at 60³ | [Module 3 suites](configs/module3/suites) |
 
 Module 1 runs both parts in one continuous worker process per seed. Each
@@ -32,7 +32,7 @@ make -C hypre JOBS=4
 
 ## Run
 
-[Experiment instructions](docs/experiments.md) give the commands for each
+[Experiment instructions](experiments/README.md) give the commands for each
 module. Active configurations are in `configs/`. After the selected Module 1
 run finishes, initialize Module 2 with explicit paths to its trained seed
 directories using `run_policy init --training-run SEED=PATH`. No experiment is

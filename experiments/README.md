@@ -88,3 +88,19 @@ Run the second batch for seeds 4–6. Each seed starts four fresh branches and h
 problem stream and the shared setup encoding. Native and overhead-included
 timing are both recorded. Failed
 cases remain in the measurements, and common-success comparisons are reported.
+
+## Paper figures
+
+The runners produce the manuscript figures in each completed run's
+`paper_figures/` directory. To regenerate them from saved results:
+
+```sh
+python -m experiments.paper_final.plot_online results/module1/diffusion_60_batch1
+python -m experiments.paper_final.plot_policy results/module2/run
+```
+
+The online renderer produces the runtime breakdown, cumulative-time plot, and
+relaxation-weight heatmap. Supply recorded individual-cycle examples with
+`--cycle-examples PATH.json` to also produce the schedule/residual figure.
+The matched-policy renderer produces the savings plot and selected weight panels.
+These commands read saved evidence and perform no solver or learner runs.

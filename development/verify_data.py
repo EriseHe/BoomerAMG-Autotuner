@@ -48,9 +48,9 @@ def verify(raw=False):
     assert protocol['phases']['online']['model_updates'] is True
     assert protocol['phases']['frozen']['model_updates'] is False
     assert protocol['phases']['frozen']['rl_epsilon_exploration'] is False
-    published_ref = read(ROOT/'docs/commit-map.json')['published_source_commit']
+    published_ref = read(ROOT/'development/commit-map.json')['published_source_commit']
     for name, digest in read(DATA/'source_manifest.json').items():
-        if sha(ROOT/name) != digest:
+        if not (ROOT/name).is_file() or sha(ROOT/name) != digest:
             assert published_ref, name
             source = subprocess.check_output(['git','show',f'{published_ref}:{name}'],cwd=ROOT)
             assert hashlib.sha256(source).hexdigest() == digest, name

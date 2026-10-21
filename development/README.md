@@ -22,7 +22,7 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 PYTHONPATH=. \
   python -m unittest discover \
   -s development/tests -p 'test_*.py' -v
 
-python tools/verify_data.py
+python development/verify_data.py
 ```
 
 The selected scripts and compact reports under `results/rl_*` are development

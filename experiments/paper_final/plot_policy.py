@@ -19,12 +19,13 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 import numpy as np
 
-from experiments.paper_final.plot_online import sha, style, index_ticks
+from experiments.paper_final.plot_online import sha
 from experiments.paper_final.matched_policy.configuration import METHODS, LABELS
 from experiments.paper_final.matched_policy.selection import trial_key, verify_coverage
 
+from experiments.paper_final.common.figure_style import matched_figures
+
 FIELDS = ("native_continuation_sec", "inclusive_continuation_sec", "native_total_sec", "inclusive_total_sec")
-COLORS = ("#777777", "#454f5b", "#9b609a", "#d58b19", "#2166ac")
 
 
 def read_study(root):
@@ -108,51 +109,6 @@ def paired_gains(costs, success, field=0):
     return np.where(eligible, gains, np.nan)
 
 
-def plot_savings(gains, metric, title):
-    fig, ax = plt.subplots(figsize=(6.6, 2.8))
-    for j, method in enumerate(METHODS):
-        values = gains[:, j][np.isfinite(gains[:, j])]
-        if len(values):
-            ax.scatter(values, j + np.linspace(-.12, .12, len(values)) if len(values) > 1 else [j],
-                       s=13, facecolors="white", edgecolors=COLORS[j], linewidths=.7, zorder=3)
-            sd = values.std(ddof=1) if len(values) > 1 else None
-            ax.errorbar(values.mean(), j, xerr=sd, fmt="D", color=COLORS[j], capsize=2.2, markersize=3.3, zorder=4)
-        else:
-            ax.text(.98, 1 - (j + .5) / 5, "undefined", transform=ax.transAxes, ha="right", fontsize=7)
-    ax.set(yticks=range(5), yticklabels=[LABELS[m] for m in METHODS], ylim=(4.45, -.45),
-           xlabel=f"{metric} continuation-time reduction vs $w=1$ (%)")
-    ax.axvline(0, color=".55", lw=.6)
-    ax.grid(axis="x")
-    fig.suptitle(title, fontsize=9, y=.99)
-    fig.text(.6, .015, "Open points: seeds; diamonds: mean; whiskers: sample SD when available", ha="center", fontsize=6.5)
-    fig.subplots_adjust(left=.28, right=.99, top=.86, bottom=.23)
-    return fig
-
-
-def plot_weights(weights, order, seed, title):
-    fig, grid = plt.subplots(3, 2, figsize=(6.9, 5.1), sharex=True, sharey=True, layout="constrained")
-    axes = list(grid.flat)
-    cmap = plt.colormaps["viridis"].copy()
-    cmap.set_bad("#efefef")
-    n, cap = weights.shape[1:]
-    finite = weights[np.isfinite(weights)]
-    low = min(1., float(finite.min())) if len(finite) else 1.
-    high = max(3., float(finite.max())) if len(finite) else 3.
-    for j, (ax, method) in enumerate(zip(axes, METHODS)):
-        im = ax.imshow(weights[j, order].T, origin="lower", aspect="auto", interpolation="none",
-                       extent=(.5, n + .5, -.5, cap - .5), cmap=cmap, vmin=low, vmax=high)
-        ax.set_title(f"({'abcde'[j]}) {LABELS[method]}", loc="left")
-        ax.set(xticks=index_ticks(n, zero=False), yticks=np.unique(np.r_[np.arange(0, cap, 10), cap - 1]))
-        if j % 2 == 0:
-            ax.set_ylabel(r"Cycle index $k$")
-        if j >= 3:
-            ax.set_xlabel("Test problem rank")
-            ax.tick_params(labelbottom=True)
-    axes[-1].axis("off")
-    axes[-1].text(.05, .6, "First prescribed repetition\nSame input and hierarchy in each column\nSorted by weight-one primary cycle count\nGray: no recorded primary action", transform=axes[-1].transAxes, fontsize=7, va="center")
-    fig.colorbar(im, ax=axes[:-1], label="Relaxation weight", ticks=np.linspace(low, high, 5), pad=.02)
-    fig.suptitle(f"{title} · seed {seed}", fontsize=9)
-    return fig
 
 
 def generate(run, *, output=None):
@@ -170,11 +126,7 @@ def generate(run, *, output=None):
     kind = protocol["problem"]["kind"]
     family = "Diffusion–advection" if "advection" in kind or "convection" in kind else "Diffusion"
     title = family + " " + (rf"${grid[0]}^3$" if len(set(grid)) == 1 else " × ".join(map(str, grid)))
-    style()
-    figures = [("matched_policy_savings", plot_savings(native, "Native", title)),
-               ("matched_policy_inclusive_savings", plot_savings(inclusive, "Inclusive", title)),
-               ("matched_policy_weights", plot_weights(weights[selected], orders[selected], seed, title))]
-    figures += [(f"matched_policy_weights_seed{s}", plot_weights(weights[i], orders[i], s, title)) for i, s in enumerate(seeds)]
+    figures = matched_figures(native, weights, case_ids, selected, seeds, title)
     output.mkdir(parents=True, exist_ok=True)
     metadata = {"Title": "Module 2 fresh five-policy study", "Author": "RLTune-BoomerAMG"}
     with PdfPages(output / "module2_paper_figures.pdf", metadata=metadata) as pdf:
@@ -189,8 +141,8 @@ def generate(run, *, output=None):
                         case_order_0_based=orders, native_reductions_pct=native, inclusive_reductions_pct=inclusive)
     captions = (
         f"Module 2: {protocol['name']}. Seeds: {seeds}; {len(case_ids)} paired inputs; {protocol['repetitions_per_case']} evaluation repetitions.\n\n"
-        "matched_policy_savings and matched_policy_inclusive_savings: Percentage reduction against fixed weight one. Repetitions are averaged within input before summing native or inclusive continuation costs. Open points are seed-level ratios; diamonds and whiskers are their mean and sample SD (no SD for a single seed). Only seeds where the compared policy and reference complete every evaluation successfully enter that comparison. Undefined comparators stay undefined. Native continuation excludes common primary setup and includes recovery setup/solve. Inclusive continuation adds controller computation. All five policy roles are shown.\n\n"
-        f"matched_policy_weights: Selected illustration, seed {seed}. The seed with the largest full-panel native frozen-RL reduction versus weight one among qualifying successful seeds is used; if no seed qualifies, the first listed seed is displayed without a best-run claim. This is an illustrative selection, not a typical-run estimate. Every panel uses the recorded first prescribed repetition, including exploration settings as executed; actions are neither averaged nor extrapolated. Columns use one shared order, decreasing weight-one primary cycle count, with case ID breaking ties. Gray cells have no recorded primary action after termination, or correspond to an undefined fixed comparator. Recovery cycles are excluded. Individual seed figures retain every training seed.\n\n"
+        "matched_policy_savings: Percentage reduction against fixed weight one. Repetitions are averaged within input before summing native continuation costs. Open points are seed-level ratios; diamonds and whiskers are their mean and sample SD (no SD for a single seed). Only seeds where the compared policy and reference complete every evaluation successfully enter that comparison. Undefined comparators stay undefined. Native continuation excludes common primary setup and includes recovery setup/solve. Inclusive continuation adds controller computation. The four alternatives to fixed weight one are shown.\n\n"
+        f"matched_policy_weights: Selected illustration, seed {seed}. The seed with the largest full-panel native frozen-RL reduction versus weight one among qualifying successful seeds is used; if no seed qualifies, the first listed seed is displayed without a best-run claim. This is an illustrative selection, not a typical-run estimate. Every panel uses the recorded first prescribed repetition, including exploration settings as executed; actions are neither averaged nor extrapolated. Columns use one shared order, decreasing weight-one primary cycle count, with case ID breaking ties. White cells have no recorded primary action after termination, or correspond to an undefined fixed comparator. Recovery cycles are excluded. The four displayed heatmap policies are fixed weight one, per-input best fixed, periodic, and frozen RL.\n\n"
         "Fixed references are freshly scan-selected best-observed grid choices on this evaluation panel, then independently retimed. Scan costs do not substitute for evaluation costs and are excluded from the plotted costs.\n"
     )
     (output / "captions.txt").write_text(captions)
