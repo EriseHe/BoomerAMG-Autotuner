@@ -8,8 +8,8 @@ HYPRE. Use a new output directory for each run. Active configurations are in
 
 Each seed runs one continuous stream in a single worker process:
 
-- Inputs 1–5,000: both LinUCB and LSTDQ learn from input one.
-- Inputs 5,001–6,000: both learners are frozen and LSTDQ epsilon exploration is disabled.
+- **Part 1 — online learning, inputs 1–5,000:** both LinUCB and LSTDQ learn from input one.
+- **Part 2 — frozen evaluation, inputs 5,001–6,000:** both learners are frozen and LSTDQ epsilon exploration is disabled.
 
 All four branches are measured independently: Default, fixed-setup LSTDQ,
 setup-only LinUCB, and joint LinUCB–LSTDQ. Each suite starts three concurrent
@@ -34,7 +34,8 @@ includes every setup/solve attempt, retry, and fallback. Total recorded time
 also includes learner/controller work; assembly and file I/O are excluded.
 LSTDQ learns from native cycle execution time only. Controller overhead remains
 included in total-runtime evaluation and the setup bandit's cost feedback.
-Summaries report separate `learning` and `frozen` windows and the full stream.
+Summaries report Part 1 as the `learning` window, Part 2 as the `frozen` window,
+and both together as the `full` stream.
 
 The configurations use confidence coefficient 2, 1,024 setup candidates,
 relaxation weights 1–3, tolerance 10⁻⁶, and a 50-cycle cap. The solve controller
@@ -45,6 +46,9 @@ normalization, and cycle time relative to the first native cycle of the attempt.
 
 After Module 1 is complete, create a configuration using its trained joint
 models. Specify one seed directory per source; no run is selected automatically.
+Module 2 uses the learned models from Part 1; Part 2 preserves their learned
+parameters. Source paths are supplied when this study is initialized, so the
+repository does not bind Module 2 to a particular Module 1 experiment.
 For example, with the output layout above:
 
 ```sh
@@ -81,5 +85,8 @@ python -m experiments.paper_final.run_online prepare --suite configs/module3/sui
 python -m experiments.paper_final.run_online run --output results/module3/variable_flow_60_batch1
 ```
 
-Run the second batch for seeds 4–6. Each seed has 5,000 learning inputs. Failed
+Run the second batch for seeds 4–6. Each seed starts four fresh branches and has
+5,000 learning inputs. Module 3 runs independently with its own variable-flow
+problem stream and uses the same shared setup encoding and native-cycle RL
+learning cost. Native and overhead-included timing are both recorded. Failed
 cases remain in the measurements, and common-success comparisons are reported.
