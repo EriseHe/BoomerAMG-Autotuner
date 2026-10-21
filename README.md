@@ -11,7 +11,7 @@ features, and normalized cycle observations. The encoder is named
 | Study | Inputs and learning | Configuration |
 |---|---|---|
 | Module 1, Part 1: online learning | Inputs 1–5,000; LinUCB and LSTDQ learn from input one | [Module 1 suites](configs/module1/suites) |
-| Module 1, Part 2: frozen evaluation | Inputs 5,001–6,000; retain the Part 1 models, disable updates and RL exploration | Same Module 1 suites |
+| Module 1, Part 2: frozen evaluation | Inputs 5,001–6,000; retain the Part 1 models, disable updates and RL exploration | [Module 1 suites](configs/module1/suites) |
 | Module 2: matched policy evaluation | Use selected trained Module 1 models to compare frozen LSTDQ with fixed and periodic relaxation on matched hierarchies | [Module 2 instructions](docs/experiments.md#module-2-matched-policy-evaluation) |
 | Module 3: variable flow | Six independent 5,000-input learning streams at 60³ | [Module 3 suites](configs/module3/suites) |
 
