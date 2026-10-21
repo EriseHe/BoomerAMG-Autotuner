@@ -32,8 +32,6 @@ Candidate scoring, setup selection, and solve-controller overhead are measured
 in both phases. Frozen inputs have no setup or RL update work. Native time
 includes every setup/solve attempt, retry, and fallback. Total recorded time
 also includes learner/controller work; assembly and file I/O are excluded.
-LSTDQ learns from native cycle execution time only. Controller overhead remains
-included in total-runtime evaluation and the setup bandit's cost feedback.
 Summaries report Part 1 as the `learning` window, Part 2 as the `frozen` window,
 and both together as the `full` stream.
 
@@ -87,6 +85,6 @@ python -m experiments.paper_final.run_online run --output results/module3/variab
 
 Run the second batch for seeds 4–6. Each seed starts four fresh branches and has
 5,000 learning inputs. Module 3 runs independently with its own variable-flow
-problem stream and uses the same shared setup encoding and native-cycle RL
-learning cost. Native and overhead-included timing are both recorded. Failed
+problem stream and the shared setup encoding. Native and overhead-included
+timing are both recorded. Failed
 cases remain in the measurements, and common-success comparisons are reported.

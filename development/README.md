@@ -10,9 +10,7 @@ and frozen evaluation. Official experiment runners do not import or execute
 them. The scoring-equivalence check compares the controller with the direct
 matrix expression; it adds no work to an official solver run.
 
-The RL checks cover the published first-cycle time normalization and
-native-only learning cost with separately measured controller overhead. The earlier completed scoring optimization
-is retained; the interrupted follow-up round introduced no controller changes.
+The RL checks cover state normalization, scoring, and timing accounting.
 The frozen-evaluation checks cover Module 1's 1,000-input frozen phase.
 `frozen_evaluation_source.json` records the original source
 snapshot, and `validation-source.json` records the validation. The development
