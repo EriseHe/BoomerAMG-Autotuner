@@ -39,9 +39,6 @@ directories using `run_policy init --training-run SEED=PATH`. No experiment is
 selected automatically. Checkpoint loading checks the complete feature
 description before loading learned parameters.
 
-LSTDQ learns from **native cycle execution time only** (`cost_target=native_cycle`).
-The setup bandit's cost feedback includes measured learner/controller overhead.
-
 Each run writes its own trajectories, checkpoints, source hashes, summaries,
 and figures under `results/`. Native solver time and total time including
 learner/controller overhead are reported separately.
