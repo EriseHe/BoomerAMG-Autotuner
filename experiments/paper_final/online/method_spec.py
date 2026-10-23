@@ -16,7 +16,6 @@ METHOD_KEYS = {
     "solve",
     "fixed_weight",
     "seed_offset",
-    "setup_warmup_cases",
     "solve_activation_case",
     "solve_activation",
     "solve_tolerance",
@@ -43,7 +42,6 @@ class ComposableMethodSpec:
     candidate_sampling: str = "uniform512"
     fixed_weight: float | None = None
     seed_offset: int = 0
-    setup_warmup_cases: int = 0
     solve_activation_case: int = 0
     solve_tolerance: float | None = None
     solve_context: str = CANONICAL_PROBLEM_CONTEXT
@@ -154,13 +152,6 @@ class ComposableMethodSpec:
                     f"method {name!r} fixed_weight must be finite and positive"
                 )
         seed_offset = int(raw.get("seed_offset", 0))
-        setup_warmup_cases = int(raw.get("setup_warmup_cases", 0))
-        if setup_warmup_cases < 0:
-            raise ValueError(f"method {name!r} setup_warmup_cases must be non-negative")
-        if setup_warmup_cases and setup_kind not in ONLINE_SETUP_KINDS:
-            raise ValueError(
-                f"method {name!r} can only warm up an online setup learner"
-            )
         solve_activation_case = int(raw.get("solve_activation_case", 0))
         if solve_activation_case < 0:
             raise ValueError(
@@ -205,7 +196,6 @@ class ComposableMethodSpec:
             candidate_sampling=candidate_sampling,
             fixed_weight=fixed_weight,
             seed_offset=seed_offset,
-            setup_warmup_cases=setup_warmup_cases,
             solve_activation_case=solve_activation_case,
             solve_tolerance=solve_tolerance,
             solve_context=solve_context,

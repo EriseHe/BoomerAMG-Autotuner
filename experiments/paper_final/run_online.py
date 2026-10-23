@@ -359,16 +359,15 @@ def initialize(output, label):
         raise ValueError("Input pairing changed")
     study = resolve_composable_study(root.args)
     setup_args = replace(root.args, online_cases=evaluation.training_cases+root.args.online_cases) if evaluation else root.args
-    setup = build_named_setup_branches(setup_args, study=study, warmup_instances=(),
-                                       stream_hash=root.manifest["sha256"])
-    validate_setup_branch_independence(setup.branches, named_setup_spaces=True, setup_candidate_mode="aot")
+    setup_branches = build_named_setup_branches(setup_args, study=study)
+    validate_setup_branch_independence(setup_branches, named_setup_spaces=True, setup_candidate_mode="aot")
     solve = build_composable_solve_runtime(root.args, specs=root.spec.methods)
     runtimes = {}
     for method in root.spec.methods:
         runtime = SimpleNamespace(**vars(root), name=method.name, method=method,
                                   bundle=solve.controller_bundles.get(method.name))
-        if method.name in setup.branches:
-            runtime.branch = setup.branches[method.name]
+        if method.name in setup_branches:
+            runtime.branch = setup_branches[method.name]
             model = observed_model(use_retry_rule(runtime.branch.policy.model, "failure_model_adjacent"))
             runtime.branch.policy.model = model
             runtime.rows = CandidateRows(model, cases=len(root.stream), attempts=3, directory=stage/"unused")

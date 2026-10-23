@@ -186,10 +186,6 @@
         }
       }
     },
-    "lin_ts": {
-      "loss_scale_prior_sec": 0.1,
-      "relative_sampling_scale": 0.15
-    },
     "parameter_resolution": 20
   },
   "solve": {

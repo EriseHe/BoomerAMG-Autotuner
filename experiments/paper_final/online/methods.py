@@ -12,10 +12,6 @@ from typing import Any, Dict, Mapping, Sequence
 import numpy as np
 from experiments.paper_final.online.controllers import make_setup_feature_encoder
 from experiments.paper_final.online.method_spec import ComposableMethodSpec
-from experiments.paper_final.online.artifacts import _write_json_line
-from experiments.paper_final.online.case_loop import _method_stream_summary
-from experiments.paper_final.online.reporting import _empty_stream_summary
-from experiments.paper_final.online.io import _write_json
 from problems.amg import COMPACT_DIFFUSION_CONTEXT_INDICES
 from problems.registry import learning_context_for_setup
 from setup.registry import ONLINE_SETUP_KINDS
@@ -38,18 +34,6 @@ class ComposableStudy:
     family_by_method: Mapping[str, str]
     setup_configuration_spaces: Mapping[str, SetupConfigurationSpace]
     bandit_methods: tuple[str, ...]
-
-
-@dataclass(frozen=True)
-class ComposableSetupArtifacts:
-    """Per-method setup learners and resolved warmup artifacts."""
-
-    branches: Mapping[str, Any]
-    warmup_rows: tuple[Mapping[str, Any], ...]
-    warmup_summary: Mapping[str, Any]
-    warmup_trajectory: Any
-    warmup_state: Mapping[str, str]
-    aot_enabled: bool
 
 
 @dataclass(frozen=True)
@@ -136,21 +120,12 @@ def _validate_specs(
         (spec.candidate_sampling == "structured512" for spec in specs)
     ):
         raise ValueError("structured512 candidate sampling requires AOT mode")
-    invalid_warmups = {
-        spec.name: int(spec.setup_warmup_cases)
-        for spec in specs
-        if not 0 <= int(spec.setup_warmup_cases) <= int(args.warmup_cases)
-    }
-    if invalid_warmups:
-        raise ValueError(
-            f"Method setup_warmup_cases must lie within the shared warmup prefix [0, {int(args.warmup_cases)}]: {invalid_warmups}"
-        )
     staged_methods = {
         spec.name: int(spec.solve_activation_case)
         for spec in specs
         if int(spec.solve_activation_case) > 0
     }
-    if int(args.warmup_cases) != 0 or any((spec.setup_warmup_cases for spec in specs)):
+    if int(args.warmup_cases) != 0:
         raise ValueError("The official study has no separate setup warmup")
     if any((spec.solve_activation is not None for spec in specs)):
         raise ValueError("The official study uses fixed solve activation")
@@ -229,20 +204,11 @@ def build_named_setup_branches(
     args: Any,
     *,
     study: ComposableStudy,
-    warmup_instances: Sequence[tuple[Mapping[str, Any], np.ndarray]],
-    stream_hash: str,
-) -> ComposableSetupArtifacts:
+) -> Dict[str, Any]:
     """Build independent setup learners for named composable spaces."""
-    if warmup_instances or any((spec.setup_warmup_cases for spec in study.specs)):
-        raise ValueError("The official study has no separate setup warmup")
     if not study.setup_configuration_spaces:
         raise ValueError("Named setup branch construction requires setup spaces")
-    warmup_path = args.output_dir / "warmup_trajectory.jsonl"
-    warmup_path.write_text("", encoding="utf-8")
     branches: Dict[str, Any] = {}
-    warmup_state: Dict[str, str] = {}
-    warmup_state_dir = args.output_dir / "bandit_warmup_states"
-    warmup_state_dir.mkdir(parents=True, exist_ok=True)
     aot_enabled = str(args.setup_candidate_mode) == "aot"
     for method in study.bandit_methods:
         method_spec = study.specs_by_name[method]
@@ -276,7 +242,7 @@ def build_named_setup_branches(
             parameter_resolution=int(args.setup_param_resolution),
             configuration_space=configuration_space,
             candidate_schedule_dir=candidate_schedule_dir if aot_enabled else None,
-            candidate_schedule_rounds=(len(warmup_instances) + int(args.online_cases))
+            candidate_schedule_rounds=int(args.online_cases)
             * int(args.aot_max_selections_per_case)
             if aot_enabled
             else None,
@@ -288,109 +254,7 @@ def build_named_setup_branches(
             context_interaction_indices=learning_context.interaction_indices,
         )
         branches[method] = branch
-    requested_depths = {
-        method: int(study.specs_by_name[method].setup_warmup_cases)
-        for method in study.bandit_methods
-    }
-    grouped_methods: Dict[tuple[str, str, str, str, int], list[str]] = {}
-    for method in study.bandit_methods:
-        spec = study.specs_by_name[method]
-        key = (
-            str(spec.setup_kind),
-            str(spec.setup_space),
-            str(spec.candidate_sampling),
-            str(spec.setup_context),
-            int(spec.seed_offset),
-        )
-        grouped_methods.setdefault(key, []).append(method)
-    combined_rows: list[Mapping[str, Any]] = []
-    method_summaries: Dict[str, Mapping[str, Any]] = {}
-    method_trajectories: Dict[str, str] = {}
-    checkpoint_root = args.output_dir / "bandit_warmup_checkpoints"
-    trajectory_root = args.output_dir / "bandit_warmup_trajectories"
-    checkpoint_root.mkdir(parents=True, exist_ok=True)
-    trajectory_root.mkdir(parents=True, exist_ok=True)
-    evaluation_cursor = len(warmup_instances) * int(args.aot_max_selections_per_case)
-    for group_index, methods in enumerate(grouped_methods.values()):
-        source_method = methods[0]
-        source_spec = study.specs_by_name[source_method]
-        source_branch = branches[source_method]
-        depths = sorted({requested_depths[method] for method in methods})
-        max_depth = depths[-1]
-        checkpoints = {
-            depth: checkpoint_root / f"group_{group_index}_warmup_{depth}.npz"
-            for depth in depths
-        }
-        if 0 in checkpoints:
-            source_branch.policy.model.save_mutable_state(
-                checkpoints[0],
-                metadata={
-                    "stream_hash": str(stream_hash),
-                    "warmup_cases": 0,
-                    "source_method": source_method,
-                },
-            )
-        rows: list[Mapping[str, Any]] = []
-        trajectory_path = trajectory_root / f"group_{group_index}.jsonl"
-        previous_update = 0.0
-        with trajectory_path.open("w", encoding="utf-8") as trajectory:
-            pass
-        combined_rows.extend(rows)
-        for method in methods:
-            depth = requested_depths[method]
-            model = branches[method].policy.model
-            model.load_mutable_state(checkpoints[depth])
-            if aot_enabled:
-                model.set_candidate_schedule_cursor(evaluation_cursor)
-            summary = (
-                _empty_stream_summary()
-                if depth == 0
-                else _method_stream_summary(rows[:depth])
-            )
-            method_summaries[method] = summary
-            method_trajectories[method] = str(trajectory_path)
-            state_path = warmup_state_dir / f"{method}.npz"
-            model.save_mutable_state(
-                state_path,
-                metadata={
-                    "stream_hash": str(stream_hash),
-                    "summary": summary,
-                    "method": method,
-                    "setup_space": study.specs_by_name[method].setup_space,
-                    "setup_context": study.specs_by_name[method].setup_context,
-                    "warmup_cases": int(depth),
-                    "evaluation_schedule_cursor": int(evaluation_cursor),
-                },
-            )
-            warmup_state[method] = str(state_path)
-    with warmup_path.open("w", encoding="utf-8") as combined:
-        for row in combined_rows:
-            _write_json_line(combined, dict(row))
-    warmup_summary: Mapping[str, Any] = (
-        _empty_stream_summary()
-        if not any(requested_depths.values())
-        else method_summaries
-    )
-    _write_json(
-        args.output_dir / "warmup_progress.json",
-        {
-            "completed_native_instances": len(combined_rows),
-            "method_warmup_cases": requested_depths,
-            "summary": warmup_summary,
-            "trajectories": method_trajectories,
-        },
-    )
-    return ComposableSetupArtifacts(
-        branches=branches,
-        warmup_rows=tuple(combined_rows),
-        warmup_summary=warmup_summary,
-        warmup_trajectory={
-            "combined": str(warmup_path),
-            "by_method": method_trajectories,
-        },
-        warmup_state=warmup_state,
-        aot_enabled=aot_enabled,
-    )
+    return branches
 
 
 def validate_setup_branch_independence(
