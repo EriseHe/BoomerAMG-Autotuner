@@ -9,7 +9,6 @@ import numpy as np
 from .amg import (
     DIFFUSION_ADVECTION_CONTEXT_DIM,
     DIFFUSION_ADVECTION_CONTEXT_FIELDS,
-    build_context_diffusion_advection,
     build_context_diffusion_advection_from_matrix_kwargs,
     build_matrix_kwargs_difconv,
     stencil_0_difconv_rl,
@@ -60,38 +59,6 @@ def build_matrix_kwargs_scalar_anisotropic_diffusion_advection(
         az=az,
         rhs_seed=rhs_seed,
         rhs_type=rhs_type,
-    )
-
-
-def build_context_scalar_anisotropic_diffusion_advection(
-    *,
-    cx: float,
-    cy: float,
-    cz: float,
-    ax: float,
-    ay: float,
-    az: float,
-    nx: int,
-    ny: int,
-    nz: int,
-    grid_norm_div: float,
-    c_norm_div: float,
-    a_norm_div: float,
-) -> np.ndarray:
-    """Build diffusion and advection descriptors for one fixed-grid matrix."""
-    return build_context_diffusion_advection(
-        cx=cx,
-        cy=cy,
-        cz=cz,
-        ax=ax,
-        ay=ay,
-        az=az,
-        nx=nx,
-        ny=ny,
-        nz=nz,
-        grid_norm_div=grid_norm_div,
-        c_norm_div=c_norm_div,
-        a_norm_div=a_norm_div,
     )
 
 
@@ -186,7 +153,6 @@ __all__ = [
     "SCALAR_ANISOTROPIC_DIFFUSION_ADVECTION_CONTEXT_DIM",
     "SCALAR_ANISOTROPIC_DIFFUSION_ADVECTION_CONTEXT_FIELDS",
     "SCALAR_ANISOTROPIC_DIFFUSION_ADVECTION_INTERACTION_INDICES",
-    "build_context_scalar_anisotropic_diffusion_advection",
     "build_default_linucb_context",
     "build_matrix_kwargs_scalar_anisotropic_diffusion_advection",
     "stencil_0_scalar_anisotropic_diffusion_advection_rl",

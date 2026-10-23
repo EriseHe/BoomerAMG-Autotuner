@@ -240,22 +240,6 @@ def iter_actions_from_parameter_space_spec(parameter_spec: ParameterSpaceSpec):
     yield from rec(0, {})
 
 
-def enumerate_actions_from_parameter_space_spec(
-    parameter_spec: ParameterSpaceSpec,
-) -> Tuple[Dict[str, Any], ...]:
-    return tuple(iter_actions_from_parameter_space_spec(parameter_spec))
-
-
-def _pairwise_products(values: np.ndarray) -> np.ndarray:
-    if values.size <= 1:
-        return np.zeros(0, dtype=float)
-    out = []
-    for i in range(values.size):
-        for j in range(i + 1, values.size):
-            out.append(float(values[i] * values[j]))
-    return np.asarray(out, dtype=float)
-
-
 class GenericActionFeatureEncoder:
     def __init__(self, parameter_spec: ParameterSpaceSpec) -> None:
         self.parameter_spec = parameter_spec

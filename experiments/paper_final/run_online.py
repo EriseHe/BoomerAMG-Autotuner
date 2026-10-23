@@ -20,7 +20,6 @@ import subprocess
 import sys
 import time
 import traceback
-import gzip
 import hashlib
 from dataclasses import replace
 from types import SimpleNamespace
@@ -46,6 +45,7 @@ from experiments.paper_final.recovery.execution import CandidateRows
 from experiments.paper_final.recovery.retry_comparison import use_retry_rule
 from experiments.paper_final.recovery import metrics as sweep
 from experiments.paper_final.recovery import model_audit as screen
+from experiments.paper_final.recovery.system import request_performance_qos
 from experiments.paper_final.recovery.observations import observed_model
 from experiments.paper_final.recovery.controller_audit import audit_controller_counts
 from setup.space import DEFAULT_SETUP_PARAMS
@@ -54,86 +54,6 @@ from solve.controllers.common.state_encoder import STATE_ENCODING
 
 def source_hashes():
     return {name: file_hash(ROOT/name) for name in sorted(execution_source_paths())}
-
-
-def write_frozen_manifest():
-    destination = ROOT/"data/module1/frozen"
-    files = {str(p.relative_to(ROOT)):file_hash(p) for p in sorted(destination.rglob('*'))
-             if p.is_file() and p != destination/"manifest.json"}
-    dump(destination/"manifest.json", files)
-    inventory_path = ROOT/"data/manifest.json"
-    if inventory_path.exists():
-        inventory = read(inventory_path)
-        inventory["files"] = {name: sha for name, sha in inventory["files"].items()
-                              if not name.startswith("data/module1/frozen/")}
-        inventory["files"].update(files)
-        inventory["files"]["data/module1/frozen/manifest.json"] = file_hash(destination/"manifest.json")
-        dump(inventory_path, inventory)
-
-
-def prepare_frozen():
-    """Describe held-out blocks using the official sampler and released models."""
-    from experiments.paper_final.common.online_inputs import canonical_stream_bytes, sampling_signature
-    from experiments.paper_final.online.case_loop import _problem_stream_spec, _sampled_advection_range
-    destination = ROOT/"data/module1/frozen"
-    destination.mkdir(exist_ok=False)
-    (destination/"inputs").mkdir()
-    captures = dict(format_version=1, module=1, phase="frozen", streams={})
-    for family in ("diffusion", "advection"):
-        for grid in (40, 60, 80):
-            experiment = f"{family}_{grid}"
-            training_keys = set()
-            configurations = []
-            for seed in range(1, 7):
-                batch = "batch_01" if seed <= 3 else "batch_02"
-                source = Path(f"data/official/module1/batches/{batch}/{experiment}/seed_{seed}")
-                training_path = Path(f"data/module1/configurations/{experiment}/seed_{seed}.json")
-                for row in read_records(ROOT/source/"inputs.jsonl"):
-                    training_keys.add(digest(row["mkw"]))
-                raw = copy.deepcopy(read(ROOT/training_path))
-                raw.update(name=f"module1_frozen_{experiment}_seed{seed}",
-                    description="Frozen Module 1 deployment on new inputs 5001-6000; no learner updates.",
-                    output_dir=f"results/module1/frozen/{experiment}_{batch}/seed_{seed}",
-                    evaluation=dict(checkpoint_directory=str(source), training_configuration=str(training_path),
-                                    training_cases=5000, explore=False))
-                raw["stream"].update(cases=1000, online_cases=1000, instance_offset=625,
-                    cases_per_seed=125, group_take=1000, expected_sha256="")
-                raw["reporting"]["progress_every"] = 500
-                spec = parse_joint_experiment_config(raw)
-                args = runtime_config_from_spec(spec)
-                configure_paired_environment(args)
-                stream, manifest = build_paired_instance_stream(args)
-                payload = canonical_stream_bytes(stream)
-                sha = hashlib.sha256(payload).hexdigest()
-                assert sha == manifest["sha256"] and len(stream) == 1000
-                raw["stream"]["expected_sha256"] = sha
-                (destination/"inputs"/f"{sha}.jsonl.gz").write_bytes(gzip.compress(payload, mtime=0))
-                problem, shape, advection = _problem_stream_spec(args)
-                sampled = _sampled_advection_range(args, problem=problem)
-                captures["streams"][sha] = dict(file=f"{sha}.jsonl.gz", canonical_sha256=sha,
-                    compressed_sha256=file_hash(destination/"inputs"/f"{sha}.jsonl.gz"), cases=1000,
-                    sampling_signature=sampling_signature(args, problem=problem, grid=shape, advection=advection,
-                                                           sampled_advection_range=sampled), stream_manifest=manifest)
-                path = destination/f"configurations/{experiment}/seed_{seed}.json"
-                dump(path, raw)
-                configurations.append((seed, raw, stream))
-            new_keys = set()
-            for seed, raw, stream in configurations:
-                keys = {digest(mkw) for mkw, _ in stream}
-                assert len(keys) == 1000 and not keys.intersection(training_keys) and not keys.intersection(new_keys)
-                new_keys.update(keys)
-            for batch, seeds in ((1, range(1, 4)), (2, range(4, 7))):
-                dump(destination/f"suites/{experiment}_batch{batch}.json", dict(name=f"Module 1: frozen {experiment}",
-                     seeds=[dict(label=str(s), config=f"../configurations/{experiment}/seed_{s}.json") for s in seeds]))
-            print(f"Module 1 frozen {experiment}: 6,000 held-out inputs; no overlap with any of the six training streams.", flush=True)
-    dump(destination/"inputs/manifest.json", captures)
-    dump(destination/"protocol.json", dict(module=1, phase="frozen", training_module=1, training_cases=5000,
-         evaluation_global_cases=[5001, 6000], cases_per_seed=1000, seeds=list(range(1,7)),
-         families=["diffusion", "advection"], grids=[40,60,80], methods=factorial.METHODS,
-         model_updates=False, exploration=False, setup_confidence_rule="unchanged trained LinUCB LCB and failure-aware retries",
-         sampling="Next 125 child instances per each of the eight original streams, window [625,750), shuffled by the original seed",
-         native_sha256=sweep.native_hashes(), original_main_commit=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()))
-    write_frozen_manifest()
 
 
 def decode(raw, directory):
@@ -329,88 +249,6 @@ def freeze_live_runtimes(stage, runtimes, training_cases):
          model_updates=False, epsilon_exploration=False, measure_overhead=True, identities=identities))
 
 
-def prepare_all(suite_directory, output, *, cases=None):
-    output.mkdir(parents=True, exist_ok=False)
-    frozen = suite_directory.resolve() == (ROOT/"data/module1/frozen/suites").resolve()
-    if frozen:
-        dump(ROOT/"data/module1/frozen/source_manifest.json", source_hashes())
-    suites = sorted(suite_directory.glob('*.json'), key=lambda p:(p.name.startswith('advection'),p.name))
-    if not suites:
-        raise ValueError("No experiment suites found")
-    for suite in suites:
-        prepare(suite.resolve(), output/suite.stem, cases=cases)
-    dump(output/"queue.json", dict(suites=[p.stem for p in suites], suite_directory=str(suite_directory.resolve())))
-    dump(output/"status.json", dict(status="prepared", completed_suites=0, total_suites=len(suites)))
-    if frozen:
-        write_frozen_manifest()
-
-
-def run_all(output):
-    """Run the existing frozen suite entry point sequentially, three seeds at a time."""
-    queue = read(output/"queue.json")["suites"]
-    if read(output/"status.json")["status"] != "prepared":
-        raise ValueError("Use a fresh prepared suite queue")
-    guard = prevent_sleep()
-    try:
-        for position, name in enumerate(queue):
-            stage = output/name
-            dump(output/"status.json", dict(status="running", pid=os.getpid(), active_suite=name,
-                 completed_suites=position, total_suites=len(queue)))
-            with (stage/"launcher.log").open('x') as log:
-                result = subprocess.run([sys.executable,"-m","experiments.paper_final.run_online","run","--output",str(stage)],
-                    cwd=stage/"source", env=single_thread_environment(), stdout=log, stderr=subprocess.STDOUT)
-            if result.returncode:
-                raise RuntimeError(f"Suite failed: {name}; inspect its launcher.log and seed status")
-            print(f"Completed {position+1}/{len(queue)}: {name}", flush=True)
-        rows = []
-        for name in queue:
-            summary = read(output/name/"summary.json")
-            for row in summary["rows"]:
-                rows.append(dict(experiment=name.rsplit('_batch',1)[0], **row))
-        aggregates = []
-        for experiment in sorted({row["experiment"] for row in rows}):
-            for window in dict.fromkeys(row["window"] for row in rows):
-                for method in factorial.METHODS:
-                    selected = [r for r in rows if (r["experiment"],r["window"],r["method"]) == (experiment,window,method)]
-                    aggregates.append(dict(experiment=experiment,window=window,method=method,seeds=len(selected),
-                        final_failures=sum(r["failures"] for r in selected),
-                        **{field+"_"+stat:float(np.mean([r[field] for r in selected]) if stat=="mean"
-                            else np.std([r[field] for r in selected],ddof=1))
-                            for field in ("native_reduction_pct","inclusive_reduction_pct")
-                            for stat in (("mean","sd") if len(selected)>1 else ("mean",))}))
-        frozen = all(read(output/name/"protocol.json").get("frozen_evaluation") for name in queue)
-        combined = dict(module=1, phase="frozen" if frozen else "online", passed=True,
-                        rows=rows, aggregates=aggregates, frozen=frozen)
-        dump(output/"summary.json", combined)
-        write_csv(output/"summary.csv", rows)
-        write_csv(output/"aggregate.csv", aggregates)
-        if len(queue) == 12 and all(read(output/name/"protocol.json").get("frozen_evaluation")
-            and all(s["cases"] == 1000 for s in read(output/name/"protocol.json")["stages"].values()) for name in queue):
-            dump(ROOT/"data/module1/frozen/summary.json", combined)
-            write_csv(ROOT/"data/module1/frozen/summary.csv", rows)
-            write_csv(ROOT/"data/module1/frozen/aggregate.csv", aggregates)
-            for experiment in sorted({row["experiment"] for row in rows}):
-                values, seeds = [], []
-                for name in queue:
-                    if name.rsplit('_batch',1)[0] != experiment:
-                        continue
-                    with np.load(output/name/"paper_figures/plot_data.npz",allow_pickle=False) as payload:
-                        values.append(payload['timings_sec'])
-                        seeds.extend(payload['seeds'].tolist())
-                        fields = payload['timing_fields'].copy()
-                arrays = ROOT/f'data/module1/frozen/arrays/{experiment}.npz'
-                arrays.parent.mkdir(parents=True,exist_ok=True)
-                np.savez_compressed(arrays,seeds=np.asarray(seeds),methods=np.asarray(factorial.METHODS),
-                     timing_fields=fields,timings_sec=np.concatenate(values),problem_indices=np.arange(5001,6001))
-            write_frozen_manifest()
-        dump(output/"status.json", dict(status="complete", passed=True, completed_suites=len(queue),total_suites=len(queue),at=now()))
-    except BaseException:
-        dump(output/"status.json", dict(status="failed", traceback=traceback.format_exc()))
-        raise
-    finally:
-        stop_sleep_prevention(guard)
-
-
 def prepare(suite_path, output, *, cases=None):
     suite = read(suite_path)
     if set(suite) != {"name", "seeds"} or not suite["seeds"]:
@@ -600,7 +438,7 @@ def worker(output, label):
         protocol = read(output/"protocol.json")
         cases = protocol["stages"][label]["cases"]
         dump(stage/"environment.json", dict(pid=os.getpid(), executable=sys.executable,
-            python=sys.version, qos=screen.request_performance_qos(), mpi=MPI.Get_library_version(),
+            python=sys.version, qos=request_performance_qos(), mpi=MPI.Get_library_version(),
             threads={key: os.environ.get(key) for key in THREAD_KEYS}))
         warmup = [sweep.execute_default_case(first, i) for i in range(min(3, cases))]
         dump(stage/"native_warmup.json", dict(measured=False, learner_updates=0, records=warmup))
@@ -803,26 +641,15 @@ def launch(output):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=("prepare", "run", "worker", "analyze", "prepare-frozen", "prepare-all", "run-all"))
+    parser.add_argument("command", choices=("prepare", "run", "worker", "analyze"))
     parser.add_argument("--output", type=Path)
     parser.add_argument("--suite", type=Path)
     parser.add_argument("--label")
     parser.add_argument("--cases", type=int)
     args = parser.parse_args()
-    if args.command == "prepare-frozen":
-        prepare_frozen()
-        return
     if args.output is None:
         parser.error("This command requires --output")
     output = args.output.resolve()
-    if args.command == "prepare-all":
-        if args.suite is None:
-            parser.error("prepare-all requires --suite pointing to a suite directory")
-        prepare_all(args.suite.resolve(), output, cases=args.cases)
-        return
-    if args.command == "run-all":
-        run_all(output)
-        return
     if args.command == "prepare":
         if args.suite is None:
             parser.error("prepare requires --suite")

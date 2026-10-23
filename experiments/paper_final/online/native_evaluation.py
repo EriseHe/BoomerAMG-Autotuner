@@ -3,7 +3,6 @@
 from __future__ import annotations
 import time
 from typing import Any, Callable, Dict, List, Sequence, Tuple
-import numpy as np
 from hypre.bindings import (
     AMGNativeError,
     SolveStatus,
@@ -54,89 +53,6 @@ def _actual_failure_result(
         "iterations": int(iterations),
         "structural_fail": stage == "setup",
     }
-
-
-def solve_fixed_w_case(
-    *,
-    params: Dict[str, Any],
-    mkw: Dict[str, Any],
-    w: float,
-    sweeps_down: int,
-    sweeps_up: int,
-    solve_tol: float,
-    solve_max_cycles: int,
-) -> Dict[str, Any]:
-    started_at = time.perf_counter()
-    prep = None
-    solve_runtime = 0.0
-    residual_norm = float("nan")
-    iterations = 0
-    cycle_residuals: List[float] = []
-    cycle_times: List[float] = []
-    native_status = SolveStatus.CONTINUE
-    try:
-        params = augment_setup_params(params)
-        with create_env(**mkw) as env:
-            prep = env.prepare_rl(params=params)
-            residual_norm = float(env.r0)
-            for cycle in range(int(solve_max_cycles)):
-                (residual_norm, dt) = env.step_rl(
-                    relax_weight=float(w),
-                    sweeps_down=int(sweeps_down),
-                    sweeps_up=int(sweeps_up),
-                    tol=float(solve_tol),
-                    max_cycles=int(solve_max_cycles),
-                )
-                solve_runtime += float(dt)
-                iterations = cycle + 1
-                cycle_residuals.append(float(residual_norm))
-                cycle_times.append(float(dt))
-                native_status = env.last_step.status
-                if native_status is not SolveStatus.CONTINUE:
-                    break
-        failure_reason = (
-            ""
-            if native_status is SolveStatus.CONVERGED
-            else "max_cycles_reached_without_convergence"
-        )
-        return {
-            "runtime": float(prep.setup_runtime_sec + solve_runtime),
-            "setup_runtime": float(prep.setup_runtime_sec),
-            "solve_runtime": float(solve_runtime),
-            "infer_runtime": 0.0,
-            "failed": bool(failure_reason),
-            "failure_reason": str(failure_reason),
-            "attempt_status": "success" if not failure_reason else "nonconvergence",
-            "native_status": native_status.name.lower(),
-            "residual_norm": float(residual_norm),
-            "iterations": int(iterations),
-            "final_w": float(w),
-            "final_sweeps_down": int(sweeps_down),
-            "final_sweeps_up": int(sweeps_up),
-            "cycle_actions": [float(w)] * int(iterations),
-            "cycle_residuals": cycle_residuals,
-            "cycle_times": cycle_times,
-        }
-    except Exception as exc:
-        result = _actual_failure_result(
-            exc,
-            started_at=started_at,
-            setup_runtime=0.0 if prep is None else prep.setup_runtime_sec,
-            solve_runtime=solve_runtime,
-            iterations=iterations,
-            residual_norm=residual_norm,
-        )
-        result.update(
-            {
-                "final_w": float(w),
-                "final_sweeps_down": int(sweeps_down),
-                "final_sweeps_up": int(sweeps_up),
-                "cycle_actions": [],
-                "cycle_residuals": [],
-                "cycle_times": [],
-            }
-        )
-        return result
 
 
 def solve_schedule_case(
@@ -244,21 +160,6 @@ def solve_schedule_case(
         result["runtime"] += decision_runtime
         result["solve_runtime"] += decision_runtime
         return result
-
-
-def classify_no_rl_failure(
-    *, residual_norm: float, iterations: int, solver_tol: float, solver_max_iter: int
-) -> str:
-    reasons: List[str] = []
-    if not np.isfinite(float(residual_norm)):
-        reasons.append("non_finite_residual_norm")
-    elif float(residual_norm) > float(solver_tol):
-        reasons.append("residual_above_solver_tol")
-    if float(residual_norm) > float(solver_tol) and int(iterations) >= int(
-        solver_max_iter
-    ):
-        reasons.append("max_iter_reached_without_convergence")
-    return ";".join(reasons)
 
 
 def solve_no_rl_case(

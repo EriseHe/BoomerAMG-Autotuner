@@ -208,13 +208,6 @@ def _validate_specs(
     return specs
 
 
-def validate_composable_protocol(args: Any) -> tuple[ComposableMethodSpec, ...]:
-    """Compatibility validator returning the ordered method specs."""
-    return _validate_specs(
-        args, configuration_spaces=setup_configuration_spaces_from_args(args)
-    )
-
-
 def resolve_composable_study(args: Any) -> ComposableStudy:
     """Resolve all composable method-level ownership in one validated object."""
     configuration_spaces = setup_configuration_spaces_from_args(args)

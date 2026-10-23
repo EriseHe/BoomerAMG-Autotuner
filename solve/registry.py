@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Callable, Literal, Mapping
+from typing import Any, Callable, Literal
 
 from solve.controllers.common import (
     ControllerBundle,
@@ -71,29 +71,6 @@ class OnlineControllerBuildSpec:
     actions: SharedActionSpec
     algorithm: AlgorithmSpec
     trace_lambda: float | None = None
-
-
-def make_online_controller_spec(
-    *,
-    kind: OnlineSolveKind,
-    state: SolveStateSpec,
-    actions: SharedActionSpec,
-    algorithm_parameters: Mapping[str, Any],
-    trace_lambda: float | None = None,
-) -> OnlineControllerBuildSpec:
-    """Create a typed build spec from experiment-selected numeric values."""
-
-    registration = _online_registration(kind)
-    assert registration.spec_type is not None
-    algorithm = registration.spec_type(**dict(algorithm_parameters))
-    _resolve_trace_lambda(registration, trace_lambda)
-    return OnlineControllerBuildSpec(
-        kind=kind,
-        state=state,
-        actions=actions,
-        algorithm=algorithm,
-        trace_lambda=trace_lambda,
-    )
 
 
 def build_online_solve_controller(
@@ -174,7 +151,6 @@ __all__ = [
     "OnlineSolveKind",
     "SolveKindRegistration",
     "build_online_solve_controller",
-    "make_online_controller_spec",
     "normalize_solve_kind",
     "solve_kind_registration",
 ]

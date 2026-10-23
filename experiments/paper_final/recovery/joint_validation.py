@@ -1,53 +1,14 @@
 """Shared-state continuation and unchanged no-recovery solve-RL targets."""
 from __future__ import annotations
 
-import copy
-from dataclasses import asdict
 import time
 
-import numpy as np
-
-from experiments.paper_final.common.artifacts import digest
 from experiments.paper_final.online.configuration import evaluation_index_offset
 from experiments.paper_final.online.case_loop import report_online_outcome
 from experiments.paper_final.recovery.execution import EpisodeRecorder
 from experiments.paper_final.recovery.retry_comparison import run_deferred_case
 from experiments.paper_final.recovery import metrics as sweep
 from problems.registry import context_for_setup_method
-
-
-def copy_complete_prefix(source, target, checkpoint, *, previous_update):
-    """Restore learned state plus the previous-arm anchor omitted by checkpoints.
-
-    Both continuation models are freshly initialized before this function is
-    called. Checkpoints restore regression, binary failure targets, candidate
-    statistics, schedule position, and RNG. History also influences structured
-    candidate anchors, so preserve it explicitly instead of resetting it.
-    """
-    if source._last_phi is not None or source._last_arm is not None:
-        raise ValueError("The prefix has an unresolved action")
-    if target.t or target.history:
-        raise ValueError("Continuation target must be fresh")
-    target.load_mutable_state(checkpoint)
-    target.history = copy.deepcopy(source.history)
-    target.candidate_stats_history = copy.deepcopy(source.candidate_stats_history)
-    # This cache is derived immutable topology, not learned statistics. Start
-    # both fresh continuations with the same empty cache, leaving the prefix
-    # object untouched and unused for future selections.
-    target._local_neighbor_cache = {}
-    for key in ("A_inv", "b", "failure_b"):
-        np.testing.assert_array_equal(getattr(source,key),getattr(target,key))
-        if np.shares_memory(getattr(source,key),getattr(target,key)):
-            raise ValueError("Continuation shares mutable setup arrays")
-    if source.rng is target.rng or digest(source.rng.bit_generator.state) != digest(target.rng.bit_generator.state):
-        raise ValueError("Setup RNG was not independently restored")
-    if digest([asdict(s) for s in source.history]) != digest([asdict(s) for s in target.history]):
-        raise ValueError("Structured candidate history was not restored")
-    source_cursor = 0 if source._candidate_schedule is None else source._candidate_schedule.cursor
-    target_cursor = 0 if target._candidate_schedule is None else target._candidate_schedule.cursor
-    if target_cursor != source_cursor:
-        raise ValueError("Candidate schedule boundary differs")
-    return float(previous_update)
 
 
 def execute_learned(runtime, index, previous_update, *, feedback_mode, activation_case=1000):

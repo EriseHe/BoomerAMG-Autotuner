@@ -347,29 +347,3 @@ def run_policy(job, name, spec, bundle, *, tolerance=1e-6, max_cycles=50, profil
     ):
         raise AssertionError("Invalid timing")
     return row
-
-
-def verify_inputs(output, *, check_source=True):
-    saved = read(output / "prepared.json")
-    files = {
-        "protocol.json": saved["protocol_sha256"],
-        "inputs.json": saved["inputs_sha256"],
-        **{f"jobs_{p}.json": h for p, h in saved["jobs_sha256"].items()},
-        **saved["checkpoint_sha256"],
-        **saved.get("evidence_sha256", {}),
-    }
-    for path, expected in files.items():
-        if file_hash(output / path) != expected:
-            raise RuntimeError(f"Prepared input changed: {path}")
-    if check_source:
-        manifest = read(output / "source_manifest.json")
-        if saved.get("source_scope") == "official_submission":
-            from .frozen_inputs import execution_source_paths
-
-            if set(manifest) != execution_source_paths():
-                raise RuntimeError("Experiment source files changed after preparation")
-        for path, expected in manifest.items():
-            if not (ROOT / path).is_file() or file_hash(ROOT / path) != expected:
-                raise RuntimeError(
-                    f"Experiment source changed after preparation: {path}"
-                )

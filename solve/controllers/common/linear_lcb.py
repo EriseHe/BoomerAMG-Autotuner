@@ -49,17 +49,6 @@ def _greedy_cost_index(
     return int(tied[0])
 
 
-def _sandwich_quadratic(
-    projected_features: np.ndarray,
-    moment_covariance: np.ndarray,
-) -> np.ndarray:
-    """Evaluate one sandwich-covariance quadratic form per action."""
-
-    projected = np.asarray(projected_features, dtype=float)
-    covariance = np.asarray(moment_covariance, dtype=float)
-    return np.sum((projected @ covariance) * projected, axis=1)
-
-
 def _rank_one_accumulate(
     matrix: np.ndarray,
     left: np.ndarray,

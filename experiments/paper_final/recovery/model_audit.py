@@ -4,8 +4,6 @@ import numpy as np
 
 from experiments.paper_final.recovery.retry_comparison import FailureAwareRetryLinUCB
 
-from experiments.paper_final.recovery.system import request_performance_qos
-
 from problems.registry import context_for_setup_method
 
 def audit_final_model(runtime, records):

@@ -4,10 +4,9 @@ from __future__ import annotations
 import os
 from dataclasses import dataclass, replace
 from pathlib import Path
-from typing import Any, Callable, Dict, Mapping, Optional, Sequence, Tuple
+from typing import Any, Dict, Mapping, Optional, Sequence
 import numpy as np
 from setup.space import SetupConfigurationSpace, build_setup_param_space
-from setup.learners.linucb import run_same_context_setup_reselection
 from setup.learners.common import (
     AOTCandidateSchedule,
     FactorizedActionFeatureCache,
@@ -347,47 +346,3 @@ def build_online_linucb_branch(
     if configuration_space is None:
         validate_expected_setup_action_count(branch)
     return (branch, cfg)
-
-
-def run_bandit_step_test_final(
-    *,
-    policy: Any,
-    parameter_space: Dict[str, Any],
-    problem_context: np.ndarray | None = None,
-    context: np.ndarray | None = None,
-    solver_fn: Callable[[Dict[str, Any]], Dict[str, Any]],
-    fallback_solver_fn: Callable[[Dict[str, Any]], Dict[str, Any]] | None,
-    prev_update_est: float,
-    primary_is_default: bool = False,
-    failure_penalty_sec: float | None = None,
-) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str, float], int, float]:
-    """Run one setup decision through the shared PDE-context boundary.
-
-    ``context`` remains a compatibility alias for historical callers. New
-    setup/solve orchestration should use the same ``problem_context`` keyword
-    and values passed to the solve controller.
-    """
-    if problem_context is not None and context is not None:
-        raise ValueError("pass exactly one of problem_context or legacy context")
-    resolved_context = problem_context if problem_context is not None else context
-    if resolved_context is None:
-        raise ValueError("problem_context is required")
-    result = run_same_context_setup_reselection(
-        policy=policy,
-        parameter_space=parameter_space,
-        context=np.asarray(resolved_context, dtype=float),
-        solver_fn=solver_fn,
-        fallback_solver_fn=fallback_solver_fn,
-        default_params=DEFAULT_SETUP_PARAMS,
-        prev_update_est=float(prev_update_est),
-        primary_is_default=bool(primary_is_default),
-        max_learned_attempts=3,
-        failure_penalty_sec=failure_penalty_sec,
-    )
-    return (
-        dict(result.params),
-        dict(result.outcome),
-        dict(result.timing),
-        int(result.fallback_used),
-        float(result.update_runtime_sec),
-    )
