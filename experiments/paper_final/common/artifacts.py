@@ -138,29 +138,3 @@ def write_csv(path, rows):
         )
         writer.writeheader()
         writer.writerows(rows)
-
-
-def support_source_paths():
-    """Current shared implementations, including newly added untracked source."""
-    directories = (
-        Path(__file__).parent,
-        ROOT / "experiments/paper_final/online",
-        ROOT / "solve/core",
-        ROOT / "solve/controllers/common",
-    )
-    paths = {
-        str(path.relative_to(ROOT))
-        for directory in directories
-        for path in directory.glob("*.py")
-    }
-    paths.add("experiments/runtime.py")
-    return paths
-
-
-def source_differences(manifest):
-    """Report missing and changed source; an archived path is still a change."""
-    return [
-        name
-        for name, expected in manifest.items()
-        if not (ROOT / name).is_file() or file_hash(ROOT / name) != expected
-    ]

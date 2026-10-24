@@ -54,7 +54,7 @@ CANDIDATE_SCHEDULE_KEYS = {
 DEFAULT_STRUCTURED_QUOTAS = {
     "anchor": 64, "balanced_global": 192, "coordinate_local": 192, "sobol": 64,
 }
-LIN_TS_KEYS = {"relative_sampling_scale", "loss_scale_prior_sec"}
+LEGACY_LIN_TS_KEYS = {"relative_sampling_scale", "loss_scale_prior_sec"}
 PROBLEM_KEYS = {
     "kind",
     "grid",
@@ -324,34 +324,23 @@ class CandidateScheduleSpec:
 
 
 @dataclass(frozen=True)
-class LinTsSpec:
-    relative_sampling_scale: float = 0.15
-    loss_scale_prior_sec: float = 0.1
-
-    @classmethod
-    def from_mapping(cls, raw: Mapping[str, Any]) -> "LinTsSpec":
-        unknown = set(raw) - LIN_TS_KEYS
-        if unknown:
-            raise ValueError(f"Unknown setup.lin_ts keys: {sorted(unknown)}")
-        return cls(
-            relative_sampling_scale=float(raw.get("relative_sampling_scale", 0.15)),
-            loss_scale_prior_sec=float(raw.get("loss_scale_prior_sec", 0.1)),
-        )
-
-
-@dataclass(frozen=True)
 class SetupExperimentSpec:
     parameter_resolution: int
     action_space: str
     candidate_schedule: CandidateScheduleSpec
     configuration_spaces: Mapping[str, SetupConfigurationSpace]
-    lin_ts: LinTsSpec
 
     @classmethod
     def from_mapping(cls, raw: Mapping[str, Any]) -> "SetupExperimentSpec":
         unknown = set(raw) - SETUP_KEYS
         if unknown:
             raise ValueError(f"Unknown setup config keys: {sorted(unknown)}")
+        legacy_lin_ts = mapping(raw.get("lin_ts", {}), name="setup.lin_ts")
+        unknown_legacy = set(legacy_lin_ts) - LEGACY_LIN_TS_KEYS
+        if unknown_legacy:
+            raise ValueError(f"Unknown setup.lin_ts keys: {sorted(unknown_legacy)}")
+        for key in LEGACY_LIN_TS_KEYS & set(legacy_lin_ts):
+            float(legacy_lin_ts[key])
         raw_spaces = mapping(
             raw.get("configuration_spaces", {}), name="setup.configuration_spaces"
         )
@@ -373,9 +362,6 @@ class SetupExperimentSpec:
                 )
             ),
             configuration_spaces=spaces,
-            lin_ts=LinTsSpec.from_mapping(
-                mapping(raw.get("lin_ts", {}), name="setup.lin_ts")
-            ),
         )
 
 
@@ -576,8 +562,6 @@ class JointExperimentRuntimeConfig:
     setup_candidate_mode: str
     aot_max_selections_per_case: int
     aot_schedule_chunk_rounds: int
-    lin_ts_relative_sampling_scale: float
-    lin_ts_loss_scale_prior: float
     weights: str
     action_rbf_centers: str
     action_rbf_sigma: float
@@ -648,7 +632,7 @@ def parse_joint_experiment_config(
         raise ValueError(
             "The official online study uses rollback_unrecovered without a penalty"
         )
-    if stream.warmup_cases or any((m.setup_warmup_cases for m in methods)):
+    if stream.warmup_cases:
         raise ValueError(
             "The official online study learns setup from the first problem"
         )
@@ -716,8 +700,6 @@ def runtime_config_from_spec(spec: JointExperimentSpec) -> JointExperimentRuntim
         aot_structured_quotas=spec.setup.candidate_schedule.structured_quotas,
         aot_max_selections_per_case=spec.setup.candidate_schedule.max_selections_per_case,
         aot_schedule_chunk_rounds=spec.setup.candidate_schedule.chunk_rounds,
-        lin_ts_relative_sampling_scale=spec.setup.lin_ts.relative_sampling_scale,
-        lin_ts_loss_scale_prior=spec.setup.lin_ts.loss_scale_prior_sec,
         weights=csv(actions.weights),
         action_rbf_centers=csv(actions.rbf_centers),
         action_rbf_sigma=actions.rbf_sigma,

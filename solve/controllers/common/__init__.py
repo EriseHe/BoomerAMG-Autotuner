@@ -13,7 +13,6 @@ from .linear_lcb import (
     _json_dataclass,
     _rank_one_accumulate,
     _rank_one_inverse_accumulate,
-    _sandwich_quadratic,
 )
 from .state_encoder import (
     CANONICAL_PROBLEM_CONTEXT,

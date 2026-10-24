@@ -97,10 +97,6 @@ def normalize_setup_context_mode(mode: str) -> str:
     return token
 
 
-def learning_context_for_problem(kind: str) -> ProblemLearningContext:
-    return _LEARNING_CONTEXTS[normalize_problem_kind(kind)]
-
-
 def learning_context_for_setup(
     problem_kind: str,
     setup_kind: str,
@@ -179,7 +175,6 @@ __all__ = [
     "SETUP_CONTEXT_MODES",
     "SUPPORTED_PROBLEM_KINDS",
     "context_for_setup_method",
-    "learning_context_for_problem",
     "learning_context_for_setup",
     "normalize_problem_kind",
     "normalize_setup_context_mode",

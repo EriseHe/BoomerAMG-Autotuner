@@ -25,7 +25,7 @@
     }
   },
   "files": {
-    "data/README.md": "4235f2d68edcc85e6da9c3670b26f9b31dc21e6947a239a7671d34b63d53a91d",
+    "data/README.md": "f6eb809593ea24afafa2b6307ba895fac6db6b33a51708a45e84c164474bd34f",
     "data/module1/aggregate.csv": "0b9ca633d240341056b892796994e581f7163a8bcb2da6cf0cfac036bfc704e9",
     "data/module1/arrays/advection_40.npz": "0d964900394a5089e7c3da831c5bbc777d0e605af4ef4d37ac2b4ae7565c516c",
     "data/module1/arrays/advection_60.npz": "078e55a134b928ce8cc248efc07a07c28e9c7c119d9a2e1c9c65d4d5d8c0d7d4",

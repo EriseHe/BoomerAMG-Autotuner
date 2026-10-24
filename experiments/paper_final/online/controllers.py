@@ -1,6 +1,7 @@
-"""Build the setup feature map shared by setup selection and solve control."""
+"""Build solve-context setup descriptors from the shared parameter specification."""
 
 from __future__ import annotations
+from dataclasses import replace
 from setup.learners.common import GenericActionFeatureEncoder
 from setup.space import (
     SetupConfigurationSpace,
@@ -28,4 +29,14 @@ def make_setup_feature_encoder(
         ),
         numeric_grids=configuration_space.numeric_grids if configuration_space else None,
     )
-    return GenericActionFeatureEncoder(parameter_spec)
+    # Preserve categorical one-hot entries and numerical distances. The setup
+    # learner owns its original encoder; only solve-context scaling changes.
+    parameters = []
+    for parameter in parameter_spec.parameters:
+        if parameter.kind in ("continuous", "integer"):
+            values = (*parameter.values, parameter.default)
+            low, high = min(values), max(values)
+            parameter = replace(parameter, center=(low + high) / 2.,
+                                scale=(high - low) / 2. if high > low else 1.)
+        parameters.append(parameter)
+    return GenericActionFeatureEncoder(replace(parameter_spec, parameters=tuple(parameters)))

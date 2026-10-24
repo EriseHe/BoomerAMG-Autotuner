@@ -141,7 +141,6 @@ class SolveStateEncoder:
         cycle: int,
         last_weight: float,
         last_cycle_time: float,
-        first_cycle_time: float | None,
         setup_params: Dict[str, Any] | None = None,
         problem_context: Sequence[float] | np.ndarray | None = None,
     ) -> np.ndarray:
@@ -166,21 +165,17 @@ class SolveStateEncoder:
         gap_fraction = (log_residual - self._log_tolerance) / initial_gap
         log_ratio = (log_residual - log_previous_residual) / initial_gap
         cycle_fraction = float(cycle) / float(self.max_cycles)
-        # The first native cycle sets a fixed reference for this attempt.
-        # Before it executes, no timing observation is available.
+        # Absolute native cycle time, logarithmically scaled by a fixed 1 ms.
+        # Before the first cycle, no timing observation is available.
         if cycle == 0:
             cycle_time = 0.0
         else:
-            if (first_cycle_time is None
-                    or not math.isfinite(float(first_cycle_time))
-                    or float(first_cycle_time) <= 0.0):
-                raise ValueError("The first native cycle time must be finite and positive")
             previous_time = float(last_cycle_time)
             if not math.isfinite(previous_time) or previous_time < 0.0:
                 raise ValueError("The preceding native cycle time must be finite and nonnegative")
-            cycle_time = previous_time / float(first_cycle_time)
+            cycle_time = math.log1p(previous_time / 0.001)
             if not math.isfinite(cycle_time):
-                raise ValueError("The native cycle-time ratio must be finite")
+                raise ValueError("The logarithmic native cycle time must be finite")
         weight = (float(last_weight) - self._weight_center) / self._weight_scale
 
         if self.problem_context_mode in STRESS_CONTEXT_FIELDS:
@@ -272,6 +267,15 @@ class SolveStateEncoder:
         parameters = np.zeros(self.feature_dim, dtype=float)
         parameters[0] = float(value)
         return parameters
+
+    def metadata(self) -> dict[str, Any]:
+        return dict(
+            context_variant="normalized_setup_cycle_time", cycle_time_mode="log",
+            cycle_time_normalization="log1p_native_seconds_over_fixed_reference",
+            cycle_time_reference_sec=0.001, cycle_time_logarithm="natural",
+            cycle_time_clipping=False, initial_cycle_time_feature=0.0,
+            feature_dim=self.feature_dim,
+        )
 
     def _context_from_matrix_kwargs(
         self,

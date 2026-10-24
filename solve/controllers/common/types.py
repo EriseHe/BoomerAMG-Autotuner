@@ -67,9 +67,6 @@ class ControllerBundle:
         compare=False,
     )
 
-    def as_legacy_tuple(self) -> tuple[Any, SolveStateEncoder]:
-        return self.controller, self.encoder
-
     def run_case(self, case: OnlineSolveCase) -> dict[str, Any]:
         """Run one solve episode through the shared transactional adapter."""
 

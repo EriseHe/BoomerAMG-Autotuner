@@ -20,7 +20,7 @@ from matplotlib.backends.backend_pdf import PdfPages
 import numpy as np
 
 from experiments.paper_final.plot_online import sha
-from experiments.paper_final.matched_policy.configuration import METHODS, LABELS
+from experiments.paper_final.matched_policy.configuration import METHODS
 from experiments.paper_final.matched_policy.selection import trial_key, verify_coverage
 
 from experiments.paper_final.common.figure_style import matched_figures

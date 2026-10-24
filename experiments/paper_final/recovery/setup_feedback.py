@@ -8,8 +8,16 @@ import numpy as np
 
 from hypre.bindings import RecoveryOutcome, execute_attempt
 from setup.learners.linucb.learner import SharedLinUCB
-from setup.learners.linucb.setup_reselection import SetupReselectionResult
 from setup.space import DEFAULT_SETUP_PARAMS
+
+
+@dataclass(frozen=True)
+class SetupReselectionResult:
+    params: dict[str, object]
+    outcome: dict[str, object]
+    timing: dict[str, float]
+    fallback_used: int
+    update_runtime_sec: float
 
 
 @dataclass(frozen=True)
