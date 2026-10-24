@@ -4,6 +4,25 @@ Run commands from the repository root after installing the package and building
 HYPRE. Use a new output directory for each run. Active configurations are in
 `configs/`; the state encoding is `shared_context`.
 
+## Complete study
+
+```sh
+python -m experiments.run_all --output results/full_study
+```
+
+This runs all six Module 1 family/grid suites in two batches each, Module 2
+using the resulting six Diffusion 60 joint models, and both Module 3 batches.
+Module 1 includes both its learning and frozen parts. Three seeds run
+concurrently within each online batch; batches and modules run sequentially.
+The Module 1 order is Advection 60, 40, 80, then Diffusion 40, 60, 80.
+
+Use `--dry-run` to inspect the full command plan without starting a run.
+Use `--module2-source advection_60` to select another Module 1 family/grid
+for Module 2. Its paths always refer to the new study's Module 1 outputs.
+The wrapper uses the existing module commands, records their logs and status,
+and stops on an error or a change to source/configuration files. Choose a new
+output directory for each study; interrupted streams are not resumed.
+
 ## Module 1: online learning and frozen evaluation
 
 Each seed runs one continuous stream in a single worker process:
@@ -37,8 +56,9 @@ and both together as the `full` stream.
 
 The configurations use confidence coefficient 2, 1,024 setup candidates,
 relaxation weights 1–3, tolerance 10⁻⁶, and a 50-cycle cap. The solve controller
-uses the same setup descriptors as the bandit, tolerance-based residual
-normalization, and cycle time relative to the first native cycle of the attempt.
+uses the shared categorical setup encoding with fixed-range numerical
+descriptors, tolerance-based residual normalization, and
+`log(1 + preceding_cycle_seconds / 0.001)` for the cycle-time context.
 
 ## Module 2: matched policy evaluation
 
