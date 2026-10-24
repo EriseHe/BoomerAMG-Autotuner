@@ -43,7 +43,7 @@ from experiments.paper_final.online.methods import (
 )
 from experiments.paper_final.online import factorial
 from experiments.paper_final.recovery.execution import CandidateRows
-from experiments.paper_final.recovery.retry_comparison import use_retry_rule
+from experiments.paper_final.recovery.setup_feedback import FailureAwareRetryLinUCB
 from experiments.paper_final.recovery import metrics as sweep
 from experiments.paper_final.recovery import model_audit as screen
 from experiments.paper_final.recovery.observations import observed_model
@@ -251,7 +251,12 @@ def prepare_evaluation(runtime, stage):
                     window = min(size, 2*window)
             if last["problem_index"] != evaluation.training_cases:
                 raise ValueError("Training trajectory is incomplete")
-            histories[name] = dict(last_attempt=last["outcome"]["primary_attempts"][-1],
+            outcome = last["outcome"]
+            last_observation = outcome["primary_attempts"][-1]
+            if outcome.get("fallback_learning_cost") is not None:
+                last_observation = dict(arm_index=outcome["fallback_arm_index"],
+                                        learning_cost=outcome["fallback_learning_cost"])
+            histories[name] = dict(last_attempt=last_observation,
                                    trajectory=key, trajectory_sha256=inventory[key]["sha256"])
     training_inputs = list(read_records(source/"inputs.jsonl"))
     old = {digest(r["mkw"]) for r in training_inputs}
@@ -313,7 +318,7 @@ def freeze_live_runtimes(stage, runtimes, training_cases):
             directory = stage/"frozen_initial_bandit_states"
             directory.mkdir(exist_ok=True)
             model.save_mutable_state(directory/f"{name}.npz")
-            for field in ("update", "defer_cost", "resolve_cost"):
+            for field in ("update", "defer_cost", "resolve_cost", "update_default_fallback"):
                 setattr(model, field, reject_frozen_update)
             for field in ("A_inv", "b", "failure_b"):
                 getattr(model, field).setflags(write=False)
@@ -427,6 +432,7 @@ def prepare(suite_path, output, *, cases=None):
         rl_update_time_charge="none; controller overhead is evaluation only",
         solve_state_encoding=STATE_ENCODING,
         setup_failure_observation_retention=True, failure_score_beta=2.0,
+        setup_fallback_feedback="successful_default_only",
         shared_prefix=False, copied_measurements=False, exact_default=DEFAULT_SETUP_PARAMS,
         learning_start="Both setup learners and both LSTDQ controllers start cold at input 1",
         concurrency="One single-thread worker per seed; four methods serially in balanced permutation blocks",
@@ -531,7 +537,7 @@ def initialize(output, label):
                                   bundle=solve.controller_bundles.get(method.name))
         if method.name in setup.branches:
             runtime.branch = setup.branches[method.name]
-            model = observed_model(use_retry_rule(runtime.branch.policy.model, "failure_model_adjacent"))
+            model = observed_model(FailureAwareRetryLinUCB.from_runtime_model(runtime.branch.policy.model))
             runtime.branch.policy.model = model
             runtime.rows = CandidateRows(model, cases=len(root.stream), attempts=3, directory=stage/"unused")
             if evaluation:
@@ -539,7 +545,7 @@ def initialize(output, label):
                 from setup.learners.linucb.learner import SharedLinUCBStep
                 last = read(stage/"training_history.json")[method.name]["last_attempt"]
                 model.history = [SharedLinUCBStep(model.t, last["arm_index"], last["learning_cost"], 0., 0.)]
-                for field in ("update", "defer_cost", "resolve_cost"):
+                for field in ("update", "defer_cost", "resolve_cost", "update_default_fallback"):
                     setattr(model, field, reject_frozen_update)
                 for field in ("A_inv", "b", "failure_b"):
                     getattr(model, field).setflags(write=False)

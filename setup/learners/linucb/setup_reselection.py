@@ -15,6 +15,7 @@ from hypre.bindings import (
     execute_attempt,
 )
 from hypre.bindings.recovery import validate_failure_penalty
+from .learner import SharedLinUCB
 
 
 @dataclass(frozen=True)
@@ -104,10 +105,10 @@ def run_same_context_setup_reselection(
 ) -> SetupReselectionResult:
     """Update each setup immediately with its own T on success, 2T on failure.
 
-    Module 1 retries construction failures with another learned setup; solve
-    failures go to default. Module 06 uses the same feedback with a shared
-    three-attempt budget for both kinds of failure. The optional final-failure
-    penalty configures the solve controller only, not the setup target.
+    Construction failures may trigger setup reselection; solve failures go to
+    Default. A successful Default fallback supplies its own measured cost to
+    LinUCB. The optional final-failure penalty configures the solve controller
+    only, not the setup target.
     """
     if int(max_learned_attempts) < 1:
         raise ValueError("max_learned_attempts must be at least one")
@@ -118,6 +119,7 @@ def run_same_context_setup_reselection(
     attempts, rows, arms = [], [], []
     select_total = loss_total = update_total = 0.0
     fallback = embedded = None
+    fallback_observation = None
     params, info, select_sec = _run_selection(
         policy, context=context, parameter_space=parameter_space,
     )
@@ -154,6 +156,12 @@ def run_same_context_setup_reselection(
         elif not attempts[-1].succeeded and not primary_is_default and fallback_solver_fn is not None:
             fallback = execute_attempt(lambda: fallback_solver_fn(dict(default_params)),
                                        require_valid_observation=True)
+        if can_update and isinstance(model, SharedLinUCB) and fallback is not None and fallback.succeeded:
+            started = time.perf_counter_ns()
+            fallback_observation = model.update_default_fallback(
+                context, default_params, fallback.end_to_end_runtime_sec,
+            )
+            update_total += (time.perf_counter_ns() - started) / 1.0e9
     except Exception:
         cancel = getattr(model, "cancel_pending", None)
         if callable(cancel):
@@ -168,7 +176,9 @@ def run_same_context_setup_reselection(
         selected_arm_index=arms[-1], failure_feedback_mode="attempt_2T",
         failure_penalty_sec=0.0, bandit_learning_cost=rows[-1]["learning_cost"],
         bandit_update_committed=can_update,
-        bandit_observation_count=len(attempts) if can_update else 0,
+        bandit_observation_count=(len(attempts) + int(fallback_observation is not None)) if can_update else 0,
+        fallback_learning_cost=None if fallback_observation is None else fallback_observation.loss,
+        fallback_arm_index=None if fallback_observation is None else fallback_observation.arm_index,
         controller_update_committed=bool(not outcome["failed"] and
             attempts[-1].result.get("controller_update_committed", False)),
     )

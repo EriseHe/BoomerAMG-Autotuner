@@ -346,9 +346,16 @@ def validate_recovery_stream(
         )
         bandit_observation_count += int(outcome.get("bandit_observation_count", 0))
         if expect_bandit_updates:
+            fallback_cost = outcome.get("fallback_learning_cost")
+            fallback_observations = int(fallback_cost is not None)
             if (not outcome.get("bandit_update_committed", False)
-                or outcome.get("bandit_observation_count") != primary_attempts):
+                or outcome.get("bandit_observation_count") != primary_attempts + fallback_observations):
                 raise AssertionError(f"record {index}: missing per-attempt setup update")
+            if fallback_observations:
+                expected_cost = sum(outcome[f"fallback_{part}_runtime"] for part in ("setup", "solve", "controller"))
+                if (fallback_status != "success" or not np.isfinite(fallback_cost)
+                        or not np.isclose(fallback_cost, expected_cost)):
+                    raise AssertionError(f"record {index}: invalid fallback setup target")
             for attempt in outcome["primary_attempts"]:
                 target = attempt["attempt_cost"] * (1 if attempt["status"] == "success" else 2)
                 if not np.isfinite(target) or target < 0 or not np.isclose(attempt["learning_cost"], target):

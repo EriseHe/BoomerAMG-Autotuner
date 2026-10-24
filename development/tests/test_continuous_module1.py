@@ -78,7 +78,7 @@ class ContinuousModuleOneTests(unittest.TestCase):
             runner.freeze_live_runtimes(stage, {'bandit_lstdq': runtime}, 5000)
             self.assertEqual(original, (id(runtime), id(model), id(controller), id(model.history), id(model.rng), id(controller.rng)))
             self.assertFalse(runtime.args.evaluation.explore)
-            for field in ('update', 'defer_cost', 'resolve_cost'):
+            for field in ('update', 'defer_cost', 'resolve_cost', 'update_default_fallback'):
                 with self.assertRaisesRegex(RuntimeError, 'update was attempted'):
                     getattr(model, field)()
             with self.assertRaisesRegex(RuntimeError, 'update was attempted'):

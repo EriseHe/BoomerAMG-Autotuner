@@ -4,10 +4,9 @@ from __future__ import annotations
 import os
 from dataclasses import dataclass, replace
 from pathlib import Path
-from typing import Any, Callable, Dict, Mapping, Optional, Sequence, Tuple
+from typing import Any, Dict, Mapping, Optional, Sequence
 import numpy as np
 from setup.space import SetupConfigurationSpace, build_setup_param_space
-from setup.learners.linucb import run_same_context_setup_reselection
 from setup.learners.common import (
     AOTCandidateSchedule,
     FactorizedActionFeatureCache,
@@ -47,7 +46,7 @@ def validate_expected_setup_action_count(branch: BranchRun) -> int:
 
 
 @dataclass(frozen=True)
-class TestFinalBanditConfig:
+class SetupBanditConfig:
     alpha: float
     l2: float
     candidate_pool_size: int
@@ -62,8 +61,8 @@ class TestFinalBanditConfig:
     tune7_candidate_elite_fraction: float
 
 
-def default_test_final_bandit_config_from_env() -> TestFinalBanditConfig:
-    return TestFinalBanditConfig(
+def setup_bandit_config_from_env() -> SetupBanditConfig:
+    return SetupBanditConfig(
         alpha=float(os.environ.get("ALPHA", "1.0")),
         l2=float(os.environ.get("L2", "1.0")),
         candidate_pool_size=int(os.environ.get("CANDIDATE_POOL_SIZE", "512")),
@@ -125,7 +124,7 @@ class GenericBanditPolicy:
         )
 
 
-def build_test_final_bandit_policy(
+def build_setup_bandit_policy(
     *,
     method: str,
     tune_dim: int,
@@ -136,7 +135,7 @@ def build_test_final_bandit_policy(
     default_arm_index: int,
     parameter_spec: Optional[ParameterSpaceSpec],
     tune7_variant: str,
-    cfg: TestFinalBanditConfig,
+    cfg: SetupBanditConfig,
     candidate_schedule: AOTCandidateSchedule | None = None,
     action_feature_cache: FactorizedActionFeatureCache | None = None,
     candidate_sampling: str = "uniform512",
@@ -224,14 +223,14 @@ def build_online_linucb_branch(
     candidate_sampling: str = "uniform512",
     context_dim: int = DIFCONV_CONTEXT_DIM,
     context_interaction_indices: Sequence[int] = (1, 2, 3, 4),
-) -> tuple[BranchRun, TestFinalBanditConfig]:
+) -> tuple[BranchRun, SetupBanditConfig]:
     """Build a canonical online setup-bandit branch without a Gym dependency."""
     if learner_kind != "linucb":
         raise ValueError("The official setup learner is LinUCB")
     learner_token = "linucb"
     learner_method = "linucb"
     family = "Shared LinUCB"
-    cfg = default_test_final_bandit_config_from_env()
+    cfg = setup_bandit_config_from_env()
     if candidate_pool_size is not None:
         if type(candidate_pool_size) is not int or candidate_pool_size < 1:
             raise ValueError("candidate_pool_size must be a positive integer")
@@ -314,7 +313,7 @@ def build_online_linucb_branch(
                     "structured_sobol_size": structured_quotas["sobol"],
                 } if structured_quotas is not None else {}),
             )
-        policy = build_test_final_bandit_policy(
+        policy = build_setup_bandit_policy(
             method=learner_method,
             tune_dim=int(tune_dim),
             actions=setup_space.actions,
@@ -347,47 +346,3 @@ def build_online_linucb_branch(
     if configuration_space is None:
         validate_expected_setup_action_count(branch)
     return (branch, cfg)
-
-
-def run_bandit_step_test_final(
-    *,
-    policy: Any,
-    parameter_space: Dict[str, Any],
-    problem_context: np.ndarray | None = None,
-    context: np.ndarray | None = None,
-    solver_fn: Callable[[Dict[str, Any]], Dict[str, Any]],
-    fallback_solver_fn: Callable[[Dict[str, Any]], Dict[str, Any]] | None,
-    prev_update_est: float,
-    primary_is_default: bool = False,
-    failure_penalty_sec: float | None = None,
-) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str, float], int, float]:
-    """Run one setup decision through the shared PDE-context boundary.
-
-    ``context`` remains a compatibility alias for historical callers. New
-    setup/solve orchestration should use the same ``problem_context`` keyword
-    and values passed to the solve controller.
-    """
-    if problem_context is not None and context is not None:
-        raise ValueError("pass exactly one of problem_context or legacy context")
-    resolved_context = problem_context if problem_context is not None else context
-    if resolved_context is None:
-        raise ValueError("problem_context is required")
-    result = run_same_context_setup_reselection(
-        policy=policy,
-        parameter_space=parameter_space,
-        context=np.asarray(resolved_context, dtype=float),
-        solver_fn=solver_fn,
-        fallback_solver_fn=fallback_solver_fn,
-        default_params=DEFAULT_SETUP_PARAMS,
-        prev_update_est=float(prev_update_est),
-        primary_is_default=bool(primary_is_default),
-        max_learned_attempts=3,
-        failure_penalty_sec=failure_penalty_sec,
-    )
-    return (
-        dict(result.params),
-        dict(result.outcome),
-        dict(result.timing),
-        int(result.fallback_used),
-        float(result.update_runtime_sec),
-    )

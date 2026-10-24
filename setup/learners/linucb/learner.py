@@ -1177,6 +1177,42 @@ class SharedLinUCB:
         self._last_phi = None
         self._last_arm = None
 
+    def update_default_fallback(
+        self, context: Iterable[float], params: Mapping[str, Any], loss: float
+    ) -> SharedLinUCBStep:
+        """Update the setup model after a successful Default fallback."""
+        if self._last_phi is not None or self._last_arm is not None:
+            raise RuntimeError("Cannot update Default fallback with pending feedback")
+        x = self._validate_x(np.asarray(list(context), dtype=float))
+        cost = float(loss)
+        if not np.isfinite(cost) or cost < 0.0:
+            raise ValueError("Default fallback cost must be finite and nonnegative")
+        index_of = getattr(self.actions, "index_of", None)
+        if callable(index_of):
+            arm = int(index_of(params))
+        else:
+            if self._action_key_to_arm is None:
+                self._action_key_to_arm = {
+                    action_key_from_parameter_space_spec(action, self.parameter_spec): i
+                    for i, action in enumerate(self.actions)
+                }
+            key = action_key_from_parameter_space_spec(params, self.parameter_spec)
+            if key not in self._action_key_to_arm:
+                raise ValueError("Default fallback configuration is not in the setup configuration space")
+            arm = self._action_key_to_arm[key]
+        self._last_phi = self._phi(x, arm)
+        self._last_arm = arm
+        self.history.append(SharedLinUCBStep(
+            t=self.t + 1, arm_index=arm, loss=float("nan"),
+            pred_mean=float("nan"), pred_uncert=float("nan"),
+        ))
+        self.candidate_stats_history.append({
+            "strategy": "default_fallback", "candidate_count": 1,
+            "elite": 0, "local": 0, "global": 0,
+        })
+        self.update(cost)
+        return self.history[-1]
+
     def cancel_pending(self) -> None:
         """Discard a selected arm when its solve outcome was never observed."""
         if self._last_phi is None or self._last_arm is None:

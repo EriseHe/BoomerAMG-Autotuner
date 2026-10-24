@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from experiments.paper_final.recovery.retry_comparison import DeferredCostLinUCB, run_deferred_case
+from experiments.paper_final.recovery.setup_feedback import DeferredCostLinUCB, run_deferred_case
 from experiments.paper_final.recovery.metrics import VARIANT
 from experiments.paper_final.recovery.execution import EpisodeRecorder
 

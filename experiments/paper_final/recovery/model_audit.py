@@ -2,7 +2,7 @@
 from __future__ import annotations
 import numpy as np
 
-from experiments.paper_final.recovery.retry_comparison import FailureAwareRetryLinUCB
+from experiments.paper_final.recovery.setup_feedback import FailureAwareRetryLinUCB
 
 from experiments.paper_final.recovery.system import request_performance_qos
 
@@ -20,6 +20,11 @@ def audit_final_model(runtime, records):
             features.append(model._phi(np.asarray(context), attempt["arm_index"]))
             targets.append(attempt["learning_cost"])
             failures.append(float(attempt["status"] != "success"))
+        fallback_cost = row["outcome"].get("fallback_learning_cost")
+        if fallback_cost is not None:
+            features.append(model._phi(np.asarray(context), row["outcome"]["fallback_arm_index"]))
+            targets.append(fallback_cost)
+            failures.append(0.0)
     phi = np.asarray(features)
     expected_inverse = np.linalg.inv(model.l2_reg*np.eye(model.d_phi) + phi.T @ phi)
     if model.t != len(features) or not np.allclose(model.A_inv, expected_inverse, rtol=1e-7, atol=1e-9):

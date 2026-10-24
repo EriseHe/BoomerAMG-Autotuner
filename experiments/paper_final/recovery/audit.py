@@ -25,10 +25,21 @@ def audit(records, variant, *, feedback_mode="attempt_2T", learn=True):
         if variant.default_fallback and attempts[-1]["status"] != "success" and not out["fallback_used"]:
             raise ValueError("Missing required default fallback after learned failure")
         committed = not out["failed"]
-        if learn and (not out["bandit_update_committed"] or out["bandit_observation_count"] != len(attempts)):
-            raise ValueError("Every valid learned attempt must update the setup model")
+        fallback_observed = learn and out["fallback_used"] and out["fallback_status"] == "success"
+        expected_observations = len(attempts) + int(fallback_observed)
+        if learn and (not out["bandit_update_committed"] or out["bandit_observation_count"] != expected_observations):
+            raise ValueError("Setup observations must include learned attempts and a successful fallback")
         if not learn and (out["bandit_update_committed"] or out["bandit_observation_count"] or out["controller_update_committed"]):
             raise ValueError("Frozen evaluation updated a learner")
+        fallback_cost = out.get("fallback_learning_cost")
+        fallback_arm = out.get("fallback_arm_index")
+        if fallback_observed:
+            expected_cost = sum(out[f"fallback_{part}_runtime"] for part in ("setup", "solve", "controller"))
+            if (fallback_cost is None or fallback_arm is None or fallback_arm < 0
+                    or not math.isclose(fallback_cost, expected_cost, rel_tol=1e-12)):
+                raise ValueError("Successful fallback must learn its own measured cost")
+        elif fallback_cost is not None or fallback_arm is not None:
+            raise ValueError("Unexpected fallback training observation")
         if out["failure_feedback_mode"] != feedback_mode:
             raise ValueError("Setup feedback differs from the requested protocol")
         for i, attempt in enumerate(attempts):

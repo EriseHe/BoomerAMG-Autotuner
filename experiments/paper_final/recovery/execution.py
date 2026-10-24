@@ -9,10 +9,8 @@ from typing import Any
 
 import numpy as np
 
-from hypre.bindings import AttemptOutcome, RecoveryOutcome, execute_attempt
+from hypre.bindings import RecoveryOutcome, execute_attempt
 from setup.learners.common import AOTCandidateSchedule
-from setup.learners.linucb.setup_reselection import SetupReselectionResult
-from setup.space import DEFAULT_SETUP_PARAMS
 from .protocol import EXTRA_CANDIDATE_SEED_OFFSET
 
 
@@ -195,103 +193,3 @@ def run_fixed_case(solver, recorder, snapshot_runtime, include_recovery, *, fall
             cycle_residuals=raw_attempts[index].get("cycle_residuals", []),
         )
     return out
-
-
-def run_unified_case(*, policy, parameter_space, context, solver, fallback_solver=None,
-                     variant, previous_update, before_attempt, recorder=None,
-                     snapshot_runtime=0.0, update_attempt=None):
-    """Run the shared learned budget, followed by the configured default fallback."""
-    if variant.attempts < 1:
-        raise ValueError("Attempt budget must be positive")
-    if variant.default_fallback and fallback_solver is None:
-        raise ValueError("Default fallback protocol requires a fallback solver")
-    model = policy.model
-    attempts, parameters, arms, selections, costs, targets, raw_attempts = [], [], [], [], [], [], []
-    update_runtime = loss_runtime = 0.0
-    fallback = None
-    try:
-        for index in range(variant.attempts):
-            start = time.perf_counter()
-            before_attempt(index)
-            if index == 0:
-                params, _ = policy.select(context=context, parameter_space=parameter_space)
-            else:
-                params, _ = model.select_recovery(context, excluded_arms=arms)
-            selections.append(time.perf_counter() - start)
-            arm = int(model._last_arm)
-            if arm in arms:
-                raise AssertionError("Same failed setup selected twice on one problem")
-            arms.append(arm)
-            parameters.append(dict(params))
-            if recorder is not None:
-                recorder.attempt_index = index
-                recorder.current = None
-            primary = execute_attempt(lambda: solver(params), require_valid_observation=True)
-            attempts.append(primary)
-            raw_attempts.append(dict(primary.result))
-            start = time.perf_counter()
-            cost = primary.end_to_end_runtime_sec + selections[-1] + previous_update
-            target = cost * (1.0 if primary.succeeded else 2.0)
-            costs.append(cost)
-            targets.append(target)
-            loss_runtime += time.perf_counter() - start
-            start = time.perf_counter()
-            if update_attempt is None:
-                model.update(target)
-            else:
-                update_attempt(target, primary.succeeded)
-            update_runtime += time.perf_counter() - start
-            if primary.succeeded:
-                break
-
-        if not attempts[-1].succeeded and variant.default_fallback:
-            fallback = execute_attempt(fallback_solver, require_valid_observation=True)
-        recovery = RecoveryOutcome(primary_attempts=tuple(attempts), fallback=fallback)
-        start = time.perf_counter()
-        additions, replayed = ([0.0] * len(attempts), 0)
-        if recorder is not None:
-            additions, replayed = recorder.finalize(
-                attempts, fallback, include_recovery=variant.rl_recovery_cost,
-            )
-        finalization_runtime = time.perf_counter() - start if recorder is not None else 0.0
-        controller_extra = float(snapshot_runtime + finalization_runtime)
-
-        committed = not recovery.unrecovered_failure
-    except Exception:
-        model.cancel_pending()
-        if recorder is not None:
-            recorder.controller.restore_learning_state(recorder.snapshot)
-        raise
-
-    outcome = recovery.to_result()
-    outcome["infer_runtime"] += controller_extra
-    outcome["runtime"] += controller_extra
-    outcome["solve_runtime"] += controller_extra
-    outcome.update(
-        failure_feedback_mode="attempt_2T", failure_penalty_sec=0.0,
-        bandit_update_committed=True,
-        bandit_observation_count=len(attempts),
-        bandit_learning_cost=targets[-1],
-        controller_update_committed=bool(committed and recorder is not None
-                                        and any(e.committed for e in recorder.episodes)),
-        case_learning_runtime=controller_extra,
-        target_replay_runtime=finalization_runtime if replayed else 0.0,
-        replayed_transitions=replayed,
-        selected_arm_index=arms[-1],
-    )
-    for i, row in enumerate(outcome["primary_attempts"]):
-        row.update(arm_index=arms[i], params=parameters[i],
-                   selection_runtime=selections[i],
-                   attempt_cost=costs[i], learning_cost=targets[i],
-                   rl_episode_recorded=bool(recorder is not None and any(
-                       e.committed and e.attempt_index == i for e in recorder.episodes)),
-                   rl_recovery_cost=additions[i] if committed else None,
-                   cycle_actions=raw_attempts[i].get("cycle_actions", []),
-                   cycle_times=raw_attempts[i].get("cycle_times", []),
-                   cycle_residuals=raw_attempts[i].get("cycle_residuals", []))
-    selection_runtime = sum(selections)
-    timing = dict(select_sec=selection_runtime, loss_eval_sec=loss_runtime,
-                  update_sec=update_runtime,
-                  overhead_sec=selection_runtime + loss_runtime + update_runtime)
-    return SetupReselectionResult(parameters[-1], outcome, timing,
-                                 int(recovery.fallback_used), update_runtime)
