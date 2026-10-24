@@ -32,12 +32,19 @@ make -C hypre JOBS=4
 
 ## Run
 
-[Experiment instructions](experiments/README.md) give the commands for each
-module. Active configurations are in `configs/`. After the selected Module 1
-run finishes, initialize Module 2 with explicit paths to its trained seed
-directories using `run_policy init --training-run SEED=PATH`. No experiment is
-selected automatically. Checkpoint loading checks the complete feature
-description before loading learned parameters.
+Run the complete study in order with a new output directory:
+
+```sh
+python -m experiments.run_all --output results/full_study
+```
+
+This runs all Module 1 suites, passes their six Diffusion 60 joint models to
+Module 2, then runs both Module 3 batches. Each online batch uses three
+concurrent seed workers. Use `--dry-run` to inspect the plan or
+`--module2-source advection_60` to select another Module 1 family/grid.
+[Experiment instructions](experiments/README.md) also give individual module
+commands. Checkpoint loading checks the complete feature description before
+loading learned parameters.
 
 Each run writes its own trajectories, checkpoints, source hashes, summaries,
 and figures under `results/`. Native solver time and total time including
