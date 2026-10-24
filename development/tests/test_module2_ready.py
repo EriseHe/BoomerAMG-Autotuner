@@ -1,5 +1,7 @@
 """Exercise Module 2 with synthetic source models, without choosing a real run."""
 from contextlib import redirect_stdout
+import copy
+from dataclasses import replace
 from io import StringIO
 import json
 from pathlib import Path
@@ -12,6 +14,7 @@ from experiments.paper_final.matched_policy import planning, workflow
 from experiments.paper_final.online.configuration import parse_joint_experiment_config
 from experiments.paper_final.online.setup_branches import build_online_linucb_branch
 from experiments.paper_final.run_policy import main as policy_main
+from experiments.paper_final import run_online as online
 from problems.registry import learning_context_for_setup
 from setup.space import SetupConfigurationSpace
 
@@ -20,6 +23,60 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class ModuleTwoReadyTests(unittest.TestCase):
+    def test_real_module1_learning_and_frozen_checkpoints_connect(self):
+        raw=artifacts.read(ROOT/'configs/module1/diffusion_40/seed_1.json')
+        raw['problem']['grid']=[12,12,12]
+        for field in ('stream','frozen_stream'):
+            separate=copy.deepcopy(raw)
+            separate['stream']=separate[field]
+            separate.pop('frozen_stream')
+            separate['stream']['expected_sha256']=''
+            spec=parse_joint_experiment_config(separate)
+            args=online.runtime_config_from_spec(spec)
+            online.configure_paired_environment(args)
+            _,manifest=online.build_paired_instance_stream(args)
+            raw[field]['expected_sha256']=manifest['sha256']
+        original=online.decode
+        def shortened(config,directory):
+            runtime=original(config,directory)
+            runtime.stream=runtime.stream[:2]+runtime.stream[5000:5003]
+            runtime.args=replace(runtime.args,online_cases=5)
+            runtime.freeze_after=2
+            return runtime
+        with TemporaryDirectory(dir=ROOT/'results',prefix='module1_to_module2_') as directory:
+            root=Path(directory)
+            artifacts.dump(root/'source.json',raw)
+            artifacts.dump(root/'suite.json',dict(name='Module handoff validation',
+                seeds=[dict(label='1',config=str(root/'source.json'))]))
+            training=root/'module1'
+            with patch.object(online,'decode',shortened):
+                online.prepare(root/'suite.json',training,cases=5)
+                artifacts.dump(training/'release.json',dict(validation_only=True))
+                online.worker(training,'1')
+            self.assertTrue(artifacts.read(training/'seed_1/frozen_state_audit.json')['passed'])
+            self.assertTrue(artifacts.read(training/'seed_1/result.json')['passed'])
+            config=root/'module2.json'
+            with patch('sys.argv',['run_policy','init','--config',str(config),
+                       '--random-seed','31','--training-run',f'1={training}/seed_1']):
+                policy_main()
+            matched=artifacts.read(config)
+            matched.update(cases=2,weights=[1.,2.],workers=1,scan_extra_repetitions=0,
+                           scan_repeat_fraction=0.,evaluation_repetitions=1)
+            artifacts.dump(config,matched)
+            with patch('sys.argv',['run_policy','validate','--config',str(config)]):
+                policy_main()
+            output=root/'module2'
+            planning.prepare(config,output)
+            self.assertTrue(all(row['setup_learning_unchanged']
+                               for row in artifacts.read(output/'setup_freeze_audit.json')))
+            with patch('experiments.paper_final.plot_policy.generate'):
+                workflow.run(output)
+            self.assertEqual(artifacts.read(output/'status.json')['status'],'complete')
+            self.assertTrue(artifacts.read(output/'analysis/summary.json')['audit']['exact_coverage'])
+            for path in (output/'progress').glob('*.json'):
+                row=artifacts.read(path)
+                if row.get('status')=='complete':self.assertTrue(row['frozen_audit_passed'])
+
     def test_active_online_configs_use_shared_context(self):
         paths = list((ROOT/'configs').rglob('seed_*.json'))
         self.assertEqual(len(paths), 42)
