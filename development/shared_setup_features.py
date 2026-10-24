@@ -1,5 +1,5 @@
 """Expose the shared setup-action feature structure to the solve controller."""
-from experiments.paper_final.online.controllers import make_setup_feature_encoder
+from development.setup_normalization import make_bandit_scaled_setup_encoder as make_setup_feature_encoder
 from development.setup_normalization import make_range_normalized_setup_encoder
 
 

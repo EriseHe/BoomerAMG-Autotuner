@@ -103,9 +103,8 @@ def initialize(output, label):
     if root.args.evaluation is not None or root.freeze_after is not None:
         raise ValueError('Learning-only diagnostic required')
     study = runner.resolve_composable_study(root.args)
-    setup = runner.build_named_setup_branches(root.args, study=study, warmup_instances=(),
-                                              stream_hash=root.manifest['sha256'])
-    if set(setup.branches) != {METHODS[1]}:
+    setup = runner.build_named_setup_branches(root.args, study=study)
+    if set(setup) != {METHODS[1]}:
         raise ValueError('Only Joint should own a setup learner')
     solve = build_solve_runtime(root.args, specs=root.spec.methods, context_variant=context_variant)
     if set(solve.controller_bundles) != {METHODS[1]}:
@@ -114,8 +113,8 @@ def initialize(output, label):
     for method in root.spec.methods:
         runtime = SimpleNamespace(**vars(root), name=method.name, method=method,
                                   bundle=solve.controller_bundles.get(method.name))
-        if method.name in setup.branches:
-            runtime.branch = setup.branches[method.name]
+        if method.name in setup:
+            runtime.branch = setup[method.name]
             model = runner.observed_model(runner.FailureAwareRetryLinUCB.from_runtime_model(runtime.branch.policy.model))
             runtime.branch.policy.model = model
             runtime.rows = runner.CandidateRows(model, cases=len(root.stream), attempts=3, directory=stage/'unused')
@@ -158,7 +157,7 @@ def worker(output, label):
         cases = protocol['stages'][label]['cases']
         default = runtimes[METHODS[0]]
         runner.dump(stage/'environment.json', dict(pid=os.getpid(), executable=__import__('sys').executable,
-            qos=runner.screen.request_performance_qos(), mpi=MPI.Get_library_version(),
+            qos=runner.request_performance_qos(), mpi=MPI.Get_library_version(),
             threads={key:os.environ.get(key) for key in THREAD_KEYS}))
         warmup = [runner.sweep.execute_default_case(default, i) for i in range(min(3,cases))]
         runner.dump(stage/'native_warmup.json', dict(measured=False, learner_updates=0, records=warmup))

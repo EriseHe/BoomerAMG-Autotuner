@@ -10,7 +10,7 @@ import numpy as np
 
 from development.run_setup_normalization import configured_runner, normalization_source_hashes, runner
 from development.setup_normalization import make_range_normalized_setup_encoder
-from experiments.paper_final.online.controllers import make_setup_feature_encoder
+from development.setup_normalization import make_bandit_scaled_setup_encoder as make_setup_feature_encoder
 from setup.learners.common.aot_candidates import CompactActionCatalog
 from setup.space import DEFAULT_SETUP_PARAMS, SetupConfigurationSpace
 from solve.controllers.common import OnlineControllerFactoryRequest, SharedActionSpec, SolveStateSpec

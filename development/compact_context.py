@@ -32,17 +32,23 @@ class CompactSolveStateEncoder:
     def __getattr__(self, name):
         return getattr(self.base, name)
 
-    def encode(self, *, cycle, last_cycle_time, first_cycle_time, setup_params=None, **kwargs):
-        # Reuse the existing residual, weight, problem and setup construction.
-        # A unit divisor passes the log-time value through without using the
-        # attempt's first measured cycle or modifying any reward calculation.
+    def encode(self, *, cycle, last_cycle_time, first_cycle_time=None, setup_params=None, **kwargs):
+        base = self.base.encode(cycle=cycle, last_cycle_time=last_cycle_time,
+                                setup_params=setup_params, **kwargs)
+        # The published encoder owns logarithmic timing. The alternative ratio
+        # remains confined to development diagnostics.
         if self.cycle_time_mode == "first_cycle_ratio":
-            return self.base.encode(cycle=cycle, last_cycle_time=last_cycle_time,
-                                    first_cycle_time=first_cycle_time,
-                                    setup_params=setup_params, **kwargs)
-        timing = 0.0 if cycle == 0 else log_cycle_time(last_cycle_time)
-        base = self.base.encode(cycle=cycle, last_cycle_time=timing,
-                                first_cycle_time=1.0, setup_params=setup_params, **kwargs)
+            if cycle == 0:
+                self._first_cycle_time = None
+            else:
+                if first_cycle_time is not None:
+                    self._first_cycle_time = float(first_cycle_time)
+                elif cycle == 1:
+                    self._first_cycle_time = float(last_cycle_time)
+                reference = getattr(self, '_first_cycle_time', None)
+                if reference is None or not math.isfinite(reference) or reference <= 0.:
+                    raise ValueError('A positive first native cycle time is required')
+                base[5] = float(last_cycle_time) / reference
         return base
 
     def constant_value_parameters(self, value):

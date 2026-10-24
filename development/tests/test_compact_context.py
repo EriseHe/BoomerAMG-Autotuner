@@ -80,7 +80,7 @@ class CompactContextTests(unittest.TestCase):
         old = value.base
         for cycle, residual, previous in ((0, 1., 1.), (3, 100., .1), (51, 1e-8, .01)):
             kwargs = observation(cycle=cycle, residual=residual, previous_residual=previous)
-            expected = old.encode(**kwargs)
+            expected = old.encode(**{k:v for k,v in kwargs.items() if k != "first_cycle_time"})
             actual = value.encode(**kwargs)
             self.assertEqual(actual.size, 32)
             np.testing.assert_array_equal(np.delete(actual, 5), np.delete(expected, 5))

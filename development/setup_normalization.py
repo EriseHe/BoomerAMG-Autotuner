@@ -1,24 +1,21 @@
-"""Fixed parameter-range scaling for the solve controller's setup descriptors."""
-from dataclasses import replace
-
+"""Development comparisons of bandit scaling and the published RL descriptors."""
 from experiments.paper_final.online.controllers import make_setup_feature_encoder
 from setup.learners.common import GenericActionFeatureEncoder
+from setup.space import build_setup_parameter_spec
 
 
 def make_range_normalized_setup_encoder(**kwargs):
-    """Keep reference one-hot categories; map each numerical range to [-1, 1].
+    """Use the numerical range normalization now owned by the standard factory."""
+    return make_setup_feature_encoder(**kwargs)
 
-    Bounds include the allowed grid and Default. Discretized numerical parameters
-    retain their numerical distances. Constant parameters map to zero. This
-    creates a separate RL encoder and never mutates the setup learner's encoder.
-    """
-    shared = make_setup_feature_encoder(**kwargs)
-    parameters = []
-    for parameter in shared.parameter_spec.parameters:
-        if parameter.kind in ("continuous", "integer"):
-            values = (*parameter.values, parameter.default)
-            low, high = min(values), max(values)
-            parameter = replace(parameter, center=(low + high) / 2.,
-                                scale=(high - low) / 2. if high > low else 1.)
-        parameters.append(parameter)
-    return GenericActionFeatureEncoder(replace(shared.parameter_spec, parameters=tuple(parameters)))
+
+def make_bandit_scaled_setup_encoder(*, configuration_space=None, parameter_resolution=None):
+    """Retain the original bandit scaling solely for development comparisons."""
+    spec, _ = build_setup_parameter_spec(
+        tune_dim=7, tune7_variant='categorical', parameter_resolution=parameter_resolution,
+        coarsen_type_values=configuration_space.coarsen_types if configuration_space else None,
+        interp_type_values=configuration_space.interp_types if configuration_space else None,
+        agg_interp_type_values=configuration_space.agg_interp_types if configuration_space else None,
+        numeric_grids=configuration_space.numeric_grids if configuration_space else None,
+    )
+    return GenericActionFeatureEncoder(spec)

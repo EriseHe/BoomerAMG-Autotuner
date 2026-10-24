@@ -42,7 +42,6 @@ class ScoringEquivalenceTests(unittest.TestCase):
             previous_residual=10. ** (-.5 * max(0, cycle - 1)),
             cycle=cycle, last_weight=float(rng.uniform(1., 3.)),
             last_cycle_time=float(rng.uniform(0., .03)),
-            first_cycle_time=.01 if cycle else None,
         )
 
     def assert_dense_scores(self, model, features):

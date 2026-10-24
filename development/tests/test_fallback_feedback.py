@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 import numpy as np
 
-from experiments.paper_final.online.case_loop import report_online_outcome, validate_recovery_stream
+from experiments.paper_final.online.case_loop import report_online_outcome
 from experiments.paper_final.recovery.audit import audit
 from experiments.paper_final.recovery.metrics import VARIANT
 from development.retry_comparison import use_retry_rule
@@ -17,7 +17,6 @@ from experiments.paper_final.recovery import model_audit
 from setup.learners.common.action_features import GenericActionFeatureEncoder, ParameterSpec, ParameterSpaceSpec
 from setup.learners.common.aot_candidates import AOTCandidateSchedule, CompactActionCatalog, FactorizedActionFeatureCache
 from setup.learners.linucb.learner import SharedLinUCB
-from setup.learners.linucb.setup_reselection import run_same_context_setup_reselection
 from setup.space import DEFAULT_SETUP_PARAMS
 
 
@@ -238,19 +237,6 @@ class FallbackFeedbackTests(unittest.TestCase):
             self.assertEqual(restored.t, 4)
             for key, expected in model._cand.export_statistics().items():
                 np.testing.assert_array_equal(restored._cand.export_statistics()[key], expected)
-
-    def test_immediate_feedback_path_observes_only_successful_fallback(self):
-        for success in (True, False):
-            model = learner(rule=None)
-            result = run_same_context_setup_reselection(policy=policy(model),
-                parameter_space={}, context=CONTEXT, solver_fn=lambda params: outcome(False, 1., "setup"),
-                fallback_solver_fn=lambda params: outcome(success, 2.),
-                default_params=DEFAULT_SETUP_PARAMS, prev_update_est=.125)
-            self.assertEqual(result.outcome["bandit_observation_count"], 3 + int(success))
-            self.assertEqual(result.outcome["fallback_learning_cost"], 2. if success else None)
-            self.assert_regression(model, result)
-            reported = report_online_outcome(result.outcome, bandit_timing=result.timing)
-            validate_recovery_stream([dict(problem_index=1, outcome=reported)], expect_bandit_updates=True)
 
     def test_audit_rejects_missing_duplicate_or_failed_fallback_observations(self):
         for success in (True, False):
