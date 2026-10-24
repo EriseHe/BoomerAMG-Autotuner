@@ -5,13 +5,11 @@ from __future__ import annotations
 import argparse
 from typing import Any, Dict, Mapping
 
-from hypre.bindings import augment_setup_params
-from setup.space import DEFAULT_SETUP_PARAMS
+from experiments.paper_final.recovery.default_fallback import run_default_fallback
 from solve.controllers.common import ControllerBundle, OnlineSolveCase
 
 from .feedback import as_feedback
 from .case_loop import report_online_outcome
-from .native_evaluation import solve_no_rl_case
 
 
 def run_case(
@@ -26,12 +24,10 @@ def run_case(
     fallback_result: Dict[str, Any] = {}
 
     def fallback_attempt():
-        result = solve_no_rl_case(
-            params=dict(DEFAULT_SETUP_PARAMS),
+        result = run_default_fallback(
             mkw=mkw,
             solver_tol=float(args.tol),
             solver_max_iter=int(args.max_cycles),
-            augment_params=augment_setup_params,
         )
         fallback_result.update(result)
         return result

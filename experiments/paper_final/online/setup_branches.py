@@ -46,7 +46,7 @@ def validate_expected_setup_action_count(branch: BranchRun) -> int:
 
 
 @dataclass(frozen=True)
-class TestFinalBanditConfig:
+class SetupBanditConfig:
     alpha: float
     l2: float
     candidate_pool_size: int
@@ -61,8 +61,8 @@ class TestFinalBanditConfig:
     tune7_candidate_elite_fraction: float
 
 
-def default_test_final_bandit_config_from_env() -> TestFinalBanditConfig:
-    return TestFinalBanditConfig(
+def setup_bandit_config_from_env() -> SetupBanditConfig:
+    return SetupBanditConfig(
         alpha=float(os.environ.get("ALPHA", "1.0")),
         l2=float(os.environ.get("L2", "1.0")),
         candidate_pool_size=int(os.environ.get("CANDIDATE_POOL_SIZE", "512")),
@@ -124,7 +124,7 @@ class GenericBanditPolicy:
         )
 
 
-def build_test_final_bandit_policy(
+def build_setup_bandit_policy(
     *,
     method: str,
     tune_dim: int,
@@ -135,7 +135,7 @@ def build_test_final_bandit_policy(
     default_arm_index: int,
     parameter_spec: Optional[ParameterSpaceSpec],
     tune7_variant: str,
-    cfg: TestFinalBanditConfig,
+    cfg: SetupBanditConfig,
     candidate_schedule: AOTCandidateSchedule | None = None,
     action_feature_cache: FactorizedActionFeatureCache | None = None,
     candidate_sampling: str = "uniform512",
@@ -223,14 +223,14 @@ def build_online_linucb_branch(
     candidate_sampling: str = "uniform512",
     context_dim: int = DIFCONV_CONTEXT_DIM,
     context_interaction_indices: Sequence[int] = (1, 2, 3, 4),
-) -> tuple[BranchRun, TestFinalBanditConfig]:
+) -> tuple[BranchRun, SetupBanditConfig]:
     """Build a canonical online setup-bandit branch without a Gym dependency."""
     if learner_kind != "linucb":
         raise ValueError("The official setup learner is LinUCB")
     learner_token = "linucb"
     learner_method = "linucb"
     family = "Shared LinUCB"
-    cfg = default_test_final_bandit_config_from_env()
+    cfg = setup_bandit_config_from_env()
     if candidate_pool_size is not None:
         if type(candidate_pool_size) is not int or candidate_pool_size < 1:
             raise ValueError("candidate_pool_size must be a positive integer")
@@ -313,7 +313,7 @@ def build_online_linucb_branch(
                     "structured_sobol_size": structured_quotas["sobol"],
                 } if structured_quotas is not None else {}),
             )
-        policy = build_test_final_bandit_policy(
+        policy = build_setup_bandit_policy(
             method=learner_method,
             tune_dim=int(tune_dim),
             actions=setup_space.actions,

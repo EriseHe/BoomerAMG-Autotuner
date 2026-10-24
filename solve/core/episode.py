@@ -304,7 +304,6 @@ def run_td_episode(
             previous_residual = initial_residual
             last_weight = initial_environment_weight
             last_cycle_time = 0.0
-            first_cycle_time = None
             lifecycle_started = time.perf_counter()
             try:
                 controller.start_episode(
@@ -324,7 +323,6 @@ def run_td_episode(
                 cycle=0,
                 last_weight=last_weight,
                 last_cycle_time=last_cycle_time,
-                first_cycle_time=first_cycle_time,
             )
             current_feature_runtime = float(time.perf_counter() - feature_started)
             feature_runtime += current_feature_runtime
@@ -448,8 +446,6 @@ def run_td_episode(
                     )
                     break
                 cycle_time = float(cycle_time)
-                if cycle == 0:
-                    first_cycle_time = cycle_time
                 solve_runtime += cycle_time
                 iterations = cycle + 1
                 native_status = env.last_step.status
@@ -476,7 +472,6 @@ def run_td_episode(
                         cycle=iterations,
                         last_weight=float(weight),
                         last_cycle_time=cycle_time,
-                        first_cycle_time=first_cycle_time,
                     )
                     next_feature_runtime = float(time.perf_counter() - feature_started)
                     feature_runtime += next_feature_runtime

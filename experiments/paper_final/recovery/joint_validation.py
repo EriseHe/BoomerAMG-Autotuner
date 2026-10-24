@@ -1,19 +1,20 @@
 """Shared-state continuation and unchanged no-recovery solve-RL targets."""
 from __future__ import annotations
 
+from functools import partial
 import time
 
 from experiments.paper_final.online.configuration import evaluation_index_offset
 from experiments.paper_final.online.case_loop import report_online_outcome
 from experiments.paper_final.recovery.execution import EpisodeRecorder
-from experiments.paper_final.recovery.retry_comparison import run_deferred_case
+from experiments.paper_final.recovery.setup_feedback import run_deferred_case
 from experiments.paper_final.recovery import metrics as sweep
 from problems.registry import context_for_setup_method
 
 
 def execute_learned(runtime, index, previous_update, *, feedback_mode, activation_case=1000):
     from hypre.bindings import augment_setup_params
-    from setup.space import DEFAULT_SETUP_PARAMS
+    from experiments.paper_final.recovery.default_fallback import run_default_fallback
     from solve.core.episode import run_td_episode
     from experiments.paper_final.online.native_evaluation import solve_no_rl_case
 
@@ -52,7 +53,8 @@ def execute_learned(runtime, index, previous_update, *, feedback_mode, activatio
     diagnostic_start=len(model.selection_diagnostics)
     result=run_deferred_case(policy=runtime.branch.policy,
         parameter_space=runtime.branch.parameter_space,context=learner_context,
-        solver=solve,fallback_solver=lambda:native(DEFAULT_SETUP_PARAMS),variant=sweep.VARIANT,
+        solver=solve,fallback_solver=partial(run_default_fallback, mkw=mkw,
+            solver_tol=args.tol, solver_max_iter=args.max_cycles),variant=sweep.VARIANT,
         previous_update=previous_update,before_attempt=lambda attempt:runtime.rows.before_attempt(schedule_index,attempt),
         feedback_mode=feedback_mode,recorder=recorder,snapshot_runtime=snapshot_runtime,learn=learn)
     runtime.rows.finish_case(schedule_index)

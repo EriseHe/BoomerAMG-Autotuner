@@ -2,7 +2,7 @@
 from __future__ import annotations
 import numpy as np
 
-from experiments.paper_final.recovery.retry_comparison import ConservativeRetryLinUCB, FailureAwareRetryLinUCB
+from experiments.paper_final.recovery.setup_feedback import FailureAwareRetryLinUCB
 
 class ObservedSelection:
     """Capture already computed scores; preserve the selector and its RNG calls."""
@@ -25,13 +25,11 @@ class ObservedSelection:
             def candidate(i):
                 result = dict(arm=int(data["arms"][i]), mean=float(data["mean"][i]),
                     width=float(data["width"][i]), runtime_lcb=float(data["score"][i]))
-                if retry and "failure_mean" in data:
+                if retry:
                     result.update(failure_mean=float(data["failure_mean"][i]),
                                   failure_upper=float(data["failure_upper"][i]))
-                elif retry:
-                    result["runtime_ucb"] = float(data["retry_score"][i])
                 return result
-            strategy = ("failure_upper" if "failure_mean" in data else "runtime_ucb") if retry else "runtime_lcb"
+            strategy = "failure_upper" if retry else "runtime_lcb"
             record = dict(strategy=strategy,
                 observations=self.t, alpha=float(data["alpha"]), selected=candidate(location),
                 best_two_gap=float(objective[ranked[1]]-objective[ranked[0]]) if len(ranked)>1 else None,
@@ -66,21 +64,10 @@ class ObservedFailureAware(ObservedSelection, FailureAwareRetryLinUCB):
             & np.isclose(runtime_score, runtime_score[best], atol=1e-12, rtol=0))
 
 
-class ObservedConservative(ObservedSelection, ConservativeRetryLinUCB):
-    def _recovery_best_locations(self, x, **kwargs):
-        score = kwargs["runtime_mean"] + self._effective_alpha() * kwargs["runtime_uncert"]
-        self._capture["retry_score"] = score
-        return np.flatnonzero(np.isclose(score, np.min(score), atol=1e-12, rtol=0))
-
-
 def observed_model(model):
-    if isinstance(model, FailureAwareRetryLinUCB):
-        cls = ObservedFailureAware
-    elif isinstance(model, ConservativeRetryLinUCB):
-        cls = ObservedConservative
-    else:
-        raise TypeError("Unknown retry learner")
-    observed = object.__new__(cls)
+    if not isinstance(model, FailureAwareRetryLinUCB):
+        raise TypeError("Expected a failure-aware setup learner")
+    observed = object.__new__(ObservedFailureAware)
     observed.__dict__ = model.__dict__.copy()
     observed.selection_diagnostics, observed._capture = [], None
     return observed

@@ -9,6 +9,7 @@ from __future__ import annotations
 import itertools
 import math
 import time
+from functools import partial
 from pathlib import Path
 
 import numpy as np
@@ -136,8 +137,7 @@ def validate_methods(spec):
 
 
 def execute_fixed_rl(runtime, index):
-    from hypre.bindings import augment_setup_params
-    from experiments.paper_final.online.native_evaluation import solve_no_rl_case
+    from experiments.paper_final.recovery.default_fallback import run_default_fallback
     from solve.core.episode import run_td_episode
 
     started = time.perf_counter()
@@ -159,13 +159,10 @@ def execute_fixed_rl(runtime, index):
         traces.append(raw)
         return raw
 
-    def fallback():
-        return solve_no_rl_case(params=dict(DEFAULT_SETUP_PARAMS), mkw=dict(mkw),
-            solver_tol=runtime.args.tol, solver_max_iter=runtime.args.max_cycles,
-            augment_params=augment_setup_params)
-
     raw = run_fixed_case(solve, recorder, snapshot_runtime, False,
-                         fallback_solver=fallback, max_attempts=1)
+                         fallback_solver=partial(run_default_fallback, mkw=mkw,
+                             solver_tol=runtime.args.tol, solver_max_iter=runtime.args.max_cycles),
+                         max_attempts=1)
     for attempt, trace in zip(raw["primary_attempts"], traces):
         attempt.update(params=dict(DEFAULT_SETUP_PARAMS),
                        **{key: trace.get(key, []) for key in sweep.TRACE_FIELDS})

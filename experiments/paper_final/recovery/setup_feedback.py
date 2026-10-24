@@ -1,8 +1,4 @@
-"""Conservative and failure-aware retries with delayed measured-cost targets.
-
-The production learner remains a single runtime model. The optional failure
-target vector exists only in this experiment's failure-aware subclass.
-"""
+"""Setup cost feedback and failure-aware retry selection."""
 from __future__ import annotations
 
 from dataclasses import dataclass, replace
@@ -12,14 +8,7 @@ import numpy as np
 
 from hypre.bindings import RecoveryOutcome, execute_attempt
 from setup.learners.linucb.learner import SharedLinUCB
-
-
-RETRY_RULES = {
-    "conservative_suffix": "Conservative retries + full remaining-attempt cost",
-    "conservative_adjacent": "Conservative retries + adjacent-attempt cost",
-    "failure_model_suffix": "Failure-model retries + full remaining-attempt cost",
-    "failure_model_adjacent": "Failure-model retries + adjacent-attempt cost",
-}
+from setup.space import DEFAULT_SETUP_PARAMS
 
 
 @dataclass(frozen=True)
@@ -40,6 +29,17 @@ class DeferredCost:
 
 
 class DeferredCostLinUCB(SharedLinUCB):
+    @classmethod
+    def from_runtime_model(cls, model):
+        """Adopt a fresh runtime learner without rebuilding its candidate inputs."""
+        if model.t or model.history or model._last_phi is not None or np.any(model.b):
+            raise ValueError("Setup feedback requires a fresh learner")
+        if not np.array_equal(model.A_inv, np.eye(model.d_phi) / model.l2_reg):
+            raise ValueError("Expected untrained setup precision")
+        adapted = object.__new__(cls)
+        adapted.__dict__ = model.__dict__.copy()
+        return adapted
+
     def defer_cost(self, succeeded):
         """Count the observation while preserving runtime means until case completion."""
         if self._last_phi is None or self._last_arm is None:
@@ -67,19 +67,16 @@ class DeferredCostLinUCB(SharedLinUCB):
             self.history[observation.history_index], loss=loss)
 
 
-class ConservativeRetryLinUCB(DeferredCostLinUCB):
-    def _recovery_best_locations(
-        self, x, *, candidates, candidate_features, runtime_score,
-        runtime_mean, runtime_uncert,
-    ):
-        score = runtime_mean + self._effective_alpha() * runtime_uncert
-        return np.flatnonzero(np.isclose(score, np.min(score), atol=1e-12, rtol=0))
-
-
 class FailureAwareRetryLinUCB(DeferredCostLinUCB):
     """One binary target vector, sharing the runtime model's precision matrix."""
 
     failure_beta = 2.0  # Setup failure-score coefficient, not RL beta.
+
+    @classmethod
+    def from_runtime_model(cls, model):
+        adapted = super().from_runtime_model(model)
+        adapted.failure_b = np.zeros(model.d_phi, dtype=float)
+        return adapted
 
     def _recovery_best_locations(
         self, x, *, candidates, candidate_features, runtime_score,
@@ -111,29 +108,14 @@ class FailureAwareRetryLinUCB(DeferredCostLinUCB):
         self.failure_b[:] = vector
 
 
-def use_retry_rule(model, rule):
-    """Adopt a freshly constructed canonical learner without rebuilding inputs."""
-    if rule not in RETRY_RULES:
-        raise ValueError("Unknown retry rule")
-    if model.t or model.history or model._last_phi is not None or np.any(model.b):
-        raise ValueError("Each retry rule must start with a fresh learner")
-    if not np.array_equal(model.A_inv, np.eye(model.d_phi) / model.l2_reg):
-        raise ValueError("Expected untrained setup precision")
-    cls = ConservativeRetryLinUCB if rule.startswith("conservative_") else FailureAwareRetryLinUCB
-    adapted = object.__new__(cls)
-    adapted.__dict__ = model.__dict__.copy()
-    if cls is FailureAwareRetryLinUCB:
-        adapted.failure_b = np.zeros(model.d_phi, dtype=float)
-    return adapted
-
-
 def run_deferred_case(*, policy, parameter_space, context, solver,
                       fallback_solver, variant, previous_update, before_attempt,
                       feedback_mode, recorder=None, snapshot_runtime=0.0, learn=True):
     """Resolve adjacent or full remaining costs once, after the case finishes.
 
-    Successful attempts receive their own cost. Executed default fallback time
-    belongs to the preceding cost sequence but adds no setup observation.
+    Successful attempts receive their own cost. Default fallback time also
+    belongs to the preceding cost sequence. A successful fallback adds one
+    setup observation; a failed fallback adds none.
     All valid setup observations survive final case failure. Optional solve RL
     keeps its existing attempt costs, with no recovery augmentation or replay;
     only RL learning is rolled back when the entire case fails.
@@ -151,6 +133,7 @@ def run_deferred_case(*, policy, parameter_space, context, solver,
     raw_attempts = []
     loss_runtime = update_runtime = 0.0
     fallback = None
+    fallback_observation = None
     try:
         for index in range(variant.attempts):
             tick = time.perf_counter()
@@ -194,6 +177,10 @@ def run_deferred_case(*, policy, parameter_space, context, solver,
         tick = time.perf_counter()
         for observation, target in zip(observations, targets):
             model.resolve_cost(observation, target)
+        if learn and fallback is not None and fallback.succeeded:
+            fallback_observation = model.update_default_fallback(
+                context, DEFAULT_SETUP_PARAMS, fallback.end_to_end_runtime_sec,
+            )
         if learn:
             update_runtime += time.perf_counter()-tick
         finalization_runtime = 0.0
@@ -214,8 +201,11 @@ def run_deferred_case(*, policy, parameter_space, context, solver,
     for field in ("runtime", "solve_runtime", "infer_runtime"):
         outcome[field] += controller_extra
     outcome.update(failure_feedback_mode=feedback_mode, failure_penalty_sec=0.0,
-        bandit_update_committed=learn, bandit_observation_count=len(attempts) if learn else 0,
+        bandit_update_committed=learn,
+        bandit_observation_count=(len(attempts) + int(fallback_observation is not None)) if learn else 0,
         bandit_learning_cost=targets[-1],
+        fallback_learning_cost=None if fallback_observation is None else fallback_observation.loss,
+        fallback_arm_index=None if fallback_observation is None else fallback_observation.arm_index,
         controller_update_committed=bool(not outcome["failed"] and recorder is not None
             and any(e.committed for e in recorder.episodes)),
         case_learning_runtime=controller_extra, target_replay_runtime=0.0, replayed_transitions=0,
