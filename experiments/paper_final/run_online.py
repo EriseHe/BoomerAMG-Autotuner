@@ -25,7 +25,7 @@ from dataclasses import replace
 from types import SimpleNamespace
 
 from experiments.runtime import (configure_single_thread, single_thread_environment,
-    prevent_sleep, stop_sleep_prevention, THREAD_KEYS)
+    prevent_sleep, stop_sleep_prevention, request_performance_qos, THREAD_KEYS)
 configure_single_thread()
 import numpy as np
 
@@ -45,7 +45,6 @@ from experiments.paper_final.recovery.execution import CandidateRows
 from experiments.paper_final.recovery.setup_feedback import FailureAwareRetryLinUCB
 from experiments.paper_final.recovery import metrics as sweep
 from experiments.paper_final.recovery import model_audit as screen
-from experiments.paper_final.recovery.system import request_performance_qos
 from experiments.paper_final.recovery.observations import observed_model
 from experiments.paper_final.recovery.controller_audit import audit_controller_counts
 from setup.space import DEFAULT_SETUP_PARAMS
