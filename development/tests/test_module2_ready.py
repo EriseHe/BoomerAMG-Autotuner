@@ -5,6 +5,7 @@ from dataclasses import replace
 from io import StringIO
 import json
 from pathlib import Path
+import sys
 from tempfile import TemporaryDirectory
 import unittest
 from unittest.mock import patch
@@ -55,6 +56,9 @@ class ModuleTwoReadyTests(unittest.TestCase):
                 online.worker(training,'1')
             self.assertTrue(artifacts.read(training/'seed_1/frozen_state_audit.json')['passed'])
             self.assertTrue(artifacts.read(training/'seed_1/result.json')['passed'])
+            scheduling = artifacts.read(training/'seed_1/environment.json')['qos']
+            self.assertEqual(scheduling['requested'], sys.platform == 'darwin')
+            self.assertFalse(scheduling['hard_affinity'])
             config=root/'module2.json'
             with patch('sys.argv',['run_policy','init','--config',str(config),
                        '--random-seed','31','--training-run',f'1={training}/seed_1']):
@@ -73,6 +77,9 @@ class ModuleTwoReadyTests(unittest.TestCase):
                 workflow.run(output)
             self.assertEqual(artifacts.read(output/'status.json')['status'],'complete')
             self.assertTrue(artifacts.read(output/'analysis/summary.json')['audit']['exact_coverage'])
+            for phase in ('scan', 'test'):
+                worker = artifacts.read(output/f'raw/{phase}/worker_0.complete.json')
+                self.assertEqual(worker['qos'], scheduling)
             for path in (output/'progress').glob('*.json'):
                 row=artifacts.read(path)
                 if row.get('status')=='complete':self.assertTrue(row['frozen_audit_passed'])
