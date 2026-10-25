@@ -2,10 +2,12 @@
 
 This module uses only the standard library and has no import-time side effects.
 Call ``configure_single_thread`` before importing NumPy or the native bindings
-in an executable entry point. Use ``single_thread_environment`` for workers.
+in an executable entry point. Use ``single_thread_environment`` when launching
+workers and ``request_performance_qos`` inside each worker before its workload.
 """
 from __future__ import annotations
 
+import ctypes
 import os
 from pathlib import Path
 import subprocess
@@ -29,6 +31,20 @@ def single_thread_environment(environment: Mapping[str, str] | None = None) -> d
     result = dict(os.environ if environment is None else environment)
     result.update({key: "1" for key in THREAD_KEYS})
     return result
+
+
+def request_performance_qos() -> dict[str, object]:
+    """Request macOS worker QoS without imposing CPU affinity."""
+    if sys.platform != "darwin":
+        return {"requested": False, "reason": "non-macOS", "hard_affinity": False}
+    library = ctypes.CDLL("/usr/lib/libSystem.B.dylib")
+    function = library.pthread_set_qos_class_self_np
+    function.argtypes = [ctypes.c_uint, ctypes.c_int]
+    function.restype = ctypes.c_int
+    status = int(function(0x19, 0))  # QOS_CLASS_USER_INITIATED, pthread/qos.h
+    if status:
+        raise OSError(status, "Cannot request user-initiated worker QoS")
+    return {"requested": True, "class": "user_initiated", "hard_affinity": False}
 
 
 def prevent_sleep() -> subprocess.Popen | None:

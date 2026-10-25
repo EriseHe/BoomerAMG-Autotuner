@@ -9,7 +9,7 @@ import subprocess
 import sys
 import time
 
-from experiments.runtime import single_thread_environment
+from experiments.runtime import request_performance_qos, single_thread_environment
 from . import artifacts, frozen_policy, policy_analysis as analysis
 from .artifacts import ROOT
 
@@ -34,6 +34,7 @@ def run_frozen_worker(output, phase, worker_id, workers, *, run_number, verify, 
     directory.mkdir(parents=True, exist_ok=True)
     with (directory / f"worker_{worker_id}.lock").open("a") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        qos = request_performance_qos()
         verify(output)
         protocol = artifacts.read(output / "protocol.json")
         jobs = artifacts.read(output / f"jobs_{phase}.json")[worker_id::workers]
@@ -52,6 +53,7 @@ def run_frozen_worker(output, phase, worker_id, workers, *, run_number, verify, 
             "worker": worker_id,
             "workers": workers,
             "pid": os.getpid(),
+            "qos": qos,
             "done": len(done),
             "total": len(expected),
             "status": "running",
