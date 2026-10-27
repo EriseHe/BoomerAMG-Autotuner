@@ -1,7 +1,30 @@
 {
-  "description": "Module 1: advection_80, seed 2, 5,000 paired cases and four cold branches.",
+  "description": "Module 1: advection_80, seed 2; 5,000 learning inputs followed by 1,000 frozen inputs in one stream.",
   "failure_feedback": {
     "mode": "rollback_unrecovered"
+  },
+  "frozen_stream": {
+    "cases": 1000,
+    "cases_per_seed": 125,
+    "expected_sha256": "bdbdcee89fb709a3c99fc0f8529dab14c85b15a4c391bfebe1c5ad3425dfc596",
+    "group_take": 1000,
+    "instance_offset": 625,
+    "online_cases": 1000,
+    "seed_groups": [
+      173325802,
+      173331802,
+      173337802,
+      173343802,
+      173349802,
+      173355802,
+      173361802,
+      173367802
+    ],
+    "shuffle_seeds": [
+      173373802
+    ],
+    "smoke": false,
+    "warmup_cases": 0
   },
   "methods": [
     {
@@ -56,7 +79,7 @@
   },
   "reporting": {
     "generate_plots": true,
-    "progress_every": 100,
+    "progress_every": 1000,
     "rolling_window": 100
   },
   "schema_version": 2,
@@ -188,10 +211,6 @@
         }
       }
     },
-    "lin_ts": {
-      "loss_scale_prior_sec": 0.1,
-      "relative_sampling_scale": 0.15
-    },
     "parameter_resolution": 20
   },
   "solve": {
@@ -200,6 +219,7 @@
       "step": 0.05,
       "stop": 3
     },
+    "cost_target": "native_cycle",
     "epsilon": {
       "decay_steps": 20000,
       "final": 0.03,
@@ -222,7 +242,7 @@
       "sigma": 0.2
     },
     "smoother_profile": "l1_jacobi_direct_coarse",
-    "state_encoding": "space_aware_v2",
+    "state_encoding": "shared_context",
     "tolerance": 1e-06
   },
   "stream": {
