@@ -1,4 +1,4 @@
-"""Durable worker execution shared by frozen matched-hierarchy studies."""
+"""Durable seed-batched execution for frozen matched-hierarchy studies."""
 
 from __future__ import annotations
 
@@ -28,7 +28,8 @@ def stop_children(children):
 
 def run_frozen_worker(output, phase, worker_id, workers, *, run_number, verify, policy):
     protocol = artifacts.read(output / "protocol.json")
-    if not 1 <= workers <= protocol.get("max_workers", 3) or worker_id not in range(workers):
+    seeds = protocol["training_seeds"]
+    if not 1 <= workers <= protocol.get("max_workers", 3) or worker_id not in range(len(seeds)):
         raise ValueError("Worker count or index differs from the protocol")
     directory = output / "raw" / phase
     directory.mkdir(parents=True, exist_ok=True)
@@ -37,7 +38,9 @@ def run_frozen_worker(output, phase, worker_id, workers, *, run_number, verify, 
         qos = request_performance_qos()
         verify(output)
         protocol = artifacts.read(output / "protocol.json")
-        jobs = artifacts.read(output / f"jobs_{phase}.json")[worker_id::workers]
+        seed = seeds[worker_id]
+        jobs = [job for job in artifacts.read(output / f"jobs_{phase}.json")
+                if job["seed"] == seed]
         expected = analysis.expected_cells(jobs)
         path = directory / f"worker_{worker_id}.jsonl"
         done = set()
@@ -52,27 +55,23 @@ def run_frozen_worker(output, phase, worker_id, workers, *, run_number, verify, 
             "phase": phase,
             "worker": worker_id,
             "workers": workers,
+            "seed": seed,
             "pid": os.getpid(),
             "qos": qos,
             "done": len(done),
             "total": len(expected),
             "status": "running",
         }
-        bundles = {}
-        snapshots = {}
+        bundle = policy.load_bundle(output, seed)
+        snapshot = policy.frozen_snapshot(bundle)
         with path.open("a", buffering=1) as handle:
             for job in jobs:
-                seed = job["seed"]
-                if seed not in bundles:
-                    bundles[seed] = policy.load_bundle(output, seed)
-                    snapshots[seed] = policy.frozen_snapshot(bundles[seed])
                 for name in job["policy_order"]:
                     key = analysis.cell_key({**job, "policy": name})
                     if key in done:
                         continue
                     state.update(
                         at=artifacts.now(),
-                        seed=seed,
                         case=job["case_id"] + 1,
                         policy=name,
                         done=len(done),
@@ -82,7 +81,7 @@ def run_frozen_worker(output, phase, worker_id, workers, *, run_number, verify, 
                         output / "progress" / f"{phase}_{worker_id}.json", state
                     )
                     row = policy.run_policy(
-                        job, name, protocol["policies"][name], bundles[seed]
+                        job, name, protocol["policies"][name], bundle
                     )
                     row.update(
                         phase=phase,
@@ -101,7 +100,7 @@ def run_frozen_worker(output, phase, worker_id, workers, *, run_number, verify, 
                     wall += row["wall_sec"]
                 handle.flush()
                 os.fsync(handle.fileno())
-                policy.verify_frozen(bundles[seed], snapshots[seed])
+                policy.verify_frozen(bundle, snapshot)
         if done != expected:
             raise AssertionError("Incomplete worker")
         state.update(
@@ -117,68 +116,74 @@ def run_frozen_worker(output, phase, worker_id, workers, *, run_number, verify, 
 
 def run_frozen_phase(output, phase, *, runner_module, run_number, workers=3):
     jobs = artifacts.read(output / f"jobs_{phase}.json")
-    tolerance = artifacts.read(output / "protocol.json").get("tolerance", 1e-6)
+    protocol = artifacts.read(output / "protocol.json")
+    tolerance = protocol.get("tolerance", 1e-6)
+    seeds = protocol["training_seeds"]
+    if not 1 <= workers <= protocol.get("max_workers", 3):
+        raise ValueError("Worker count differs from the protocol")
     expected = analysis.expected_cells(jobs)
     children = []
     logs = []
     start = time.monotonic()
     try:
-        for i in range(workers):
-            log = (output / "raw" / phase / f"worker_{i}.log").open("a", buffering=1)
-            logs.append(log)
-            children.append(
-                subprocess.Popen(
-                    [
-                        sys.executable,
-                        "-u",
-                        "-m",
-                        runner_module,
-                        "worker",
-                        "--output",
-                        str(output),
-                        "--phase",
-                        phase,
-                        "--worker",
-                        str(i),
-                    ],
-                    cwd=ROOT,
-                    env=single_thread_environment(),
-                    stdout=log,
-                    stderr=subprocess.STDOUT,
+        for batch_start in range(0, len(seeds), workers):
+            children = []
+            for i in range(batch_start, min(batch_start + workers, len(seeds))):
+                log = (output / "raw" / phase / f"worker_{i}.log").open("a", buffering=1)
+                logs.append(log)
+                children.append(
+                    subprocess.Popen(
+                        [
+                            sys.executable,
+                            "-u",
+                            "-m",
+                            runner_module,
+                            "worker",
+                            "--output",
+                            str(output),
+                            "--phase",
+                            phase,
+                            "--worker",
+                            str(i),
+                        ],
+                        cwd=ROOT,
+                        env=single_thread_environment(),
+                        stdout=log,
+                        stderr=subprocess.STDOUT,
+                    )
                 )
-            )
-        while True:
-            codes = [c.poll() for c in children]
-            if any(c not in (None, 0) for c in codes):
-                raise RuntimeError(f"{phase} worker stopped: {codes}")
-            progress = [
-                artifacts.read(p) for p in (output / "progress").glob(f"{phase}_*.json")
-            ]
-            done = sum(p["done"] for p in progress)
-            elapsed = time.monotonic() - start
-            artifacts.dump(
-                output / "status.json",
-                {
-                    "status": "running",
-                    "phase": phase,
-                    "run_number": run_number,
-                    "at": artifacts.now(),
-                    "done": done,
-                    "total": len(expected),
-                    "elapsed_sec": elapsed,
-                    "estimated_phase_remaining_sec": elapsed
-                    * (len(expected) - done)
-                    / done
-                    if done
-                    else None,
-                    "worker_pids": [p.pid for p in children],
-                },
-            )
-            if all(c == 0 for c in codes):
-                break
-            time.sleep(5)
+            while True:
+                codes = [c.poll() for c in children]
+                if any(c not in (None, 0) for c in codes):
+                    raise RuntimeError(f"{phase} worker stopped: {codes}")
+                progress = [
+                    artifacts.read(p) for p in (output / "progress").glob(f"{phase}_*.json")
+                ]
+                done = sum(p["done"] for p in progress)
+                elapsed = time.monotonic() - start
+                artifacts.dump(
+                    output / "status.json",
+                    {
+                        "status": "running",
+                        "phase": phase,
+                        "run_number": run_number,
+                        "at": artifacts.now(),
+                        "done": done,
+                        "total": len(expected),
+                        "elapsed_sec": elapsed,
+                        "estimated_phase_remaining_sec": elapsed
+                        * (len(expected) - done)
+                        / done
+                        if done
+                        else None,
+                        "worker_pids": [p.pid for p in children],
+                    },
+                )
+                if all(c == 0 for c in codes):
+                    break
+                time.sleep(5)
         seen = set()
-        for i in range(workers):
+        for i in range(len(seeds)):
             marker = artifacts.read(
                 output / "raw" / phase / f"worker_{i}.complete.json"
             )
