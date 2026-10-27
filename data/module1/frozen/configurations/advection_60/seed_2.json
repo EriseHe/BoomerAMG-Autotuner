@@ -1,11 +1,5 @@
 {
-  "description": "Frozen Module 1 deployment on new inputs 5001-6000; no learner updates.",
-  "evaluation": {
-    "checkpoint_directory": "data/official/module1/batches/batch_01/advection_60/seed_2",
-    "explore": false,
-    "training_cases": 5000,
-    "training_configuration": "data/module1/configurations/advection_60/seed_2.json"
-  },
+  "description": "Module 1 Part 2: frozen evaluation on inputs 5001\u20136000; measured in the same continuous worker after Part 1.",
   "failure_feedback": {
     "mode": "rollback_unrecovered"
   },
@@ -62,7 +56,7 @@
   },
   "reporting": {
     "generate_plots": true,
-    "progress_every": 500,
+    "progress_every": 1000,
     "rolling_window": 100
   },
   "schema_version": 2,
@@ -194,10 +188,6 @@
         }
       }
     },
-    "lin_ts": {
-      "loss_scale_prior_sec": 0.1,
-      "relative_sampling_scale": 0.15
-    },
     "parameter_resolution": 20
   },
   "solve": {
@@ -206,6 +196,7 @@
       "step": 0.05,
       "stop": 3
     },
+    "cost_target": "native_cycle",
     "epsilon": {
       "decay_steps": 20000,
       "final": 0.03,
@@ -228,7 +219,7 @@
       "sigma": 0.2
     },
     "smoother_profile": "l1_jacobi_direct_coarse",
-    "state_encoding": "space_aware_v2",
+    "state_encoding": "shared_context",
     "tolerance": 1e-06
   },
   "stream": {
@@ -253,5 +244,11 @@
     ],
     "smoke": false,
     "warmup_cases": 0
+  },
+  "evaluation": {
+    "checkpoint_directory": "data/official/module1/batches/batch_01/advection_60/seed_2",
+    "explore": false,
+    "training_cases": 5000,
+    "training_configuration": "data/module1/configurations/advection_60/seed_2.json"
   }
 }
