@@ -8,7 +8,7 @@ These files are archival paper artifacts, not active runner inputs. Use
 configurations and checkpoints retain their recorded state encoding and are
 not expected to load into the current training workflow.
 
-Module 1 Part 1 is online learning on inputs 1–5,000, stored in `module1/`.
+Module 1 Part 1 is online learning on inputs 1–5,000, stored in `module1/online/`.
 Part 2 is frozen evaluation on inputs 5,001–6,000, stored in `module1/frozen/`.
 Both parts are measured in one continuous worker stream, including overhead.
 The two parts retain separate summaries and timing arrays. The Module 1 protocol

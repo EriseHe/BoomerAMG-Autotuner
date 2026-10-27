@@ -15,17 +15,17 @@ from verify_data import DATA, read, verify
 def reproduce(output):
     verify()
     output.mkdir(parents=True,exist_ok=False)
-    cases={};counts=read(DATA/'module1/method_counts.json')
-    for path in sorted((DATA/'module1/arrays').glob('*.npz')):
+    cases={};counts=read(DATA/'module1/online/method_counts.json')
+    for path in sorted((DATA/'module1/online/arrays').glob('*.npz')):
         with np.load(path,allow_pickle=False) as a:
             cases[path.stem]={seed:dict(a=a['timings_sec'][i],result={'methods':counts[path.stem][seed]})
                 for i,seed in enumerate(a['seeds'].tolist())}
     aggregates,records,selected,_=online.statistics(cases)
-    with np.load(DATA/'module1/weights.npz',allow_pickle=False) as a:
+    with np.load(DATA/'module1/online/weights.npz',allow_pickle=False) as a:
         label,seed=str(a['case']),str(a['seed'])
         assert (label,seed)==(selected['case'],selected['seed'])
         cases[label][seed]['w']=a['first_primary_weights']
-    examples=read(DATA/'module1/cycle_examples.json')
+    examples=read(DATA/'module1/online/cycle_examples.json')
     destination=output/'module1';(destination/'sections').mkdir(parents=True)
     online.plots(cases,selected,destination/'figures',examples)
     online.write_rows(destination,aggregates,records,selected)
@@ -33,7 +33,7 @@ def reproduce(output):
     policy.publish(DATA/'module2',output/'module2')
     for module in [1,3]:
         folder=output/f'module{module}';folder.mkdir(exist_ok=True)
-        summary=read(DATA/f'module{module}/summary.json')
+        summary=read(DATA/('module1/online' if module==1 else f'module{module}')/'summary.json')
         for key in ['rows','aggregates']:
             values=summary[key]
             with (folder/f'{key}.csv').open('w',newline='') as stream:

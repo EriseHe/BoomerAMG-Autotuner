@@ -66,7 +66,7 @@ def main():
     result = dict(native_solves_executed=0, comparisons=[], trajectories=[], checks={})
     raw_manifest = read(ROOT/'data/raw_files.json')['files']
     for grid, seeds in ((60,range(1,4)),(80,range(1,7))):
-        old = np.load(ROOT/f'data/module1/arrays/advection_{grid}.npz')['timings_sec']
+        old = np.load(ROOT/f'data/module1/online/arrays/advection_{grid}.npz')['timings_sec']
         old_frozen = np.load(ROOT/f'data/module1/frozen/arrays/advection_{grid}.npz')['timings_sec']
         batches = [1] if grid==60 else [1,2]
         current = np.concatenate([np.load(CURRENT/f'advection_{grid}_batch{batch}/paper_figures/plot_data.npz')['timings_sec'] for batch in batches])
@@ -115,7 +115,7 @@ def main():
     result['source_changes']={k:dict(original=sha,current=pinned.get(k)) for k,sha in manifest.items() if sha!=pinned.get(k)}
     result['checks']['bandit_learner_source_unchanged'] = manifest['setup/learners/linucb/learner.py']==pinned['setup/learners/linucb/learner.py']
     result['checks']['problem_context_source_unchanged'] = manifest['problems/amg.py']==pinned['problems/amg.py']
-    result['checks']['native_libraries_unchanged'] = read(ROOT/'data/module1/protocol.json')['native_sha256']==read(CURRENT/'advection_60_batch1/protocol.json')['native_sha256']
+    result['checks']['native_libraries_unchanged'] = read(ROOT/'data/module1/online/protocol.json')['native_sha256']==read(CURRENT/'advection_60_batch1/protocol.json')['native_sha256']
     result['baseline_source_commit']=baseline
     for name in ('solve/controllers/common/state_encoder.py','solve/core/episode.py','solve/controllers/recursive_lstdq/controller.py','setup/learners/common/action_features.py'):
         assert hashlib.sha256(subprocess.check_output(['git','show',f'{baseline}:{name}'],cwd=ROOT)).hexdigest()==manifest[name]

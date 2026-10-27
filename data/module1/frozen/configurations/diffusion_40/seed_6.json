@@ -252,6 +252,6 @@
     "checkpoint_directory": "data/official/module1/batches/batch_02/diffusion_40/seed_6",
     "explore": false,
     "training_cases": 5000,
-    "training_configuration": "data/module1/configurations/diffusion_40/seed_6.json"
+    "training_configuration": "data/module1/online/configurations/diffusion_40/seed_6.json"
   }
 }

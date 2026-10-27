@@ -28,7 +28,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def setup_encoder():
-    raw = json.loads((ROOT / 'data/module1/configurations/diffusion_40/seed_1.json').read_text())
+    raw = json.loads((ROOT / 'data/module1/online/configurations/diffusion_40/seed_1.json').read_text())
     space = SetupConfigurationSpace.from_mapping(
         'expanded', raw['setup']['configuration_spaces']['expanded_no_endpoints'])
     return make_setup_feature_encoder(configuration_space=space, parameter_resolution=20)

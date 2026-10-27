@@ -174,7 +174,7 @@ def main():
     old_manifest=read(ROOT/'data/source_manifest.json')
     current_manifest=read(CURRENT/'source_manifest.json')
     result['source_changes']={k:dict(original=v,current=current_manifest.get(k)) for k,v in old_manifest.items() if v!=current_manifest.get(k)}
-    result['checks']['native_libraries_unchanged']=read(ROOT/'data/module1/protocol.json')['native_sha256']==read(CURRENT/'protocol.json')['native_sha256']
+    result['checks']['native_libraries_unchanged']=read(ROOT/'data/module1/online/protocol.json')['native_sha256']==read(CURRENT/'protocol.json')['native_sha256']
     for name in ['solve/controllers/common/state_encoder.py','setup/space.py']:
         source=subprocess.check_output(['git','show',f'{BASELINE}:{name}'],cwd=ROOT)
         assert hashlib.sha256(source).hexdigest()==old_manifest[name]

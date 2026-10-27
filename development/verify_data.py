@@ -39,7 +39,7 @@ def verify(raw=False):
         assert path.resolve().is_relative_to(ROOT) and not path.is_symlink(), name
         assert sha(path) == digest, name
     frozen = DATA/'module1/frozen'
-    protocol = read(DATA/'module1/protocol.json')
+    protocol = read(DATA/'module1/online/protocol.json')
     assert protocol['cases_per_seed'] == 6000
     assert protocol['training_cases_per_seed'] == 5000
     assert protocol['frozen_cases_per_seed'] == 1000
@@ -56,7 +56,7 @@ def verify(raw=False):
             assert hashlib.sha256(source).hexdigest() == digest, name
     result = {}
     for module, count in [(1,720000),(3,120000)]:
-        summary=read(DATA/f'module{module}/summary.json')
+        summary=read(DATA/('module1/online' if module==1 else f'module{module}')/'summary.json')
         rows=summary['rows'];full=[r for r in rows if r['window']=='full']
         assert sum(r['cases'] for r in full)==count
         experiments={f'{family}_{grid}' for family in ['diffusion','advection'] for grid in [40,60,80]} if module==1 else {None}
@@ -74,7 +74,7 @@ def verify(raw=False):
             for metric in ['native_reduction_pct','inclusive_reduction_pct']:
                 close(a[metric+'_mean'],statistics.mean(r[metric] for r in selected))
                 close(a[metric+'_sd'],statistics.stdev(r[metric] for r in selected))
-        for config in (DATA/f'module{module}/configurations').rglob('*.json'):
+        for config in (DATA/('module1/online' if module==1 else f'module{module}')/'configurations').rglob('*.json'):
             cfg=read(config)
             assert cfg['stream']['online_cases']==5000 and cfg['stream']['warmup_cases']==0
             assert cfg['setup']['candidate_schedule']['pool_size']==1024
@@ -82,8 +82,8 @@ def verify(raw=False):
             space=cfg['setup']['configuration_spaces']['expanded_no_endpoints']
             assert space['numeric_grids']['agg_num_levels']==[0,1,2] and space['agg_interp_types']==[4,6,7]
         result[f'module{module}']={'method_cases':count,'seeds':6}
-    rows=read(DATA/'module1/summary.json')['rows']
-    for path in (DATA/'module1/arrays').glob('*.npz'):
+    rows=read(DATA/'module1/online/summary.json')['rows']
+    for path in (DATA/'module1/online/arrays').glob('*.npz'):
         with np.load(path,allow_pickle=False) as a:
             assert a['seeds'].tolist()==['1','2','3','4','5','6']
             assert tuple(a['methods'])==METHODS
@@ -113,7 +113,7 @@ def verify(raw=False):
         protocol=read(frozen/'protocol.json')
         assert protocol['module']==1 and protocol['phase']=='frozen' and protocol['model_updates'] is False
         assert protocol['evaluation_global_cases']==[5001,6000]
-        assert protocol['native_sha256']==read(DATA/'module1/protocol.json')['native_sha256']
+        assert protocol['native_sha256']==read(DATA/'module1/online/protocol.json')['native_sha256']
         for name,digest in read(frozen/'manifest.json').items():
             assert sha(ROOT/name)==digest,name
         captures=read(frozen/'inputs/manifest.json')['streams']

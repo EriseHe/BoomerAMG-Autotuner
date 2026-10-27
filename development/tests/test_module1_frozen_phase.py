@@ -24,7 +24,7 @@ def read(path):
 
 class ModuleOneFrozenTests(unittest.TestCase):
     def test_protocol_has_5000_learning_and_1000_frozen_inputs(self):
-        protocol = read(ROOT / 'data/module1/protocol.json')
+        protocol = read(ROOT / 'data/module1/online/protocol.json')
         self.assertEqual(protocol['cases_per_seed'], 6000)
         self.assertEqual(protocol['training_cases_per_seed'], 5000)
         self.assertEqual(protocol['frozen_cases_per_seed'], 1000)

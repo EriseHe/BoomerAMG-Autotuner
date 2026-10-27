@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def configuration():
-    raw = runner.read(ROOT/'data/module1/configurations/diffusion_60/seed_4.json')
+    raw = runner.read(ROOT/'data/module1/online/configurations/diffusion_60/seed_4.json')
     raw['solve']['state_encoding'] = STATE_ENCODING
     raw['solve']['cost_target'] = 'native_cycle'
     raw['frozen_stream'] = runner.read(ROOT/'data/module1/frozen/configurations/diffusion_60/seed_4.json')['stream']
