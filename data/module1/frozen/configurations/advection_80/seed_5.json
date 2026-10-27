@@ -249,6 +249,6 @@
     "checkpoint_directory": "data/official/module1/batches/batch_02/advection_80/seed_5",
     "explore": false,
     "training_cases": 5000,
-    "training_configuration": "data/module1/configurations/advection_80/seed_5.json"
+    "training_configuration": "data/module1/online/configurations/advection_80/seed_5.json"
   }
 }

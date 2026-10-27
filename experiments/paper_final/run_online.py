@@ -135,7 +135,7 @@ def prepare_evaluation(runtime, stage):
     for key in ("problem", "setup", "solve", "methods", "seeds", "failure_feedback"):
         if training[key] != raw[key]:
             raise ValueError(f"Frozen evaluation changed the Module 1 {key} settings")
-    if sweep.native_hashes() != read(ROOT/"data/module1/protocol.json")["native_sha256"]:
+    if sweep.native_hashes() != read(ROOT/"data/module1/online/protocol.json")["native_sha256"]:
         raise ValueError("Frozen evaluation requires the matching Module 1 native build")
     inventory = training_inventory(source)
     sources, histories = {}, {}
