@@ -232,31 +232,46 @@ def online_figures(a, chosen, seed, title, examples=None):
 def matched_figures(native, weights, case_ids, selected, seeds, title):
     style()
     methods = ("reference", "fixed", "oracle", "periodic", "rl")
-    colors = (COLORS[2], COLORS[1], WEIGHT_CMAP(.63), COLORS[3])
-    labels = ("Global best fixed", "Per-instance best fixed", "Periodic (2.85, 1.10)", "Frozen RL")
-    fig, ax = plt.subplots(figsize=(6.85, 2.35))
-    extent = []
-    for i, (j, color) in enumerate(zip(range(1, 5), colors)):
-        gains = native[:, j]
-        gains = gains[np.isfinite(gains)]
-        if not len(gains):
-            ax.text(.98, 1-(i+.5)/4, "undefined", transform=ax.transAxes, ha="right", fontsize=7)
-            continue
-        mean = float(gains.mean())
-        sd = float(gains.std(ddof=1)) if len(gains)>1 else 0.
-        ax.scatter(gains, i+np.linspace(-.13,.13,len(gains)) if len(gains)>1 else [i],
-                   s=16, facecolors="white", edgecolors=color, linewidths=.85, zorder=3)
-        ax.errorbar(mean,i,xerr=sd,fmt="D",color=color,capsize=2.5,markersize=4,elinewidth=.9,zorder=4)
-        extent.extend([gains.min(),gains.max(),mean-sd,mean+sd])
-    if extent:
-        padding = .055*max(max(extent)-min(extent),1.)
-        ax.set_xlim(min(extent)-padding,max(extent)+padding)
-    ax.set(yticks=range(4),yticklabels=labels,ylim=(3.4,-.4),
-           xlabel=r"Native continuation-time reduction relative to $w=1$ (%)")
-    fig.suptitle(f"Matched-policy savings ({title}, {len(seeds)} checkpoints)",y=.99,fontsize=9)
-    ax.text(.98,1.075,"Open circles: checkpoints; diamonds: mean ± SD",transform=ax.transAxes,ha="right",fontsize=6.5)
-    fig.subplots_adjust(left=.235,right=.985,top=.78,bottom=.22)
-    figures = [("matched_policy_savings",fig)]
+    labels = ("Global best fixed", "Per-problem best fixed", "Periodic (2.85, 1.10)", "Frozen RL")
+    # Apply the compact manuscript style only to savings, preserving the
+    # typography of the relaxation-weight panels below.
+    with matplotlib.rc_context({"font.size": 8.5, "axes.titlesize": 9,
+                                "axes.labelsize": 8.5, "xtick.labelsize": 8,
+                                "ytick.labelsize": 8, "legend.fontsize": 8}):
+        fig, ax = plt.subplots(figsize=(7.0, 1.58))
+        extent = []
+        for i, j in enumerate(range(1, 5)):
+            gains = native[:, j]
+            gains = gains[np.isfinite(gains)]
+            if not len(gains):
+                ax.text(.98, i, "undefined", transform=ax.get_yaxis_transform(),
+                        ha="right", va="center", fontsize=8)
+                continue
+            mean = float(gains.mean())
+            sd = float(gains.std(ddof=1)) if len(gains) > 1 else 0.
+            offsets = np.linspace(-.12, .12, len(gains)) if len(gains) > 1 else [0.]
+            ax.scatter(gains, i + np.asarray(offsets), s=17, facecolors="white",
+                       edgecolors="#222222", linewidths=.8, zorder=3)
+            ax.errorbar(mean, i, xerr=sd, fmt="D", color="#222222",
+                        markersize=4, elinewidth=.8, capsize=2, capthick=.7, zorder=4)
+            endpoint = max(gains.max(), mean + sd)
+            annotation = f"{mean:.1f} ± {sd:.1f}" if len(gains) > 1 else f"{mean:.1f}"
+            ax.annotate(annotation, (endpoint, i), xytext=(7, 0),
+                        textcoords="offset points", va="center", fontsize=8)
+            extent.extend([gains.min(), gains.max(), mean - sd, mean + sd])
+        if extent:
+            # Keep every checkpoint and whisker visible on other datasets too;
+            # reserve room on the right for the numerical annotations.
+            span = max(max(extent) - min(extent), 1.)
+            ax.set_xlim(min(extent) - .075 * span, max(extent) + .25 * span)
+        ax.set(yticks=range(4), yticklabels=labels, ylim=(3.70, -.30),
+               xlabel=r"Solver-only continuation-time reduction relative to $w=1$ (%)")
+        ax.tick_params(axis="y", length=0, pad=7)
+        ax.spines["left"].set_visible(False)
+        ax.xaxis.labelpad = 6
+        # The manuscript caption explains the markers and checkpoint population.
+        fig.subplots_adjust(left=.235, right=.985, top=.962, bottom=.332)
+        figures = [("matched_policy_savings", fig)]
     seed=seeds[selected]
     order=np.lexsort((case_ids,-np.isfinite(weights[selected,0]).sum(axis=1)))
     indices=[0,2,3,4]
