@@ -1,5 +1,5 @@
 {
-  "encoding_version": "space_aware_v2",
+  "name": "shared_context",
   "weight_bounds": [
     1.0,
     3.0
@@ -14,6 +14,29 @@
     "interp_type",
     "agg_interp_type"
   ],
+  "setup_descriptor_names": [
+    "strong_threshold",
+    "max_row_sum",
+    "trunc_factor",
+    "P_max_elmts",
+    "agg_num_levels",
+    "coarsen_type=0",
+    "coarsen_type=2",
+    "coarsen_type=3",
+    "coarsen_type=6",
+    "coarsen_type=8",
+    "interp_type=0",
+    "interp_type=2",
+    "interp_type=3",
+    "interp_type=4",
+    "interp_type=8",
+    "interp_type=17",
+    "interp_type=18",
+    "agg_interp_type=6",
+    "agg_interp_type=7"
+  ],
+  "setup_descriptor_dim": 19,
+  "setup_categorical_encoding": "reference_one_hot",
   "setup_parameter_spec": {
     "parameters": [
       {
@@ -42,8 +65,8 @@
           0.95
         ],
         "default": 0.25,
-        "center": 0.25,
-        "scale": 0.25,
+        "center": 0.475,
+        "scale": 0.475,
         "active_if": []
       },
       {
@@ -72,8 +95,8 @@
           0.95
         ],
         "default": 0.9,
-        "center": 0.9,
-        "scale": 0.1,
+        "center": 0.4750005,
+        "scale": 0.47499949999999996,
         "active_if": []
       },
       {
@@ -102,8 +125,8 @@
           0.95
         ],
         "default": 0.0,
-        "center": 0.0,
-        "scale": 0.2,
+        "center": 0.475,
+        "scale": 0.475,
         "active_if": []
       },
       {
@@ -118,8 +141,8 @@
           16.0
         ],
         "default": 4.0,
-        "center": 4.0,
-        "scale": 4.0,
+        "center": 9.0,
+        "scale": 7.0,
         "active_if": []
       },
       {
@@ -131,7 +154,7 @@
           2.0
         ],
         "default": 0.0,
-        "center": 0.0,
+        "center": 1.0,
         "scale": 1.0,
         "active_if": []
       },
@@ -192,12 +215,17 @@
       }
     ]
   },
-  "strict_setup_categories": true,
   "tol": 1e-06,
   "max_cycles": 50,
   "c_max": 1000.0,
-  "time_scale_sec": 0.002,
-  "feature_dim": 32,
+  "context_variant": "normalized_setup_cycle_time",
+  "cycle_time_mode": "log",
+  "cycle_time_normalization": "log1p_native_seconds_over_fixed_reference",
+  "cycle_time_reference_sec": 0.001,
+  "cycle_time_logarithm": "natural",
+  "cycle_time_clipping": false,
+  "initial_cycle_time_feature": 0.0,
+  "feature_dim": 29,
   "problem_context_mode": "diffusion3d",
   "problem_context_fields": [
     "bias",

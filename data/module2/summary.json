@@ -2,10 +2,10 @@
   "module": 2,
   "audit": {
     "evaluation_failures": 0,
-    "evaluation_trials": 8535,
+    "evaluation_trials": 8529,
     "exact_coverage": true,
     "fresh_scan_trials": 29520,
-    "recovered_evaluations": 30
+    "recovered_evaluations": 21
   },
   "per_seed": [
     {
@@ -13,12 +13,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 11.868820428960476,
-      "inclusive_total_sec": 18.178425095627087,
+      "inclusive_continuation_sec": 12.66379605995246,
+      "inclusive_total_sec": 18.892659059952443,
       "label": "Fixed w=1",
       "method": "reference",
-      "native_continuation_sec": 11.868085000000104,
-      "native_total_sec": 18.177689666666712,
+      "native_continuation_sec": 12.663097999999955,
+      "native_total_sec": 18.89196099999993,
       "seed": 1
     },
     {
@@ -26,12 +26,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.840914046747439,
-      "inclusive_total_sec": 14.1346353800807,
+      "inclusive_continuation_sec": 8.234467653012484,
+      "inclusive_total_sec": 14.454635986345854,
       "label": "Best global fixed",
       "method": "fixed",
-      "native_continuation_sec": 7.840393333333529,
-      "native_total_sec": 14.134114666666791,
+      "native_continuation_sec": 8.233972666666803,
+      "native_total_sec": 14.454141000000167,
       "seed": 1
     },
     {
@@ -39,12 +39,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.669814607685279,
-      "inclusive_total_sec": 13.974593274351932,
+      "inclusive_continuation_sec": 8.036449132495491,
+      "inclusive_total_sec": 14.256700799162216,
       "label": "Best per-instance fixed",
       "method": "oracle",
-      "native_continuation_sec": 7.66930733333373,
-      "native_total_sec": 13.97408600000039,
+      "native_continuation_sec": 8.035967999999958,
+      "native_total_sec": 14.256219666666682,
       "seed": 1
     },
     {
@@ -52,12 +52,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 6.931280024810413,
-      "inclusive_total_sec": 13.250081358143783,
+      "inclusive_continuation_sec": 7.283924155980116,
+      "inclusive_total_sec": 13.51120548931337,
       "label": "Periodic schedule",
       "method": "periodic",
-      "native_continuation_sec": 6.930307333333294,
-      "native_total_sec": 13.249108666666666,
+      "native_continuation_sec": 7.28295533333338,
+      "native_total_sec": 13.510236666666634,
       "seed": 1
     },
     {
@@ -65,12 +65,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.475839795402056,
-      "inclusive_total_sec": 13.777375462068637,
+      "inclusive_continuation_sec": 7.5950892664177765,
+      "inclusive_total_sec": 13.819777599751244,
       "label": "Frozen LSTDQ",
       "method": "rl",
-      "native_continuation_sec": 7.218929333333818,
-      "native_total_sec": 13.520465000000405,
+      "native_continuation_sec": 7.407950666666724,
+      "native_total_sec": 13.632639000000195,
       "seed": 1
     },
     {
@@ -78,12 +78,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 12.301038741528123,
-      "inclusive_total_sec": 18.874247408194723,
+      "inclusive_continuation_sec": 12.374359267603905,
+      "inclusive_total_sec": 18.88998293427058,
       "label": "Fixed w=1",
       "method": "reference",
-      "native_continuation_sec": 12.300283666667285,
-      "native_total_sec": 18.87349233333389,
+      "native_continuation_sec": 12.37368066666647,
+      "native_total_sec": 18.889304333333147,
       "seed": 2
     },
     {
@@ -91,12 +91,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 8.254535746522249,
-      "inclusive_total_sec": 14.824103079855522,
+      "inclusive_continuation_sec": 8.17607312598209,
+      "inclusive_total_sec": 14.694541459315422,
       "label": "Best global fixed",
       "method": "fixed",
-      "native_continuation_sec": 8.254006333333129,
-      "native_total_sec": 14.823573666666407,
+      "native_continuation_sec": 8.175596333333344,
+      "native_total_sec": 14.694064666666675,
       "seed": 2
     },
     {
@@ -104,12 +104,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 8.066648473511329,
-      "inclusive_total_sec": 14.628563806844504,
+      "inclusive_continuation_sec": 7.95060127584183,
+      "inclusive_total_sec": 14.471837942508547,
       "label": "Best per-instance fixed",
       "method": "oracle",
-      "native_continuation_sec": 8.066126666666507,
-      "native_total_sec": 14.628041999999684,
+      "native_continuation_sec": 7.9501326666663426,
+      "native_total_sec": 14.471369333333069,
       "seed": 2
     },
     {
@@ -117,12 +117,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.419859315905022,
-      "inclusive_total_sec": 14.00288798257173,
+      "inclusive_continuation_sec": 7.751292296446823,
+      "inclusive_total_sec": 14.264520629780149,
       "label": "Periodic schedule",
       "method": "periodic",
-      "native_continuation_sec": 7.418804999999625,
-      "native_total_sec": 14.001833666666323,
+      "native_continuation_sec": 7.750296333333438,
+      "native_total_sec": 14.263524666666758,
       "seed": 2
     },
     {
@@ -130,12 +130,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.741622048460626,
-      "inclusive_total_sec": 14.33521904846076,
+      "inclusive_continuation_sec": 7.843879168317615,
+      "inclusive_total_sec": 14.35485616831767,
       "label": "Frozen LSTDQ",
       "method": "rl",
-      "native_continuation_sec": 7.48594833333377,
-      "native_total_sec": 14.0795453333339,
+      "native_continuation_sec": 7.65530366666689,
+      "native_total_sec": 14.166280666666935,
       "seed": 2
     },
     {
@@ -143,12 +143,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 11.919143006919475,
-      "inclusive_total_sec": 18.328736006919332,
+      "inclusive_continuation_sec": 12.470002019250806,
+      "inclusive_total_sec": 18.53950201925085,
       "label": "Fixed w=1",
       "method": "reference",
-      "native_continuation_sec": 11.918412666666846,
-      "native_total_sec": 18.328005666666712,
+      "native_continuation_sec": 12.469318666666789,
+      "native_total_sec": 18.538818666666835,
       "seed": 3
     },
     {
@@ -156,12 +156,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.9405737987033485,
-      "inclusive_total_sec": 14.368476798703446,
+      "inclusive_continuation_sec": 8.132988311975112,
+      "inclusive_total_sec": 14.238191978641659,
       "label": "Best global fixed",
       "method": "fixed",
-      "native_continuation_sec": 7.940058666666824,
-      "native_total_sec": 14.367961666666922,
+      "native_continuation_sec": 8.13251133333349,
+      "native_total_sec": 14.23771500000004,
       "seed": 3
     },
     {
@@ -169,12 +169,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.759793153346989,
-      "inclusive_total_sec": 14.183248820013608,
+      "inclusive_continuation_sec": 7.883400041985596,
+      "inclusive_total_sec": 13.976368041985626,
       "label": "Best per-instance fixed",
       "method": "oracle",
-      "native_continuation_sec": 7.759287333333251,
-      "native_total_sec": 14.18274299999987,
+      "native_continuation_sec": 7.882939000000055,
+      "native_total_sec": 13.975907000000088,
       "seed": 3
     },
     {
@@ -182,12 +182,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.041587913079403,
-      "inclusive_total_sec": 13.475929913079522,
+      "inclusive_continuation_sec": 7.083928321787262,
+      "inclusive_total_sec": 13.179160321787181,
       "label": "Periodic schedule",
       "method": "periodic",
-      "native_continuation_sec": 7.040619333333244,
-      "native_total_sec": 13.474961333333356,
+      "native_continuation_sec": 7.08293733333341,
+      "native_total_sec": 13.178169333333326,
       "seed": 3
     },
     {
@@ -195,12 +195,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.113783945925465,
-      "inclusive_total_sec": 13.533221945925412,
+      "inclusive_continuation_sec": 7.483516759771235,
+      "inclusive_total_sec": 13.58151809310455,
       "label": "Frozen LSTDQ",
       "method": "rl",
-      "native_continuation_sec": 6.870187333333234,
-      "native_total_sec": 13.289625333333188,
+      "native_continuation_sec": 7.295403666666714,
+      "native_total_sec": 13.393405000000023,
       "seed": 3
     },
     {
@@ -208,12 +208,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 12.295535329218907,
-      "inclusive_total_sec": 18.54272332921893,
+      "inclusive_continuation_sec": 12.438929512696317,
+      "inclusive_total_sec": 18.608213846029585,
       "label": "Fixed w=1",
       "method": "reference",
-      "native_continuation_sec": 12.294798999999449,
-      "native_total_sec": 18.541986999999466,
+      "native_continuation_sec": 12.43823799999972,
+      "native_total_sec": 18.60752233333298,
       "seed": 4
     },
     {
@@ -221,12 +221,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 8.271212800349012,
-      "inclusive_total_sec": 14.526717467015748,
+      "inclusive_continuation_sec": 8.12109492663773,
+      "inclusive_total_sec": 14.301124593304447,
       "label": "Best global fixed",
       "method": "fixed",
-      "native_continuation_sec": 8.270688000000609,
-      "native_total_sec": 14.526192666667349,
+      "native_continuation_sec": 8.12061866666669,
+      "native_total_sec": 14.300648333333415,
       "seed": 4
     },
     {
@@ -234,12 +234,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 8.12559801089805,
-      "inclusive_total_sec": 14.37951101089797,
+      "inclusive_continuation_sec": 7.896940559426009,
+      "inclusive_total_sec": 14.07547822609272,
       "label": "Best per-instance fixed",
       "method": "oracle",
-      "native_continuation_sec": 8.12506633333391,
-      "native_total_sec": 14.378979333333831,
+      "native_continuation_sec": 7.896469666666966,
+      "native_total_sec": 14.075007333333678,
       "seed": 4
     },
     {
@@ -247,12 +247,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.535058467193739,
-      "inclusive_total_sec": 13.790743467193812,
+      "inclusive_continuation_sec": 7.094717692910194,
+      "inclusive_total_sec": 13.275711692910198,
       "label": "Periodic schedule",
       "method": "periodic",
-      "native_continuation_sec": 7.533954666666298,
-      "native_total_sec": 13.789639666666362,
+      "native_continuation_sec": 7.093745333333154,
+      "native_total_sec": 13.27473933333316,
       "seed": 4
     },
     {
@@ -260,12 +260,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.836617271018168,
-      "inclusive_total_sec": 14.102097937684876,
+      "inclusive_continuation_sec": 7.969343176268613,
+      "inclusive_total_sec": 14.149271176268682,
       "label": "Frozen LSTDQ",
       "method": "rl",
-      "native_continuation_sec": 7.5761896666663535,
-      "native_total_sec": 13.841670333333056,
+      "native_continuation_sec": 7.771595000000158,
+      "native_total_sec": 13.951523000000224,
       "seed": 4
     },
     {
@@ -273,12 +273,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 11.940330065253619,
-      "inclusive_total_sec": 18.358283065253612,
+      "inclusive_continuation_sec": 12.825609794493493,
+      "inclusive_total_sec": 19.768062794493527,
       "label": "Fixed w=1",
       "method": "reference",
-      "native_continuation_sec": 11.939603333332688,
-      "native_total_sec": 18.357556333332703,
+      "native_continuation_sec": 12.824957000000127,
+      "native_total_sec": 19.76741000000017,
       "seed": 5
     },
     {
@@ -286,12 +286,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.931919236158271,
-      "inclusive_total_sec": 14.338997236158383,
+      "inclusive_continuation_sec": 8.422749642778005,
+      "inclusive_total_sec": 15.344877642778004,
       "label": "Best global fixed",
       "method": "fixed",
-      "native_continuation_sec": 7.931390333333923,
-      "native_total_sec": 14.33846833333404,
+      "native_continuation_sec": 8.422289,
+      "native_total_sec": 15.344416999999998,
       "seed": 5
     },
     {
@@ -299,12 +299,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.723023540269953,
-      "inclusive_total_sec": 14.132768206936776,
+      "inclusive_continuation_sec": 8.174986050725721,
+      "inclusive_total_sec": 15.111149050725672,
       "label": "Best per-instance fixed",
       "method": "oracle",
-      "native_continuation_sec": 7.7225203333339305,
-      "native_total_sec": 14.132265000000752,
+      "native_continuation_sec": 8.174533999999944,
+      "native_total_sec": 15.110696999999902,
       "seed": 5
     },
     {
@@ -312,12 +312,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.054141753968889,
-      "inclusive_total_sec": 13.46487442063561,
+      "inclusive_continuation_sec": 7.829052946349799,
+      "inclusive_total_sec": 14.782725613016419,
       "label": "Periodic schedule",
       "method": "periodic",
-      "native_continuation_sec": 7.05315933333348,
-      "native_total_sec": 13.4638920000002,
+      "native_continuation_sec": 7.828041666666545,
+      "native_total_sec": 14.781714333333165,
       "seed": 5
     },
     {
@@ -325,12 +325,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.274101340754221,
-      "inclusive_total_sec": 13.6844210074208,
+      "inclusive_continuation_sec": 7.712028494953942,
+      "inclusive_total_sec": 14.667015494953958,
       "label": "Frozen LSTDQ",
       "method": "rl",
-      "native_continuation_sec": 7.0259806666668645,
-      "native_total_sec": 13.436300333333442,
+      "native_continuation_sec": 7.533355333333358,
+      "native_total_sec": 14.48834233333338,
       "seed": 5
     },
     {
@@ -338,12 +338,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 12.294040166507251,
-      "inclusive_total_sec": 19.208715499840512,
+      "inclusive_continuation_sec": 12.994272893549486,
+      "inclusive_total_sec": 19.1655175602161,
       "label": "Fixed w=1",
       "method": "reference",
-      "native_continuation_sec": 12.293301666665911,
-      "native_total_sec": 19.20797699999917,
+      "native_continuation_sec": 12.993581000000162,
+      "native_total_sec": 19.16482566666679,
       "seed": 6
     },
     {
@@ -351,12 +351,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 8.121203079161948,
-      "inclusive_total_sec": 15.045672745828616,
+      "inclusive_continuation_sec": 8.589442119957802,
+      "inclusive_total_sec": 14.774652786624502,
       "label": "Best global fixed",
       "method": "fixed",
-      "native_continuation_sec": 8.120688333333245,
-      "native_total_sec": 15.045157999999919,
+      "native_continuation_sec": 8.588943666666822,
+      "native_total_sec": 14.774154333333529,
       "seed": 6
     },
     {
@@ -364,12 +364,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.824115738986541,
-      "inclusive_total_sec": 14.772055405653145,
+      "inclusive_continuation_sec": 8.170845117888325,
+      "inclusive_total_sec": 14.36662045122173,
       "label": "Best per-instance fixed",
       "method": "oracle",
-      "native_continuation_sec": 7.8236180000005735,
-      "native_total_sec": 14.771557666667178,
+      "native_continuation_sec": 8.170348333333376,
+      "native_total_sec": 14.366123666666784,
       "seed": 6
     },
     {
@@ -377,12 +377,12 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.110687478858777,
-      "inclusive_total_sec": 14.034651812192251,
+      "inclusive_continuation_sec": 7.472708774428259,
+      "inclusive_total_sec": 13.666281441094847,
       "label": "Periodic schedule",
       "method": "periodic",
-      "native_continuation_sec": 7.109754000000764,
-      "native_total_sec": 14.033718333334237,
+      "native_continuation_sec": 7.471648666666575,
+      "native_total_sec": 13.665221333333168,
       "seed": 6
     },
     {
@@ -390,70 +390,586 @@
       "defined": true,
       "expected_cases": 100,
       "failed_cases": 0,
-      "inclusive_continuation_sec": 7.503730077718743,
-      "inclusive_total_sec": 14.43257841105219,
+      "inclusive_continuation_sec": 8.112963075879469,
+      "inclusive_total_sec": 14.309478075879442,
       "label": "Frozen LSTDQ",
       "method": "rl",
-      "native_continuation_sec": 7.259176333333257,
-      "native_total_sec": 14.188024666666701,
+      "native_continuation_sec": 7.9162036666664966,
+      "native_total_sec": 14.112718666666467,
       "seed": 6
     }
   ],
+  "protocol": {
+    "created_at": "2026-10-27T06:58:42.166340+00:00",
+    "evaluation": "Freeze scan selections, independently retime five policy roles; share identical execution cells; all failures and recovery costs retained",
+    "format": "matched_policy",
+    "labels": {
+      "fixed": "Best global fixed",
+      "oracle": "Best per-instance fixed",
+      "periodic": "Periodic schedule",
+      "reference": "Fixed w=1",
+      "rl": "Frozen LSTDQ"
+    },
+    "max_cycles": 50,
+    "max_workers": 3,
+    "methods": [
+      "reference",
+      "fixed",
+      "oracle",
+      "periodic",
+      "rl"
+    ],
+    "module": 2,
+    "name": "matched_policy",
+    "policies": {
+      "fixed_1": {
+        "kind": "fixed",
+        "pattern": [
+          1.0
+        ]
+      },
+      "fixed_1.05": {
+        "kind": "fixed",
+        "pattern": [
+          1.05
+        ]
+      },
+      "fixed_1.1": {
+        "kind": "fixed",
+        "pattern": [
+          1.1
+        ]
+      },
+      "fixed_1.15": {
+        "kind": "fixed",
+        "pattern": [
+          1.15
+        ]
+      },
+      "fixed_1.2": {
+        "kind": "fixed",
+        "pattern": [
+          1.2
+        ]
+      },
+      "fixed_1.25": {
+        "kind": "fixed",
+        "pattern": [
+          1.25
+        ]
+      },
+      "fixed_1.3": {
+        "kind": "fixed",
+        "pattern": [
+          1.3
+        ]
+      },
+      "fixed_1.35": {
+        "kind": "fixed",
+        "pattern": [
+          1.35
+        ]
+      },
+      "fixed_1.4": {
+        "kind": "fixed",
+        "pattern": [
+          1.4
+        ]
+      },
+      "fixed_1.45": {
+        "kind": "fixed",
+        "pattern": [
+          1.45
+        ]
+      },
+      "fixed_1.5": {
+        "kind": "fixed",
+        "pattern": [
+          1.5
+        ]
+      },
+      "fixed_1.55": {
+        "kind": "fixed",
+        "pattern": [
+          1.55
+        ]
+      },
+      "fixed_1.6": {
+        "kind": "fixed",
+        "pattern": [
+          1.6
+        ]
+      },
+      "fixed_1.65": {
+        "kind": "fixed",
+        "pattern": [
+          1.65
+        ]
+      },
+      "fixed_1.7": {
+        "kind": "fixed",
+        "pattern": [
+          1.7
+        ]
+      },
+      "fixed_1.75": {
+        "kind": "fixed",
+        "pattern": [
+          1.75
+        ]
+      },
+      "fixed_1.8": {
+        "kind": "fixed",
+        "pattern": [
+          1.8
+        ]
+      },
+      "fixed_1.85": {
+        "kind": "fixed",
+        "pattern": [
+          1.85
+        ]
+      },
+      "fixed_1.9": {
+        "kind": "fixed",
+        "pattern": [
+          1.9
+        ]
+      },
+      "fixed_1.95": {
+        "kind": "fixed",
+        "pattern": [
+          1.95
+        ]
+      },
+      "fixed_2": {
+        "kind": "fixed",
+        "pattern": [
+          2.0
+        ]
+      },
+      "fixed_2.05": {
+        "kind": "fixed",
+        "pattern": [
+          2.05
+        ]
+      },
+      "fixed_2.1": {
+        "kind": "fixed",
+        "pattern": [
+          2.1
+        ]
+      },
+      "fixed_2.15": {
+        "kind": "fixed",
+        "pattern": [
+          2.15
+        ]
+      },
+      "fixed_2.2": {
+        "kind": "fixed",
+        "pattern": [
+          2.2
+        ]
+      },
+      "fixed_2.25": {
+        "kind": "fixed",
+        "pattern": [
+          2.25
+        ]
+      },
+      "fixed_2.3": {
+        "kind": "fixed",
+        "pattern": [
+          2.3
+        ]
+      },
+      "fixed_2.35": {
+        "kind": "fixed",
+        "pattern": [
+          2.35
+        ]
+      },
+      "fixed_2.4": {
+        "kind": "fixed",
+        "pattern": [
+          2.4
+        ]
+      },
+      "fixed_2.45": {
+        "kind": "fixed",
+        "pattern": [
+          2.45
+        ]
+      },
+      "fixed_2.5": {
+        "kind": "fixed",
+        "pattern": [
+          2.5
+        ]
+      },
+      "fixed_2.55": {
+        "kind": "fixed",
+        "pattern": [
+          2.55
+        ]
+      },
+      "fixed_2.6": {
+        "kind": "fixed",
+        "pattern": [
+          2.6
+        ]
+      },
+      "fixed_2.65": {
+        "kind": "fixed",
+        "pattern": [
+          2.65
+        ]
+      },
+      "fixed_2.7": {
+        "kind": "fixed",
+        "pattern": [
+          2.7
+        ]
+      },
+      "fixed_2.75": {
+        "kind": "fixed",
+        "pattern": [
+          2.75
+        ]
+      },
+      "fixed_2.8": {
+        "kind": "fixed",
+        "pattern": [
+          2.8
+        ]
+      },
+      "fixed_2.85": {
+        "kind": "fixed",
+        "pattern": [
+          2.85
+        ]
+      },
+      "fixed_2.9": {
+        "kind": "fixed",
+        "pattern": [
+          2.9
+        ]
+      },
+      "fixed_2.95": {
+        "kind": "fixed",
+        "pattern": [
+          2.95
+        ]
+      },
+      "fixed_3": {
+        "kind": "fixed",
+        "pattern": [
+          3.0
+        ]
+      },
+      "periodic": {
+        "kind": "periodic",
+        "pattern": [
+          2.85,
+          1.1
+        ]
+      },
+      "rl_frozen": {
+        "beta": null,
+        "explore": false,
+        "kind": "rl",
+        "learn": false
+      }
+    },
+    "problem": {
+      "advection": [
+        0,
+        0,
+        0
+      ],
+      "c_max": 1000,
+      "c_min": 1,
+      "grid": [
+        60,
+        60,
+        60
+      ],
+      "kind": "scalar_anisotropic_diffusion"
+    },
+    "profile": "l1_jacobi_direct_coarse",
+    "recovery": "One primary matched hierarchy, then one fresh Default fallback on numerical failure; no setup reselection or learning",
+    "repetitions_per_case": 3,
+    "scan_extra_repeat_case_ids": [
+      0,
+      6,
+      22,
+      29,
+      30,
+      36,
+      45,
+      74,
+      87,
+      91
+    ],
+    "scan_extra_repetitions": 2,
+    "scan_repetitions": 1,
+    "seeds": {
+      "candidates": 20261020,
+      "inputs": 20261019,
+      "order": 20261021,
+      "repeats": 20261022
+    },
+    "selection": "Fresh complete fixed-weight scans, mean native continuation cost; all-success global weight and successful per-case weights; deterministic weight-name ties",
+    "sources": {
+      "1": {
+        "directory": "checkpoints/seed_1",
+        "effective_beta": 2.0,
+        "method": "bandit_lstdq",
+        "original_files": {
+          "config": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_1/experiment_config.json",
+            "sha256": "b20d27f3988ea2d263f887f682d2f24f4be15439fb18a07f0ae24e6fefc35fcc"
+          },
+          "controller_checkpoint": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_1/checkpoints/bandit_lstdq_final.npz",
+            "sha256": "5c3a1be8d5eee8d54b0df5bb44b98b2bff3d47fc6c40c4956d18e35235760b25"
+          },
+          "encoder": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_1/checkpoints/bandit_lstdq_final.npz.encoder.json",
+            "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+          },
+          "setup_checkpoint": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_1/final_bandit_states/bandit_lstdq.npz",
+            "sha256": "e61c29f2fc7d61301dd65eb1e94017b27a951f527749c97e786a53bd0e334b38"
+          }
+        }
+      },
+      "2": {
+        "directory": "checkpoints/seed_2",
+        "effective_beta": 2.0,
+        "method": "bandit_lstdq",
+        "original_files": {
+          "config": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_2/experiment_config.json",
+            "sha256": "ad7331e4bed01f6c4bd6b68cc74bfea00dd36842a765ae7d80e956e744e8b612"
+          },
+          "controller_checkpoint": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_2/checkpoints/bandit_lstdq_final.npz",
+            "sha256": "c0f19a5e2a0c5d57b24969d7446f3bbaa4691f3d1f6d490aa1b1e9385b7ccf13"
+          },
+          "encoder": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_2/checkpoints/bandit_lstdq_final.npz.encoder.json",
+            "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+          },
+          "setup_checkpoint": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_2/final_bandit_states/bandit_lstdq.npz",
+            "sha256": "b09ffd49fcb94461ac877777d7a7606d8ba09ca1477fe6647334bc5516444b35"
+          }
+        }
+      },
+      "3": {
+        "directory": "checkpoints/seed_3",
+        "effective_beta": 2.0,
+        "method": "bandit_lstdq",
+        "original_files": {
+          "config": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_3/experiment_config.json",
+            "sha256": "dcf082077b0e11a2314ed10d14bf06a78e1ea270fd47a063ed188aa3a061fee5"
+          },
+          "controller_checkpoint": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_3/checkpoints/bandit_lstdq_final.npz",
+            "sha256": "edd3b5802ab972be65e97af981915a2aa5d95125e4288605963af0d43ba5f27d"
+          },
+          "encoder": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_3/checkpoints/bandit_lstdq_final.npz.encoder.json",
+            "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+          },
+          "setup_checkpoint": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_3/final_bandit_states/bandit_lstdq.npz",
+            "sha256": "2a6ca216852b1052d61f2e08511c4c82775af4d99faf4ac590032f345d513b6d"
+          }
+        }
+      },
+      "4": {
+        "directory": "checkpoints/seed_4",
+        "effective_beta": 2.0,
+        "method": "bandit_lstdq",
+        "original_files": {
+          "config": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_4/experiment_config.json",
+            "sha256": "1fede3f2ff8448a47c06734ee67b63c34adea54f641ce1ed8e4dc361c0282dfe"
+          },
+          "controller_checkpoint": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_4/checkpoints/bandit_lstdq_final.npz",
+            "sha256": "04de86db9feeff06f7eae391f31c63c4f254399850d48abb907ae57ae58e7660"
+          },
+          "encoder": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_4/checkpoints/bandit_lstdq_final.npz.encoder.json",
+            "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+          },
+          "setup_checkpoint": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_4/final_bandit_states/bandit_lstdq.npz",
+            "sha256": "fd5743b6ac8853f489c03b9bf10c0c1f28f5fb7ae97a00733f7ca4e295e5f6fa"
+          }
+        }
+      },
+      "5": {
+        "directory": "checkpoints/seed_5",
+        "effective_beta": 2.0,
+        "method": "bandit_lstdq",
+        "original_files": {
+          "config": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_5/experiment_config.json",
+            "sha256": "b7c96232079826e7e1a06434d4443a421b82b2eb332576f3b2c02ef2c741aad6"
+          },
+          "controller_checkpoint": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_5/checkpoints/bandit_lstdq_final.npz",
+            "sha256": "319598e3dd87e73dd248f4e1403145d6ff3224e93c2356635aea7093e5b89c26"
+          },
+          "encoder": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_5/checkpoints/bandit_lstdq_final.npz.encoder.json",
+            "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+          },
+          "setup_checkpoint": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_5/final_bandit_states/bandit_lstdq.npz",
+            "sha256": "e92beefa07aa994fae4a52309f87173d5a55e9fb8381db1917d8ba1789a1fd8c"
+          }
+        }
+      },
+      "6": {
+        "directory": "checkpoints/seed_6",
+        "effective_beta": 2.0,
+        "method": "bandit_lstdq",
+        "original_files": {
+          "config": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_6/experiment_config.json",
+            "sha256": "c286ea86b00ad2a9921fd94ea119f27af8bbd5bc983336439daa912f4d1c5bb4"
+          },
+          "controller_checkpoint": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_6/checkpoints/bandit_lstdq_final.npz",
+            "sha256": "f58979ebedaef90785c8feee5ea78a5832d7fd034c05f07cb7f5e9ed2251b843"
+          },
+          "encoder": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_6/checkpoints/bandit_lstdq_final.npz.encoder.json",
+            "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+          },
+          "setup_checkpoint": {
+            "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_6/final_bandit_states/bandit_lstdq.npz",
+            "sha256": "ec3fdc9cee83f53078de164f9738775bd1b6a5a96dd136bbbeaba78da0c5f95c"
+          }
+        }
+      }
+    },
+    "test_cases": 100,
+    "tolerance": 1e-06,
+    "training_seeds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weights": [
+      1.0,
+      1.05,
+      1.1,
+      1.15,
+      1.2,
+      1.25,
+      1.3,
+      1.35,
+      1.4,
+      1.45,
+      1.5,
+      1.55,
+      1.6,
+      1.65,
+      1.7,
+      1.75,
+      1.8,
+      1.85,
+      1.9,
+      1.95,
+      2.0,
+      2.05,
+      2.1,
+      2.15,
+      2.2,
+      2.25,
+      2.3,
+      2.35,
+      2.4,
+      2.45,
+      2.5,
+      2.55,
+      2.6,
+      2.65,
+      2.7,
+      2.75,
+      2.8,
+      2.85,
+      2.9,
+      2.95,
+      3.0
+    ]
+  },
   "rl_comparisons": [
     {
       "comparator": "reference",
-      "mean_pct": 40.19219927482915,
+      "mean_pct": 39.82999699921141,
       "metric": "native_continuation_sec",
-      "sample_sd_pct": 1.5242347798609432,
+      "sample_sd_pct": 1.8106795493384438,
       "seeds": 6
     },
     {
       "comparator": "reference",
-      "mean_pct": 38.11716266568315,
+      "mean_pct": 38.33204523872871,
       "metric": "inclusive_continuation_sec",
-      "sample_sd_pct": 1.564529703668459,
+      "sample_sd_pct": 1.8590499074572924,
       "seeds": 6
     },
     {
       "comparator": "fixed",
-      "mean_pct": 10.187924423633186,
+      "mean_pct": 8.229059297302662,
       "metric": "native_continuation_sec",
-      "sample_sd_pct": 2.0777486293132843,
+      "sample_sd_pct": 2.530149150373991,
       "seeds": 6
     },
     {
       "comparator": "fixed",
-      "mean_pct": 7.072131616862125,
+      "mean_pct": 5.944549160268446,
       "metric": "inclusive_continuation_sec",
-      "sample_sd_pct": 2.1358103326363653,
+      "sample_sd_pct": 2.607989901989885,
       "seeds": 6
     },
     {
       "comparator": "oracle",
-      "mean_pct": 7.918883425845731,
+      "mean_pct": 5.2520657483600095,
       "metric": "native_continuation_sec",
-      "sample_sd_pct": 2.0152172260103955,
+      "sample_sd_pct": 2.777510387750156,
       "seeds": 6
     },
     {
       "comparator": "oracle",
-      "mean_pct": 4.724577201186912,
+      "mean_pct": 2.893569284312262,
       "metric": "inclusive_continuation_sec",
-      "sample_sd_pct": 2.059742002617826,
+      "sample_sd_pct": 2.8590294424065585,
       "seeds": 6
     },
     {
       "comparator": "periodic",
-      "mean_pct": -0.82098148627844,
+      "mean_pct": -2.5385485505910297,
       "metric": "native_continuation_sec",
-      "sample_sd_pct": 2.2297394580784364,
+      "sample_sd_pct": 4.8096297129110175,
       "seeds": 6
     },
     {
       "comparator": "periodic",
-      "mean_pct": -4.311011924266198,
+      "mean_pct": -5.084697318189365,
       "metric": "inclusive_continuation_sec",
-      "sample_sd_pct": 2.2963319777116045,
+      "sample_sd_pct": 4.979730211503565,
       "seeds": 6
     }
   ],
@@ -463,309 +979,309 @@
       "global_candidates": [
         {
           "failed_cases": 0,
-          "native_continuation_sec": 11.895330666665991,
+          "native_continuation_sec": 12.363778333331885,
           "policy": "fixed_1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 11.355210666647162,
+          "native_continuation_sec": 11.789139999997177,
           "policy": "fixed_1.05"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.929448333330427,
+          "native_continuation_sec": 11.288073333329105,
           "policy": "fixed_1.1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.387885666669943,
+          "native_continuation_sec": 10.737945666668994,
           "policy": "fixed_1.15"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.005690000007322,
+          "native_continuation_sec": 10.442316333336152,
           "policy": "fixed_1.2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.595433333331616,
+          "native_continuation_sec": 9.81045533333143,
           "policy": "fixed_1.25"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.241709333343833,
+          "native_continuation_sec": 9.485959333334218,
           "policy": "fixed_1.3"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.959550333328565,
+          "native_continuation_sec": 9.220443666662874,
           "policy": "fixed_1.35"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.592116333335717,
+          "native_continuation_sec": 8.862368000001066,
           "policy": "fixed_1.4"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.3324480000008,
+          "native_continuation_sec": 8.551198000000987,
           "policy": "fixed_1.45"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.079874999997779,
+          "native_continuation_sec": 8.379418666665797,
           "policy": "fixed_1.5"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 7.920420666667788,
+          "native_continuation_sec": 8.164804999996207,
           "policy": "fixed_1.55"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 7.849360333331195,
+          "native_continuation_sec": 8.030984999998271,
           "policy": "fixed_1.6"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.164961333329696,
+          "native_continuation_sec": 8.166137666665612,
           "policy": "fixed_1.65"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.994670666663083,
+          "native_continuation_sec": 8.94839833333455,
           "policy": "fixed_1.7"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.766008000006531,
+          "native_continuation_sec": 10.632487666664982,
           "policy": "fixed_1.75"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 13.433147666668761,
+          "native_continuation_sec": 13.161342666662494,
           "policy": "fixed_1.8"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 17.836695333346213,
+          "native_continuation_sec": 17.572103666663086,
           "policy": "fixed_1.85"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 27.00132266668319,
+          "native_continuation_sec": 26.074374666661658,
           "policy": "fixed_1.9"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.78653266667102,
+          "native_continuation_sec": 59.13662433334187,
           "policy": "fixed_1.95"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.903386666665654,
+          "native_continuation_sec": 59.345007000003946,
           "policy": "fixed_2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.70200266665548,
+          "native_continuation_sec": 59.182997333336246,
           "policy": "fixed_2.05"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.086803000013525,
+          "native_continuation_sec": 59.1503420000083,
           "policy": "fixed_2.1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.812893666674285,
+          "native_continuation_sec": 59.00008433333113,
           "policy": "fixed_2.15"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.75828599997349,
+          "native_continuation_sec": 59.113588666668456,
           "policy": "fixed_2.2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.725971999994805,
+          "native_continuation_sec": 59.090177000002214,
           "policy": "fixed_2.25"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.591030666669276,
+          "native_continuation_sec": 59.001025666679126,
           "policy": "fixed_2.3"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.78379533331246,
+          "native_continuation_sec": 59.10086199998811,
           "policy": "fixed_2.35"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.835008000007676,
+          "native_continuation_sec": 59.058220333332244,
           "policy": "fixed_2.4"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.80956200000886,
+          "native_continuation_sec": 59.213936666666,
           "policy": "fixed_2.45"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.842242666669414,
+          "native_continuation_sec": 59.10147533333658,
           "policy": "fixed_2.5"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.863110333336465,
+          "native_continuation_sec": 59.206989000007425,
           "policy": "fixed_2.55"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.84272933334088,
+          "native_continuation_sec": 59.162391666668974,
           "policy": "fixed_2.6"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.689061333340575,
+          "native_continuation_sec": 59.23466933332978,
           "policy": "fixed_2.65"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.88286366665365,
+          "native_continuation_sec": 59.21482633333456,
           "policy": "fixed_2.7"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.760946333340236,
+          "native_continuation_sec": 59.261204333331975,
           "policy": "fixed_2.75"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.87649199998582,
+          "native_continuation_sec": 59.16744399999848,
           "policy": "fixed_2.8"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.84278899998685,
+          "native_continuation_sec": 59.02434799999724,
           "policy": "fixed_2.85"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.70387066665296,
+          "native_continuation_sec": 58.96190900000487,
           "policy": "fixed_2.9"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.983481666667586,
+          "native_continuation_sec": 59.129126999997766,
           "policy": "fixed_2.95"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.647173333319664,
+          "native_continuation_sec": 59.037042666663304,
           "policy": "fixed_3"
         }
       ],
       "per_instance": {
-        "0": "fixed_1.65",
-        "1": "fixed_1.45",
-        "10": "fixed_1.65",
-        "11": "fixed_1.6",
-        "12": "fixed_1.75",
-        "13": "fixed_1.6",
+        "0": "fixed_1.45",
+        "1": "fixed_1.5",
+        "10": "fixed_1.55",
+        "11": "fixed_1.65",
+        "12": "fixed_1.5",
+        "13": "fixed_1.55",
         "14": "fixed_1.6",
-        "15": "fixed_1.65",
-        "16": "fixed_1.4",
+        "15": "fixed_1.55",
+        "16": "fixed_1.55",
         "17": "fixed_1.6",
-        "18": "fixed_1.6",
+        "18": "fixed_1.65",
         "19": "fixed_1.5",
-        "2": "fixed_1.55",
+        "2": "fixed_1.6",
         "20": "fixed_1.6",
-        "21": "fixed_1.55",
+        "21": "fixed_1.65",
         "22": "fixed_1.6",
-        "23": "fixed_1.55",
-        "24": "fixed_1.55",
-        "25": "fixed_1.6",
-        "26": "fixed_1.55",
-        "27": "fixed_1.6",
-        "28": "fixed_1.5",
-        "29": "fixed_1.5",
-        "3": "fixed_1.55",
-        "30": "fixed_1.4",
+        "23": "fixed_1.7",
+        "24": "fixed_1.7",
+        "25": "fixed_1.7",
+        "26": "fixed_1.65",
+        "27": "fixed_1.65",
+        "28": "fixed_1.7",
+        "29": "fixed_1.8",
+        "3": "fixed_1.65",
+        "30": "fixed_1.55",
         "31": "fixed_1.65",
-        "32": "fixed_1.55",
-        "33": "fixed_1.55",
-        "34": "fixed_1.55",
+        "32": "fixed_1.65",
+        "33": "fixed_1.65",
+        "34": "fixed_1.5",
         "35": "fixed_1.6",
-        "36": "fixed_1.65",
+        "36": "fixed_1.5",
         "37": "fixed_1.6",
         "38": "fixed_1.6",
-        "39": "fixed_1.65",
-        "4": "fixed_1.5",
-        "40": "fixed_1.5",
-        "41": "fixed_1.6",
-        "42": "fixed_1.55",
-        "43": "fixed_1.55",
-        "44": "fixed_1.5",
+        "39": "fixed_1.6",
+        "4": "fixed_1.65",
+        "40": "fixed_1.4",
+        "41": "fixed_1.55",
+        "42": "fixed_1.65",
+        "43": "fixed_1.5",
+        "44": "fixed_1.65",
         "45": "fixed_1.6",
-        "46": "fixed_1.55",
-        "47": "fixed_1.4",
+        "46": "fixed_1.65",
+        "47": "fixed_1.6",
         "48": "fixed_1.6",
         "49": "fixed_1.6",
-        "5": "fixed_1.7",
-        "50": "fixed_1.65",
+        "5": "fixed_1.6",
+        "50": "fixed_1.5",
         "51": "fixed_1.7",
-        "52": "fixed_1.55",
-        "53": "fixed_1.55",
+        "52": "fixed_1.65",
+        "53": "fixed_1.4",
         "54": "fixed_1.65",
-        "55": "fixed_1.65",
-        "56": "fixed_1.65",
-        "57": "fixed_1.6",
-        "58": "fixed_1.55",
-        "59": "fixed_1.6",
-        "6": "fixed_1.55",
-        "60": "fixed_1.55",
-        "61": "fixed_1.65",
+        "55": "fixed_1.6",
+        "56": "fixed_1.6",
+        "57": "fixed_1.65",
+        "58": "fixed_1.65",
+        "59": "fixed_1.65",
+        "6": "fixed_1.65",
+        "60": "fixed_1.7",
+        "61": "fixed_1.55",
         "62": "fixed_1.6",
-        "63": "fixed_1.55",
-        "64": "fixed_1.7",
-        "65": "fixed_1.7",
-        "66": "fixed_1.45",
+        "63": "fixed_1.45",
+        "64": "fixed_1.6",
+        "65": "fixed_1.65",
+        "66": "fixed_1.7",
         "67": "fixed_1.6",
-        "68": "fixed_1.65",
+        "68": "fixed_1.6",
         "69": "fixed_1.65",
-        "7": "fixed_1.65",
-        "70": "fixed_1.55",
+        "7": "fixed_1.6",
+        "70": "fixed_1.65",
         "71": "fixed_1.65",
-        "72": "fixed_1.55",
-        "73": "fixed_1.6",
-        "74": "fixed_1.65",
-        "75": "fixed_1.6",
+        "72": "fixed_1.7",
+        "73": "fixed_1.4",
+        "74": "fixed_1.6",
+        "75": "fixed_1.65",
         "76": "fixed_1.6",
-        "77": "fixed_1.65",
+        "77": "fixed_1.7",
         "78": "fixed_1.5",
-        "79": "fixed_1.65",
+        "79": "fixed_1.6",
         "8": "fixed_1.65",
-        "80": "fixed_1.4",
-        "81": "fixed_1.6",
-        "82": "fixed_1.55",
+        "80": "fixed_1.55",
+        "81": "fixed_1.55",
+        "82": "fixed_1.5",
         "83": "fixed_1.55",
-        "84": "fixed_1.6",
-        "85": "fixed_1.6",
+        "84": "fixed_1.65",
+        "85": "fixed_1.7",
         "86": "fixed_1.65",
-        "87": "fixed_1.55",
-        "88": "fixed_1.4",
+        "87": "fixed_1.5",
+        "88": "fixed_1.7",
         "89": "fixed_1.6",
-        "9": "fixed_1.45",
+        "9": "fixed_1.35",
         "90": "fixed_1.5",
-        "91": "fixed_1.65",
-        "92": "fixed_1.7",
+        "91": "fixed_1.7",
+        "92": "fixed_1.6",
         "93": "fixed_1.55",
-        "94": "fixed_1.65",
-        "95": "fixed_1.5",
-        "96": "fixed_1.7",
-        "97": "fixed_1.65",
+        "94": "fixed_1.6",
+        "95": "fixed_1.55",
+        "96": "fixed_1.65",
+        "97": "fixed_1.55",
         "98": "fixed_1.65",
         "99": "fixed_1.65"
       },
@@ -776,310 +1292,310 @@
       "global_candidates": [
         {
           "failed_cases": 0,
-          "native_continuation_sec": 12.309114999993854,
+          "native_continuation_sec": 12.116322999992104,
           "policy": "fixed_1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 11.817617333339815,
+          "native_continuation_sec": 11.523232666665784,
           "policy": "fixed_1.05"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 11.337598666657115,
+          "native_continuation_sec": 11.002626666667657,
           "policy": "fixed_1.1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.799526333326634,
+          "native_continuation_sec": 10.45450033333143,
           "policy": "fixed_1.15"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.424044666662667,
+          "native_continuation_sec": 10.115147000001677,
           "policy": "fixed_1.2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.962221333335144,
+          "native_continuation_sec": 9.714658333337368,
           "policy": "fixed_1.25"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.619767333330014,
+          "native_continuation_sec": 9.327397666670517,
           "policy": "fixed_1.3"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.42316600000785,
+          "native_continuation_sec": 9.065421999999112,
           "policy": "fixed_1.35"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.117650666669702,
+          "native_continuation_sec": 8.704355666664469,
           "policy": "fixed_1.4"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.793524333330076,
+          "native_continuation_sec": 8.445190666665333,
           "policy": "fixed_1.45"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.534988333328311,
+          "native_continuation_sec": 8.236170999997054,
           "policy": "fixed_1.5"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.31090899999095,
+          "native_continuation_sec": 8.061782333332179,
           "policy": "fixed_1.55"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.283699333336335,
+          "native_continuation_sec": 7.982982000000455,
           "policy": "fixed_1.6"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.465710999994748,
+          "native_continuation_sec": 8.230833999999444,
           "policy": "fixed_1.65"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.35654100000643,
+          "native_continuation_sec": 9.031592666667997,
           "policy": "fixed_1.7"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 11.141187333324648,
+          "native_continuation_sec": 10.751471333335438,
           "policy": "fixed_1.75"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 13.814987000009086,
+          "native_continuation_sec": 13.495623999999133,
           "policy": "fixed_1.8"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 18.23138733334189,
+          "native_continuation_sec": 18.089067666662963,
           "policy": "fixed_1.85"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 27.074859666665557,
+          "native_continuation_sec": 26.819260333335915,
           "policy": "fixed_1.9"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.984635666662115,
+          "native_continuation_sec": 60.05537300000838,
           "policy": "fixed_1.95"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.96925799999727,
+          "native_continuation_sec": 59.804420333331045,
           "policy": "fixed_2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.92355899997897,
+          "native_continuation_sec": 59.95702200000091,
           "policy": "fixed_2.05"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.96811733333367,
+          "native_continuation_sec": 59.87583999999908,
           "policy": "fixed_2.1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.159550333346296,
+          "native_continuation_sec": 60.01386500000886,
           "policy": "fixed_2.15"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.95981966665023,
+          "native_continuation_sec": 59.925920666660545,
           "policy": "fixed_2.2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.9202490000075,
+          "native_continuation_sec": 59.87670499999348,
           "policy": "fixed_2.25"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.9917666666645,
+          "native_continuation_sec": 60.07051566666906,
           "policy": "fixed_2.3"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.90817000000384,
+          "native_continuation_sec": 59.98533533334676,
           "policy": "fixed_2.35"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.02096699996591,
+          "native_continuation_sec": 59.81532633333892,
           "policy": "fixed_2.4"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.89147766666054,
+          "native_continuation_sec": 59.93982333334132,
           "policy": "fixed_2.45"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.90166399999059,
+          "native_continuation_sec": 59.85378899999245,
           "policy": "fixed_2.5"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.00749500000169,
+          "native_continuation_sec": 59.900626666661005,
           "policy": "fixed_2.55"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.93665733332167,
+          "native_continuation_sec": 59.97623900001284,
           "policy": "fixed_2.6"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.94987466666798,
+          "native_continuation_sec": 59.922557333326246,
           "policy": "fixed_2.65"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.88009133333984,
+          "native_continuation_sec": 60.0591273333272,
           "policy": "fixed_2.7"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.03304366667103,
+          "native_continuation_sec": 60.05384200000051,
           "policy": "fixed_2.75"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.83220633330382,
+          "native_continuation_sec": 59.93931133333499,
           "policy": "fixed_2.8"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.96656666666705,
+          "native_continuation_sec": 59.70961766666389,
           "policy": "fixed_2.85"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.79321599999752,
+          "native_continuation_sec": 59.8728456666654,
           "policy": "fixed_2.9"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.95220866667646,
+          "native_continuation_sec": 59.94078700000874,
           "policy": "fixed_2.95"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.074716333336795,
+          "native_continuation_sec": 59.94139333333023,
           "policy": "fixed_3"
         }
       ],
       "per_instance": {
-        "0": "fixed_1.65",
-        "1": "fixed_1.35",
+        "0": "fixed_1.55",
+        "1": "fixed_1.7",
         "10": "fixed_1.55",
-        "11": "fixed_1.6",
-        "12": "fixed_1.7",
-        "13": "fixed_1.6",
-        "14": "fixed_1.5",
-        "15": "fixed_1.65",
-        "16": "fixed_1.55",
-        "17": "fixed_1.5",
+        "11": "fixed_1.65",
+        "12": "fixed_1.5",
+        "13": "fixed_1.65",
+        "14": "fixed_1.55",
+        "15": "fixed_1.6",
+        "16": "fixed_1.6",
+        "17": "fixed_1.55",
         "18": "fixed_1.65",
-        "19": "fixed_1.55",
+        "19": "fixed_1.5",
         "2": "fixed_1.6",
-        "20": "fixed_1.65",
-        "21": "fixed_1.55",
-        "22": "fixed_1.55",
-        "23": "fixed_1.6",
-        "24": "fixed_1.5",
+        "20": "fixed_1.5",
+        "21": "fixed_1.65",
+        "22": "fixed_1.6",
+        "23": "fixed_1.7",
+        "24": "fixed_1.65",
         "25": "fixed_1.7",
         "26": "fixed_1.65",
         "27": "fixed_1.6",
-        "28": "fixed_1.55",
-        "29": "fixed_1.55",
-        "3": "fixed_1.65",
-        "30": "fixed_1.55",
-        "31": "fixed_1.55",
-        "32": "fixed_1.55",
+        "28": "fixed_1.65",
+        "29": "fixed_1.35",
+        "3": "fixed_1.55",
+        "30": "fixed_1.65",
+        "31": "fixed_1.6",
+        "32": "fixed_1.65",
         "33": "fixed_1.55",
-        "34": "fixed_1.6",
-        "35": "fixed_1.55",
-        "36": "fixed_1.55",
+        "34": "fixed_1.5",
+        "35": "fixed_1.6",
+        "36": "fixed_1.35",
         "37": "fixed_1.6",
-        "38": "fixed_1.65",
-        "39": "fixed_1.65",
-        "4": "fixed_1.65",
+        "38": "fixed_1.55",
+        "39": "fixed_1.55",
+        "4": "fixed_1.7",
         "40": "fixed_1.55",
         "41": "fixed_1.55",
-        "42": "fixed_1.55",
-        "43": "fixed_1.5",
-        "44": "fixed_1.5",
-        "45": "fixed_1.65",
-        "46": "fixed_1.55",
-        "47": "fixed_1.6",
-        "48": "fixed_1.65",
-        "49": "fixed_1.6",
-        "5": "fixed_1.65",
-        "50": "fixed_1.7",
+        "42": "fixed_1.7",
+        "43": "fixed_1.55",
+        "44": "fixed_1.6",
+        "45": "fixed_1.7",
+        "46": "fixed_1.7",
+        "47": "fixed_1.55",
+        "48": "fixed_1.6",
+        "49": "fixed_1.55",
+        "5": "fixed_1.6",
+        "50": "fixed_1.55",
         "51": "fixed_1.7",
-        "52": "fixed_1.7",
-        "53": "fixed_1.6",
-        "54": "fixed_1.5",
-        "55": "fixed_1.7",
-        "56": "fixed_1.65",
-        "57": "fixed_1.55",
-        "58": "fixed_1.6",
+        "52": "fixed_1.65",
+        "53": "fixed_1.45",
+        "54": "fixed_1.6",
+        "55": "fixed_1.6",
+        "56": "fixed_1.55",
+        "57": "fixed_1.65",
+        "58": "fixed_1.55",
         "59": "fixed_1.65",
         "6": "fixed_1.6",
-        "60": "fixed_1.55",
-        "61": "fixed_1.65",
-        "62": "fixed_1.45",
-        "63": "fixed_1.55",
-        "64": "fixed_1.6",
-        "65": "fixed_1.7",
-        "66": "fixed_1.5",
-        "67": "fixed_1.55",
+        "60": "fixed_1.7",
+        "61": "fixed_1.55",
+        "62": "fixed_1.5",
+        "63": "fixed_1.5",
+        "64": "fixed_1.55",
+        "65": "fixed_1.65",
+        "66": "fixed_1.65",
+        "67": "fixed_1.45",
         "68": "fixed_1.55",
-        "69": "fixed_1.55",
-        "7": "fixed_1.65",
-        "70": "fixed_1.45",
-        "71": "fixed_1.6",
-        "72": "fixed_1.6",
-        "73": "fixed_1.6",
+        "69": "fixed_1.65",
+        "7": "fixed_1.6",
+        "70": "fixed_1.65",
+        "71": "fixed_1.65",
+        "72": "fixed_1.7",
+        "73": "fixed_1.5",
         "74": "fixed_1.6",
-        "75": "fixed_1.65",
+        "75": "fixed_1.55",
         "76": "fixed_1.6",
-        "77": "fixed_1.6",
-        "78": "fixed_1.4",
-        "79": "fixed_1.6",
-        "8": "fixed_1.55",
-        "80": "fixed_1.5",
+        "77": "fixed_1.7",
+        "78": "fixed_1.45",
+        "79": "fixed_1.5",
+        "8": "fixed_1.6",
+        "80": "fixed_1.7",
         "81": "fixed_1.6",
         "82": "fixed_1.65",
-        "83": "fixed_1.5",
-        "84": "fixed_1.6",
-        "85": "fixed_1.7",
-        "86": "fixed_1.5",
-        "87": "fixed_1.6",
-        "88": "fixed_1.55",
-        "89": "fixed_1.65",
-        "9": "fixed_1.6",
+        "83": "fixed_1.55",
+        "84": "fixed_1.7",
+        "85": "fixed_1.65",
+        "86": "fixed_1.65",
+        "87": "fixed_1.55",
+        "88": "fixed_1.6",
+        "89": "fixed_1.7",
+        "9": "fixed_1.4",
         "90": "fixed_1.55",
-        "91": "fixed_1.6",
-        "92": "fixed_1.65",
-        "93": "fixed_1.35",
-        "94": "fixed_1.5",
-        "95": "fixed_1.5",
+        "91": "fixed_1.7",
+        "92": "fixed_1.7",
+        "93": "fixed_1.5",
+        "94": "fixed_1.55",
+        "95": "fixed_1.6",
         "96": "fixed_1.55",
-        "97": "fixed_1.65",
-        "98": "fixed_1.55",
+        "97": "fixed_1.6",
+        "98": "fixed_1.65",
         "99": "fixed_1.65"
       },
       "uncovered_case_ids": []
@@ -1089,311 +1605,311 @@
       "global_candidates": [
         {
           "failed_cases": 0,
-          "native_continuation_sec": 11.895168000009198,
+          "native_continuation_sec": 12.188759999986267,
           "policy": "fixed_1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 11.478268000004968,
+          "native_continuation_sec": 11.65367499999684,
           "policy": "fixed_1.05"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.910991000008417,
+          "native_continuation_sec": 11.098618333332007,
           "policy": "fixed_1.1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.38837466666605,
+          "native_continuation_sec": 10.623689333332887,
           "policy": "fixed_1.15"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.04069233333034,
+          "native_continuation_sec": 10.226551666668628,
           "policy": "fixed_1.2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.627610666663024,
+          "native_continuation_sec": 9.790792999993947,
           "policy": "fixed_1.25"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.270900999989786,
+          "native_continuation_sec": 9.446004666668868,
           "policy": "fixed_1.3"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.956296333327977,
+          "native_continuation_sec": 9.058256333329082,
           "policy": "fixed_1.35"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.669650999996648,
+          "native_continuation_sec": 8.734258666665793,
           "policy": "fixed_1.4"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.405967999992484,
+          "native_continuation_sec": 8.506705333333585,
           "policy": "fixed_1.45"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.239767000003305,
+          "native_continuation_sec": 8.231280999998269,
           "policy": "fixed_1.5"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 7.983162666675815,
+          "native_continuation_sec": 8.033233666675144,
           "policy": "fixed_1.55"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 7.912886666667587,
+          "native_continuation_sec": 7.938052333329842,
           "policy": "fixed_1.6"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.16363066665763,
+          "native_continuation_sec": 8.102036666668075,
           "policy": "fixed_1.65"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.056494666664976,
+          "native_continuation_sec": 8.78410333333342,
           "policy": "fixed_1.7"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.832534000001349,
+          "native_continuation_sec": 10.290991666665006,
           "policy": "fixed_1.75"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 13.519171666670928,
+          "native_continuation_sec": 12.86134566666228,
           "policy": "fixed_1.8"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 18.086632000007768,
+          "native_continuation_sec": 17.16005866666316,
           "policy": "fixed_1.85"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 27.063109666673416,
+          "native_continuation_sec": 25.460013333330505,
           "policy": "fixed_1.9"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.89824633334423,
+          "native_continuation_sec": 58.20489200000734,
           "policy": "fixed_1.95"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.901389666662965,
+          "native_continuation_sec": 58.31940733332924,
           "policy": "fixed_2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.92347233333637,
+          "native_continuation_sec": 58.34927899999114,
           "policy": "fixed_2.05"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.08778733332945,
+          "native_continuation_sec": 58.34733066666995,
           "policy": "fixed_2.1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.0605133333284,
+          "native_continuation_sec": 58.29149399999598,
           "policy": "fixed_2.15"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.01561633334272,
+          "native_continuation_sec": 58.401695000006804,
           "policy": "fixed_2.2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.04429899998692,
+          "native_continuation_sec": 58.21011000000178,
           "policy": "fixed_2.25"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.88306833331601,
+          "native_continuation_sec": 58.014489666672226,
           "policy": "fixed_2.3"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.03374366664061,
+          "native_continuation_sec": 58.289735666664214,
           "policy": "fixed_2.35"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.271369666664185,
+          "native_continuation_sec": 58.285415333332665,
           "policy": "fixed_2.4"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.03479266666645,
+          "native_continuation_sec": 58.31292633333105,
           "policy": "fixed_2.45"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.96139666667635,
+          "native_continuation_sec": 58.17970866665498,
           "policy": "fixed_2.5"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.14990900000087,
+          "native_continuation_sec": 58.24696366666287,
           "policy": "fixed_2.55"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.235076333365036,
+          "native_continuation_sec": 58.27544633333758,
           "policy": "fixed_2.6"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.04538966665301,
+          "native_continuation_sec": 58.238579000007704,
           "policy": "fixed_2.65"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.97141566665641,
+          "native_continuation_sec": 58.284611000000886,
           "policy": "fixed_2.7"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.981339666664894,
+          "native_continuation_sec": 58.18446099999279,
           "policy": "fixed_2.75"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.99396833331296,
+          "native_continuation_sec": 58.06090933333603,
           "policy": "fixed_2.8"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.95261599998982,
+          "native_continuation_sec": 58.04835866666496,
           "policy": "fixed_2.85"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.11132266667639,
+          "native_continuation_sec": 58.17231766666478,
           "policy": "fixed_2.9"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.100768000001075,
+          "native_continuation_sec": 58.23961466666222,
           "policy": "fixed_2.95"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.03125633333578,
+          "native_continuation_sec": 58.338996000006865,
           "policy": "fixed_3"
         }
       ],
       "per_instance": {
-        "0": "fixed_1.7",
-        "1": "fixed_1.35",
-        "10": "fixed_1.6",
-        "11": "fixed_1.6",
-        "12": "fixed_1.7",
-        "13": "fixed_1.45",
-        "14": "fixed_1.5",
-        "15": "fixed_1.6",
-        "16": "fixed_1.55",
-        "17": "fixed_1.65",
+        "0": "fixed_1.55",
+        "1": "fixed_1.65",
+        "10": "fixed_1.65",
+        "11": "fixed_1.5",
+        "12": "fixed_1.65",
+        "13": "fixed_1.65",
+        "14": "fixed_1.55",
+        "15": "fixed_1.55",
+        "16": "fixed_1.6",
+        "17": "fixed_1.45",
         "18": "fixed_1.65",
-        "19": "fixed_1.6",
+        "19": "fixed_1.5",
         "2": "fixed_1.65",
-        "20": "fixed_1.5",
-        "21": "fixed_1.45",
-        "22": "fixed_1.6",
-        "23": "fixed_1.55",
-        "24": "fixed_1.55",
+        "20": "fixed_1.7",
+        "21": "fixed_1.6",
+        "22": "fixed_1.55",
+        "23": "fixed_1.65",
+        "24": "fixed_1.7",
         "25": "fixed_1.65",
         "26": "fixed_1.65",
         "27": "fixed_1.6",
-        "28": "fixed_1.5",
+        "28": "fixed_1.55",
         "29": "fixed_1.6",
-        "3": "fixed_1.65",
+        "3": "fixed_1.55",
         "30": "fixed_1.6",
-        "31": "fixed_1.55",
-        "32": "fixed_1.55",
-        "33": "fixed_1.6",
-        "34": "fixed_1.65",
+        "31": "fixed_1.7",
+        "32": "fixed_1.6",
+        "33": "fixed_1.65",
+        "34": "fixed_1.5",
         "35": "fixed_1.65",
-        "36": "fixed_1.55",
+        "36": "fixed_1.45",
         "37": "fixed_1.6",
-        "38": "fixed_1.7",
-        "39": "fixed_1.65",
-        "4": "fixed_1.6",
-        "40": "fixed_1.35",
+        "38": "fixed_1.55",
+        "39": "fixed_1.55",
+        "4": "fixed_1.7",
+        "40": "fixed_1.55",
         "41": "fixed_1.55",
-        "42": "fixed_1.5",
-        "43": "fixed_1.6",
+        "42": "fixed_1.65",
+        "43": "fixed_1.65",
         "44": "fixed_1.6",
-        "45": "fixed_1.65",
-        "46": "fixed_1.6",
-        "47": "fixed_1.45",
-        "48": "fixed_1.55",
-        "49": "fixed_1.4",
-        "5": "fixed_1.7",
-        "50": "fixed_1.7",
-        "51": "fixed_1.7",
+        "45": "fixed_1.7",
+        "46": "fixed_1.7",
+        "47": "fixed_1.65",
+        "48": "fixed_1.5",
+        "49": "fixed_1.55",
+        "5": "fixed_1.6",
+        "50": "fixed_1.45",
+        "51": "fixed_1.65",
         "52": "fixed_1.7",
-        "53": "fixed_1.6",
-        "54": "fixed_1.65",
-        "55": "fixed_1.7",
-        "56": "fixed_1.65",
-        "57": "fixed_1.6",
-        "58": "fixed_1.55",
-        "59": "fixed_1.7",
-        "6": "fixed_1.6",
-        "60": "fixed_1.6",
+        "53": "fixed_1.4",
+        "54": "fixed_1.6",
+        "55": "fixed_1.6",
+        "56": "fixed_1.55",
+        "57": "fixed_1.65",
+        "58": "fixed_1.6",
+        "59": "fixed_1.65",
+        "6": "fixed_1.65",
+        "60": "fixed_1.7",
         "61": "fixed_1.6",
-        "62": "fixed_1.55",
-        "63": "fixed_1.45",
-        "64": "fixed_1.6",
-        "65": "fixed_1.65",
-        "66": "fixed_1.6",
-        "67": "fixed_1.5",
-        "68": "fixed_1.65",
-        "69": "fixed_1.6",
-        "7": "fixed_1.65",
-        "70": "fixed_1.5",
-        "71": "fixed_1.6",
-        "72": "fixed_1.6",
-        "73": "fixed_1.6",
-        "74": "fixed_1.6",
-        "75": "fixed_1.65",
+        "62": "fixed_1.65",
+        "63": "fixed_1.7",
+        "64": "fixed_1.55",
+        "65": "fixed_1.75",
+        "66": "fixed_1.65",
+        "67": "fixed_1.6",
+        "68": "fixed_1.55",
+        "69": "fixed_1.65",
+        "7": "fixed_1.6",
+        "70": "fixed_1.6",
+        "71": "fixed_1.65",
+        "72": "fixed_1.7",
+        "73": "fixed_1.75",
+        "74": "fixed_1.5",
+        "75": "fixed_1.6",
         "76": "fixed_1.6",
-        "77": "fixed_1.65",
-        "78": "fixed_1.45",
-        "79": "fixed_1.6",
-        "8": "fixed_1.6",
-        "80": "fixed_1.45",
+        "77": "fixed_1.7",
+        "78": "fixed_1.5",
+        "79": "fixed_1.55",
+        "8": "fixed_1.55",
+        "80": "fixed_1.7",
         "81": "fixed_1.6",
-        "82": "fixed_1.55",
+        "82": "fixed_1.6",
         "83": "fixed_1.45",
-        "84": "fixed_1.5",
-        "85": "fixed_1.65",
-        "86": "fixed_1.7",
+        "84": "fixed_1.7",
+        "85": "fixed_1.55",
+        "86": "fixed_1.65",
         "87": "fixed_1.55",
-        "88": "fixed_1.55",
-        "89": "fixed_1.65",
-        "9": "fixed_1.55",
-        "90": "fixed_1.55",
-        "91": "fixed_1.55",
+        "88": "fixed_1.65",
+        "89": "fixed_1.6",
+        "9": "fixed_1.45",
+        "90": "fixed_1.6",
+        "91": "fixed_1.6",
         "92": "fixed_1.6",
-        "93": "fixed_1.45",
+        "93": "fixed_1.55",
         "94": "fixed_1.65",
-        "95": "fixed_1.65",
-        "96": "fixed_1.6",
-        "97": "fixed_1.7",
+        "95": "fixed_1.5",
+        "96": "fixed_1.7",
+        "97": "fixed_1.5",
         "98": "fixed_1.6",
-        "99": "fixed_1.65"
+        "99": "fixed_1.7"
       },
       "uncovered_case_ids": []
     },
@@ -1402,311 +1918,311 @@
       "global_candidates": [
         {
           "failed_cases": 0,
-          "native_continuation_sec": 12.425893333321248,
+          "native_continuation_sec": 12.14941966666936,
           "policy": "fixed_1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 11.937771999999399,
+          "native_continuation_sec": 11.619542333336586,
           "policy": "fixed_1.05"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 11.358422666664069,
+          "native_continuation_sec": 11.106990333327495,
           "policy": "fixed_1.1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.852118333336945,
+          "native_continuation_sec": 10.571753999995757,
           "policy": "fixed_1.15"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.47364033333317,
+          "native_continuation_sec": 10.174793666669974,
           "policy": "fixed_1.2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.05926433333612,
+          "native_continuation_sec": 9.809186000000421,
           "policy": "fixed_1.25"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.679928000011225,
+          "native_continuation_sec": 9.449540333333239,
           "policy": "fixed_1.3"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.438015666667848,
+          "native_continuation_sec": 9.05938233333252,
           "policy": "fixed_1.35"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.06572500001285,
+          "native_continuation_sec": 8.769313000000494,
           "policy": "fixed_1.4"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.803725333327037,
+          "native_continuation_sec": 8.503439999997312,
           "policy": "fixed_1.45"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.681426333328384,
+          "native_continuation_sec": 8.211211000000675,
           "policy": "fixed_1.5"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.461700000007841,
+          "native_continuation_sec": 8.050446000000079,
           "policy": "fixed_1.55"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.342235999993449,
+          "native_continuation_sec": 7.932691666668086,
           "policy": "fixed_1.6"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.552004333344495,
+          "native_continuation_sec": 8.106388666671648,
           "policy": "fixed_1.65"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.400054000005005,
+          "native_continuation_sec": 8.78802099999429,
           "policy": "fixed_1.7"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 11.086845333328823,
+          "native_continuation_sec": 10.333435333334748,
           "policy": "fixed_1.75"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 13.871788000011557,
+          "native_continuation_sec": 12.933677333330937,
           "policy": "fixed_1.8"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 18.294223333319763,
+          "native_continuation_sec": 17.122763666662777,
           "policy": "fixed_1.85"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 27.017478666683143,
+          "native_continuation_sec": 25.830173333341172,
           "policy": "fixed_1.9"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.32569833335621,
+          "native_continuation_sec": 58.33052499999281,
           "policy": "fixed_1.95"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.99855666665425,
+          "native_continuation_sec": 58.37443999999503,
           "policy": "fixed_2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.15930166668633,
+          "native_continuation_sec": 58.65097199999062,
           "policy": "fixed_2.05"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.993955999995066,
+          "native_continuation_sec": 58.35759633331978,
           "policy": "fixed_2.1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.30239699999799,
+          "native_continuation_sec": 58.489055000002395,
           "policy": "fixed_2.15"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.1643069999929,
+          "native_continuation_sec": 58.36713733332104,
           "policy": "fixed_2.2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.16933600001989,
+          "native_continuation_sec": 58.49752633333331,
           "policy": "fixed_2.25"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.318863999991315,
+          "native_continuation_sec": 58.44052199999353,
           "policy": "fixed_2.3"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.177901000004304,
+          "native_continuation_sec": 58.43047766667174,
           "policy": "fixed_2.35"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.07996666664305,
+          "native_continuation_sec": 58.33279166665937,
           "policy": "fixed_2.4"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.076300333321505,
+          "native_continuation_sec": 58.398948333343554,
           "policy": "fixed_2.45"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.96880633334925,
+          "native_continuation_sec": 58.42624766666093,
           "policy": "fixed_2.5"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.14566966666005,
+          "native_continuation_sec": 58.30360599999925,
           "policy": "fixed_2.55"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.14402466666424,
+          "native_continuation_sec": 58.4656986666574,
           "policy": "fixed_2.6"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.201933000009625,
+          "native_continuation_sec": 58.61067000000199,
           "policy": "fixed_2.65"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.297536999989894,
+          "native_continuation_sec": 58.32777633333676,
           "policy": "fixed_2.7"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.28778699998959,
+          "native_continuation_sec": 58.1972886666701,
           "policy": "fixed_2.75"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.00593633333134,
+          "native_continuation_sec": 58.951958333334034,
           "policy": "fixed_2.8"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.17410866666274,
+          "native_continuation_sec": 58.38389699999459,
           "policy": "fixed_2.85"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.12808599999708,
+          "native_continuation_sec": 58.49096599999093,
           "policy": "fixed_2.9"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.06009133334007,
+          "native_continuation_sec": 58.37095266666419,
           "policy": "fixed_2.95"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.19432866665626,
+          "native_continuation_sec": 58.48021999999798,
           "policy": "fixed_3"
         }
       ],
       "per_instance": {
-        "0": "fixed_1.65",
-        "1": "fixed_1.5",
-        "10": "fixed_1.5",
-        "11": "fixed_1.65",
-        "12": "fixed_1.7",
+        "0": "fixed_1.45",
+        "1": "fixed_1.7",
+        "10": "fixed_1.65",
+        "11": "fixed_1.6",
+        "12": "fixed_1.6",
         "13": "fixed_1.65",
-        "14": "fixed_1.6",
+        "14": "fixed_1.55",
         "15": "fixed_1.65",
-        "16": "fixed_1.35",
-        "17": "fixed_1.55",
-        "18": "fixed_1.5",
-        "19": "fixed_1.6",
+        "16": "fixed_1.6",
+        "17": "fixed_1.5",
+        "18": "fixed_1.65",
+        "19": "fixed_1.55",
         "2": "fixed_1.6",
-        "20": "fixed_1.65",
-        "21": "fixed_1.4",
+        "20": "fixed_1.75",
+        "21": "fixed_1.65",
         "22": "fixed_1.55",
-        "23": "fixed_1.6",
-        "24": "fixed_1.55",
-        "25": "fixed_1.7",
-        "26": "fixed_1.5",
-        "27": "fixed_1.5",
-        "28": "fixed_1.55",
-        "29": "fixed_1.65",
-        "3": "fixed_1.65",
-        "30": "fixed_1.5",
-        "31": "fixed_1.65",
-        "32": "fixed_1.5",
-        "33": "fixed_1.6",
-        "34": "fixed_1.55",
-        "35": "fixed_1.65",
-        "36": "fixed_1.55",
-        "37": "fixed_1.6",
-        "38": "fixed_1.7",
-        "39": "fixed_1.65",
-        "4": "fixed_1.55",
-        "40": "fixed_2.1",
-        "41": "fixed_1.55",
-        "42": "fixed_1.55",
+        "23": "fixed_1.7",
+        "24": "fixed_1.65",
+        "25": "fixed_1.65",
+        "26": "fixed_1.6",
+        "27": "fixed_1.6",
+        "28": "fixed_1.7",
+        "29": "fixed_1.55",
+        "3": "fixed_1.6",
+        "30": "fixed_1.6",
+        "31": "fixed_1.6",
+        "32": "fixed_1.6",
+        "33": "fixed_1.65",
+        "34": "fixed_1.5",
+        "35": "fixed_1.7",
+        "36": "fixed_1.5",
+        "37": "fixed_1.55",
+        "38": "fixed_1.55",
+        "39": "fixed_1.6",
+        "4": "fixed_1.65",
+        "40": "fixed_1.5",
+        "41": "fixed_1.5",
+        "42": "fixed_1.6",
         "43": "fixed_1.55",
-        "44": "fixed_1.6",
-        "45": "fixed_1.65",
-        "46": "fixed_1.65",
+        "44": "fixed_1.65",
+        "45": "fixed_1.6",
+        "46": "fixed_1.7",
         "47": "fixed_1.6",
         "48": "fixed_1.55",
-        "49": "fixed_1.4",
-        "5": "fixed_1.7",
-        "50": "fixed_1.7",
-        "51": "fixed_1.7",
+        "49": "fixed_1.55",
+        "5": "fixed_1.5",
+        "50": "fixed_1.45",
+        "51": "fixed_1.65",
         "52": "fixed_1.7",
-        "53": "fixed_1.6",
-        "54": "fixed_1.55",
-        "55": "fixed_1.65",
-        "56": "fixed_1.7",
-        "57": "fixed_1.6",
-        "58": "fixed_1.55",
-        "59": "fixed_1.7",
-        "6": "fixed_1.6",
-        "60": "fixed_1.6",
-        "61": "fixed_1.55",
-        "62": "fixed_1.65",
-        "63": "fixed_1.5",
-        "64": "fixed_1.7",
+        "53": "fixed_1.45",
+        "54": "fixed_1.65",
+        "55": "fixed_1.6",
+        "56": "fixed_1.5",
+        "57": "fixed_1.65",
+        "58": "fixed_1.5",
+        "59": "fixed_1.6",
+        "6": "fixed_1.7",
+        "60": "fixed_1.7",
+        "61": "fixed_1.6",
+        "62": "fixed_1.55",
+        "63": "fixed_1.7",
+        "64": "fixed_1.5",
         "65": "fixed_1.7",
-        "66": "fixed_1.5",
-        "67": "fixed_1.65",
-        "68": "fixed_1.65",
-        "69": "fixed_1.5",
-        "7": "fixed_1.7",
-        "70": "fixed_1.5",
-        "71": "fixed_1.55",
-        "72": "fixed_1.6",
-        "73": "fixed_1.6",
-        "74": "fixed_1.65",
-        "75": "fixed_1.65",
-        "76": "fixed_1.5",
-        "77": "fixed_1.65",
-        "78": "fixed_1.4",
-        "79": "fixed_1.65",
-        "8": "fixed_1.6",
-        "80": "fixed_1.4",
+        "66": "fixed_1.6",
+        "67": "fixed_1.5",
+        "68": "fixed_1.5",
+        "69": "fixed_1.65",
+        "7": "fixed_1.6",
+        "70": "fixed_1.6",
+        "71": "fixed_1.65",
+        "72": "fixed_1.65",
+        "73": "fixed_1.8",
+        "74": "fixed_1.5",
+        "75": "fixed_1.6",
+        "76": "fixed_1.65",
+        "77": "fixed_1.75",
+        "78": "fixed_1.6",
+        "79": "fixed_1.6",
+        "8": "fixed_1.65",
+        "80": "fixed_1.65",
         "81": "fixed_1.6",
         "82": "fixed_1.55",
         "83": "fixed_1.5",
-        "84": "fixed_1.55",
-        "85": "fixed_1.7",
-        "86": "fixed_1.6",
+        "84": "fixed_1.7",
+        "85": "fixed_1.55",
+        "86": "fixed_1.65",
         "87": "fixed_1.6",
-        "88": "fixed_1.6",
+        "88": "fixed_1.7",
         "89": "fixed_1.65",
-        "9": "fixed_1.45",
-        "90": "fixed_1.5",
-        "91": "fixed_1.55",
-        "92": "fixed_1.6",
-        "93": "fixed_1.5",
+        "9": "fixed_1.5",
+        "90": "fixed_1.55",
+        "91": "fixed_1.65",
+        "92": "fixed_1.65",
+        "93": "fixed_1.55",
         "94": "fixed_1.65",
         "95": "fixed_1.45",
         "96": "fixed_1.7",
-        "97": "fixed_1.7",
-        "98": "fixed_1.65",
-        "99": "fixed_1.65"
+        "97": "fixed_1.5",
+        "98": "fixed_1.55",
+        "99": "fixed_1.6"
       },
       "uncovered_case_ids": []
     },
@@ -1715,311 +2231,311 @@
       "global_candidates": [
         {
           "failed_cases": 0,
-          "native_continuation_sec": 12.011627000005138,
+          "native_continuation_sec": 12.53552933333012,
           "policy": "fixed_1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 11.460586999998757,
+          "native_continuation_sec": 11.856538000000365,
           "policy": "fixed_1.05"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.911279333334965,
+          "native_continuation_sec": 11.309914666666598,
           "policy": "fixed_1.1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.444928666664731,
+          "native_continuation_sec": 10.808435333333906,
           "policy": "fixed_1.15"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.008809999998888,
+          "native_continuation_sec": 10.337853666668535,
           "policy": "fixed_1.2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.602731666676489,
+          "native_continuation_sec": 10.009828666667858,
           "policy": "fixed_1.25"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.265913000002772,
+          "native_continuation_sec": 9.59851300000164,
           "policy": "fixed_1.3"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.99324733334209,
+          "native_continuation_sec": 9.295529333345325,
           "policy": "fixed_1.35"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.677972333326908,
+          "native_continuation_sec": 9.016261666664477,
           "policy": "fixed_1.4"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.371225666663161,
+          "native_continuation_sec": 8.744318333332181,
           "policy": "fixed_1.45"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.168692333330613,
+          "native_continuation_sec": 8.500314999996213,
           "policy": "fixed_1.5"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.035632333327733,
+          "native_continuation_sec": 8.221833333334548,
           "policy": "fixed_1.55"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 7.939255333328002,
+          "native_continuation_sec": 8.182975333333061,
           "policy": "fixed_1.6"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.196731999997276,
+          "native_continuation_sec": 8.541600333337179,
           "policy": "fixed_1.65"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.060240333348858,
+          "native_continuation_sec": 9.431009999998574,
           "policy": "fixed_1.7"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.862634000001533,
+          "native_continuation_sec": 11.29983600000221,
           "policy": "fixed_1.75"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 13.584964000004145,
+          "native_continuation_sec": 14.187463000004394,
           "policy": "fixed_1.8"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 18.18830233333848,
+          "native_continuation_sec": 18.82823133334439,
           "policy": "fixed_1.85"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 27.215123666671264,
+          "native_continuation_sec": 28.1001970000056,
           "policy": "fixed_1.9"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.094458999988554,
+          "native_continuation_sec": 61.06792666668784,
           "policy": "fixed_1.95"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.990445333348084,
+          "native_continuation_sec": 61.32722166666563,
           "policy": "fixed_2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.20627200000901,
+          "native_continuation_sec": 61.24324666667882,
           "policy": "fixed_2.05"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.119250333327514,
+          "native_continuation_sec": 61.36935499999857,
           "policy": "fixed_2.1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.29397399999892,
+          "native_continuation_sec": 61.07000699998943,
           "policy": "fixed_2.15"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.30462366666144,
+          "native_continuation_sec": 61.20698733333289,
           "policy": "fixed_2.2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.99477233333662,
+          "native_continuation_sec": 61.047670666669504,
           "policy": "fixed_2.25"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.99411233331018,
+          "native_continuation_sec": 61.11793166665552,
           "policy": "fixed_2.3"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.08656133332414,
+          "native_continuation_sec": 61.13360900000944,
           "policy": "fixed_2.35"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.08890999999117,
+          "native_continuation_sec": 61.327912666668794,
           "policy": "fixed_2.4"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.18598366666557,
+          "native_continuation_sec": 61.010369000006946,
           "policy": "fixed_2.45"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.063315333333556,
+          "native_continuation_sec": 61.20248366667484,
           "policy": "fixed_2.5"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.21796733334738,
+          "native_continuation_sec": 60.96153433333702,
           "policy": "fixed_2.55"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.254620333335474,
+          "native_continuation_sec": 61.12622200001728,
           "policy": "fixed_2.6"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.22400799999731,
+          "native_continuation_sec": 61.26957866665876,
           "policy": "fixed_2.65"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.113867666669115,
+          "native_continuation_sec": 61.06453299999929,
           "policy": "fixed_2.7"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.13220233333209,
+          "native_continuation_sec": 61.19988333333327,
           "policy": "fixed_2.75"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.23790000000446,
+          "native_continuation_sec": 61.153256999995406,
           "policy": "fixed_2.8"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.31271533334908,
+          "native_continuation_sec": 61.248705000004676,
           "policy": "fixed_2.85"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.23277300000102,
+          "native_continuation_sec": 61.3596996666667,
           "policy": "fixed_2.9"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 61.18263466664944,
+          "native_continuation_sec": 61.30166633333513,
           "policy": "fixed_2.95"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 60.98450666666612,
+          "native_continuation_sec": 61.13143333333174,
           "policy": "fixed_3"
         }
       ],
       "per_instance": {
-        "0": "fixed_1.65",
-        "1": "fixed_1.5",
-        "10": "fixed_1.65",
+        "0": "fixed_1.55",
+        "1": "fixed_1.45",
+        "10": "fixed_1.6",
         "11": "fixed_1.6",
-        "12": "fixed_1.7",
-        "13": "fixed_1.6",
+        "12": "fixed_1.55",
+        "13": "fixed_1.7",
         "14": "fixed_1.55",
         "15": "fixed_1.65",
-        "16": "fixed_1.5",
-        "17": "fixed_1.45",
-        "18": "fixed_1.6",
-        "19": "fixed_1.5",
-        "2": "fixed_1.6",
-        "20": "fixed_1.65",
-        "21": "fixed_1.45",
+        "16": "fixed_1.55",
+        "17": "fixed_1.6",
+        "18": "fixed_1.65",
+        "19": "fixed_1.6",
+        "2": "fixed_1.7",
+        "20": "fixed_1.55",
+        "21": "fixed_1.6",
         "22": "fixed_1.6",
-        "23": "fixed_1.6",
-        "24": "fixed_1.55",
+        "23": "fixed_1.7",
+        "24": "fixed_1.65",
         "25": "fixed_1.7",
         "26": "fixed_1.65",
-        "27": "fixed_1.5",
-        "28": "fixed_1.55",
-        "29": "fixed_1.6",
-        "3": "fixed_1.65",
-        "30": "fixed_1.5",
+        "27": "fixed_1.55",
+        "28": "fixed_1.45",
+        "29": "fixed_1.5",
+        "3": "fixed_1.6",
+        "30": "fixed_1.55",
         "31": "fixed_1.6",
-        "32": "fixed_1.45",
-        "33": "fixed_1.5",
-        "34": "fixed_1.65",
-        "35": "fixed_1.55",
-        "36": "fixed_1.65",
-        "37": "fixed_1.6",
-        "38": "fixed_1.7",
-        "39": "fixed_1.65",
-        "4": "fixed_1.55",
-        "40": "fixed_1.35",
-        "41": "fixed_1.4",
-        "42": "fixed_1.5",
-        "43": "fixed_1.6",
-        "44": "fixed_1.5",
-        "45": "fixed_1.65",
-        "46": "fixed_1.55",
-        "47": "fixed_1.5",
-        "48": "fixed_1.6",
+        "32": "fixed_1.65",
+        "33": "fixed_1.65",
+        "34": "fixed_1.55",
+        "35": "fixed_1.6",
+        "36": "fixed_1.45",
+        "37": "fixed_1.65",
+        "38": "fixed_1.55",
+        "39": "fixed_1.5",
+        "4": "fixed_1.65",
+        "40": "fixed_1.6",
+        "41": "fixed_1.5",
+        "42": "fixed_1.55",
+        "43": "fixed_1.65",
+        "44": "fixed_1.65",
+        "45": "fixed_1.6",
+        "46": "fixed_1.7",
+        "47": "fixed_1.65",
+        "48": "fixed_1.5",
         "49": "fixed_1.55",
-        "5": "fixed_1.7",
-        "50": "fixed_1.65",
+        "5": "fixed_1.5",
+        "50": "fixed_1.55",
         "51": "fixed_1.7",
         "52": "fixed_1.6",
-        "53": "fixed_1.6",
-        "54": "fixed_1.65",
-        "55": "fixed_1.7",
-        "56": "fixed_1.7",
+        "53": "fixed_1.5",
+        "54": "fixed_1.6",
+        "55": "fixed_1.6",
+        "56": "fixed_1.45",
         "57": "fixed_1.65",
-        "58": "fixed_1.6",
-        "59": "fixed_1.6",
+        "58": "fixed_1.65",
+        "59": "fixed_1.55",
         "6": "fixed_1.6",
-        "60": "fixed_1.6",
-        "61": "fixed_1.55",
-        "62": "fixed_1.65",
-        "63": "fixed_1.55",
-        "64": "fixed_1.7",
-        "65": "fixed_1.65",
-        "66": "fixed_1.6",
-        "67": "fixed_1.65",
-        "68": "fixed_1.6",
-        "69": "fixed_1.6",
-        "7": "fixed_1.7",
-        "70": "fixed_1.5",
+        "60": "fixed_1.7",
+        "61": "fixed_1.6",
+        "62": "fixed_1.55",
+        "63": "fixed_1.45",
+        "64": "fixed_1.6",
+        "65": "fixed_1.55",
+        "66": "fixed_1.65",
+        "67": "fixed_1.6",
+        "68": "fixed_1.45",
+        "69": "fixed_1.7",
+        "7": "fixed_1.55",
+        "70": "fixed_1.65",
         "71": "fixed_1.65",
-        "72": "fixed_1.55",
-        "73": "fixed_1.6",
-        "74": "fixed_1.65",
+        "72": "fixed_1.65",
+        "73": "fixed_1.4",
+        "74": "fixed_1.45",
         "75": "fixed_1.6",
-        "76": "fixed_1.65",
-        "77": "fixed_1.65",
-        "78": "fixed_1.45",
-        "79": "fixed_1.6",
-        "8": "fixed_1.7",
-        "80": "fixed_1.5",
-        "81": "fixed_1.6",
-        "82": "fixed_1.55",
-        "83": "fixed_1.5",
-        "84": "fixed_1.65",
-        "85": "fixed_1.6",
+        "76": "fixed_1.6",
+        "77": "fixed_1.55",
+        "78": "fixed_1.5",
+        "79": "fixed_1.55",
+        "8": "fixed_1.65",
+        "80": "fixed_1.6",
+        "81": "fixed_1.55",
+        "82": "fixed_1.6",
+        "83": "fixed_1.6",
+        "84": "fixed_1.7",
+        "85": "fixed_1.55",
         "86": "fixed_1.65",
-        "87": "fixed_1.65",
+        "87": "fixed_1.5",
         "88": "fixed_1.6",
-        "89": "fixed_1.65",
-        "9": "fixed_1.5",
+        "89": "fixed_1.7",
+        "9": "fixed_1.75",
         "90": "fixed_1.55",
-        "91": "fixed_1.65",
-        "92": "fixed_1.6",
+        "91": "fixed_1.7",
+        "92": "fixed_1.7",
         "93": "fixed_1.55",
-        "94": "fixed_1.65",
-        "95": "fixed_1.5",
-        "96": "fixed_1.6",
+        "94": "fixed_1.6",
+        "95": "fixed_1.65",
+        "96": "fixed_1.65",
         "97": "fixed_1.6",
-        "98": "fixed_1.65",
-        "99": "fixed_1.65"
+        "98": "fixed_1.6",
+        "99": "fixed_1.6"
       },
       "uncovered_case_ids": []
     },
@@ -2028,311 +2544,311 @@
       "global_candidates": [
         {
           "failed_cases": 0,
-          "native_continuation_sec": 12.343841333341677,
+          "native_continuation_sec": 12.591860000001486,
           "policy": "fixed_1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 11.730854333345118,
+          "native_continuation_sec": 12.125939000003317,
           "policy": "fixed_1.05"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 11.194106333341841,
+          "native_continuation_sec": 11.67117099999575,
           "policy": "fixed_1.1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.632716333337491,
+          "native_continuation_sec": 11.16513033332933,
           "policy": "fixed_1.15"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 10.262690666664747,
+          "native_continuation_sec": 10.7285986666638,
           "policy": "fixed_1.2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.862566000006723,
+          "native_continuation_sec": 10.406873333333266,
           "policy": "fixed_1.25"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.482115999987915,
+          "native_continuation_sec": 10.006369333330214,
           "policy": "fixed_1.3"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.096010999993089,
+          "native_continuation_sec": 9.705335999999157,
           "policy": "fixed_1.35"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.794518333333087,
+          "native_continuation_sec": 9.445831333339273,
           "policy": "fixed_1.4"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.584467000007042,
+          "native_continuation_sec": 8.92023600000449,
           "policy": "fixed_1.45"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.303522000004735,
+          "native_continuation_sec": 8.733121666669033,
           "policy": "fixed_1.5"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.163925333329056,
+          "native_continuation_sec": 8.55996100000028,
           "policy": "fixed_1.55"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.15717100000085,
+          "native_continuation_sec": 8.50086200000251,
           "policy": "fixed_1.6"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 8.525273333326169,
+          "native_continuation_sec": 8.529123999998514,
           "policy": "fixed_1.65"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 9.602637333322319,
+          "native_continuation_sec": 9.283840333334242,
           "policy": "fixed_1.7"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 11.525788666668062,
+          "native_continuation_sec": 10.865995000002403,
           "policy": "fixed_1.75"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 14.329654666665139,
+          "native_continuation_sec": 13.27009700000242,
           "policy": "fixed_1.8"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 19.148178000010883,
+          "native_continuation_sec": 17.522695333325554,
           "policy": "fixed_1.85"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 28.773141666683895,
+          "native_continuation_sec": 25.96192800000168,
           "policy": "fixed_1.9"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 63.16235600000246,
+          "native_continuation_sec": 58.919275666664596,
           "policy": "fixed_1.95"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 63.01979333330831,
+          "native_continuation_sec": 58.87800033332495,
           "policy": "fixed_2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 62.95970333333645,
+          "native_continuation_sec": 58.90717399999773,
           "policy": "fixed_2.05"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 62.95344966667362,
+          "native_continuation_sec": 58.92166400000458,
           "policy": "fixed_2.1"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 63.06645699999248,
+          "native_continuation_sec": 58.918071333328506,
           "policy": "fixed_2.15"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 63.083752999996314,
+          "native_continuation_sec": 58.70166299998828,
           "policy": "fixed_2.2"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 62.89645033334528,
+          "native_continuation_sec": 58.91638700000608,
           "policy": "fixed_2.25"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 62.9311526666489,
+          "native_continuation_sec": 58.87503266666003,
           "policy": "fixed_2.3"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 63.35540966668296,
+          "native_continuation_sec": 58.76912499999651,
           "policy": "fixed_2.35"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 62.98868599999712,
+          "native_continuation_sec": 58.83634666666609,
           "policy": "fixed_2.4"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 63.046596666667554,
+          "native_continuation_sec": 58.91102466666112,
           "policy": "fixed_2.45"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 63.03731366666886,
+          "native_continuation_sec": 58.998110666666975,
           "policy": "fixed_2.5"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 63.0669753333245,
+          "native_continuation_sec": 58.90267866666679,
           "policy": "fixed_2.55"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 62.990808666683435,
+          "native_continuation_sec": 58.90891866667105,
           "policy": "fixed_2.6"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 62.95252033332572,
+          "native_continuation_sec": 58.81853700000161,
           "policy": "fixed_2.65"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 62.825873333327564,
+          "native_continuation_sec": 58.78137533333302,
           "policy": "fixed_2.7"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 63.01898900001287,
+          "native_continuation_sec": 58.76019566666489,
           "policy": "fixed_2.75"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 62.88755400001518,
+          "native_continuation_sec": 58.856244333337656,
           "policy": "fixed_2.8"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 62.773377666666946,
+          "native_continuation_sec": 59.01618433333342,
           "policy": "fixed_2.85"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 63.1156226666643,
+          "native_continuation_sec": 59.10600266665402,
           "policy": "fixed_2.9"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 62.991393333340184,
+          "native_continuation_sec": 58.79863399999638,
           "policy": "fixed_2.95"
         },
         {
           "failed_cases": 0,
-          "native_continuation_sec": 63.032244666663075,
+          "native_continuation_sec": 58.85486599999754,
           "policy": "fixed_3"
         }
       ],
       "per_instance": {
-        "0": "fixed_1.65",
-        "1": "fixed_1.35",
-        "10": "fixed_1.5",
-        "11": "fixed_1.65",
-        "12": "fixed_1.45",
-        "13": "fixed_1.65",
-        "14": "fixed_1.6",
+        "0": "fixed_1.55",
+        "1": "fixed_1.5",
+        "10": "fixed_1.65",
+        "11": "fixed_1.6",
+        "12": "fixed_1.5",
+        "13": "fixed_1.6",
+        "14": "fixed_1.65",
         "15": "fixed_1.65",
-        "16": "fixed_1.5",
+        "16": "fixed_1.6",
         "17": "fixed_1.55",
-        "18": "fixed_1.65",
-        "19": "fixed_1.65",
+        "18": "fixed_1.6",
+        "19": "fixed_1.6",
         "2": "fixed_1.7",
         "20": "fixed_1.6",
-        "21": "fixed_1.5",
+        "21": "fixed_1.65",
         "22": "fixed_1.6",
-        "23": "fixed_1.55",
-        "24": "fixed_1.6",
-        "25": "fixed_1.65",
-        "26": "fixed_1.45",
-        "27": "fixed_1.55",
-        "28": "fixed_1.55",
-        "29": "fixed_1.5",
+        "23": "fixed_1.7",
+        "24": "fixed_1.65",
+        "25": "fixed_1.7",
+        "26": "fixed_1.65",
+        "27": "fixed_1.65",
+        "28": "fixed_1.6",
+        "29": "fixed_1.85",
         "3": "fixed_1.65",
-        "30": "fixed_1.5",
-        "31": "fixed_1.5",
-        "32": "fixed_1.8",
-        "33": "fixed_1.45",
-        "34": "fixed_1.6",
+        "30": "fixed_1.6",
+        "31": "fixed_1.6",
+        "32": "fixed_1.65",
+        "33": "fixed_1.65",
+        "34": "fixed_1.45",
         "35": "fixed_1.5",
-        "36": "fixed_1.5",
-        "37": "fixed_1.6",
-        "38": "fixed_1.65",
-        "39": "fixed_1.65",
-        "4": "fixed_1.6",
-        "40": "fixed_1.2",
-        "41": "fixed_1.5",
-        "42": "fixed_1.55",
-        "43": "fixed_1.6",
-        "44": "fixed_1.45",
+        "36": "fixed_1.45",
+        "37": "fixed_1.65",
+        "38": "fixed_1.6",
+        "39": "fixed_1.55",
+        "4": "fixed_1.65",
+        "40": "fixed_1.6",
+        "41": "fixed_1.55",
+        "42": "fixed_1.65",
+        "43": "fixed_1.55",
+        "44": "fixed_1.6",
         "45": "fixed_1.65",
-        "46": "fixed_1.45",
-        "47": "fixed_1.5",
+        "46": "fixed_1.75",
+        "47": "fixed_1.65",
         "48": "fixed_1.55",
-        "49": "fixed_1.55",
-        "5": "fixed_1.7",
-        "50": "fixed_1.7",
+        "49": "fixed_1.5",
+        "5": "fixed_1.6",
+        "50": "fixed_1.5",
         "51": "fixed_1.7",
         "52": "fixed_1.7",
-        "53": "fixed_1.55",
-        "54": "fixed_1.55",
-        "55": "fixed_1.65",
-        "56": "fixed_1.65",
-        "57": "fixed_1.6",
-        "58": "fixed_1.65",
-        "59": "fixed_1.7",
-        "6": "fixed_1.5",
-        "60": "fixed_1.6",
-        "61": "fixed_1.55",
-        "62": "fixed_1.55",
+        "53": "fixed_1.45",
+        "54": "fixed_1.6",
+        "55": "fixed_1.6",
+        "56": "fixed_1.6",
+        "57": "fixed_1.65",
+        "58": "fixed_1.55",
+        "59": "fixed_1.65",
+        "6": "fixed_1.65",
+        "60": "fixed_1.7",
+        "61": "fixed_1.6",
+        "62": "fixed_1.65",
         "63": "fixed_1.55",
-        "64": "fixed_1.7",
+        "64": "fixed_1.55",
         "65": "fixed_1.65",
-        "66": "fixed_1.5",
-        "67": "fixed_1.55",
-        "68": "fixed_1.5",
-        "69": "fixed_1.6",
-        "7": "fixed_1.65",
-        "70": "fixed_1.5",
-        "71": "fixed_1.6",
-        "72": "fixed_1.55",
+        "66": "fixed_1.7",
+        "67": "fixed_1.6",
+        "68": "fixed_1.4",
+        "69": "fixed_1.65",
+        "7": "fixed_1.6",
+        "70": "fixed_1.6",
+        "71": "fixed_1.65",
+        "72": "fixed_1.7",
         "73": "fixed_1.6",
-        "74": "fixed_1.65",
-        "75": "fixed_1.65",
+        "74": "fixed_1.6",
+        "75": "fixed_1.6",
         "76": "fixed_1.6",
-        "77": "fixed_1.55",
-        "78": "fixed_1.55",
-        "79": "fixed_1.65",
+        "77": "fixed_1.7",
+        "78": "fixed_1.65",
+        "79": "fixed_1.6",
         "8": "fixed_1.65",
-        "80": "fixed_1.35",
-        "81": "fixed_1.55",
-        "82": "fixed_1.6",
-        "83": "fixed_1.45",
-        "84": "fixed_1.65",
-        "85": "fixed_1.6",
-        "86": "fixed_1.6",
-        "87": "fixed_1.6",
-        "88": "fixed_1.45",
+        "80": "fixed_1.65",
+        "81": "fixed_1.6",
+        "82": "fixed_1.65",
+        "83": "fixed_1.55",
+        "84": "fixed_1.6",
+        "85": "fixed_1.65",
+        "86": "fixed_1.65",
+        "87": "fixed_1.55",
+        "88": "fixed_1.65",
         "89": "fixed_1.65",
         "9": "fixed_1.5",
-        "90": "fixed_1.5",
-        "91": "fixed_1.55",
-        "92": "fixed_1.6",
-        "93": "fixed_1.35",
-        "94": "fixed_1.5",
-        "95": "fixed_1.6",
-        "96": "fixed_1.65",
-        "97": "fixed_1.7",
-        "98": "fixed_1.6",
-        "99": "fixed_1.65"
+        "90": "fixed_1.6",
+        "91": "fixed_1.7",
+        "92": "fixed_1.65",
+        "93": "fixed_1.55",
+        "94": "fixed_1.55",
+        "95": "fixed_1.85",
+        "96": "fixed_1.55",
+        "97": "fixed_1.5",
+        "98": "fixed_1.65",
+        "99": "fixed_1.5"
       },
       "uncovered_case_ids": []
     }

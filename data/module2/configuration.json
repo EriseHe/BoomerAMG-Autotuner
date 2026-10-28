@@ -1,7 +1,8 @@
 {
   "cases": 100,
+  "config_path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/study/module2/configuration.json",
   "evaluation_repetitions": 3,
-  "name": "Module 2: matched-policy evaluation",
+  "name": "matched_policy",
   "periodic_pattern": [
     2.85,
     1.1
@@ -21,22 +22,1578 @@
     ],
     "kind": "scalar_anisotropic_diffusion"
   },
-  "rl_beta": 2.0,
+  "rl_beta": null,
   "scan_extra_repetitions": 2,
   "scan_repeat_fraction": 0.1,
   "scan_repetitions": 1,
   "schema_version": 1,
   "seeds": {
-    "candidates": 2026101206,
-    "inputs": 2026101205,
-    "order": 2026101207,
-    "repeats": 2026101208
+    "candidates": 20261020,
+    "inputs": 20261019,
+    "order": 20261021,
+    "repeats": 20261022
   },
   "solver": {
     "max_cycles": 50,
     "profile": "l1_jacobi_direct_coarse",
     "tolerance": 1e-06
   },
+  "training_runs": [
+    {
+      "config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_1/experiment_config.json",
+      "controller_checkpoint": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_1/checkpoints/bandit_lstdq_final.npz",
+      "encoder": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_1/checkpoints/bandit_lstdq_final.npz.encoder.json",
+      "method": "bandit_lstdq",
+      "seed": 1,
+      "setup_checkpoint": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_1/final_bandit_states/bandit_lstdq.npz",
+      "training_config": {
+        "description": "Module 1: diffusion_60, seed 1; 5,000 learning inputs followed by 1,000 frozen inputs in one stream.",
+        "failure_feedback": {
+          "mode": "rollback_unrecovered"
+        },
+        "frozen_stream": {
+          "cases": 1000,
+          "cases_per_seed": 125,
+          "expected_sha256": "8652be3263c362a82faf00e87f072836c82d487128205cb067feff6407248a86",
+          "group_take": 1000,
+          "instance_offset": 625,
+          "online_cases": 1000,
+          "seed_groups": [
+            56700120,
+            56706120,
+            56712120,
+            56718120,
+            56724120,
+            56730120,
+            56736120,
+            56742120
+          ],
+          "shuffle_seeds": [
+            56748120
+          ],
+          "smoke": false,
+          "warmup_cases": 0
+        },
+        "methods": [
+          {
+            "candidate_sampling": "structured512",
+            "id": "bandit_lstdq",
+            "seed_offset": 0,
+            "setup": "linucb",
+            "setup_context": "diffusion3d",
+            "setup_space": "expanded_no_endpoints",
+            "solve": "recursive_lstdq",
+            "solve_activation_case": 0,
+            "solve_context": "diffusion3d",
+            "solve_tolerance": 1e-06
+          }
+        ],
+        "name": "module1_diffusion_60_seed1",
+        "output_dir": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/five_seed_study_20261025_041644/study/module1/diffusion_60/seed_1",
+        "problem": {
+          "advection": [
+            0,
+            0,
+            0
+          ],
+          "c_max": 1000,
+          "c_min": 1,
+          "grid": [
+            60,
+            60,
+            60
+          ],
+          "kind": "scalar_anisotropic_diffusion"
+        },
+        "reporting": {
+          "generate_plots": true,
+          "progress_every": 1000,
+          "rolling_window": 100
+        },
+        "schema_version": 2,
+        "seeds": {
+          "bandit": 56760120,
+          "base": 56700120,
+          "controller": 56766120,
+          "method_order": 56772120
+        },
+        "setup": {
+          "action_space": "full_cartesian",
+          "candidate_schedule": {
+            "chunk_rounds": 256,
+            "max_selections_per_case": 3,
+            "mode": "aot",
+            "pool_size": 1024,
+            "structured_quotas": {
+              "anchor": 128,
+              "balanced_global": 384,
+              "coordinate_local": 384,
+              "sobol": 128
+            }
+          },
+          "configuration_spaces": {
+            "expanded_no_endpoints": {
+              "agg_interp_types": [
+                4,
+                6,
+                7
+              ],
+              "coarsen_types": [
+                0,
+                2,
+                3,
+                6,
+                8,
+                10
+              ],
+              "interp_types": [
+                0,
+                2,
+                3,
+                4,
+                6,
+                8,
+                17,
+                18
+              ],
+              "numeric_grids": {
+                "P_max_elmts": [
+                  2,
+                  4,
+                  6,
+                  8,
+                  12,
+                  16
+                ],
+                "agg_num_levels": [
+                  0,
+                  1,
+                  2
+                ],
+                "max_row_sum": [
+                  1e-06,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ],
+                "strong_threshold": [
+                  0.0,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ],
+                "trunc_factor": [
+                  0.0,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ]
+              }
+            }
+          },
+          "parameter_resolution": 20
+        },
+        "solve": {
+          "action_grid": {
+            "start": 1,
+            "step": 0.05,
+            "stop": 3
+          },
+          "cost_target": "native_cycle",
+          "epsilon": {
+            "decay_steps": 20000,
+            "final": 0.03,
+            "start": 0.3
+          },
+          "lstdq": {
+            "beta": 2,
+            "lcb_lower_bound_sec": 0,
+            "residual_floor_sec": 0.001,
+            "ridge": 1,
+            "trace_lambda": 0.8
+          },
+          "max_cycles": 50,
+          "rbf": {
+            "centers": {
+              "start": 1,
+              "step": 0.25,
+              "stop": 3
+            },
+            "sigma": 0.2
+          },
+          "smoother_profile": "l1_jacobi_direct_coarse",
+          "state_encoding": "shared_context",
+          "tolerance": 1e-06
+        },
+        "stream": {
+          "cases": 5000,
+          "cases_per_seed": 625,
+          "expected_sha256": "e79ce1e088712599abd69a0b6b48cfbea54fbcf6c684b057353bd64af38ec823",
+          "group_take": 5000,
+          "instance_offset": 0,
+          "online_cases": 5000,
+          "seed_groups": [
+            56700120,
+            56706120,
+            56712120,
+            56718120,
+            56724120,
+            56730120,
+            56736120,
+            56742120
+          ],
+          "shuffle_seeds": [
+            56748120
+          ],
+          "smoke": false,
+          "warmup_cases": 0
+        }
+      }
+    },
+    {
+      "config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_2/experiment_config.json",
+      "controller_checkpoint": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_2/checkpoints/bandit_lstdq_final.npz",
+      "encoder": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_2/checkpoints/bandit_lstdq_final.npz.encoder.json",
+      "method": "bandit_lstdq",
+      "seed": 2,
+      "setup_checkpoint": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_2/final_bandit_states/bandit_lstdq.npz",
+      "training_config": {
+        "description": "Module 1: diffusion_60, seed 2; 5,000 learning inputs followed by 1,000 frozen inputs in one stream.",
+        "failure_feedback": {
+          "mode": "rollback_unrecovered"
+        },
+        "frozen_stream": {
+          "cases": 1000,
+          "cases_per_seed": 125,
+          "expected_sha256": "2b9dac7b123629ae201569c17f611924ab98fb5a3cedbd84c84bcb4b4c90697e",
+          "group_take": 1000,
+          "instance_offset": 625,
+          "online_cases": 1000,
+          "seed_groups": [
+            173325802,
+            173331802,
+            173337802,
+            173343802,
+            173349802,
+            173355802,
+            173361802,
+            173367802
+          ],
+          "shuffle_seeds": [
+            173373802
+          ],
+          "smoke": false,
+          "warmup_cases": 0
+        },
+        "methods": [
+          {
+            "candidate_sampling": "structured512",
+            "id": "bandit_lstdq",
+            "seed_offset": 0,
+            "setup": "linucb",
+            "setup_context": "diffusion3d",
+            "setup_space": "expanded_no_endpoints",
+            "solve": "recursive_lstdq",
+            "solve_activation_case": 0,
+            "solve_context": "diffusion3d",
+            "solve_tolerance": 1e-06
+          }
+        ],
+        "name": "module1_diffusion_60_seed2",
+        "output_dir": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/five_seed_study_20261025_041644/study/module1/diffusion_60/seed_2",
+        "problem": {
+          "advection": [
+            0,
+            0,
+            0
+          ],
+          "c_max": 1000,
+          "c_min": 1,
+          "grid": [
+            60,
+            60,
+            60
+          ],
+          "kind": "scalar_anisotropic_diffusion"
+        },
+        "reporting": {
+          "generate_plots": true,
+          "progress_every": 1000,
+          "rolling_window": 100
+        },
+        "schema_version": 2,
+        "seeds": {
+          "bandit": 173385802,
+          "base": 173325802,
+          "controller": 173391802,
+          "method_order": 173397802
+        },
+        "setup": {
+          "action_space": "full_cartesian",
+          "candidate_schedule": {
+            "chunk_rounds": 256,
+            "max_selections_per_case": 3,
+            "mode": "aot",
+            "pool_size": 1024,
+            "structured_quotas": {
+              "anchor": 128,
+              "balanced_global": 384,
+              "coordinate_local": 384,
+              "sobol": 128
+            }
+          },
+          "configuration_spaces": {
+            "expanded_no_endpoints": {
+              "agg_interp_types": [
+                4,
+                6,
+                7
+              ],
+              "coarsen_types": [
+                0,
+                2,
+                3,
+                6,
+                8,
+                10
+              ],
+              "interp_types": [
+                0,
+                2,
+                3,
+                4,
+                6,
+                8,
+                17,
+                18
+              ],
+              "numeric_grids": {
+                "P_max_elmts": [
+                  2,
+                  4,
+                  6,
+                  8,
+                  12,
+                  16
+                ],
+                "agg_num_levels": [
+                  0,
+                  1,
+                  2
+                ],
+                "max_row_sum": [
+                  1e-06,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ],
+                "strong_threshold": [
+                  0.0,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ],
+                "trunc_factor": [
+                  0.0,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ]
+              }
+            }
+          },
+          "parameter_resolution": 20
+        },
+        "solve": {
+          "action_grid": {
+            "start": 1,
+            "step": 0.05,
+            "stop": 3
+          },
+          "cost_target": "native_cycle",
+          "epsilon": {
+            "decay_steps": 20000,
+            "final": 0.03,
+            "start": 0.3
+          },
+          "lstdq": {
+            "beta": 2,
+            "lcb_lower_bound_sec": 0,
+            "residual_floor_sec": 0.001,
+            "ridge": 1,
+            "trace_lambda": 0.8
+          },
+          "max_cycles": 50,
+          "rbf": {
+            "centers": {
+              "start": 1,
+              "step": 0.25,
+              "stop": 3
+            },
+            "sigma": 0.2
+          },
+          "smoother_profile": "l1_jacobi_direct_coarse",
+          "state_encoding": "shared_context",
+          "tolerance": 1e-06
+        },
+        "stream": {
+          "cases": 5000,
+          "cases_per_seed": 625,
+          "expected_sha256": "7e1fe1b87108d45207bbc031c9955dcc8309c944b25e99bfba05a2857f500789",
+          "group_take": 5000,
+          "instance_offset": 0,
+          "online_cases": 5000,
+          "seed_groups": [
+            173325802,
+            173331802,
+            173337802,
+            173343802,
+            173349802,
+            173355802,
+            173361802,
+            173367802
+          ],
+          "shuffle_seeds": [
+            173373802
+          ],
+          "smoke": false,
+          "warmup_cases": 0
+        }
+      }
+    },
+    {
+      "config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_3/experiment_config.json",
+      "controller_checkpoint": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_3/checkpoints/bandit_lstdq_final.npz",
+      "encoder": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_3/checkpoints/bandit_lstdq_final.npz.encoder.json",
+      "method": "bandit_lstdq",
+      "seed": 3,
+      "setup_checkpoint": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_3/final_bandit_states/bandit_lstdq.npz",
+      "training_config": {
+        "description": "Module 1: diffusion_60, seed 3; 5,000 learning inputs followed by 1,000 frozen inputs in one stream.",
+        "failure_feedback": {
+          "mode": "rollback_unrecovered"
+        },
+        "frozen_stream": {
+          "cases": 1000,
+          "cases_per_seed": 125,
+          "expected_sha256": "2f7a6f2d03834052ed97983d7b60a892525e437d94bc74c5cfe1bfd5e1826187",
+          "group_take": 1000,
+          "instance_offset": 625,
+          "online_cases": 1000,
+          "seed_groups": [
+            663486482,
+            663492482,
+            663498482,
+            663504482,
+            663510482,
+            663516482,
+            663522482,
+            663528482
+          ],
+          "shuffle_seeds": [
+            663534482
+          ],
+          "smoke": false,
+          "warmup_cases": 0
+        },
+        "methods": [
+          {
+            "candidate_sampling": "structured512",
+            "id": "bandit_lstdq",
+            "seed_offset": 0,
+            "setup": "linucb",
+            "setup_context": "diffusion3d",
+            "setup_space": "expanded_no_endpoints",
+            "solve": "recursive_lstdq",
+            "solve_activation_case": 0,
+            "solve_context": "diffusion3d",
+            "solve_tolerance": 1e-06
+          }
+        ],
+        "name": "module1_diffusion_60_seed3",
+        "output_dir": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/five_seed_study_20261025_041644/study/module1/diffusion_60/seed_3",
+        "problem": {
+          "advection": [
+            0,
+            0,
+            0
+          ],
+          "c_max": 1000,
+          "c_min": 1,
+          "grid": [
+            60,
+            60,
+            60
+          ],
+          "kind": "scalar_anisotropic_diffusion"
+        },
+        "reporting": {
+          "generate_plots": true,
+          "progress_every": 1000,
+          "rolling_window": 100
+        },
+        "schema_version": 2,
+        "seeds": {
+          "bandit": 663546482,
+          "base": 663486482,
+          "controller": 663552482,
+          "method_order": 663558482
+        },
+        "setup": {
+          "action_space": "full_cartesian",
+          "candidate_schedule": {
+            "chunk_rounds": 256,
+            "max_selections_per_case": 3,
+            "mode": "aot",
+            "pool_size": 1024,
+            "structured_quotas": {
+              "anchor": 128,
+              "balanced_global": 384,
+              "coordinate_local": 384,
+              "sobol": 128
+            }
+          },
+          "configuration_spaces": {
+            "expanded_no_endpoints": {
+              "agg_interp_types": [
+                4,
+                6,
+                7
+              ],
+              "coarsen_types": [
+                0,
+                2,
+                3,
+                6,
+                8,
+                10
+              ],
+              "interp_types": [
+                0,
+                2,
+                3,
+                4,
+                6,
+                8,
+                17,
+                18
+              ],
+              "numeric_grids": {
+                "P_max_elmts": [
+                  2,
+                  4,
+                  6,
+                  8,
+                  12,
+                  16
+                ],
+                "agg_num_levels": [
+                  0,
+                  1,
+                  2
+                ],
+                "max_row_sum": [
+                  1e-06,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ],
+                "strong_threshold": [
+                  0.0,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ],
+                "trunc_factor": [
+                  0.0,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ]
+              }
+            }
+          },
+          "parameter_resolution": 20
+        },
+        "solve": {
+          "action_grid": {
+            "start": 1,
+            "step": 0.05,
+            "stop": 3
+          },
+          "cost_target": "native_cycle",
+          "epsilon": {
+            "decay_steps": 20000,
+            "final": 0.03,
+            "start": 0.3
+          },
+          "lstdq": {
+            "beta": 2,
+            "lcb_lower_bound_sec": 0,
+            "residual_floor_sec": 0.001,
+            "ridge": 1,
+            "trace_lambda": 0.8
+          },
+          "max_cycles": 50,
+          "rbf": {
+            "centers": {
+              "start": 1,
+              "step": 0.25,
+              "stop": 3
+            },
+            "sigma": 0.2
+          },
+          "smoother_profile": "l1_jacobi_direct_coarse",
+          "state_encoding": "shared_context",
+          "tolerance": 1e-06
+        },
+        "stream": {
+          "cases": 5000,
+          "cases_per_seed": 625,
+          "expected_sha256": "93b9f0207a5ba8c5f01f93dbd257cc5d66e307be8800bcab04e3d025aed23353",
+          "group_take": 5000,
+          "instance_offset": 0,
+          "online_cases": 5000,
+          "seed_groups": [
+            663486482,
+            663492482,
+            663498482,
+            663504482,
+            663510482,
+            663516482,
+            663522482,
+            663528482
+          ],
+          "shuffle_seeds": [
+            663534482
+          ],
+          "smoke": false,
+          "warmup_cases": 0
+        }
+      }
+    },
+    {
+      "config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_4/experiment_config.json",
+      "controller_checkpoint": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_4/checkpoints/bandit_lstdq_final.npz",
+      "encoder": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_4/checkpoints/bandit_lstdq_final.npz.encoder.json",
+      "method": "bandit_lstdq",
+      "seed": 4,
+      "setup_checkpoint": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_4/final_bandit_states/bandit_lstdq.npz",
+      "training_config": {
+        "description": "Module 1: diffusion_60, seed 4; 5,000 learning inputs followed by 1,000 frozen inputs in one stream.",
+        "failure_feedback": {
+          "mode": "rollback_unrecovered"
+        },
+        "frozen_stream": {
+          "cases": 1000,
+          "cases_per_seed": 125,
+          "expected_sha256": "f6aa6c0e2de6dc8275395d9c071f379686c96b10801082c063f2a8781940daf2",
+          "group_take": 1000,
+          "instance_offset": 625,
+          "online_cases": 1000,
+          "seed_groups": [
+            265187924,
+            265193924,
+            265199924,
+            265205924,
+            265211924,
+            265217924,
+            265223924,
+            265229924
+          ],
+          "shuffle_seeds": [
+            265235924
+          ],
+          "smoke": false,
+          "warmup_cases": 0
+        },
+        "methods": [
+          {
+            "candidate_sampling": "structured512",
+            "id": "bandit_lstdq",
+            "seed_offset": 0,
+            "setup": "linucb",
+            "setup_context": "diffusion3d",
+            "setup_space": "expanded_no_endpoints",
+            "solve": "recursive_lstdq",
+            "solve_activation_case": 0,
+            "solve_context": "diffusion3d",
+            "solve_tolerance": 1e-06
+          }
+        ],
+        "name": "module1_diffusion_60_seed4",
+        "output_dir": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module1_seed_order_45612_20261025_210255/study/module1/diffusion_60/seed_4",
+        "problem": {
+          "advection": [
+            0,
+            0,
+            0
+          ],
+          "c_max": 1000,
+          "c_min": 1,
+          "grid": [
+            60,
+            60,
+            60
+          ],
+          "kind": "scalar_anisotropic_diffusion"
+        },
+        "reporting": {
+          "generate_plots": true,
+          "progress_every": 1000,
+          "rolling_window": 100
+        },
+        "schema_version": 2,
+        "seeds": {
+          "bandit": 265247924,
+          "base": 265187924,
+          "controller": 265253924,
+          "method_order": 265259924
+        },
+        "setup": {
+          "action_space": "full_cartesian",
+          "candidate_schedule": {
+            "chunk_rounds": 256,
+            "max_selections_per_case": 3,
+            "mode": "aot",
+            "pool_size": 1024,
+            "structured_quotas": {
+              "anchor": 128,
+              "balanced_global": 384,
+              "coordinate_local": 384,
+              "sobol": 128
+            }
+          },
+          "configuration_spaces": {
+            "expanded_no_endpoints": {
+              "agg_interp_types": [
+                4,
+                6,
+                7
+              ],
+              "coarsen_types": [
+                0,
+                2,
+                3,
+                6,
+                8,
+                10
+              ],
+              "interp_types": [
+                0,
+                2,
+                3,
+                4,
+                6,
+                8,
+                17,
+                18
+              ],
+              "numeric_grids": {
+                "P_max_elmts": [
+                  2,
+                  4,
+                  6,
+                  8,
+                  12,
+                  16
+                ],
+                "agg_num_levels": [
+                  0,
+                  1,
+                  2
+                ],
+                "max_row_sum": [
+                  1e-06,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ],
+                "strong_threshold": [
+                  0.0,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ],
+                "trunc_factor": [
+                  0.0,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ]
+              }
+            }
+          },
+          "parameter_resolution": 20
+        },
+        "solve": {
+          "action_grid": {
+            "start": 1,
+            "step": 0.05,
+            "stop": 3
+          },
+          "cost_target": "native_cycle",
+          "epsilon": {
+            "decay_steps": 20000,
+            "final": 0.03,
+            "start": 0.3
+          },
+          "lstdq": {
+            "beta": 2,
+            "lcb_lower_bound_sec": 0,
+            "residual_floor_sec": 0.001,
+            "ridge": 1,
+            "trace_lambda": 0.8
+          },
+          "max_cycles": 50,
+          "rbf": {
+            "centers": {
+              "start": 1,
+              "step": 0.25,
+              "stop": 3
+            },
+            "sigma": 0.2
+          },
+          "smoother_profile": "l1_jacobi_direct_coarse",
+          "state_encoding": "shared_context",
+          "tolerance": 1e-06
+        },
+        "stream": {
+          "cases": 5000,
+          "cases_per_seed": 625,
+          "expected_sha256": "e4b2b79eeadef429a9f8fc0049bd40e020c731dd232a3ba3b833f14a5ab6345b",
+          "group_take": 5000,
+          "instance_offset": 0,
+          "online_cases": 5000,
+          "seed_groups": [
+            265187924,
+            265193924,
+            265199924,
+            265205924,
+            265211924,
+            265217924,
+            265223924,
+            265229924
+          ],
+          "shuffle_seeds": [
+            265235924
+          ],
+          "smoke": false,
+          "warmup_cases": 0
+        }
+      }
+    },
+    {
+      "config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_5/experiment_config.json",
+      "controller_checkpoint": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_5/checkpoints/bandit_lstdq_final.npz",
+      "encoder": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_5/checkpoints/bandit_lstdq_final.npz.encoder.json",
+      "method": "bandit_lstdq",
+      "seed": 5,
+      "setup_checkpoint": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_5/final_bandit_states/bandit_lstdq.npz",
+      "training_config": {
+        "description": "Module 1: diffusion_60, seed 5; 5,000 learning inputs followed by 1,000 frozen inputs in one stream.",
+        "failure_feedback": {
+          "mode": "rollback_unrecovered"
+        },
+        "frozen_stream": {
+          "cases": 1000,
+          "cases_per_seed": 125,
+          "expected_sha256": "e697fe2cc1b0b8cc4c1f84e174f0ec1c962d968e51fb8ee8ef4ca0b95e178348",
+          "group_take": 1000,
+          "instance_offset": 625,
+          "online_cases": 1000,
+          "seed_groups": [
+            339923787,
+            339929787,
+            339935787,
+            339941787,
+            339947787,
+            339953787,
+            339959787,
+            339965787
+          ],
+          "shuffle_seeds": [
+            339971787
+          ],
+          "smoke": false,
+          "warmup_cases": 0
+        },
+        "methods": [
+          {
+            "candidate_sampling": "structured512",
+            "id": "bandit_lstdq",
+            "seed_offset": 0,
+            "setup": "linucb",
+            "setup_context": "diffusion3d",
+            "setup_space": "expanded_no_endpoints",
+            "solve": "recursive_lstdq",
+            "solve_activation_case": 0,
+            "solve_context": "diffusion3d",
+            "solve_tolerance": 1e-06
+          }
+        ],
+        "name": "module1_diffusion_60_seed5",
+        "output_dir": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module1_seed_order_45612_20261025_210255/study/module1/diffusion_60/seed_5",
+        "problem": {
+          "advection": [
+            0,
+            0,
+            0
+          ],
+          "c_max": 1000,
+          "c_min": 1,
+          "grid": [
+            60,
+            60,
+            60
+          ],
+          "kind": "scalar_anisotropic_diffusion"
+        },
+        "reporting": {
+          "generate_plots": true,
+          "progress_every": 1000,
+          "rolling_window": 100
+        },
+        "schema_version": 2,
+        "seeds": {
+          "bandit": 339983787,
+          "base": 339923787,
+          "controller": 339989787,
+          "method_order": 339995787
+        },
+        "setup": {
+          "action_space": "full_cartesian",
+          "candidate_schedule": {
+            "chunk_rounds": 256,
+            "max_selections_per_case": 3,
+            "mode": "aot",
+            "pool_size": 1024,
+            "structured_quotas": {
+              "anchor": 128,
+              "balanced_global": 384,
+              "coordinate_local": 384,
+              "sobol": 128
+            }
+          },
+          "configuration_spaces": {
+            "expanded_no_endpoints": {
+              "agg_interp_types": [
+                4,
+                6,
+                7
+              ],
+              "coarsen_types": [
+                0,
+                2,
+                3,
+                6,
+                8,
+                10
+              ],
+              "interp_types": [
+                0,
+                2,
+                3,
+                4,
+                6,
+                8,
+                17,
+                18
+              ],
+              "numeric_grids": {
+                "P_max_elmts": [
+                  2,
+                  4,
+                  6,
+                  8,
+                  12,
+                  16
+                ],
+                "agg_num_levels": [
+                  0,
+                  1,
+                  2
+                ],
+                "max_row_sum": [
+                  1e-06,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ],
+                "strong_threshold": [
+                  0.0,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ],
+                "trunc_factor": [
+                  0.0,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ]
+              }
+            }
+          },
+          "parameter_resolution": 20
+        },
+        "solve": {
+          "action_grid": {
+            "start": 1,
+            "step": 0.05,
+            "stop": 3
+          },
+          "cost_target": "native_cycle",
+          "epsilon": {
+            "decay_steps": 20000,
+            "final": 0.03,
+            "start": 0.3
+          },
+          "lstdq": {
+            "beta": 2,
+            "lcb_lower_bound_sec": 0,
+            "residual_floor_sec": 0.001,
+            "ridge": 1,
+            "trace_lambda": 0.8
+          },
+          "max_cycles": 50,
+          "rbf": {
+            "centers": {
+              "start": 1,
+              "step": 0.25,
+              "stop": 3
+            },
+            "sigma": 0.2
+          },
+          "smoother_profile": "l1_jacobi_direct_coarse",
+          "state_encoding": "shared_context",
+          "tolerance": 1e-06
+        },
+        "stream": {
+          "cases": 5000,
+          "cases_per_seed": 625,
+          "expected_sha256": "3ce773afdf722a5ec458596db0d8ea64ebbd522dddbe8f4acf5871cd5a9053c4",
+          "group_take": 5000,
+          "instance_offset": 0,
+          "online_cases": 5000,
+          "seed_groups": [
+            339923787,
+            339929787,
+            339935787,
+            339941787,
+            339947787,
+            339953787,
+            339959787,
+            339965787
+          ],
+          "shuffle_seeds": [
+            339971787
+          ],
+          "smoke": false,
+          "warmup_cases": 0
+        }
+      }
+    },
+    {
+      "config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_6/experiment_config.json",
+      "controller_checkpoint": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_6/checkpoints/bandit_lstdq_final.npz",
+      "encoder": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_6/checkpoints/bandit_lstdq_final.npz.encoder.json",
+      "method": "bandit_lstdq",
+      "seed": 6,
+      "setup_checkpoint": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_6/final_bandit_states/bandit_lstdq.npz",
+      "training_config": {
+        "description": "Module 1: diffusion_60, seed 6; 5,000 learning inputs followed by 1,000 frozen inputs in one stream.",
+        "failure_feedback": {
+          "mode": "rollback_unrecovered"
+        },
+        "frozen_stream": {
+          "cases": 1000,
+          "cases_per_seed": 125,
+          "expected_sha256": "322027a7727a77f6c158a33fb7c076a0d8c7709d4b353f0d815ec71378ed7237",
+          "group_take": 1000,
+          "instance_offset": 625,
+          "online_cases": 1000,
+          "seed_groups": [
+            704464735,
+            704470735,
+            704476735,
+            704482735,
+            704488735,
+            704494735,
+            704500735,
+            704506735
+          ],
+          "shuffle_seeds": [
+            704512735
+          ],
+          "smoke": false,
+          "warmup_cases": 0
+        },
+        "methods": [
+          {
+            "candidate_sampling": "structured512",
+            "id": "bandit_lstdq",
+            "seed_offset": 0,
+            "setup": "linucb",
+            "setup_context": "diffusion3d",
+            "setup_space": "expanded_no_endpoints",
+            "solve": "recursive_lstdq",
+            "solve_activation_case": 0,
+            "solve_context": "diffusion3d",
+            "solve_tolerance": 1e-06
+          }
+        ],
+        "name": "module1_diffusion_60_seed6",
+        "output_dir": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module1_seed_order_45612_20261025_210255/study/module1/diffusion_60/seed_6",
+        "problem": {
+          "advection": [
+            0,
+            0,
+            0
+          ],
+          "c_max": 1000,
+          "c_min": 1,
+          "grid": [
+            60,
+            60,
+            60
+          ],
+          "kind": "scalar_anisotropic_diffusion"
+        },
+        "reporting": {
+          "generate_plots": true,
+          "progress_every": 1000,
+          "rolling_window": 100
+        },
+        "schema_version": 2,
+        "seeds": {
+          "bandit": 704524735,
+          "base": 704464735,
+          "controller": 704530735,
+          "method_order": 704536735
+        },
+        "setup": {
+          "action_space": "full_cartesian",
+          "candidate_schedule": {
+            "chunk_rounds": 256,
+            "max_selections_per_case": 3,
+            "mode": "aot",
+            "pool_size": 1024,
+            "structured_quotas": {
+              "anchor": 128,
+              "balanced_global": 384,
+              "coordinate_local": 384,
+              "sobol": 128
+            }
+          },
+          "configuration_spaces": {
+            "expanded_no_endpoints": {
+              "agg_interp_types": [
+                4,
+                6,
+                7
+              ],
+              "coarsen_types": [
+                0,
+                2,
+                3,
+                6,
+                8,
+                10
+              ],
+              "interp_types": [
+                0,
+                2,
+                3,
+                4,
+                6,
+                8,
+                17,
+                18
+              ],
+              "numeric_grids": {
+                "P_max_elmts": [
+                  2,
+                  4,
+                  6,
+                  8,
+                  12,
+                  16
+                ],
+                "agg_num_levels": [
+                  0,
+                  1,
+                  2
+                ],
+                "max_row_sum": [
+                  1e-06,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ],
+                "strong_threshold": [
+                  0.0,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ],
+                "trunc_factor": [
+                  0.0,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95
+                ]
+              }
+            }
+          },
+          "parameter_resolution": 20
+        },
+        "solve": {
+          "action_grid": {
+            "start": 1,
+            "step": 0.05,
+            "stop": 3
+          },
+          "cost_target": "native_cycle",
+          "epsilon": {
+            "decay_steps": 20000,
+            "final": 0.03,
+            "start": 0.3
+          },
+          "lstdq": {
+            "beta": 2,
+            "lcb_lower_bound_sec": 0,
+            "residual_floor_sec": 0.001,
+            "ridge": 1,
+            "trace_lambda": 0.8
+          },
+          "max_cycles": 50,
+          "rbf": {
+            "centers": {
+              "start": 1,
+              "step": 0.25,
+              "stop": 3
+            },
+            "sigma": 0.2
+          },
+          "smoother_profile": "l1_jacobi_direct_coarse",
+          "state_encoding": "shared_context",
+          "tolerance": 1e-06
+        },
+        "stream": {
+          "cases": 5000,
+          "cases_per_seed": 625,
+          "expected_sha256": "05ccbccf7977684a3b82d7f141d23299c3a8a75822ccb63e61589b8d63486b66",
+          "group_take": 5000,
+          "instance_offset": 0,
+          "online_cases": 5000,
+          "seed_groups": [
+            704464735,
+            704470735,
+            704476735,
+            704482735,
+            704488735,
+            704494735,
+            704500735,
+            704506735
+          ],
+          "shuffle_seeds": [
+            704512735
+          ],
+          "smoke": false,
+          "warmup_cases": 0
+        }
+      }
+    }
+  ],
   "weights": [
     1.0,
     1.05,
@@ -80,49 +1637,5 @@
     2.95,
     3.0
   ],
-  "workers": 3,
-  "training_runs": [
-    {
-      "seed": 1,
-      "method": "bandit_lstdq",
-      "config": "checkpoints/seed_1/experiment_config.json",
-      "controller_checkpoint": "checkpoints/seed_1/controller.npz",
-      "setup_checkpoint": "checkpoints/seed_1/setup_original.npz"
-    },
-    {
-      "seed": 2,
-      "method": "bandit_lstdq",
-      "config": "checkpoints/seed_2/experiment_config.json",
-      "controller_checkpoint": "checkpoints/seed_2/controller.npz",
-      "setup_checkpoint": "checkpoints/seed_2/setup_original.npz"
-    },
-    {
-      "seed": 3,
-      "method": "bandit_lstdq",
-      "config": "checkpoints/seed_3/experiment_config.json",
-      "controller_checkpoint": "checkpoints/seed_3/controller.npz",
-      "setup_checkpoint": "checkpoints/seed_3/setup_original.npz"
-    },
-    {
-      "seed": 4,
-      "method": "bandit_lstdq",
-      "config": "checkpoints/seed_4/experiment_config.json",
-      "controller_checkpoint": "checkpoints/seed_4/controller.npz",
-      "setup_checkpoint": "checkpoints/seed_4/setup_original.npz"
-    },
-    {
-      "seed": 5,
-      "method": "bandit_lstdq",
-      "config": "checkpoints/seed_5/experiment_config.json",
-      "controller_checkpoint": "checkpoints/seed_5/controller.npz",
-      "setup_checkpoint": "checkpoints/seed_5/setup_original.npz"
-    },
-    {
-      "seed": 6,
-      "method": "bandit_lstdq",
-      "config": "checkpoints/seed_6/experiment_config.json",
-      "controller_checkpoint": "checkpoints/seed_6/controller.npz",
-      "setup_checkpoint": "checkpoints/seed_6/setup_original.npz"
-    }
-  ]
+  "workers": 3
 }

@@ -1,6 +1,7 @@
 {
-  "module": 2,
+  "created_at": "2026-10-27T06:58:42.166340+00:00",
   "evaluation": "Freeze scan selections, independently retime five policy roles; share identical execution cells; all failures and recovery costs retained",
+  "format": "matched_policy",
   "labels": {
     "fixed": "Best global fixed",
     "oracle": "Best per-instance fixed",
@@ -17,6 +18,8 @@
     "periodic",
     "rl"
   ],
+  "module": 2,
+  "name": "matched_policy",
   "policies": {
     "fixed_1": {
       "kind": "fixed",
@@ -272,7 +275,7 @@
       ]
     },
     "rl_frozen": {
-      "beta": 2.0,
+      "beta": null,
       "explore": false,
       "kind": "rl",
       "learn": false
@@ -297,26 +300,166 @@
   "recovery": "One primary matched hierarchy, then one fresh Default fallback on numerical failure; no setup reselection or learning",
   "repetitions_per_case": 3,
   "scan_extra_repeat_case_ids": [
-    10,
-    18,
-    19,
-    31,
-    41,
-    42,
-    47,
-    62,
-    65,
-    85
+    0,
+    6,
+    22,
+    29,
+    30,
+    36,
+    45,
+    74,
+    87,
+    91
   ],
   "scan_extra_repetitions": 2,
   "scan_repetitions": 1,
   "seeds": {
-    "candidates": 2026101206,
-    "inputs": 2026101205,
-    "order": 2026101207,
-    "repeats": 2026101208
+    "candidates": 20261020,
+    "inputs": 20261019,
+    "order": 20261021,
+    "repeats": 20261022
   },
   "selection": "Fresh complete fixed-weight scans, mean native continuation cost; all-success global weight and successful per-case weights; deterministic weight-name ties",
+  "sources": {
+    "1": {
+      "directory": "checkpoints/seed_1",
+      "effective_beta": 2.0,
+      "method": "bandit_lstdq",
+      "original_files": {
+        "config": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_1/experiment_config.json",
+          "sha256": "b20d27f3988ea2d263f887f682d2f24f4be15439fb18a07f0ae24e6fefc35fcc"
+        },
+        "controller_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_1/checkpoints/bandit_lstdq_final.npz",
+          "sha256": "5c3a1be8d5eee8d54b0df5bb44b98b2bff3d47fc6c40c4956d18e35235760b25"
+        },
+        "encoder": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_1/checkpoints/bandit_lstdq_final.npz.encoder.json",
+          "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+        },
+        "setup_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_1/final_bandit_states/bandit_lstdq.npz",
+          "sha256": "e61c29f2fc7d61301dd65eb1e94017b27a951f527749c97e786a53bd0e334b38"
+        }
+      }
+    },
+    "2": {
+      "directory": "checkpoints/seed_2",
+      "effective_beta": 2.0,
+      "method": "bandit_lstdq",
+      "original_files": {
+        "config": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_2/experiment_config.json",
+          "sha256": "ad7331e4bed01f6c4bd6b68cc74bfea00dd36842a765ae7d80e956e744e8b612"
+        },
+        "controller_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_2/checkpoints/bandit_lstdq_final.npz",
+          "sha256": "c0f19a5e2a0c5d57b24969d7446f3bbaa4691f3d1f6d490aa1b1e9385b7ccf13"
+        },
+        "encoder": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_2/checkpoints/bandit_lstdq_final.npz.encoder.json",
+          "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+        },
+        "setup_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_2/final_bandit_states/bandit_lstdq.npz",
+          "sha256": "b09ffd49fcb94461ac877777d7a7606d8ba09ca1477fe6647334bc5516444b35"
+        }
+      }
+    },
+    "3": {
+      "directory": "checkpoints/seed_3",
+      "effective_beta": 2.0,
+      "method": "bandit_lstdq",
+      "original_files": {
+        "config": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_3/experiment_config.json",
+          "sha256": "dcf082077b0e11a2314ed10d14bf06a78e1ea270fd47a063ed188aa3a061fee5"
+        },
+        "controller_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_3/checkpoints/bandit_lstdq_final.npz",
+          "sha256": "edd3b5802ab972be65e97af981915a2aa5d95125e4288605963af0d43ba5f27d"
+        },
+        "encoder": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_3/checkpoints/bandit_lstdq_final.npz.encoder.json",
+          "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+        },
+        "setup_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_3/final_bandit_states/bandit_lstdq.npz",
+          "sha256": "2a6ca216852b1052d61f2e08511c4c82775af4d99faf4ac590032f345d513b6d"
+        }
+      }
+    },
+    "4": {
+      "directory": "checkpoints/seed_4",
+      "effective_beta": 2.0,
+      "method": "bandit_lstdq",
+      "original_files": {
+        "config": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_4/experiment_config.json",
+          "sha256": "1fede3f2ff8448a47c06734ee67b63c34adea54f641ce1ed8e4dc361c0282dfe"
+        },
+        "controller_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_4/checkpoints/bandit_lstdq_final.npz",
+          "sha256": "04de86db9feeff06f7eae391f31c63c4f254399850d48abb907ae57ae58e7660"
+        },
+        "encoder": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_4/checkpoints/bandit_lstdq_final.npz.encoder.json",
+          "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+        },
+        "setup_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_4/final_bandit_states/bandit_lstdq.npz",
+          "sha256": "fd5743b6ac8853f489c03b9bf10c0c1f28f5fb7ae97a00733f7ca4e295e5f6fa"
+        }
+      }
+    },
+    "5": {
+      "directory": "checkpoints/seed_5",
+      "effective_beta": 2.0,
+      "method": "bandit_lstdq",
+      "original_files": {
+        "config": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_5/experiment_config.json",
+          "sha256": "b7c96232079826e7e1a06434d4443a421b82b2eb332576f3b2c02ef2c741aad6"
+        },
+        "controller_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_5/checkpoints/bandit_lstdq_final.npz",
+          "sha256": "319598e3dd87e73dd248f4e1403145d6ff3224e93c2356635aea7093e5b89c26"
+        },
+        "encoder": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_5/checkpoints/bandit_lstdq_final.npz.encoder.json",
+          "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+        },
+        "setup_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_5/final_bandit_states/bandit_lstdq.npz",
+          "sha256": "e92beefa07aa994fae4a52309f87173d5a55e9fb8381db1917d8ba1789a1fd8c"
+        }
+      }
+    },
+    "6": {
+      "directory": "checkpoints/seed_6",
+      "effective_beta": 2.0,
+      "method": "bandit_lstdq",
+      "original_files": {
+        "config": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_6/experiment_config.json",
+          "sha256": "c286ea86b00ad2a9921fd94ea119f27af8bbd5bc983336439daa912f4d1c5bb4"
+        },
+        "controller_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_6/checkpoints/bandit_lstdq_final.npz",
+          "sha256": "f58979ebedaef90785c8feee5ea78a5832d7fd034c05f07cb7f5e9ed2251b843"
+        },
+        "encoder": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_6/checkpoints/bandit_lstdq_final.npz.encoder.json",
+          "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+        },
+        "setup_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_6/final_bandit_states/bandit_lstdq.npz",
+          "sha256": "ec3fdc9cee83f53078de164f9738775bd1b6a5a96dd136bbbeaba78da0c5f95c"
+        }
+      }
+    }
+  },
   "test_cases": 100,
   "tolerance": 1e-06,
   "training_seeds": [

@@ -41,7 +41,7 @@
     }
   ],
   "name": "module3_variable_flow_60_seed4",
-  "output_dir": "results/module3/variable_flow_60/seed_4",
+  "output_dir": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/study/module3/variable_flow_60_batch2/seed_4",
   "problem": {
     "c_max": 0.1,
     "c_min": 0.0001,
@@ -54,7 +54,7 @@
   },
   "reporting": {
     "generate_plots": true,
-    "progress_every": 100,
+    "progress_every": 1000,
     "rolling_window": 100
   },
   "schema_version": 2,
@@ -186,10 +186,6 @@
         }
       }
     },
-    "lin_ts": {
-      "loss_scale_prior_sec": 0.1,
-      "relative_sampling_scale": 0.15
-    },
     "parameter_resolution": 20
   },
   "solve": {
@@ -198,6 +194,7 @@
       "step": 0.05,
       "stop": 3
     },
+    "cost_target": "native_cycle",
     "epsilon": {
       "decay_steps": 20000,
       "final": 0.03,
@@ -220,7 +217,7 @@
       "sigma": 0.2
     },
     "smoother_profile": "l1_jacobi_direct_coarse",
-    "state_encoding": "space_aware_v2",
+    "state_encoding": "shared_context",
     "tolerance": 1e-06
   },
   "stream": {

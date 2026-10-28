@@ -9,9 +9,8 @@
   "default_reported_failure_residual_max": 5.9431825503066045e-06,
   "both_native_and_rl_paths_apply_cap_before_convergence_at_boundary": true,
   "boundary_rule_sources": [
-    "hypre/interfaces/amg_runtime.c:573",
-    "hypre/interfaces/amg_rl_shared.c:233",
-    "https://raw.githubusercontent.com/hypre-space/hypre/v3.1.0/src/parcsr_ls/par_amg_solve.c"
+    "adc8cd1d384469559a9bfac004e4569f5bfdf5b7:hypre/interfaces/amg_runtime.c",
+    "adc8cd1d384469559a9bfac004e4569f5bfdf5b7:hypre/interfaces/amg_rl_shared.c"
   ],
   "method_totals": {
     "default_setup_default_solve": {
@@ -21,28 +20,28 @@
     },
     "default_setup_lstdq": {
       "cases": 30000,
-      "reported_failures": 15,
-      "reported_failures_final_residual_at_or_below_tol": 4
+      "reported_failures": 30,
+      "reported_failures_final_residual_at_or_below_tol": 23
     },
     "bandit_default": {
       "cases": 30000,
-      "reported_failures": 31,
-      "reported_failures_final_residual_at_or_below_tol": 8
+      "reported_failures": 24,
+      "reported_failures_final_residual_at_or_below_tol": 6
     },
     "bandit_lstdq": {
       "cases": 30000,
-      "reported_failures": 3,
-      "reported_failures_final_residual_at_or_below_tol": 2
+      "reported_failures": 2,
+      "reported_failures_final_residual_at_or_below_tol": 1
     }
   },
   "common_success_joint": {
     "native_reduction_pct": {
-      "mean": 54.65769578836999,
-      "sample_sd": 2.007119982527036
+      "mean": 56.47919605305792,
+      "sample_sd": 2.330307463219457
     },
     "inclusive_reduction_pct": {
-      "mean": 53.02613695839711,
-      "sample_sd": 1.938070458226726
+      "mean": 55.11785756131093,
+      "sample_sd": 2.468256923392096
     }
   },
   "seed_checks": [
@@ -57,7 +56,8 @@
         },
         "default_setup_lstdq": {
           "cases": 5000,
-          "reported_failures": 0
+          "reported_failures": 2,
+          "reported_failures_final_residual_at_or_below_tol": 0
         },
         "bandit_default": {
           "cases": 5000,
@@ -66,7 +66,8 @@
         },
         "bandit_lstdq": {
           "cases": 5000,
-          "reported_failures": 0
+          "reported_failures": 0,
+          "reported_failures_final_residual_at_or_below_tol": 0
         }
       },
       "common_success_reductions": {
@@ -75,16 +76,16 @@
           "inclusive_reduction_pct": 0.0
         },
         "default_setup_lstdq": {
-          "native_reduction_pct": 13.660040495343573,
-          "inclusive_reduction_pct": 12.637733179750132
+          "native_reduction_pct": 13.30441447079923,
+          "inclusive_reduction_pct": 12.497059534310505
         },
         "bandit_default": {
-          "native_reduction_pct": 51.371896858584485,
-          "inclusive_reduction_pct": 50.888064459089996
+          "native_reduction_pct": 50.71858563723537,
+          "inclusive_reduction_pct": 50.257417988063445
         },
         "bandit_lstdq": {
-          "native_reduction_pct": 53.54707865067028,
-          "inclusive_reduction_pct": 51.97432831108664
+          "native_reduction_pct": 56.094778603880066,
+          "inclusive_reduction_pct": 54.657246356400854
         }
       }
     },
@@ -104,12 +105,13 @@
         },
         "bandit_default": {
           "cases": 5000,
-          "reported_failures": 4,
-          "reported_failures_final_residual_at_or_below_tol": 1
+          "reported_failures": 1,
+          "reported_failures_final_residual_at_or_below_tol": 0
         },
         "bandit_lstdq": {
           "cases": 5000,
-          "reported_failures": 0
+          "reported_failures": 0,
+          "reported_failures_final_residual_at_or_below_tol": 0
         }
       },
       "common_success_reductions": {
@@ -118,16 +120,16 @@
           "inclusive_reduction_pct": 0.0
         },
         "default_setup_lstdq": {
-          "native_reduction_pct": 11.211290483639436,
-          "inclusive_reduction_pct": 10.1531931907634
+          "native_reduction_pct": 13.54422229474852,
+          "inclusive_reduction_pct": 12.743589237879572
         },
         "bandit_default": {
-          "native_reduction_pct": 50.484662975524905,
-          "inclusive_reduction_pct": 50.03570434328118
+          "native_reduction_pct": 56.75867883538023,
+          "inclusive_reduction_pct": 56.30719507595212
         },
         "bandit_lstdq": {
-          "native_reduction_pct": 53.916638929990114,
-          "inclusive_reduction_pct": 52.2665968884519
+          "native_reduction_pct": 54.179405532856876,
+          "inclusive_reduction_pct": 52.736970068941545
         }
       }
     },
@@ -142,17 +144,18 @@
         },
         "default_setup_lstdq": {
           "cases": 5000,
-          "reported_failures": 1,
-          "reported_failures_final_residual_at_or_below_tol": 0
+          "reported_failures": 11,
+          "reported_failures_final_residual_at_or_below_tol": 10
         },
         "bandit_default": {
           "cases": 5000,
-          "reported_failures": 9,
+          "reported_failures": 8,
           "reported_failures_final_residual_at_or_below_tol": 1
         },
         "bandit_lstdq": {
           "cases": 5000,
-          "reported_failures": 0
+          "reported_failures": 0,
+          "reported_failures_final_residual_at_or_below_tol": 0
         }
       },
       "common_success_reductions": {
@@ -161,16 +164,16 @@
           "inclusive_reduction_pct": 0.0
         },
         "default_setup_lstdq": {
-          "native_reduction_pct": 13.866851183161423,
-          "inclusive_reduction_pct": 12.872942139040633
+          "native_reduction_pct": -0.7863661777121278,
+          "inclusive_reduction_pct": -1.6949466725566964
         },
         "bandit_default": {
-          "native_reduction_pct": 51.43782574747111,
-          "inclusive_reduction_pct": 50.97590237240255
+          "native_reduction_pct": 49.494263459292995,
+          "inclusive_reduction_pct": 48.992922290450466
         },
         "bandit_lstdq": {
-          "native_reduction_pct": 52.97489097266846,
-          "inclusive_reduction_pct": 51.385258499764554
+          "native_reduction_pct": 58.526378071591225,
+          "inclusive_reduction_pct": 57.28328953683042
         }
       }
     },
@@ -185,12 +188,12 @@
         },
         "default_setup_lstdq": {
           "cases": 5000,
-          "reported_failures": 1,
-          "reported_failures_final_residual_at_or_below_tol": 1
+          "reported_failures": 5,
+          "reported_failures_final_residual_at_or_below_tol": 3
         },
         "bandit_default": {
           "cases": 5000,
-          "reported_failures": 3,
+          "reported_failures": 1,
           "reported_failures_final_residual_at_or_below_tol": 0
         },
         "bandit_lstdq": {
@@ -205,16 +208,16 @@
           "inclusive_reduction_pct": 0.0
         },
         "default_setup_lstdq": {
-          "native_reduction_pct": 12.06595642895686,
-          "inclusive_reduction_pct": 11.019010213348546
+          "native_reduction_pct": 4.334696949537731,
+          "inclusive_reduction_pct": 3.4764734250347207
         },
         "bandit_default": {
-          "native_reduction_pct": 51.321151615106864,
-          "inclusive_reduction_pct": 50.83913257409536
+          "native_reduction_pct": 49.66776664451083,
+          "inclusive_reduction_pct": 49.20753423009106
         },
         "bandit_lstdq": {
-          "native_reduction_pct": 56.38736875151864,
-          "inclusive_reduction_pct": 54.75298650058738
+          "native_reduction_pct": 57.78635308991817,
+          "inclusive_reduction_pct": 56.47401531647349
         }
       }
     },
@@ -229,18 +232,18 @@
         },
         "default_setup_lstdq": {
           "cases": 5000,
-          "reported_failures": 8,
-          "reported_failures_final_residual_at_or_below_tol": 1
+          "reported_failures": 9,
+          "reported_failures_final_residual_at_or_below_tol": 8
         },
         "bandit_default": {
           "cases": 5000,
-          "reported_failures": 6,
-          "reported_failures_final_residual_at_or_below_tol": 4
+          "reported_failures": 5,
+          "reported_failures_final_residual_at_or_below_tol": 3
         },
         "bandit_lstdq": {
           "cases": 5000,
-          "reported_failures": 1,
-          "reported_failures_final_residual_at_or_below_tol": 1
+          "reported_failures": 0,
+          "reported_failures_final_residual_at_or_below_tol": 0
         }
       },
       "common_success_reductions": {
@@ -249,16 +252,16 @@
           "inclusive_reduction_pct": 0.0
         },
         "default_setup_lstdq": {
-          "native_reduction_pct": 14.916170340353895,
-          "inclusive_reduction_pct": 13.908691323781142
+          "native_reduction_pct": 8.764281734137324,
+          "inclusive_reduction_pct": 7.911099867113203
         },
         "bandit_default": {
-          "native_reduction_pct": 52.34803758703974,
-          "inclusive_reduction_pct": 51.87473687465456
+          "native_reduction_pct": 51.49175593119535,
+          "inclusive_reduction_pct": 51.023416866420604
         },
         "bandit_lstdq": {
-          "native_reduction_pct": 57.89545251292376,
-          "inclusive_reduction_pct": 56.117550467760466
+          "native_reduction_pct": 53.35211514642868,
+          "inclusive_reduction_pct": 51.79275326280914
         }
       }
     },
@@ -273,7 +276,7 @@
         },
         "default_setup_lstdq": {
           "cases": 5000,
-          "reported_failures": 4,
+          "reported_failures": 2,
           "reported_failures_final_residual_at_or_below_tol": 2
         },
         "bandit_default": {
@@ -293,16 +296,16 @@
           "inclusive_reduction_pct": 0.0
         },
         "default_setup_lstdq": {
-          "native_reduction_pct": 13.296538421975058,
-          "inclusive_reduction_pct": 12.258910189770077
+          "native_reduction_pct": 13.209995947258236,
+          "inclusive_reduction_pct": 12.39803167463701
         },
         "bandit_default": {
-          "native_reduction_pct": 51.213427857834205,
-          "inclusive_reduction_pct": 50.75028746528994
+          "native_reduction_pct": 49.33072815303821,
+          "inclusive_reduction_pct": 48.88491364616191
         },
         "bandit_lstdq": {
-          "native_reduction_pct": 53.224744912448685,
-          "inclusive_reduction_pct": 51.660101082731714
+          "native_reduction_pct": 58.936145873672494,
+          "inclusive_reduction_pct": 57.762870826410094
         }
       }
     }

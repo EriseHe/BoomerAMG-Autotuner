@@ -1,32 +1,32 @@
 {
-  "description": "Module 1: diffusion_60, seed 2, 5,000 paired cases and four cold branches.",
+  "description": "Module 1: diffusion_60, seed 2; 5,000 learning inputs followed by 1,000 frozen inputs in one stream.",
   "failure_feedback": {
     "mode": "rollback_unrecovered"
   },
+  "frozen_stream": {
+    "cases": 1000,
+    "cases_per_seed": 125,
+    "expected_sha256": "2b9dac7b123629ae201569c17f611924ab98fb5a3cedbd84c84bcb4b4c90697e",
+    "group_take": 1000,
+    "instance_offset": 625,
+    "online_cases": 1000,
+    "seed_groups": [
+      173325802,
+      173331802,
+      173337802,
+      173343802,
+      173349802,
+      173355802,
+      173361802,
+      173367802
+    ],
+    "shuffle_seeds": [
+      173373802
+    ],
+    "smoke": false,
+    "warmup_cases": 0
+  },
   "methods": [
-    {
-      "id": "default_setup_default_solve",
-      "setup": "default",
-      "solve": "default"
-    },
-    {
-      "id": "default_setup_lstdq",
-      "setup": "default",
-      "setup_space": "expanded_no_endpoints",
-      "solve": "recursive_lstdq",
-      "solve_activation_case": 0,
-      "solve_context": "diffusion3d",
-      "solve_tolerance": 1e-06
-    },
-    {
-      "candidate_sampling": "structured512",
-      "id": "bandit_default",
-      "seed_offset": 0,
-      "setup": "linucb",
-      "setup_context": "diffusion3d",
-      "setup_space": "expanded_no_endpoints",
-      "solve": "default"
-    },
     {
       "candidate_sampling": "structured512",
       "id": "bandit_lstdq",
@@ -41,7 +41,7 @@
     }
   ],
   "name": "module1_diffusion_60_seed2",
-  "output_dir": "results/module1/diffusion_60/seed_2",
+  "output_dir": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/five_seed_study_20261025_041644/study/module1/diffusion_60/seed_2",
   "problem": {
     "advection": [
       0,
@@ -59,7 +59,7 @@
   },
   "reporting": {
     "generate_plots": true,
-    "progress_every": 100,
+    "progress_every": 1000,
     "rolling_window": 100
   },
   "schema_version": 2,
@@ -191,10 +191,6 @@
         }
       }
     },
-    "lin_ts": {
-      "loss_scale_prior_sec": 0.1,
-      "relative_sampling_scale": 0.15
-    },
     "parameter_resolution": 20
   },
   "solve": {
@@ -203,6 +199,7 @@
       "step": 0.05,
       "stop": 3
     },
+    "cost_target": "native_cycle",
     "epsilon": {
       "decay_steps": 20000,
       "final": 0.03,
@@ -225,7 +222,7 @@
       "sigma": 0.2
     },
     "smoother_profile": "l1_jacobi_direct_coarse",
-    "state_encoding": "space_aware_v2",
+    "state_encoding": "shared_context",
     "tolerance": 1e-06
   },
   "stream": {
