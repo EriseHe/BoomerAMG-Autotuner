@@ -111,64 +111,66 @@ def cycle_heatmap(chosen, title):
 
 def draw_cycle_examples(data):
     fig = plt.figure(figsize=(9.15, 3.0))
-    # Two main blocks; the right block contains a tightly paired comparison.
-    outer = fig.add_gridspec(1, 2, width_ratios=[1.3, 1.4], wspace=.30)
+    # One schedule panel and three aligned, paired residual comparisons.
+    outer = fig.add_gridspec(1, 2, width_ratios=[1.1, 1.7], wspace=.32)
     schedule = fig.add_subplot(outer[0, 0])
-    residual_grid = outer[0, 1].subgridspec(1, 2, wspace=.06)
-    convergence = fig.add_subplot(residual_grid[0, 0])
-    default = fig.add_subplot(residual_grid[0, 1], sharey=convergence)
-    axes = (schedule, convergence, default)
-    for ex in data["examples"]:
-        default.semilogy(np.arange(ex["default_cycles"]+1), ex["default_relative_residuals"],
-            color="#111111", linestyle=ex["linestyle"], marker=ex["marker"],
-            lw=.85, ms=2.5, markerfacecolor="white", markeredgewidth=.6, zorder=1)
+    residual_grid = outer[0, 1].subgridspec(1, len(data["examples"]), wspace=.16)
+    residual_axes = []
+    for i, ex in enumerate(data["examples"]):
+        ax = fig.add_subplot(residual_grid[0, i],
+                             sharey=residual_axes[0] if residual_axes else None)
+        residual_axes.append(ax)
+        ax.semilogy(np.arange(ex["default_cycles"]+1), ex["default_relative_residuals"],
+                    color="#111111", ls="--", lw=.9, zorder=1)
     schedule.axhline(1.0, color="#111111", ls="--", lw=.9, zorder=0)
-    # Share Figure 3's blue and red; retain the middle example's color.
     example_colors = {"A": CUMULATIVE_COLORS[2], "C": CUMULATIVE_COLORS[3]}
-    for ex in reversed(data["examples"]):
-        style = dict(color=example_colors.get(ex["label"], ex["color"]),
-                     linestyle=ex["linestyle"], marker=ex["marker"],
-                     lw=1.05, ms=3.0, markerfacecolor="white", markeredgewidth=.7, zorder=3)
-        label = f'{ex["label"]}: input {ex["problem_index"]} ({ex["cycles"]} cycles)'
+    for i in reversed(range(len(data["examples"]))):
+        ex = data["examples"][i]
+        curve_style = dict(color=example_colors.get(ex["label"], ex["color"]),
+                           linestyle=ex["linestyle"], marker=ex["marker"],
+                           lw=1.05, ms=3.0, markerfacecolor="white",
+                           markeredgewidth=.7, zorder=3)
+        label = f'{ex["label"]}: {ex["problem_index"]} ({ex["cycles"]} cycles'
         if "total_reduction_pct" in ex:
-            label += f'\nTotal-time reduction: {ex["total_reduction_pct"]:.1f}%'
-        schedule.plot(np.arange(ex["cycles"]), ex["weights"], label=label, **style)
-        convergence.semilogy(np.arange(ex["cycles"]+1), ex["relative_residuals"], **style)
+            label += f'; {ex["total_reduction_pct"]:.1f}%'
+        label += ")"
+        schedule.plot(np.arange(ex["cycles"]), ex["weights"], label=label, **curve_style)
+        residual_axes[i].semilogy(np.arange(ex["cycles"]+1),
+                                 ex["relative_residuals"], **curve_style)
         if ex["exploration_cycles"]:
             k = np.array(ex["exploration_cycles"])
             schedule.scatter(k, np.array(ex["weights"])[k], marker="x", s=30,
                              color="#202020", linewidths=1.0, zorder=6)
     end = max(max(ex["cycles"], ex["default_cycles"]) for ex in data["examples"])
-    ticks = np.arange(0, end+1, 2)
     schedule.set(xlabel=r"Cycle index $k$", ylabel=r"Relaxation weight $w_k$",
-                 xlim=(-.35, end-.3), ylim=(.88, 3.13), xticks=ticks, yticks=[1, 1.5, 2, 2.5, 3])
-    # Keep the final residual visible for examples converging below 1e-7.
+                 xlim=(-.35, end-.3), ylim=(.88, 3.13),
+                 xticks=np.arange(0, end+1, 2), yticks=[1, 1.5, 2, 2.5, 3])
     residual_min = min(r for ex in data["examples"]
                        for key in ("relative_residuals", "default_relative_residuals")
                        for r in ex[key] if r > 0)
     residual_floor = min(1e-7, 10. ** np.floor(np.log10(.5 * residual_min)))
-    for ax in (convergence, default):
-        ax.set(xlabel="Completed cycles", xlim=(-.35, end+.5), ylim=(residual_floor, 2.0),
-               xticks=np.arange(0, end+1, 4), yticks=[1, 1e-2, 1e-4, 1e-6])
+    step = 10 if end > 15 else 5
+    last_tick = int(np.ceil(end / step)) * step
+    for i, (ax, ex) in enumerate(zip(residual_axes, data["examples"])):
+        ax.set(xlabel="Completed cycles", xlim=(-.35, last_tick+.5),
+               ylim=(residual_floor, 2.0), xticks=np.arange(0, last_tick+1, step),
+               yticks=[1, 1e-2, 1e-4, 1e-6])
         ax.axhline(1e-6, color="#666666", ls=":", lw=.7, zorder=0)
-    convergence.set_ylabel("Relative residual")
-    default.tick_params(axis="y", labelleft=False)
+        ax.tick_params(axis="y", labelleft=i == 0)
+        ax.set_title(f'({"bcdef"[i]}) {ex["label"]}', loc="left", pad=8)
+    residual_axes[0].set_ylabel("Relative residual")
     schedule.set_title("(a) Learned relaxation schedules", loc="left", pad=8)
-    convergence.set_title("(b) LinUCB + LSTDQ", loc="left", pad=8)
-    default.set_title(r"(c) Default ($w=1$)", loc="left", pad=8)
     handles, labels = schedule.get_legend_handles_labels()
     handles, labels = list(reversed(handles)), list(reversed(labels))
     handles.extend([Line2D([], [], color="#111111", ls="--", lw=.9),
-                    Line2D([], [], color="#202020", marker="x", ms=5, ls="None", markeredgewidth=1.0)])
+                    Line2D([], [], color="#202020", marker="x", ms=5,
+                           ls="None", markeredgewidth=1.0)])
     labels.extend([r"Default ($w=1$)", "Exploration"])
-    legend_y = .94 if any("total_reduction_pct" in ex for ex in data["examples"]) else .915
-    fig.legend(handles, labels, loc="upper center", bbox_to_anchor=(.53, legend_y), ncol=5,
+    fig.legend(handles, labels, loc="upper center", bbox_to_anchor=(.53, .915), ncol=5,
                frameon=False, handlelength=2.3, columnspacing=1.2, fontsize=7)
-    fig.suptitle(rf"Learned relaxation schedules (Diffusion ${data['grid']}^3$, seed {data['seed']}, LinUCB + LSTDQ)",
-                 fontsize=9.5, y=.995)
+    fig.suptitle("Learned relaxation schedules (Diffusion $%s^3$, seed %s, LinUCB + LSTDQ)"
+                 % (data["grid"], data["seed"]), fontsize=9.5, y=.995)
     fig.subplots_adjust(left=.065, right=.992, bottom=.175, top=.755)
-    for ax in axes:
-        ax.grid(False)
     return fig
 
 def online_figures(a, chosen, seed, title, examples=None):
@@ -263,8 +265,9 @@ def matched_figures(native, weights, case_ids, selected, seeds, title):
             offsets = np.linspace(-.12, .12, len(gains)) if len(gains) > 1 else [0.]
             ax.scatter(gains, i + np.asarray(offsets), s=17, facecolors="white",
                        edgecolors="#222222", linewidths=.8, zorder=3)
-            ax.errorbar(mean, i, xerr=sd, fmt="D", color="#222222",
-                        markersize=4, elinewidth=.8, capsize=2, capthick=.7, zorder=4)
+            mean_point, _, _ = ax.errorbar(mean, i, xerr=sd, fmt="D", color="#222222",
+                        markersize=4, elinewidth=.8, capsize=2, capthick=.7, zorder=2)
+            mean_point.set_zorder(4)
             endpoint = max(gains.max(), mean + sd)
             annotation = f"{mean:.1f} ± {sd:.1f}" if len(gains) > 1 else f"{mean:.1f}"
             ax.annotate(annotation, (endpoint, i), xytext=(7, 0),
