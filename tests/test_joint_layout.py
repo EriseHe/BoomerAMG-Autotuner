@@ -87,7 +87,7 @@ class JointLayoutTests(unittest.TestCase):
             self.assertIs(getattr(old_execution, name), getattr(execution, name))
         self.assertIs(old_protocol.RecoveryVariant, protocol.RecoveryVariant)
 
-    def test_all_valid_attempt_sequences_match_before_move(self):
+    def test_unchanged_attempt_sequences_match_before_move(self):
         failures = (CONSTRUCTION, NONCONVERGENCE, SOLVE_FAILURE, NONFINITE)
         cases = []
         for length in (1, 2, 3):
@@ -97,9 +97,17 @@ class JointLayoutTests(unittest.TestCase):
                      for statuses in itertools.product(failures, repeat=3)
                      for fallback in (SUCCESS, *failures))
         self.assertEqual(len(cases), 341)
+        comparisons = 0
         for mode in ('adjacent_delayed', 'suffix_delayed'):
             for learn in (True, False):
                 for statuses, fallback in cases:
+                    # A later correction extends any failed attempt's target across
+                    # subsequent construction failures. Those changed targets are
+                    # checked independently in ConstructionFeedbackTests.
+                    if (learn and mode == 'adjacent_delayed'
+                            and any(left != CONSTRUCTION and right == CONSTRUCTION
+                                    for left, right in zip(statuses, statuses[1:]))):
+                        continue
                     with self.subTest(mode=mode, learn=learn, statuses=statuses, fallback=fallback):
                         old = Harness(BEFORE_FEEDBACK, learn=learn, mode=mode)
                         new = Harness(learn=learn, mode=mode)
@@ -114,6 +122,8 @@ class JointLayoutTests(unittest.TestCase):
                                 np.testing.assert_array_equal(left, right)
                             else:
                                 self.assertEqual(left, right)
+                        comparisons += 1
+        self.assertEqual(comparisons, 1241)
 
     def test_previous_checkpoint_loads_without_format_changes(self):
         old_module = ModuleType('_before_joint_layout')

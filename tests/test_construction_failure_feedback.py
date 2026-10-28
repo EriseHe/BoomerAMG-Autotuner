@@ -192,8 +192,14 @@ class ConstructionFeedbackTests(unittest.TestCase):
             ((CONSTRUCTION, CONSTRUCTION, NONCONVERGENCE), SUCCESS, [(0, 1, 2), (1, 2), (2, 3)]),
             ((CONSTRUCTION, CONSTRUCTION, NONCONVERGENCE), NONCONVERGENCE, [(0, 1, 2), (1, 2), (2, 3)]),
             ((CONSTRUCTION, NONCONVERGENCE, NONCONVERGENCE), SUCCESS, [(0, 1), (1, 2), (2, 3)]),
-            ((NONCONVERGENCE, CONSTRUCTION, CONSTRUCTION), SUCCESS, [(0, 1), (1, 2, 3), (2, 3)]),
-            ((NONCONVERGENCE, CONSTRUCTION, CONSTRUCTION), CONSTRUCTION, [(0, 1), (1, 2, 3), (2, 3)]),
+            ((NONCONVERGENCE, CONSTRUCTION, CONSTRUCTION), SUCCESS, [(0, 1, 2, 3), (1, 2, 3), (2, 3)]),
+            ((NONCONVERGENCE, CONSTRUCTION, CONSTRUCTION), CONSTRUCTION, [(0, 1, 2, 3), (1, 2, 3), (2, 3)]),
+            ((NONCONVERGENCE, CONSTRUCTION, CONSTRUCTION), NONCONVERGENCE, [(0, 1, 2, 3), (1, 2, 3), (2, 3)]),
+            ((NONCONVERGENCE, CONSTRUCTION, SUCCESS), None, [(0, 1, 2), (1, 2), (2,)]),
+            ((NONCONVERGENCE, CONSTRUCTION, NONCONVERGENCE), SUCCESS, [(0, 1, 2), (1, 2), (2, 3)]),
+            ((SOLVE_FAILURE, CONSTRUCTION, NONFINITE), SUCCESS, [(0, 1, 2), (1, 2), (2, 3)]),
+            ((NONFINITE, CONSTRUCTION, NONCONVERGENCE), SUCCESS, [(0, 1, 2), (1, 2), (2, 3)]),
+            ((SOLVE_FAILURE, CONSTRUCTION, CONSTRUCTION), CONSTRUCTION, [(0, 1, 2, 3), (1, 2, 3), (2, 3)]),
             ((CONSTRUCTION, CONSTRUCTION, CONSTRUCTION), CONSTRUCTION, [(0, 1, 2, 3), (1, 2, 3), (2, 3)]),
             ((CONSTRUCTION, CONSTRUCTION, CONSTRUCTION), NONCONVERGENCE, [(0, 1, 2, 3), (1, 2, 3), (2, 3)]),
             ((CONSTRUCTION, CONSTRUCTION, CONSTRUCTION), SUCCESS, [(0, 1, 2, 3), (1, 2, 3), (2, 3)]),
@@ -202,6 +208,34 @@ class ConstructionFeedbackTests(unittest.TestCase):
         ]
         for statuses, fallback, terms in cases:
             with self.subTest(statuses=statuses, fallback=fallback):
+                harness = Harness()
+                result, _ = harness.execute(statuses, fallback)
+                self.check_targets(result, terms)
+                self.check_timing(result)
+                self.check_model(harness, result)
+
+    def test_all_failure_sequences_stop_at_next_built_hierarchy(self):
+        failures = (CONSTRUCTION, NONCONVERGENCE, SOLVE_FAILURE, NONFINITE)
+        cases = []
+        for length in (1, 2, 3):
+            cases.extend((prefix+(SUCCESS,), None)
+                         for prefix in itertools.product(failures, repeat=length-1))
+        cases.extend((statuses, fallback)
+                     for statuses in itertools.product(failures, repeat=3)
+                     for fallback in (SUCCESS, *failures))
+        self.assertEqual(len(cases), 341)
+        for statuses, fallback in cases:
+            with self.subTest(statuses=statuses, fallback=fallback):
+                sequence = statuses+(() if fallback is None else (fallback,))
+                terms = []
+                for index, status in enumerate(statuses):
+                    selected = [index]
+                    if status != SUCCESS:
+                        for following in range(index+1, len(sequence)):
+                            selected.append(following)
+                            if sequence[following] != CONSTRUCTION:
+                                break
+                    terms.append(selected)
                 harness = Harness()
                 result, _ = harness.execute(statuses, fallback)
                 self.check_targets(result, terms)
@@ -263,14 +297,16 @@ class ConstructionFeedbackTests(unittest.TestCase):
             self.check_timing(followup)
 
     def test_runtime_audit_rejects_old_short_construction_target(self):
-        harness = Harness()
-        _, reported = harness.execute((CONSTRUCTION, CONSTRUCTION, NONCONVERGENCE), SUCCESS)
-        bad = copy.deepcopy(reported)
-        rows = bad['primary_attempts']
-        rows[0]['learning_cost'] = rows[0]['attempt_cost']+rows[1]['attempt_cost']
-        with self.assertRaisesRegex(ValueError, 'Setup target does not match'):
-            audit([dict(problem_index=1, outcome=bad)], harness.variant,
-                  feedback_mode='adjacent_delayed')
+        for failure in (CONSTRUCTION, NONCONVERGENCE, SOLVE_FAILURE, NONFINITE):
+            with self.subTest(failure=failure):
+                harness = Harness()
+                _, reported = harness.execute((failure, CONSTRUCTION, NONCONVERGENCE), SUCCESS)
+                bad = copy.deepcopy(reported)
+                rows = bad['primary_attempts']
+                rows[0]['learning_cost'] = rows[0]['attempt_cost']+rows[1]['attempt_cost']
+                with self.assertRaisesRegex(ValueError, 'Setup target does not match'):
+                    audit([dict(problem_index=1, outcome=bad)], harness.variant,
+                          feedback_mode='adjacent_delayed')
 
     def test_real_clock_timing_totals_close(self):
         for statuses, fallback in (((CONSTRUCTION, CONSTRUCTION, NONCONVERGENCE), SUCCESS),
