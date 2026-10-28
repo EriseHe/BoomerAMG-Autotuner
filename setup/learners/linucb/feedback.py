@@ -100,12 +100,12 @@ def setup_cost_target(attempts, costs, index, feedback_mode):
     """Assign one setup observation its own cost and the required recovery costs.
 
     ``costs`` includes the fixed-default fallback when one was executed.
-    Construction failures in adjacent mode extend through the next constructed
+    Failed attempts in adjacent mode extend through the next constructed
     hierarchy, or through the last executed attempt if construction never succeeds.
     """
     attempt = attempts[index]
     stop = index+2
-    if feedback_mode == "adjacent_delayed" and attempt.failure_stage == "setup":
+    if feedback_mode == "adjacent_delayed" and not attempt.succeeded:
         while stop <= len(attempts) and attempts[stop-1].failure_stage == "setup":
             stop += 1
     return costs[index] if attempt.succeeded else sum(costs[index:stop]
