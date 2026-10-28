@@ -129,8 +129,10 @@ def draw_cycle_examples(data):
         style = dict(color=example_colors.get(ex["label"], ex["color"]),
                      linestyle=ex["linestyle"], marker=ex["marker"],
                      lw=1.05, ms=3.0, markerfacecolor="white", markeredgewidth=.7, zorder=3)
-        schedule.plot(np.arange(ex["cycles"]), ex["weights"],
-            label=f'{ex["label"]}: input {ex["problem_index"]} ({ex["cycles"]} cycles)', **style)
+        label = f'{ex["label"]}: input {ex["problem_index"]} ({ex["cycles"]} cycles)'
+        if "total_reduction_pct" in ex:
+            label += f'\nTotal-time reduction: {ex["total_reduction_pct"]:.1f}%'
+        schedule.plot(np.arange(ex["cycles"]), ex["weights"], label=label, **style)
         convergence.semilogy(np.arange(ex["cycles"]+1), ex["relative_residuals"], **style)
         if ex["exploration_cycles"]:
             k = np.array(ex["exploration_cycles"])
@@ -159,7 +161,8 @@ def draw_cycle_examples(data):
     handles.extend([Line2D([], [], color="#111111", ls="--", lw=.9),
                     Line2D([], [], color="#202020", marker="x", ms=5, ls="None", markeredgewidth=1.0)])
     labels.extend([r"Default ($w=1$)", "Exploration"])
-    fig.legend(handles, labels, loc="upper center", bbox_to_anchor=(.53, .915), ncol=5,
+    legend_y = .94 if any("total_reduction_pct" in ex for ex in data["examples"]) else .915
+    fig.legend(handles, labels, loc="upper center", bbox_to_anchor=(.53, legend_y), ncol=5,
                frameon=False, handlelength=2.3, columnspacing=1.2, fontsize=7)
     fig.suptitle(rf"Learned relaxation schedules (Diffusion ${data['grid']}^3$, seed {data['seed']}, LinUCB + LSTDQ)",
                  fontsize=9.5, y=.995)
