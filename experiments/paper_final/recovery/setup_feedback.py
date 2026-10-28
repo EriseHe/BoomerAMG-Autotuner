@@ -131,7 +131,8 @@ def run_deferred_case(*, policy, parameter_space, context, solver,
         raise ValueError("A snapshot cost requires an RL recorder")
     attempts, params, arms, selections, costs, observations = [], [], [], [], [], []
     raw_attempts = []
-    loss_runtime = update_runtime = 0.0
+    evaluations, updates = [], []
+    fallback_update_runtime = 0.0
     fallback = None
     fallback_observation = None
     try:
@@ -155,13 +156,14 @@ def run_deferred_case(*, policy, parameter_space, context, solver,
             raw_attempts.append(dict(attempt.result))
             tick = time.perf_counter()
             costs.append(attempt.end_to_end_runtime_sec + selections[-1] + previous_update)
-            loss_runtime += time.perf_counter()-tick
+            evaluations.append(time.perf_counter()-tick)
             tick = time.perf_counter()
             if learn:
                 observations.append(model.defer_cost(attempt.succeeded))
-                update_runtime += time.perf_counter()-tick
+                updates.append(time.perf_counter()-tick)
             else:
                 model.cancel_pending()
+                updates.append(0.0)
             if attempt.succeeded:
                 break
         if not attempts[-1].succeeded:
@@ -169,20 +171,36 @@ def run_deferred_case(*, policy, parameter_space, context, solver,
         recovery = RecoveryOutcome(primary_attempts=tuple(attempts), fallback=fallback)
         tick = time.perf_counter()
         sequence = costs + ([] if fallback is None else [fallback.end_to_end_runtime_sec])
-        targets = [cost if attempt.succeeded else sum(sequence[i:i+2]
-            if feedback_mode == "adjacent_delayed" else sequence[i:])
-            for i, (attempt, cost) in enumerate(zip(attempts, costs))] if learn else [None]*len(attempts)
+        targets = []
         if learn:
-            loss_runtime += time.perf_counter()-tick
+            # Keep shared sequence preparation in the first target's interval.
+            for i, (attempt, cost) in enumerate(zip(attempts, costs)):
+                targets.append(cost if attempt.succeeded else sum(sequence[i:i+2]
+                    if feedback_mode == "adjacent_delayed" else sequence[i:]))
+                end = time.perf_counter()
+                evaluations[i] += end-tick
+                tick = end
+            evaluations[-1] += time.perf_counter()-tick
+        else:
+            targets = [None]*len(attempts)
         tick = time.perf_counter()
-        for observation, target in zip(observations, targets):
+        for i, (observation, target) in enumerate(zip(observations, targets)):
             model.resolve_cost(observation, target)
+            end = time.perf_counter()
+            updates[i] += end-tick
+            tick = end
         if learn and fallback is not None and fallback.succeeded:
             fallback_observation = model.update_default_fallback(
                 context, DEFAULT_SETUP_PARAMS, fallback.end_to_end_runtime_sec,
             )
         if learn:
-            update_runtime += time.perf_counter()-tick
+            finished = time.perf_counter()
+            # Keep the full original interval, including trailing loop/branch
+            # work, with the last update (the fallback's when it was observed).
+            if fallback_observation is not None:
+                fallback_update_runtime = finished-tick
+            else:
+                updates[-1] += finished-tick
         finalization_runtime = 0.0
         if recorder is not None:
             tick = time.perf_counter()
@@ -204,6 +222,7 @@ def run_deferred_case(*, policy, parameter_space, context, solver,
         bandit_update_committed=learn,
         bandit_observation_count=(len(attempts) + int(fallback_observation is not None)) if learn else 0,
         bandit_learning_cost=targets[-1],
+        fallback_update_runtime=fallback_update_runtime,
         fallback_learning_cost=None if fallback_observation is None else fallback_observation.loss,
         fallback_arm_index=None if fallback_observation is None else fallback_observation.arm_index,
         controller_update_committed=bool(not outcome["failed"] and recorder is not None
@@ -212,6 +231,7 @@ def run_deferred_case(*, policy, parameter_space, context, solver,
         selected_arm_index=arms[-1])
     for i, row in enumerate(outcome["primary_attempts"]):
         row.update(arm_index=arms[i], params=params[i], selection_runtime=selections[i],
+            loss_eval_runtime=evaluations[i], update_runtime=updates[i],
             attempt_cost=costs[i], learning_cost=targets[i],
             rl_episode_recorded=bool(recorder is not None and any(
                 e.committed and e.attempt_index == i for e in recorder.episodes)),
@@ -220,6 +240,8 @@ def run_deferred_case(*, policy, parameter_space, context, solver,
             cycle_times=raw_attempts[i].get("cycle_times", []),
             cycle_residuals=raw_attempts[i].get("cycle_residuals", []))
     select_runtime = sum(selections)
+    loss_runtime = sum(evaluations)
+    update_runtime = sum(updates) + fallback_update_runtime
     timing = dict(select_sec=select_runtime, loss_eval_sec=loss_runtime, update_sec=update_runtime,
                   overhead_sec=select_runtime+loss_runtime+update_runtime)
     return SetupReselectionResult(params[-1], outcome, timing, int(recovery.fallback_used), update_runtime)
