@@ -54,16 +54,12 @@ def audit(records, variant, *, feedback_mode="attempt_2T", learn=True):
                 elif feedback_mode == "suffix_delayed":
                     expected_target += sum(a["attempt_cost"] for a in attempts[i+1:])
                     expected_target += sum(out[f"fallback_{part}_runtime"] for part in ("setup", "solve", "controller"))
-                elif attempt["status"] == "setup_failure":
+                else:
                     next_built = next((j for j in range(i+1, len(attempts))
                                        if attempts[j]["status"] != "setup_failure"), len(attempts))
                     expected_target += sum(a["attempt_cost"] for a in attempts[i+1:next_built+1])
                     if next_built == len(attempts):
                         expected_target += sum(out[f"fallback_{part}_runtime"] for part in ("setup", "solve", "controller"))
-                elif i+1 < len(attempts):
-                    expected_target += attempts[i+1]["attempt_cost"]
-                else:
-                    expected_target += sum(out[f"fallback_{part}_runtime"] for part in ("setup", "solve", "controller"))
             if attempt["attempt_cost"] < 0 or not math.isfinite(expected_target):
                 raise ValueError("Invalid setup target")
             if not math.isclose(attempt["learning_cost"], expected_target, rel_tol=1e-12):

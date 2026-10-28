@@ -26,7 +26,7 @@ def run_deferred_case(*, policy, parameter_space, context, solver,
     Successful attempts receive their own cost. Default fallback time also
     belongs to the preceding cost sequence. A successful fallback adds one
     setup observation; a failed fallback adds none.
-    In adjacent mode, construction failures accumulate costs through the next
+    In adjacent mode, failed attempts accumulate costs through the next
     attempt whose construction succeeds, or through the final fallback.
     All valid setup observations survive final case failure. Optional solve RL
     keeps its existing attempt costs, with no recovery augmentation or replay;
