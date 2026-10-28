@@ -17,7 +17,7 @@ import numpy as np
 from experiments.paper_final.common.artifacts import digest
 from experiments.paper_final.online.case_loop import report_online_outcome
 from experiments.paper_final.online.configuration import DEFAULT_STRUCTURED_QUOTAS, evaluation_index_offset
-from experiments.paper_final.recovery.execution import EpisodeRecorder, run_fixed_case
+from joint.execution import EpisodeRecorder, run_fixed_case
 from experiments.paper_final.recovery.joint_validation import execute_learned
 from experiments.paper_final.recovery import metrics as sweep
 from setup.space import DEFAULT_SETUP_PARAMS

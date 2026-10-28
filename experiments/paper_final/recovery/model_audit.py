@@ -2,7 +2,7 @@
 from __future__ import annotations
 import numpy as np
 
-from experiments.paper_final.recovery.setup_feedback import FailureAwareRetryLinUCB
+from setup.learners.linucb.feedback import FailureAwareRetryLinUCB
 
 from problems.registry import context_for_setup_method
 

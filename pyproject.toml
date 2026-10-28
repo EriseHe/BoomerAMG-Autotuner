@@ -23,6 +23,6 @@ artifacts = ["reportlab==4.4.5", "pypdf==6.1.1"]
 Repository = "https://github.com/EriseHe/RLTune-BoomerAMG"
 
 [tool.setuptools.packages.find]
-include = ["setup*", "solve*", "problems*", "experiments*", "hypre", "hypre.bindings*"]
+include = ["setup*", "solve*", "joint*", "problems*", "experiments*", "hypre", "hypre.bindings*"]
 exclude = ["*.archive*", "*.reproduction*"]
 namespaces = true

@@ -21,6 +21,13 @@ Both Module 1 and Module 3 measure four branches: Default, fixed-setup LSTDQ,
 setup-only LinUCB, and joint LinUCB–LSTDQ. Module 3 starts its own learners and
 can run independently of Modules 1 and 2.
 
+## Code organization
+
+- `setup/`: setup learners, candidate features, failure feedback, and cost targets.
+- `solve/`: cycle-level solve controllers and episode execution.
+- `joint/`: retry loops, fallback coordination, and learner state across attempts.
+- `experiments/`: study configuration, candidate schedules, solver adapters, traces, audits, and reporting.
+
 ## Install
 
 Use Python 3.10 or later, MPI, CMake, Make, and a C/C++ compiler:
