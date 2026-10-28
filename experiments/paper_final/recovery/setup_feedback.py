@@ -116,6 +116,8 @@ def run_deferred_case(*, policy, parameter_space, context, solver,
     Successful attempts receive their own cost. Default fallback time also
     belongs to the preceding cost sequence. A successful fallback adds one
     setup observation; a failed fallback adds none.
+    In adjacent mode, construction failures accumulate costs through the next
+    attempt whose construction succeeds, or through the final fallback.
     All valid setup observations survive final case failure. Optional solve RL
     keeps its existing attempt costs, with no recovery augmentation or replay;
     only RL learning is rolled back when the entire case fails.
@@ -175,7 +177,11 @@ def run_deferred_case(*, policy, parameter_space, context, solver,
         if learn:
             # Keep shared sequence preparation in the first target's interval.
             for i, (attempt, cost) in enumerate(zip(attempts, costs)):
-                targets.append(cost if attempt.succeeded else sum(sequence[i:i+2]
+                stop = i+2
+                if feedback_mode == "adjacent_delayed" and attempt.failure_stage == "setup":
+                    while stop <= len(attempts) and attempts[stop-1].failure_stage == "setup":
+                        stop += 1
+                targets.append(cost if attempt.succeeded else sum(sequence[i:stop]
                     if feedback_mode == "adjacent_delayed" else sequence[i:]))
                 end = time.perf_counter()
                 evaluations[i] += end-tick
