@@ -123,8 +123,11 @@ def draw_cycle_examples(data):
             color="#111111", linestyle=ex["linestyle"], marker=ex["marker"],
             lw=.85, ms=2.5, markerfacecolor="white", markeredgewidth=.6, zorder=1)
     schedule.axhline(1.0, color="#111111", ls="--", lw=.9, zorder=0)
+    # Share Figure 3's blue and red; retain the middle example's color.
+    example_colors = {"A": CUMULATIVE_COLORS[2], "C": CUMULATIVE_COLORS[3]}
     for ex in reversed(data["examples"]):
-        style = dict(color=ex["color"], linestyle=ex["linestyle"], marker=ex["marker"],
+        style = dict(color=example_colors.get(ex["label"], ex["color"]),
+                     linestyle=ex["linestyle"], marker=ex["marker"],
                      lw=1.05, ms=3.0, markerfacecolor="white", markeredgewidth=.7, zorder=3)
         schedule.plot(np.arange(ex["cycles"]), ex["weights"],
             label=f'{ex["label"]}: input {ex["problem_index"]} ({ex["cycles"]} cycles)', **style)
@@ -137,8 +140,13 @@ def draw_cycle_examples(data):
     ticks = np.arange(0, end+1, 2)
     schedule.set(xlabel=r"Cycle index $k$", ylabel=r"Relaxation weight $w_k$",
                  xlim=(-.35, end-.3), ylim=(.88, 3.13), xticks=ticks, yticks=[1, 1.5, 2, 2.5, 3])
+    # Keep the final residual visible for examples converging below 1e-7.
+    residual_min = min(r for ex in data["examples"]
+                       for key in ("relative_residuals", "default_relative_residuals")
+                       for r in ex[key] if r > 0)
+    residual_floor = min(1e-7, 10. ** np.floor(np.log10(.5 * residual_min)))
     for ax in (convergence, default):
-        ax.set(xlabel="Completed cycles", xlim=(-.35, end+.5), ylim=(1e-7, 2.0),
+        ax.set(xlabel="Completed cycles", xlim=(-.35, end+.5), ylim=(residual_floor, 2.0),
                xticks=np.arange(0, end+1, 4), yticks=[1, 1e-2, 1e-4, 1e-6])
         ax.axhline(1e-6, color="#666666", ls=":", lw=.7, zorder=0)
     convergence.set_ylabel("Relative residual")
