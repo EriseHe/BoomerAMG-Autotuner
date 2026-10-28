@@ -42,7 +42,7 @@ from experiments.paper_final.online.methods import (
 )
 from experiments.paper_final.online import factorial
 from experiments.paper_final.recovery.execution import CandidateRows
-from experiments.paper_final.recovery.setup_feedback import FailureAwareRetryLinUCB
+from setup.learners.linucb.feedback import FailureAwareRetryLinUCB
 from experiments.paper_final.recovery import metrics as sweep
 from experiments.paper_final.recovery import model_audit as screen
 from experiments.paper_final.recovery.observations import observed_model

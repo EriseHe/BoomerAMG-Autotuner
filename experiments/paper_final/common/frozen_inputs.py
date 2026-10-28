@@ -10,6 +10,7 @@ def execution_source_paths():
         "problems",
         "setup",
         "solve",
+        "joint",
         "hypre/bindings",
     )
     paths = {

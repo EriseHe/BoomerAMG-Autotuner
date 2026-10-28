@@ -6,8 +6,8 @@ import time
 
 from experiments.paper_final.online.configuration import evaluation_index_offset
 from experiments.paper_final.online.case_loop import report_online_outcome
-from experiments.paper_final.recovery.execution import EpisodeRecorder
-from experiments.paper_final.recovery.setup_feedback import run_deferred_case
+from joint.execution import EpisodeRecorder
+from joint.recovery import run_deferred_case
 from experiments.paper_final.recovery import metrics as sweep
 from problems.registry import context_for_setup_method
 

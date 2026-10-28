@@ -10,7 +10,7 @@ from experiments.paper_final.common.artifacts import ROOT, file_hash
 
 from experiments.paper_final.online.case_loop import report_online_outcome
 
-from experiments.paper_final.recovery.protocol import RecoveryVariant
+from joint.protocol import RecoveryVariant
 
 from experiments.paper_final.recovery.audit import audit
 
