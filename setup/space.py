@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import Any, Dict, List, Mapping, Sequence, Tuple
 
 import numpy as np
@@ -290,24 +290,18 @@ def build_setup_parameter_spec(
             kind="continuous",
             values=tuple(float(v) for v in th_grid),
             default=float(DEFAULT_SETUP_PARAMS["strong_threshold"]),
-            center=float(DEFAULT_SETUP_PARAMS["strong_threshold"]),
-            scale=0.25,
         ),
         ParameterSpec(
             name="max_row_sum",
             kind="continuous",
             values=tuple(float(v) for v in mxrs_grid),
             default=float(DEFAULT_SETUP_PARAMS["max_row_sum"]),
-            center=float(DEFAULT_SETUP_PARAMS["max_row_sum"]),
-            scale=0.10,
         ),
         ParameterSpec(
             name="trunc_factor",
             kind="continuous",
             values=tuple(float(v) for v in tr_grid),
             default=float(DEFAULT_SETUP_PARAMS["trunc_factor"]),
-            center=float(DEFAULT_SETUP_PARAMS["trunc_factor"]),
-            scale=0.20,
         ),
     ]
 
@@ -329,16 +323,12 @@ def build_setup_parameter_spec(
                     kind="integer",
                     values=tuple(int(v) for v in p_max_values),
                     default=int(DEFAULT_SETUP_PARAMS["P_max_elmts"]),
-                    center=float(DEFAULT_SETUP_PARAMS["P_max_elmts"]),
-                    scale=4.0,
                 ),
                 ParameterSpec(
                     name="agg_num_levels",
                     kind="integer",
                     values=tuple(int(v) for v in agg_nl_values),
                     default=int(DEFAULT_SETUP_PARAMS["agg_num_levels"]),
-                    center=float(DEFAULT_SETUP_PARAMS["agg_num_levels"]),
-                    scale=1.0,
                 ),
             ]
         )
@@ -359,8 +349,6 @@ def build_setup_parameter_spec(
                         kind="continuous",
                         values=tuple(float(v) for v in agg_tr_values),
                         default=float(DEFAULT_SETUP_PARAMS["agg_tr"]),
-                        center=float(DEFAULT_SETUP_PARAMS["agg_tr"]),
-                        scale=0.10,
                         active_if={"agg_num_levels": active_agg_levels},
                     ),
                     ParameterSpec(
@@ -368,8 +356,6 @@ def build_setup_parameter_spec(
                         kind="integer",
                         values=tuple(int(v) for v in agg_pmx_values),
                         default=int(DEFAULT_SETUP_PARAMS["agg_Pmx"]),
-                        center=float(DEFAULT_SETUP_PARAMS["agg_Pmx"]),
-                        scale=4.0,
                         active_if={"agg_num_levels": active_agg_levels},
                     ),
                 ]
@@ -414,6 +400,17 @@ def build_setup_parameter_spec(
                     )
                 )
                 fixed_params.pop("agg_interp_type", None)
+
+    # Both learners use the allowed numerical range, including the default.
+    for index, parameter in enumerate(base_specs):
+        if parameter.kind in ("continuous", "integer"):
+            values = (*parameter.values, parameter.default)
+            low, high = min(values), max(values)
+            base_specs[index] = replace(
+                parameter,
+                center=(low + high) / 2.0,
+                scale=(high - low) / 2.0 if high > low else 1.0,
+            )
 
     return ParameterSpaceSpec(tuple(base_specs)), fixed_params
 
