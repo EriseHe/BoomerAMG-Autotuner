@@ -18,7 +18,8 @@ import numpy as np
 
 from hypre.bindings import AttemptOutcome, AttemptStatus
 from experiments.paper_final.online.case_loop import report_online_outcome
-from experiments.paper_final.recovery import setup_feedback as feedback
+from joint import recovery as feedback
+from setup.learners.linucb.feedback import FailureAwareRetryLinUCB
 from experiments.paper_final.recovery.audit import audit
 from setup.learners.common.action_features import ParameterSpec, ParameterSpaceSpec
 from setup.learners.linucb.learner import SharedLinUCB
@@ -74,7 +75,7 @@ class Harness:
                                                 (.25, .5, .75, 1.0), .25),))
         runtime_model = SharedLinUCB([{'strong_threshold': x} for x in (.25, .5, .75, 1.0)],
                                     1, parameter_spec=spec, context_interaction_indices=(), seed=17)
-        self.model = feedback.FailureAwareRetryLinUCB.from_runtime_model(runtime_model)
+        self.model = FailureAwareRetryLinUCB.from_runtime_model(runtime_model)
         self.trace = []
         self.wrap('predict', 1/8)
         self.wrap('select_recovery', 1/4)
