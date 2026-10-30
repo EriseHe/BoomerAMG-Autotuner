@@ -12,14 +12,14 @@ features, and normalized cycle observations. The encoder is named
 |---|---|---|
 | Module 1, Part 1: online learning | Inputs 1–5,000; LinUCB and LSTDQ learn from input one | [Module 1 suites](configs/module1/suites) |
 | Module 1, Part 2: frozen evaluation | Inputs 5,001–6,000; retain the Part 1 models, disable updates and RL exploration | [Module 1 suites](configs/module1/suites) |
-| Module 2: matched policy evaluation | Use selected trained Module 1 models to compare frozen LSTDQ with fixed and periodic relaxation on matched hierarchies | [Module 2 instructions](experiments/README.md#module-2-matched-policy-evaluation) |
-| Module 3: variable flow | Six independent 5,000-input learning streams at 60³ | [Module 3 suites](configs/module3/suites) |
+| Module 2: variable flow | Six independent 5,000-input learning streams at 60³ | [Module 2 suites](configs/module2/suites) |
+| Module 3: matched policy evaluation | Use selected trained Module 1 or 2 models to compare frozen LSTDQ with fixed and periodic relaxation on matched hierarchies | [Module 3 instructions](experiments/README.md#module-3-matched-policy-evaluation) |
 
 Module 1 runs both parts in one continuous worker process per seed. Each
 diffusion/advection grid has six seeds, arranged in two batches of three.
-Both Module 1 and Module 3 measure four branches: Default, fixed-setup LSTDQ,
-setup-only LinUCB, and joint LinUCB–LSTDQ. Module 3 starts its own learners and
-can run independently of Modules 1 and 2.
+Both Module 1 and Module 2 measure four branches: Default, fixed-setup LSTDQ,
+setup-only LinUCB, and joint LinUCB–LSTDQ. Module 2 starts its own learners and
+can run independently of Modules 1 and 3.
 
 ## Code organization
 
@@ -45,10 +45,10 @@ Run the complete study in order with a new output directory:
 python -m experiments.run_all --output results/full_study
 ```
 
-This runs all Module 1 suites, passes their six Diffusion 60 joint models to
-Module 2, then runs both Module 3 batches. Each online batch uses three
+This runs all Module 1 suites, then both Module 2 batches, and finally
+Module 3 with the six Diffusion 60 joint models from Module 1. Each online batch uses three
 concurrent seed workers. Use `--dry-run` to inspect the plan or
-`--module2-source advection_60` to select another Module 1 family/grid.
+`--module3-source advection_60` to select another Module 1 family/grid.
 [Experiment instructions](experiments/README.md) also give individual module
 commands. Checkpoint loading checks the complete feature description before
 loading learned parameters.
@@ -56,7 +56,7 @@ loading learned parameters.
 Each run writes its own trajectories, checkpoints, source hashes, summaries,
 and figures under `results/`. Native solver time and total time including
 learner/controller overhead are reported separately.
-Overhead remains measured during Module 1 Part 2 and Module 2, when learning
+Overhead remains measured during Module 1 Part 2 and Module 3, when learning
 updates are disabled. Saved experiment artifacts in `data/` retain their
 recorded provenance; new runs write to `results/`.
 

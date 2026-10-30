@@ -69,7 +69,7 @@ def worker(output, phase, worker_id):
     protocol = a.read(output / "protocol.json")
     if phase == "test" and not (output / "selection_complete.json").is_file():
         raise ValueError("Complete fresh scans and freeze selections before evaluation")
-    run_frozen_worker(output, phase, worker_id, protocol["max_workers"], run_number=2,
+    run_frozen_worker(output, phase, worker_id, protocol["max_workers"], run_number=3,
                       verify=verify, policy=FrozenRuntime(output))
 
 
@@ -199,7 +199,7 @@ def analyze(output):
     a.dump(output / "analysis/summary.json", summary)
     a.write_csv(output / "analysis/per_seed.csv", per_seed)
     a.write_csv(output / "analysis/per_case.csv", per_case)
-    lines = [f"# Module 2 — {protocol['name']}", "",
+    lines = [f"# Module 3 — {protocol['name']}", "",
              f"Training seed labels: {protocol['training_seeds']}. {protocol['test_cases']} paired problems; "
              f"{protocol['repetitions_per_case']} independent evaluation repetitions.", "",
              f"Fresh fixed-weight scan: {len(scans)} trials. Independent evaluation: {len(rows)} trials.",
@@ -219,7 +219,7 @@ def analyze(output):
     from experiments.paper_final.plot_policy import generate
     generate(output)
     with (output / "REPORT.md").open("a") as handle:
-        handle.write("\n[Paper figures](paper_figures/module2_paper_figures.pdf) · [Five-policy weights](paper_figures/matched_policy_weights.png) · [Plot data and provenance](paper_figures/manifest.json)\n")
+        handle.write("\n[Paper figures](paper_figures/module3_paper_figures.pdf) · [Five-policy weights](paper_figures/matched_policy_weights.png) · [Plot data and provenance](paper_figures/manifest.json)\n")
     return summary
 
 
@@ -238,13 +238,13 @@ def run(output, *, scan_only=False):
                 preflight(output)
             workers = a.read(output / "protocol.json")["max_workers"]
             if not (output / "raw/scan/complete.json").is_file():
-                run_frozen_phase(output, "scan", runner_module=RUNNER, run_number=2, workers=workers)
+                run_frozen_phase(output, "scan", runner_module=RUNNER, run_number=3, workers=workers)
             select(output)
             if scan_only:
                 a.dump(output / "status.json", {"status": "scanned", "selections_frozen": True})
                 return
             if not (output / "raw/test/complete.json").is_file():
-                run_frozen_phase(output, "test", runner_module=RUNNER, run_number=2, workers=workers)
+                run_frozen_phase(output, "test", runner_module=RUNNER, run_number=3, workers=workers)
             result = analyze(output)
             a.dump(output / "complete.json", {"at": a.now(), "status": "complete", "audit": result["audit"]})
             a.dump(output / "status.json", {"status": "complete", "audit": result["audit"]})

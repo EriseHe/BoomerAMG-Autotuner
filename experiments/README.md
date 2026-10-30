@@ -10,15 +10,15 @@ HYPRE. Use a new output directory for each run. Active configurations are in
 python -m experiments.run_all --output results/full_study
 ```
 
-This runs all six Module 1 family/grid suites in two batches each, Module 2
-using the resulting six Diffusion 60 joint models, and both Module 3 batches.
+This runs all six Module 1 family/grid suites in two batches each, both Module 2
+batches, and Module 3 using the six Diffusion 60 joint models from Module 1.
 Module 1 includes both its learning and frozen parts. Three seeds run
 concurrently within each online batch; batches and modules run sequentially.
 The Module 1 order is Advection 60, 40, 80, then Diffusion 40, 60, 80.
 
 Use `--dry-run` to inspect the full command plan without starting a run.
-Use `--module2-source advection_60` to select another Module 1 family/grid
-for Module 2. Its paths always refer to the new study's Module 1 outputs.
+Use `--module3-source advection_60` to select another Module 1 family/grid
+for Module 3. Its paths always refer to the new study's Module 1 outputs.
 The wrapper uses the existing module commands, records their logs and status,
 and stops on an error or a change to source/configuration files. Choose a new
 output directory for each study; interrupted streams are not resumed.
@@ -60,26 +60,42 @@ uses the shared categorical setup encoding with fixed-range numerical
 descriptors, tolerance-based residual normalization, and
 `log(1 + preceding_cycle_seconds / 0.001)` for the cycle-time context.
 
-## Module 2: matched policy evaluation
+## Module 2: variable-flow evaluation
+
+Use the same online runner with the suites under `configs/module2/suites/`:
+
+```sh
+python -m experiments.paper_final.run_online prepare --suite configs/module2/suites/variable_flow_60_batch1.json --output results/module2/variable_flow_60_batch1
+python -m experiments.paper_final.run_online run --output results/module2/variable_flow_60_batch1
+```
+
+Run the second batch for seeds 4–6. Each seed starts four fresh branches and has
+5,000 learning inputs. Module 2 runs independently with its own variable-flow
+problem stream and the shared setup encoding. Native and overhead-included
+timing are both recorded. Failed
+cases remain in the measurements, and common-success comparisons are reported.
+
+## Module 3: matched policy evaluation
 
 After Module 1 is complete, create a configuration using its trained joint
 models. Specify one seed directory per source; no run is selected automatically.
-Module 2 uses the learned models from Part 1; Part 2 preserves their learned
+Module 3 uses the learned models from Part 1; Part 2 preserves their learned
 parameters. Source paths are supplied when this study is initialized, so the
-repository does not bind Module 2 to a particular Module 1 experiment.
-For example, with the output layout above:
+repository does not bind Module 3 to a particular Module 1 experiment.
+For variable flow, supply completed Module 2 seed directories instead.
+For example, with the Module 1 output layout above:
 
 ```sh
-python -m experiments.paper_final.run_policy init --config results/module2/configuration.json --random-seed 20261019 \
+python -m experiments.paper_final.run_policy init --config results/module3/configuration.json --random-seed 20261019 \
   --training-run 1=results/module1/diffusion_60_batch1/seed_1 \
   --training-run 2=results/module1/diffusion_60_batch1/seed_2 \
   --training-run 3=results/module1/diffusion_60_batch1/seed_3 \
   --training-run 4=results/module1/diffusion_60_batch2/seed_4 \
   --training-run 5=results/module1/diffusion_60_batch2/seed_5 \
   --training-run 6=results/module1/diffusion_60_batch2/seed_6
-python -m experiments.paper_final.run_policy validate --config results/module2/configuration.json
-python -m experiments.paper_final.run_policy prepare --config results/module2/configuration.json --output results/module2/run
-python -m experiments.paper_final.run_policy run --output results/module2/run
+python -m experiments.paper_final.run_policy validate --config results/module3/configuration.json
+python -m experiments.paper_final.run_policy prepare --config results/module3/configuration.json --output results/module3/run
+python -m experiments.paper_final.run_policy run --output results/module3/run
 ```
 
 Preparation copies and verifies the models and selects frozen hierarchies; it
@@ -94,21 +110,6 @@ total costs also include the common setup. Inclusive costs add controller
 work. The complete protocol, measured inputs, selections, timing records, and
 checkpoint hashes are saved with the results.
 
-## Module 3: variable-flow evaluation
-
-Use the same online runner with the suites under `configs/module3/suites/`:
-
-```sh
-python -m experiments.paper_final.run_online prepare --suite configs/module3/suites/variable_flow_60_batch1.json --output results/module3/variable_flow_60_batch1
-python -m experiments.paper_final.run_online run --output results/module3/variable_flow_60_batch1
-```
-
-Run the second batch for seeds 4–6. Each seed starts four fresh branches and has
-5,000 learning inputs. Module 3 runs independently with its own variable-flow
-problem stream and the shared setup encoding. Native and overhead-included
-timing are both recorded. Failed
-cases remain in the measurements, and common-success comparisons are reported.
-
 ## Paper figures
 
 The runners produce the manuscript figures in each completed run's
@@ -116,7 +117,7 @@ The runners produce the manuscript figures in each completed run's
 
 ```sh
 python -m experiments.paper_final.plot_online results/module1/diffusion_60_batch1
-python -m experiments.paper_final.plot_policy results/module2/run
+python -m experiments.paper_final.plot_policy results/module3/run
 ```
 
 The online renderer produces the runtime breakdown, cumulative-time plot, and

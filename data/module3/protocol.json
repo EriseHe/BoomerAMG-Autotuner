@@ -1,48 +1,468 @@
 {
-  "concurrency": "One single-thread worker per seed; four methods serially in balanced permutation blocks",
-  "continuous_stream": false,
-  "copied_measurements": false,
-  "default_attempts": 1,
-  "default_fallback_attempts": 1,
-  "exact_default": {
-    "P_max_elmts": 4,
-    "agg_Pmx": 0,
-    "agg_interp_type": 4,
-    "agg_num_levels": 0,
-    "agg_tr": 0.0,
-    "coarsen_type": 10,
-    "interp_type": 6,
-    "max_row_sum": 0.9,
-    "strong_threshold": 0.25,
-    "trunc_factor": 0.0
+  "created_at": "2026-10-27T06:58:42.166340+00:00",
+  "evaluation": "Freeze scan selections, independently retime five policy roles; share identical execution cells; all failures and recovery costs retained",
+  "format": "matched_policy",
+  "labels": {
+    "fixed": "Best global fixed",
+    "oracle": "Best per-instance fixed",
+    "periodic": "Periodic schedule",
+    "reference": "Fixed w=1",
+    "rl": "Frozen LSTDQ"
   },
-  "failure_score_beta": 2.0,
-  "feedback_mode": "adjacent_delayed",
-  "fixed_rl_attempts": 1,
-  "frozen_evaluation": false,
-  "learned_attempts": 3,
-  "learning_start": "Both setup learners and both LSTDQ controllers start cold at input 1",
+  "max_cycles": 50,
+  "max_workers": 3,
   "methods": [
-    "default_setup_default_solve",
-    "default_setup_lstdq",
-    "bandit_default",
-    "bandit_lstdq"
+    "reference",
+    "fixed",
+    "oracle",
+    "periodic",
+    "rl"
   ],
-  "name": "Module 3: variable_flow_60",
-  "native_sha256": {
-    "hypre/install/lib/libHYPRE.3.0.0.dylib": "c4ade67c2d6b2d4a3e69554808de3910cd13c42dae93d9312fa4493f89c04e21",
-    "hypre/install/lib/libHYPRE.300.dylib": "c4ade67c2d6b2d4a3e69554808de3910cd13c42dae93d9312fa4493f89c04e21",
-    "hypre/install/lib/libHYPRE.dylib": "c4ade67c2d6b2d4a3e69554808de3910cd13c42dae93d9312fa4493f89c04e21",
-    "hypre/interfaces/libamg_runtime.dylib": "15daee59e89d17a77131e4a092bff431846b0dcbf5a2003b7e21f5447fd65ff3"
+  "module": 3,
+  "name": "matched_policy",
+  "policies": {
+    "fixed_1": {
+      "kind": "fixed",
+      "pattern": [
+        1.0
+      ]
+    },
+    "fixed_1.05": {
+      "kind": "fixed",
+      "pattern": [
+        1.05
+      ]
+    },
+    "fixed_1.1": {
+      "kind": "fixed",
+      "pattern": [
+        1.1
+      ]
+    },
+    "fixed_1.15": {
+      "kind": "fixed",
+      "pattern": [
+        1.15
+      ]
+    },
+    "fixed_1.2": {
+      "kind": "fixed",
+      "pattern": [
+        1.2
+      ]
+    },
+    "fixed_1.25": {
+      "kind": "fixed",
+      "pattern": [
+        1.25
+      ]
+    },
+    "fixed_1.3": {
+      "kind": "fixed",
+      "pattern": [
+        1.3
+      ]
+    },
+    "fixed_1.35": {
+      "kind": "fixed",
+      "pattern": [
+        1.35
+      ]
+    },
+    "fixed_1.4": {
+      "kind": "fixed",
+      "pattern": [
+        1.4
+      ]
+    },
+    "fixed_1.45": {
+      "kind": "fixed",
+      "pattern": [
+        1.45
+      ]
+    },
+    "fixed_1.5": {
+      "kind": "fixed",
+      "pattern": [
+        1.5
+      ]
+    },
+    "fixed_1.55": {
+      "kind": "fixed",
+      "pattern": [
+        1.55
+      ]
+    },
+    "fixed_1.6": {
+      "kind": "fixed",
+      "pattern": [
+        1.6
+      ]
+    },
+    "fixed_1.65": {
+      "kind": "fixed",
+      "pattern": [
+        1.65
+      ]
+    },
+    "fixed_1.7": {
+      "kind": "fixed",
+      "pattern": [
+        1.7
+      ]
+    },
+    "fixed_1.75": {
+      "kind": "fixed",
+      "pattern": [
+        1.75
+      ]
+    },
+    "fixed_1.8": {
+      "kind": "fixed",
+      "pattern": [
+        1.8
+      ]
+    },
+    "fixed_1.85": {
+      "kind": "fixed",
+      "pattern": [
+        1.85
+      ]
+    },
+    "fixed_1.9": {
+      "kind": "fixed",
+      "pattern": [
+        1.9
+      ]
+    },
+    "fixed_1.95": {
+      "kind": "fixed",
+      "pattern": [
+        1.95
+      ]
+    },
+    "fixed_2": {
+      "kind": "fixed",
+      "pattern": [
+        2.0
+      ]
+    },
+    "fixed_2.05": {
+      "kind": "fixed",
+      "pattern": [
+        2.05
+      ]
+    },
+    "fixed_2.1": {
+      "kind": "fixed",
+      "pattern": [
+        2.1
+      ]
+    },
+    "fixed_2.15": {
+      "kind": "fixed",
+      "pattern": [
+        2.15
+      ]
+    },
+    "fixed_2.2": {
+      "kind": "fixed",
+      "pattern": [
+        2.2
+      ]
+    },
+    "fixed_2.25": {
+      "kind": "fixed",
+      "pattern": [
+        2.25
+      ]
+    },
+    "fixed_2.3": {
+      "kind": "fixed",
+      "pattern": [
+        2.3
+      ]
+    },
+    "fixed_2.35": {
+      "kind": "fixed",
+      "pattern": [
+        2.35
+      ]
+    },
+    "fixed_2.4": {
+      "kind": "fixed",
+      "pattern": [
+        2.4
+      ]
+    },
+    "fixed_2.45": {
+      "kind": "fixed",
+      "pattern": [
+        2.45
+      ]
+    },
+    "fixed_2.5": {
+      "kind": "fixed",
+      "pattern": [
+        2.5
+      ]
+    },
+    "fixed_2.55": {
+      "kind": "fixed",
+      "pattern": [
+        2.55
+      ]
+    },
+    "fixed_2.6": {
+      "kind": "fixed",
+      "pattern": [
+        2.6
+      ]
+    },
+    "fixed_2.65": {
+      "kind": "fixed",
+      "pattern": [
+        2.65
+      ]
+    },
+    "fixed_2.7": {
+      "kind": "fixed",
+      "pattern": [
+        2.7
+      ]
+    },
+    "fixed_2.75": {
+      "kind": "fixed",
+      "pattern": [
+        2.75
+      ]
+    },
+    "fixed_2.8": {
+      "kind": "fixed",
+      "pattern": [
+        2.8
+      ]
+    },
+    "fixed_2.85": {
+      "kind": "fixed",
+      "pattern": [
+        2.85
+      ]
+    },
+    "fixed_2.9": {
+      "kind": "fixed",
+      "pattern": [
+        2.9
+      ]
+    },
+    "fixed_2.95": {
+      "kind": "fixed",
+      "pattern": [
+        2.95
+      ]
+    },
+    "fixed_3": {
+      "kind": "fixed",
+      "pattern": [
+        3.0
+      ]
+    },
+    "periodic": {
+      "kind": "periodic",
+      "pattern": [
+        2.85,
+        1.1
+      ]
+    },
+    "rl_frozen": {
+      "beta": null,
+      "explore": false,
+      "kind": "rl",
+      "learn": false
+    }
   },
-  "phase": "online",
-  "prepared_at": "2026-10-27T08:21:28.873565+00:00",
-  "recovery": "failure_model_adjacent",
-  "rl_cost_target": "native_cycle",
-  "rl_recovery_cost": false,
-  "rl_update_time_charge": "none; controller overhead is evaluation only",
-  "rl_whole_case_failure_rollback": true,
-  "seeds": [
+  "problem": {
+    "advection": [
+      0,
+      0,
+      0
+    ],
+    "c_max": 1000,
+    "c_min": 1,
+    "grid": [
+      60,
+      60,
+      60
+    ],
+    "kind": "scalar_anisotropic_diffusion"
+  },
+  "profile": "l1_jacobi_direct_coarse",
+  "recovery": "One primary matched hierarchy, then one fresh Default fallback on numerical failure; no setup reselection or learning",
+  "repetitions_per_case": 3,
+  "scan_extra_repeat_case_ids": [
+    0,
+    6,
+    22,
+    29,
+    30,
+    36,
+    45,
+    74,
+    87,
+    91
+  ],
+  "scan_extra_repetitions": 2,
+  "scan_repetitions": 1,
+  "seeds": {
+    "candidates": 20261020,
+    "inputs": 20261019,
+    "order": 20261021,
+    "repeats": 20261022
+  },
+  "selection": "Fresh complete fixed-weight scans, mean native continuation cost; all-success global weight and successful per-case weights; deterministic weight-name ties",
+  "sources": {
+    "1": {
+      "directory": "checkpoints/seed_1",
+      "effective_beta": 2.0,
+      "method": "bandit_lstdq",
+      "original_files": {
+        "config": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_1/experiment_config.json",
+          "sha256": "b20d27f3988ea2d263f887f682d2f24f4be15439fb18a07f0ae24e6fefc35fcc"
+        },
+        "controller_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_1/checkpoints/bandit_lstdq_final.npz",
+          "sha256": "5c3a1be8d5eee8d54b0df5bb44b98b2bff3d47fc6c40c4956d18e35235760b25"
+        },
+        "encoder": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_1/checkpoints/bandit_lstdq_final.npz.encoder.json",
+          "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+        },
+        "setup_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_1/final_bandit_states/bandit_lstdq.npz",
+          "sha256": "e61c29f2fc7d61301dd65eb1e94017b27a951f527749c97e786a53bd0e334b38"
+        }
+      }
+    },
+    "2": {
+      "directory": "checkpoints/seed_2",
+      "effective_beta": 2.0,
+      "method": "bandit_lstdq",
+      "original_files": {
+        "config": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_2/experiment_config.json",
+          "sha256": "ad7331e4bed01f6c4bd6b68cc74bfea00dd36842a765ae7d80e956e744e8b612"
+        },
+        "controller_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_2/checkpoints/bandit_lstdq_final.npz",
+          "sha256": "c0f19a5e2a0c5d57b24969d7446f3bbaa4691f3d1f6d490aa1b1e9385b7ccf13"
+        },
+        "encoder": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_2/checkpoints/bandit_lstdq_final.npz.encoder.json",
+          "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+        },
+        "setup_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_2/final_bandit_states/bandit_lstdq.npz",
+          "sha256": "b09ffd49fcb94461ac877777d7a7606d8ba09ca1477fe6647334bc5516444b35"
+        }
+      }
+    },
+    "3": {
+      "directory": "checkpoints/seed_3",
+      "effective_beta": 2.0,
+      "method": "bandit_lstdq",
+      "original_files": {
+        "config": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_3/experiment_config.json",
+          "sha256": "dcf082077b0e11a2314ed10d14bf06a78e1ea270fd47a063ed188aa3a061fee5"
+        },
+        "controller_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_3/checkpoints/bandit_lstdq_final.npz",
+          "sha256": "edd3b5802ab972be65e97af981915a2aa5d95125e4288605963af0d43ba5f27d"
+        },
+        "encoder": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_3/checkpoints/bandit_lstdq_final.npz.encoder.json",
+          "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+        },
+        "setup_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_01/diffusion_60/seed_3/final_bandit_states/bandit_lstdq.npz",
+          "sha256": "2a6ca216852b1052d61f2e08511c4c82775af4d99faf4ac590032f345d513b6d"
+        }
+      }
+    },
+    "4": {
+      "directory": "checkpoints/seed_4",
+      "effective_beta": 2.0,
+      "method": "bandit_lstdq",
+      "original_files": {
+        "config": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_4/experiment_config.json",
+          "sha256": "1fede3f2ff8448a47c06734ee67b63c34adea54f641ce1ed8e4dc361c0282dfe"
+        },
+        "controller_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_4/checkpoints/bandit_lstdq_final.npz",
+          "sha256": "04de86db9feeff06f7eae391f31c63c4f254399850d48abb907ae57ae58e7660"
+        },
+        "encoder": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_4/checkpoints/bandit_lstdq_final.npz.encoder.json",
+          "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+        },
+        "setup_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_4/final_bandit_states/bandit_lstdq.npz",
+          "sha256": "fd5743b6ac8853f489c03b9bf10c0c1f28f5fb7ae97a00733f7ca4e295e5f6fa"
+        }
+      }
+    },
+    "5": {
+      "directory": "checkpoints/seed_5",
+      "effective_beta": 2.0,
+      "method": "bandit_lstdq",
+      "original_files": {
+        "config": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_5/experiment_config.json",
+          "sha256": "b7c96232079826e7e1a06434d4443a421b82b2eb332576f3b2c02ef2c741aad6"
+        },
+        "controller_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_5/checkpoints/bandit_lstdq_final.npz",
+          "sha256": "319598e3dd87e73dd248f4e1403145d6ff3224e93c2356635aea7093e5b89c26"
+        },
+        "encoder": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_5/checkpoints/bandit_lstdq_final.npz.encoder.json",
+          "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+        },
+        "setup_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_5/final_bandit_states/bandit_lstdq.npz",
+          "sha256": "e92beefa07aa994fae4a52309f87173d5a55e9fb8381db1917d8ba1789a1fd8c"
+        }
+      }
+    },
+    "6": {
+      "directory": "checkpoints/seed_6",
+      "effective_beta": 2.0,
+      "method": "bandit_lstdq",
+      "original_files": {
+        "config": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_6/experiment_config.json",
+          "sha256": "c286ea86b00ad2a9921fd94ea119f27af8bbd5bc983336439daa912f4d1c5bb4"
+        },
+        "controller_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_6/checkpoints/bandit_lstdq_final.npz",
+          "sha256": "f58979ebedaef90785c8feee5ea78a5832d7fd034c05f07cb7f5e9ed2251b843"
+        },
+        "encoder": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_6/checkpoints/bandit_lstdq_final.npz.encoder.json",
+          "sha256": "2223151c08c0061000c59d7320cca7befe875a0169bd003d097cef174534c8e3"
+        },
+        "setup_checkpoint": {
+          "path": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/data/official/module1/batches/batch_02/diffusion_60/seed_6/final_bandit_states/bandit_lstdq.npz",
+          "sha256": "ec3fdc9cee83f53078de164f9738775bd1b6a5a96dd136bbbeaba78da0c5f95c"
+        }
+      }
+    }
+  },
+  "test_cases": 100,
+  "tolerance": 1e-06,
+  "training_seeds": [
     1,
     2,
     3,
@@ -50,83 +470,47 @@
     5,
     6
   ],
-  "setup_failure_observation_retention": true,
-  "setup_fallback_feedback": "successful_default_only",
-  "shared_prefix": false,
-  "solve_state_encoding": "shared_context",
-  "source_commit": "adc8cd1d384469559a9bfac004e4569f5bfdf5b7",
-  "stages": {
-    "1": {
-      "cases": 5000,
-      "config_sha256": "0094c673ce8053c01e9297c384cdb186084ec975311807740777b23ca8507d41",
-      "freeze_after": null,
-      "full_stream_sha256": "e5183e9a9694019f5be7e77775de12ea2aee05628c15e5f728299ce0a6da7610",
-      "inputs_sha256": "a49f9245c55b3ae172085dd0f8b007125eebd7eeee1e4609cb8321777a789848",
-      "joint_activation_case": 0,
-      "smoke": false,
-      "source_config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/source/configs/module3/variable_flow_60/seed_1.json",
-      "source_config_sha256": "cf2b16a3608a4d996066eb31ecfe2826cfefc718937f965e8e2f2ca3e5ebf94a"
-    },
-    "2": {
-      "cases": 5000,
-      "config_sha256": "72f8071c029109fed8885151d157f341f59a89951d39a29bf3768dc5343fa45c",
-      "freeze_after": null,
-      "full_stream_sha256": "4f09de43592b5e382e58f66e23ba750157cbcc3c587626ccb502ea2944732d79",
-      "inputs_sha256": "988d262513f9aae3355a4da801a3aab98c726496ea79d18276c08573f4b03962",
-      "joint_activation_case": 0,
-      "smoke": false,
-      "source_config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/source/configs/module3/variable_flow_60/seed_2.json",
-      "source_config_sha256": "2407afb6d164d95fcdd3ec38dede28ac04216a5f0ab381e728f385534bb63eb4"
-    },
-    "3": {
-      "cases": 5000,
-      "config_sha256": "9796c5c9831cfc7b7e0fc30490435aff3af1fb1e598be259df319b3d15ff2cfc",
-      "freeze_after": null,
-      "full_stream_sha256": "e17c9c3e487ef44ba4516140ca4c00ab0928d49b0793e53c040d1e7994c43c46",
-      "inputs_sha256": "dc1b7fc4433411758bb41fd2a1c2a05592405da63b5bb93bf2121d4b5e20485f",
-      "joint_activation_case": 0,
-      "smoke": false,
-      "source_config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/source/configs/module3/variable_flow_60/seed_3.json",
-      "source_config_sha256": "ca9aa77be5840f1f49f79f6ab1c1d14ee8ba8c6ad8ba9ac5bdae57c2a195279d"
-    },
-    "4": {
-      "cases": 5000,
-      "config_sha256": "a27466af6e8b43f7ed20ecd42961a86295fbb9736d67b38a0111a3c6d3223223",
-      "freeze_after": null,
-      "full_stream_sha256": "9a98cd94705795e2f67c99394a78fee8d4d81c8c5c70a74685175b1bbf69dc4e",
-      "inputs_sha256": "5253732b086e1c913e9ef57af492413932b2b1c6608cc23d16bd1be7c2638056",
-      "joint_activation_case": 0,
-      "smoke": false,
-      "source_config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/source/configs/module3/variable_flow_60/seed_4.json",
-      "source_config_sha256": "e01774c76e272bf9deb1bc2d0af4eb79009713fac5a89544a27fab7f99ba4a2e"
-    },
-    "5": {
-      "cases": 5000,
-      "config_sha256": "8fef30073db4947ebf7e9f82709a9c607ffd80889961266190ff4aa57b1462c6",
-      "freeze_after": null,
-      "full_stream_sha256": "f91500d5563a74995defa02a3138a852c57bcabc702de3d8a951ed40e18434a9",
-      "inputs_sha256": "7f5448937c916ca75ff7026bffa720e61aebcc75ceceb6578383124f4a64d649",
-      "joint_activation_case": 0,
-      "smoke": false,
-      "source_config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/source/configs/module3/variable_flow_60/seed_5.json",
-      "source_config_sha256": "700a84e5b0bf7a9a7c7fdeb859320794563c0ae03838e596c7716ea970be7ff1"
-    },
-    "6": {
-      "cases": 5000,
-      "config_sha256": "67fd2b5f3c23c45558edb4f24eccf172132fbde41ad6c93f24c648e5b445fed0",
-      "freeze_after": null,
-      "full_stream_sha256": "cfcb1d4385088cbd8e723a02d222cc0860a15b577ca219d3e2cec29dc222b6fa",
-      "inputs_sha256": "be68a3966a48392d269d99ec46a301f6c16c5370177e85ff135e3e26f782ce51",
-      "joint_activation_case": 0,
-      "smoke": false,
-      "source_config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/source/configs/module3/variable_flow_60/seed_6.json",
-      "source_config_sha256": "f0fe8713277ff7a01bf013710cf57376f954ce8512bcd7ec57aacf6f6e24c524"
-    }
-  },
-  "module": 3,
-  "cases_per_seed": 5000,
-  "batch_prepared_at": [
-    "2026-10-27T08:21:28.873565+00:00",
-    "2026-10-27T10:57:20.798670+00:00"
+  "weights": [
+    1.0,
+    1.05,
+    1.1,
+    1.15,
+    1.2,
+    1.25,
+    1.3,
+    1.35,
+    1.4,
+    1.45,
+    1.5,
+    1.55,
+    1.6,
+    1.65,
+    1.7,
+    1.75,
+    1.8,
+    1.85,
+    1.9,
+    1.95,
+    2.0,
+    2.05,
+    2.1,
+    2.15,
+    2.2,
+    2.25,
+    2.3,
+    2.35,
+    2.4,
+    2.45,
+    2.5,
+    2.55,
+    2.6,
+    2.65,
+    2.7,
+    2.75,
+    2.8,
+    2.85,
+    2.9,
+    2.95,
+    3.0
   ]
 }

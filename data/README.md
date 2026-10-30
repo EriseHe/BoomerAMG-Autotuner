@@ -1,12 +1,14 @@
 # Study data
 
 `module1/`, `module2/`, and `module3/` contain the published configurations,
-measurements, and arrays. `manifest.json` checksums these files.
+measurements, and arrays. Module 2 is variable-flow online learning; Module 3
+is matched-hierarchy policy evaluation. `manifest.json` checksums these files.
 
 These files are archival paper artifacts, not active runner inputs. Use
 `configs/` and `experiments/README.md` for new experiments. Historical
 configurations and checkpoints retain their recorded state encoding and are
-not expected to load into the current training workflow.
+not expected to load into the current training workflow. Their original run-time
+module names and source paths are preserved as provenance.
 
 Module 1 Part 1 is online learning on inputs 1–5,000, stored in `module1/online/`.
 Part 2 is frozen evaluation on inputs 5,001–6,000, stored in `module1/frozen/`.

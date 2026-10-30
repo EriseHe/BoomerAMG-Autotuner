@@ -15,10 +15,10 @@ MODULE1_CASES = ('advection_60', 'advection_40', 'advection_80',
                  'diffusion_40', 'diffusion_60', 'diffusion_80')
 
 
-def plan(output: Path, module2_source: str):
-    """Bind Module 2 to this invocation's completed Module 1 seed directories."""
+def plan(output: Path, module3_source: str):
+    """Bind Module 3 to this invocation's completed Module 1 seed directories."""
     stages = []
-    for module, cases in ((1, MODULE1_CASES), (3, ('variable_flow_60',))):
+    for module, cases in ((1, MODULE1_CASES), (2, ('variable_flow_60',))):
         for case in cases:
             for batch in (1, 2):
                 name = f'{case}_batch{batch}'
@@ -29,23 +29,23 @@ def plan(output: Path, module2_source: str):
                     if command == 'prepare':
                         args += ['--suite', str(ROOT/f'configs/module{module}/suites/{name}.json')]
                     stages.append((f'module{module}_{name}_{command}', args))
-        if module == 1:
-            config = output/'module2/configuration.json'
-            destination = output/'module2/run'
+        if module == 2:
+            config = output/'module3/configuration.json'
+            destination = output/'module3/run'
             args = ['-m', 'experiments.paper_final.run_policy', 'init',
                     '--config', str(config), '--random-seed', '20261019']
             for seed in range(1, 7):
                 batch = 1 if seed <= 3 else 2
-                source = output/'module1'/f'{module2_source}_batch{batch}'/f'seed_{seed}'
+                source = output/'module1'/f'{module3_source}_batch{batch}'/f'seed_{seed}'
                 args += ['--training-run', f'{seed}={source}']
-            stages.append(('module2_init', args))
+            stages.append(('module3_init', args))
             for command in ('validate', 'prepare', 'run'):
                 args = ['-m', 'experiments.paper_final.run_policy', command]
                 if command in ('validate', 'prepare'):
                     args += ['--config', str(config)]
                 if command in ('prepare', 'run'):
                     args += ['--output', str(destination)]
-                stages.append((f'module2_{command}', args))
+                stages.append((f'module3_{command}', args))
     return stages
 
 
@@ -62,12 +62,12 @@ def source_identity():
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True, help='New directory for the complete study')
-    parser.add_argument('--module2-source', choices=MODULE1_CASES, default='diffusion_60',
+    parser.add_argument('--module3-source', choices=MODULE1_CASES, default='diffusion_60',
                         help='Module 1 family/grid supplying all six trained joint models (default: diffusion_60)')
     parser.add_argument('--dry-run', action='store_true', help='Print the plan without creating files or running solvers')
     args = parser.parse_args()
     output = args.output.expanduser().resolve()
-    stages = plan(output, args.module2_source)
+    stages = plan(output, args.module3_source)
     if args.dry_run:
         print(json.dumps([dict(stage=name, argv=[sys.executable, *argv]) for name, argv in stages], indent=2))
         return
@@ -82,7 +82,7 @@ def main():
     output.mkdir(parents=True)
     logs = output/'logs'
     logs.mkdir()
-    (output/'plan.json').write_text(json.dumps(dict(module2_source=args.module2_source,
+    (output/'plan.json').write_text(json.dumps(dict(module3_source=args.module3_source,
         source_sha256=identity, stages=[dict(name=name, argv=[sys.executable, *argv])
                                       for name, argv in stages]), indent=2)+'\n')
     state = dict(status='running', completed_commands=0, total_commands=len(stages), current=None)

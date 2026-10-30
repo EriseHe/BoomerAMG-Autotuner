@@ -1,4 +1,4 @@
-"""Explicit inputs for fresh Module 2 studies; no historical run discovery."""
+"""Explicit inputs for fresh Module 3 studies; no historical run discovery."""
 
 from __future__ import annotations
 
@@ -133,7 +133,7 @@ def load_config(path):
         training = read(item["config"])
         methods = [m for m in training["methods"] if m["id"] == method]
         if len(methods) != 1 or methods[0]["setup"] != "linucb" or not str(methods[0]["solve"]).startswith("recursive_lstdq"):
-            raise ValueError("Module 2 requires a named LinUCB-LSTDQ training source")
+            raise ValueError("Module 3 requires a named LinUCB-LSTDQ training source")
         item["training_config"] = {**training, "methods": methods}
         sources.append(item)
     cfg["training_runs"] = sources
