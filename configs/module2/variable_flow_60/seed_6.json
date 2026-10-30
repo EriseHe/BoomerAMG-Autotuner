@@ -1,5 +1,5 @@
 {
-  "description": "Module 3: variable_flow_60, seed 4, 5,000 paired cases and four cold branches.",
+  "description": "Module 2: variable_flow_60, seed 6, 5,000 paired cases and four cold branches.",
   "failure_feedback": {
     "mode": "rollback_unrecovered"
   },
@@ -40,8 +40,8 @@
       "solve_tolerance": 1e-06
     }
   ],
-  "name": "module3_variable_flow_60_seed4",
-  "output_dir": "results/module3/variable_flow_60/seed_4",
+  "name": "module2_variable_flow_60_seed6",
+  "output_dir": "results/module2/variable_flow_60/seed_6",
   "problem": {
     "c_max": 0.1,
     "c_min": 0.0001,
@@ -59,10 +59,10 @@
   },
   "schema_version": 2,
   "seeds": {
-    "bandit": 265247924,
-    "base": 265187924,
-    "controller": 265253924,
-    "method_order": 265259924
+    "bandit": 704524735,
+    "base": 704464735,
+    "controller": 704530735,
+    "method_order": 704536735
   },
   "setup": {
     "action_space": "full_cartesian",
@@ -223,22 +223,22 @@
   "stream": {
     "cases": 5000,
     "cases_per_seed": 625,
-    "expected_sha256": "9a98cd94705795e2f67c99394a78fee8d4d81c8c5c70a74685175b1bbf69dc4e",
+    "expected_sha256": "cfcb1d4385088cbd8e723a02d222cc0860a15b577ca219d3e2cec29dc222b6fa",
     "group_take": 5000,
     "instance_offset": 0,
     "online_cases": 5000,
     "seed_groups": [
-      265187924,
-      265193924,
-      265199924,
-      265205924,
-      265211924,
-      265217924,
-      265223924,
-      265229924
+      704464735,
+      704470735,
+      704476735,
+      704482735,
+      704488735,
+      704494735,
+      704500735,
+      704506735
     ],
     "shuffle_seeds": [
-      265235924
+      704512735
     ],
     "smoke": false,
     "warmup_cases": 0

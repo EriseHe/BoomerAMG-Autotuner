@@ -586,7 +586,7 @@ def analyze(output):
     figures = generate(output)
     with (output/"report.md").open("a") as handle:
         kind = read(output/f"seed_{protocol['seeds'][0]}"/"experiment_config.json")["problem"]["kind"]
-        module_number = 3 if kind.startswith("rs_") else 1
+        module_number = 2 if kind.startswith("rs_") else 1
         handle.write(f"\n[Paper figures](paper_figures/module{module_number}_paper_figures.pdf) · [Plot data and provenance](paper_figures/manifest.json)\n")
     return table
 

@@ -164,7 +164,7 @@ def generate(run, *, output=None, illustrative_seed=None, cycle_examples=None):
     kind = config["problem"]["kind"]
     family = "Diffusion–advection" if "advection" in kind or "convection" in kind else "Diffusion"
     title = family + " " + (rf"${grid[0]}^3$" if len(set(grid)) == 1 else " × ".join(map(str, grid)))
-    module_number = 3 if kind.startswith("rs_") else 1
+    module_number = 2 if kind.startswith("rs_") else 1
     output.mkdir(parents=True, exist_ok=True)
     examples = json.loads(Path(cycle_examples).read_text()) if cycle_examples is not None else None
     if cycle_examples is not None:

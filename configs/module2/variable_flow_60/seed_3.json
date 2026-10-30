@@ -1,5 +1,5 @@
 {
-  "description": "Module 3: variable_flow_60, seed 3, 5,000 paired cases and four cold branches.",
+  "description": "Module 2: variable_flow_60, seed 3, 5,000 paired cases and four cold branches.",
   "failure_feedback": {
     "mode": "rollback_unrecovered"
   },
@@ -40,8 +40,8 @@
       "solve_tolerance": 1e-06
     }
   ],
-  "name": "module3_variable_flow_60_seed3",
-  "output_dir": "results/module3/variable_flow_60/seed_3",
+  "name": "module2_variable_flow_60_seed3",
+  "output_dir": "results/module2/variable_flow_60/seed_3",
   "problem": {
     "c_max": 0.1,
     "c_min": 0.0001,
