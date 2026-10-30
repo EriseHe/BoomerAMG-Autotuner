@@ -1,4 +1,4 @@
-"""Module 2: freeze trained models, scan weights, and evaluate matched policies."""
+"""Module 3: freeze trained models, scan weights, and evaluate matched policies."""
 
 from __future__ import annotations
 

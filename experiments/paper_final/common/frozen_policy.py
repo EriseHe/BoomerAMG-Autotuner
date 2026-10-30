@@ -24,12 +24,14 @@ from experiments.paper_final.online.configuration import (
 )
 from experiments.paper_final.online.case_loop import report_online_outcome
 from experiments.paper_final.online.native_case import run_case as _run_case
+from solve.controllers.common import OnlineSolveCase
 from experiments.paper_final.online.native_evaluation import (
     solve_no_rl_case,
     solve_schedule_case,
 )
 from hypre.bindings import (
     AMG_RUNTIME_LIBRARY,
+    AttemptOutcome,
     RecoveryOutcome,
     augment_setup_params,
     run_with_default_fallback,
@@ -244,6 +246,90 @@ def reject_execution_error(outcome):
         raise RuntimeError(
             f"Experiment execution error: {outcome.get('primary_failure_reason', outcome.get('failure_reason'))}"
         )
+
+
+def audit_first_attempt_row(row):
+    """Prevent setup, controller work, or a later attempt entering the metric."""
+    outcome = row["outcome"]
+    if row.get("attempt_scope") != "first_attempt_only":
+        raise AssertionError("Wrong attempt scope")
+    if (outcome.get("fallback_used", False)
+            or outcome.get("primary_attempt_count", 1) != 1
+            or len(outcome.get("primary_attempts", [])) > 1):
+        raise AssertionError("Recovery entered a first-attempt measurement")
+    for name in ("fallback_setup_runtime", "fallback_solve_runtime", "fallback_controller_runtime"):
+        if outcome.get(name, 0) != 0:
+            raise AssertionError("Nonzero fallback cost")
+    expected = float(outcome["primary_solve_runtime"])
+    if not math.isclose(row["native_solve_sec"], expected, rel_tol=1e-10, abs_tol=1e-12):
+        raise AssertionError("Metric differs from first-attempt native solve time")
+    if not math.isclose(float(outcome["solve_runtime"]), expected, rel_tol=1e-10, abs_tol=1e-12):
+        raise AssertionError("A later solve entered the measurement")
+    if row["success"] != (outcome["first_primary_status"] == "success"):
+        raise AssertionError("Failure flag differs from first-attempt status")
+    for key in ("wall_sec", "native_solve_sec", "inclusive_solve_sec", "native_total_sec", "inclusive_total_sec"):
+        if not math.isfinite(row[key]) or row[key] < 0:
+            raise AssertionError("Invalid first-attempt timing")
+
+
+def run_first_attempt_policy(job, name, spec, bundle, *, tolerance=1e-6, max_cycles=50, profile=PROFILE):
+    """Execute exactly one matched-hierarchy attempt; never request recovery."""
+    started = time.perf_counter()
+    configure_smoother_profile(profile)
+    if spec["kind"] == "rl":
+        native = bundle.run_case(OnlineSolveCase(
+            mkw=dict(job["mkw"]), params=dict(job["params"]),
+            solve_tol=tolerance, solve_max_cycles=max_cycles,
+            learn=False, explore=False, record_action_metadata=True,
+            fallback_attempt=None,
+        ))
+        # A failed frozen episode has no learning snapshot to roll back. Clear
+        # only episode scratch state, without updating any learned parameters.
+        cleanup_started = time.perf_counter()
+        bundle.controller.finish_episode(learned=False)
+        cleanup_sec = time.perf_counter() - cleanup_started
+        if native.get("fallback_used", False) or native.get("primary_attempt_count", 1) != 1:
+            raise AssertionError("Frozen first attempt executed recovery")
+        native["infer_runtime"] = float(native.get("infer_runtime", 0)) + cleanup_sec
+        native["lifecycle_runtime"] = float(native.get("lifecycle_runtime", 0)) + cleanup_sec
+        primary = AttemptOutcome.from_mapping(native)
+        outcome = report_online_outcome(RecoveryOutcome(primary=primary).to_result(), bandit_timing={})
+    else:
+        if spec["kind"] == "native":
+            configure_smoother_profile(spec["profile"])
+            try:
+                native = solve_no_rl_case(
+                    params={**job["params"], **spec["params"]}, mkw=job["mkw"],
+                    solver_tol=tolerance, solver_max_iter=max_cycles,
+                    augment_params=augment_setup_params,
+                )
+            finally:
+                configure_smoother_profile(profile)
+        else:
+            pattern = spec["pattern"]
+            schedule = ([(max_cycles, pattern[0], 1, 1)] if len(pattern) == 1
+                        else [(i + 1, pattern[i % len(pattern)], 1, 1) for i in range(max_cycles)])
+            native = solve_schedule_case(
+                params=dict(job["params"]), mkw=dict(job["mkw"]), schedule=schedule,
+                solve_tol=tolerance, solve_max_cycles=max_cycles,
+            )
+        primary = AttemptOutcome.from_mapping(native)
+        outcome = report_online_outcome(RecoveryOutcome(primary=primary).to_result(), bandit_timing={})
+    reject_execution_error(outcome)
+    audit_outcome(outcome, tolerance=tolerance)
+    native_solve = float(outcome["primary_solve_runtime"])
+    row = {
+        **{key: job[key] for key in ("seed", "source", "case_id", "input_id", "hierarchy_id")},
+        "policy": name, "kind": spec["kind"], "attempt_scope": "first_attempt_only",
+        "wall_sec": time.perf_counter() - started,
+        "native_solve_sec": native_solve,
+        "inclusive_solve_sec": native_solve + float(outcome["infer_runtime"]),
+        "native_total_sec": float(outcome["setup_runtime"]) + native_solve,
+        "inclusive_total_sec": float(outcome["end_to_end_runtime"]),
+        "success": not bool(outcome["failed"]), "outcome": outcome,
+    }
+    audit_first_attempt_row(row)
+    return row
 
 
 def run_policy(job, name, spec, bundle, *, tolerance=1e-6, max_cycles=50, profile=PROFILE):

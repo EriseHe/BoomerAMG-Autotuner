@@ -233,7 +233,7 @@ def matched_figures(native, weights, case_ids, selected, seeds, title):
     style()
     methods = ("reference", "fixed", "oracle", "periodic", "rl")
     colors = (COLORS[2], COLORS[1], WEIGHT_CMAP(.63), COLORS[3])
-    labels = ("Global best fixed", "Per-instance best fixed", "Periodic (2.85, 1.10)", "Frozen RL")
+    labels = ("Global best fixed", "Per-problem best fixed", "Periodic (2.85, 1.10)", "Frozen RL")
     fig, ax = plt.subplots(figsize=(6.85, 2.35))
     extent = []
     for i, (j, color) in enumerate(zip(range(1, 5), colors)):
@@ -252,7 +252,7 @@ def matched_figures(native, weights, case_ids, selected, seeds, title):
         padding = .055*max(max(extent)-min(extent),1.)
         ax.set_xlim(min(extent)-padding,max(extent)+padding)
     ax.set(yticks=range(4),yticklabels=labels,ylim=(3.4,-.4),
-           xlabel=r"Native continuation-time reduction relative to $w=1$ (%)")
+           xlabel=r"First-attempt native solve-time reduction relative to $w=1$ (%)")
     fig.suptitle(f"Matched-policy savings ({title}, {len(seeds)} checkpoints)",y=.99,fontsize=9)
     ax.text(.98,1.075,"Open circles: checkpoints; diamonds: mean ± SD",transform=ax.transAxes,ha="right",fontsize=6.5)
     fig.subplots_adjust(left=.235,right=.985,top=.78,bottom=.22)
@@ -264,14 +264,14 @@ def matched_figures(native, weights, case_ids, selected, seeds, title):
     shown={methods[j]:weights[selected,j,order,:cap] for j in indices}
     ticks=np.unique(np.r_[np.arange(0,cap,10),cap-1])
     fig,axes=plt.subplots(2,2,figsize=(6.85,3.6),sharex=True,sharey=True)
-    panel_labels=(r"Fixed $w=1$","Per-instance best fixed","Periodic (2.85, 1.10)","Frozen RL")
+    panel_labels=(r"Fixed $w=1$","Per-problem best fixed","Periodic (2.85, 1.10)","Frozen RL")
     for ax,j,label,letter in zip(axes.flat,indices,panel_labels,"abcd"):
         im=ax.imshow(shown[methods[j]].T,origin="upper",interpolation="nearest",aspect="auto",
                      extent=(.5,len(case_ids)+.5,cap-.5,-.5),cmap=WEIGHT_CMAP,vmin=1,vmax=3,rasterized=True)
         ax.set_title(f"({letter}) {label}",loc="left")
         ax.set(xticks=np.unique(np.r_[1,np.linspace(0,len(case_ids),5,dtype=int)[1:]]),yticks=ticks)
     for ax in axes[:,0]: ax.set_ylabel(r"Cycle index $k$")
-    for ax in axes[1]: ax.set_xlabel("Test problem rank")
+    for ax in axes[1]: ax.set_xlabel("Problem index")
     fig.subplots_adjust(left=.10,right=.855,top=.83,bottom=.14,wspace=.12,hspace=.4)
     color_ax=fig.add_axes([.89,.14,.017,.69])
     fig.colorbar(im,cax=color_ax,label="Relaxation weight",ticks=[1,1.5,2,2.5,3])

@@ -1,4 +1,4 @@
-"""Explicit inputs for fresh Module 2 studies; no historical run discovery."""
+"""Explicit inputs for fresh Module 3 studies; no historical run discovery."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ METHODS = ("reference", "fixed", "oracle", "periodic", "rl")
 LABELS = {
     "reference": "Fixed w=1",
     "fixed": "Best global fixed",
-    "oracle": "Best per-instance fixed",
+    "oracle": "Best per-problem fixed",
     "periodic": "Periodic schedule",
     "rl": "Frozen LSTDQ",
 }
@@ -21,9 +21,9 @@ DEFAULTS = {
     "schema_version": 1,
     "name": "matched_policy",
     "cases": 100,
-    "scan_repetitions": 1,
-    "scan_extra_repetitions": 2,
-    "scan_repeat_fraction": 0.1,
+    "scan_repetitions": 3,
+    "scan_extra_repetitions": 0,
+    "scan_repeat_fraction": 0.0,
     "evaluation_repetitions": 3,
     "weights": {"start": 1, "stop": 3, "step": 0.05},
     "periodic_pattern": [2.85, 1.10],
@@ -133,7 +133,7 @@ def load_config(path):
         training = read(item["config"])
         methods = [m for m in training["methods"] if m["id"] == method]
         if len(methods) != 1 or methods[0]["setup"] != "linucb" or not str(methods[0]["solve"]).startswith("recursive_lstdq"):
-            raise ValueError("Module 2 requires a named LinUCB-LSTDQ training source")
+            raise ValueError("Module 3 requires a named LinUCB-LSTDQ training source")
         item["training_config"] = {**training, "methods": methods}
         sources.append(item)
     cfg["training_runs"] = sources

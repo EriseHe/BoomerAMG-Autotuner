@@ -1,4 +1,4 @@
-"""Paper figures from any completed fresh Module 2 study; no numerical work.
+"""Paper figures from any completed fresh Module 3 study; no numerical work.
 
 python -m experiments.paper_final.plot_policy RUN_DIRECTORY
 """
@@ -25,7 +25,7 @@ from experiments.paper_final.matched_policy.selection import trial_key, verify_c
 
 from experiments.paper_final.common.figure_style import matched_figures
 
-FIELDS = ("native_continuation_sec", "inclusive_continuation_sec", "native_total_sec", "inclusive_total_sec")
+FIELDS = ("native_solve_sec", "inclusive_solve_sec", "native_total_sec", "inclusive_total_sec")
 
 
 def read_study(root):
@@ -69,7 +69,7 @@ def read_study(root):
                     o = row["outcome"]
                     values = np.array([row[k] for k in FIELDS])
                     assert np.isfinite(values).all() and (values >= 0).all()
-                    np.testing.assert_allclose(values[0], o["solve_runtime"] + o.get("fallback_setup_runtime", 0), atol=1e-8)
+                    np.testing.assert_allclose(values[0], o["primary_solve_runtime"], atol=1e-8)
                     np.testing.assert_allclose(values[1], values[0] + o.get("infer_runtime", 0), atol=1e-8)
                     np.testing.assert_allclose(values[2], o["setup_runtime"] + o["solve_runtime"], atol=1e-8)
                     np.testing.assert_allclose(values[3], o["end_to_end_runtime"], atol=1e-8)
@@ -100,9 +100,9 @@ def read_study(root):
 
 
 def paired_gains(costs, success, field=0):
-    """Ratios of case sums after repetition averaging; full-success seeds only."""
+    """Ratios of case sums after repetition averaging, retaining failed attempts."""
     total = costs[:, :, :, field].sum(axis=2)
-    valid = success.all(axis=2) & np.isfinite(total)
+    valid = np.isfinite(total)
     eligible = valid & valid[:, :1] & (total[:, :1] > 0)
     with np.errstate(invalid="ignore", divide="ignore"):
         gains = 100 * (1 - total / total[:, :1])
@@ -117,8 +117,7 @@ def generate(run, *, output=None):
     summary, seeds, case_ids, costs, success, weights, sources = read_study(root)
     native = paired_gains(costs, success)
     inclusive = paired_gains(costs, success, 1)
-    eligible = np.flatnonzero(np.isfinite(native[:, 4]))
-    selected = int(eligible[np.argmax(native[eligible, 4])]) if len(eligible) else 0
+    selected = 0  # Preselected first seed; no timing-based illustration selection.
     seed = seeds[selected]
     orders = np.array([np.lexsort((case_ids, -np.isfinite(w[0]).sum(axis=1))) for w in weights])
     protocol = summary["protocol"]
@@ -128,8 +127,8 @@ def generate(run, *, output=None):
     title = family + " " + (rf"${grid[0]}^3$" if len(set(grid)) == 1 else " × ".join(map(str, grid)))
     figures = matched_figures(native, weights, case_ids, selected, seeds, title)
     output.mkdir(parents=True, exist_ok=True)
-    metadata = {"Title": "Module 2 fresh five-policy study", "Author": "RLTune-BoomerAMG"}
-    with PdfPages(output / "module2_paper_figures.pdf", metadata=metadata) as pdf:
+    metadata = {"Title": "Module 3 fresh five-policy study", "Author": "RLTune-BoomerAMG"}
+    with PdfPages(output / "module3_paper_figures.pdf", metadata=metadata) as pdf:
         for name, fig in figures:
             for extension in ("png", "pdf", "svg"):
                 fig.savefig(output / f"{name}.{extension}", dpi=260 if extension == "png" else 600)
@@ -140,9 +139,9 @@ def generate(run, *, output=None):
                         all_repetitions_success=success, first_repetition_primary_weights=weights,
                         case_order_0_based=orders, native_reductions_pct=native, inclusive_reductions_pct=inclusive)
     captions = (
-        f"Module 2: {protocol['name']}. Seeds: {seeds}; {len(case_ids)} paired inputs; {protocol['repetitions_per_case']} evaluation repetitions.\n\n"
-        "matched_policy_savings: Percentage reduction against fixed weight one. Repetitions are averaged within input before summing native continuation costs. Open points are seed-level ratios; diamonds and whiskers are their mean and sample SD (no SD for a single seed). Only seeds where the compared policy and reference complete every evaluation successfully enter that comparison. Undefined comparators stay undefined. Native continuation excludes common primary setup and includes recovery setup/solve. Inclusive continuation adds controller computation. The four alternatives to fixed weight one are shown.\n\n"
-        f"matched_policy_weights: Selected illustration, seed {seed}. The seed with the largest full-panel native frozen-RL reduction versus weight one among qualifying successful seeds is used; if no seed qualifies, the first listed seed is displayed without a best-run claim. This is an illustrative selection, not a typical-run estimate. Every panel uses the recorded first prescribed repetition, including exploration settings as executed; actions are neither averaged nor extrapolated. Columns use one shared order, decreasing weight-one primary cycle count, with case ID breaking ties. White cells have no recorded primary action after termination, or correspond to an undefined fixed comparator. Recovery cycles are excluded. The four displayed heatmap policies are fixed weight one, per-input best fixed, periodic, and frozen RL.\n\n"
+        f"Module 3: {protocol['name']}. Seeds: {seeds}; {len(case_ids)} paired inputs; {protocol['repetitions_per_case']} evaluation repetitions.\n\n"
+        "matched_policy_savings: Percentage reduction against fixed weight one. Repetitions are averaged within input before summing first-attempt native solve times. Open points are seed-level ratios; diamonds and whiskers are their mean and sample SD (no SD for a single seed). All six seeds and all elapsed first-attempt times enter the comparison, irrespective of convergence. Native solve time excludes setup and controller overhead; no recovery or fallback is executed. Inclusive solve time is saved separately for auditing. The four alternatives to fixed weight one are shown.\n\n"
+        f"matched_policy_weights: Selected illustration, seed {seed}. The first listed seed is preselected for illustration. Every panel uses the recorded first prescribed repetition, including exploration settings as executed; actions are neither averaged nor extrapolated. Columns use one shared order, decreasing weight-one primary cycle count, with case ID breaking ties. White cells have no recorded primary action after termination, or correspond to an undefined fixed comparator. Recovery cycles are excluded. The four displayed heatmap policies are fixed weight one, per-problem best fixed, periodic, and frozen RL.\n\n"
         "Fixed references are freshly scan-selected best-observed grid choices on this evaluation panel, then independently retimed. Scan costs do not substitute for evaluation costs and are excluded from the plotted costs.\n"
     )
     (output / "captions.txt").write_text(captions)

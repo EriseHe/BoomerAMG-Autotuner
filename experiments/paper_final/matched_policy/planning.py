@@ -147,8 +147,7 @@ def evaluation_jobs(base_jobs, selections, cfg):
         methods = {"reference": fixed_name(1), "fixed": choice["global"],
                    "oracle": choice["per_instance"][str(row["case_id"])],
                    "periodic": "periodic", "rl": "rl_frozen"}
-        # Undefined all-success comparators stay missing, never silently become
-        # a fastest failed weight. Other policies can still be evaluated.
+        # Selections minimize first-attempt solve time without success filtering.
         for repeat in range(cfg["evaluation_repetitions"]):
             order = sorted({p for p in methods.values() if p is not None})
             rng.shuffle(order)
@@ -170,7 +169,10 @@ def prepare(config, output):
     count = round(len(inputs) * float(cfg["scan_repeat_fraction"]))
     extra = sorted(random.Random(cfg["seeds"]["repeats"]).sample([r["case_id"] for r in inputs], count))
     protocol = {
-        "module": 2, "format": "matched_policy", "name": cfg["name"],
+        "module": 3, "format": "matched_policy",
+        "timing_protocol": "first_attempt_native_solve_v1",
+        "selection_metric": "native_solve_sec", "comparison_metric": "native_solve_sec",
+        "failed_attempt_times_included": True, "recovery_enabled": False, "name": cfg["name"],
         "methods": list(METHODS), "labels": LABELS, "training_seeds": [s["seed"] for s in cfg["training_runs"]],
         "problem": cfg["problem"], "test_cases": len(inputs), "repetitions_per_case": cfg["evaluation_repetitions"],
         "scan_repetitions": cfg["scan_repetitions"], "scan_extra_repetitions": cfg["scan_extra_repetitions"],
@@ -178,9 +180,9 @@ def prepare(config, output):
         "sources": sources, "max_workers": cfg["workers"], "tolerance": cfg["solver"]["tolerance"],
         "max_cycles": cfg["solver"]["max_cycles"], "profile": cfg["solver"]["profile"],
         "seeds": cfg["seeds"], "created_at": a.now(),
-        "selection": "Fresh complete fixed-weight scans, mean native continuation cost; all-success global weight and successful per-case weights; deterministic weight-name ties",
-        "recovery": "One primary matched hierarchy, then one fresh Default fallback on numerical failure; no setup reselection or learning",
-        "evaluation": "Freeze scan selections, independently retime five policy roles; share identical execution cells; all failures and recovery costs retained",
+        "selection": "Fresh complete fixed-weight scans, mean first-attempt native solve time; all 41 weights and all 100 cases retained irrespective of convergence; deterministic weight-name ties",
+        "recovery": "Exactly one attempt on the matched hierarchy; no recovery, fallback, setup reselection or learning",
+        "evaluation": "Freeze scan selections, independently retime five policy roles; share identical execution cells; all first-attempt elapsed solve times retained irrespective of convergence",
     }
     a.dump(output / "protocol.json", protocol)
     a.dump(output / "inputs.json", {"test": inputs})
@@ -199,6 +201,6 @@ def prepare(config, output):
     a.dump(output / "prepared.json", {"at": a.now(), "files_sha256": {name: a.file_hash(output / name) for name in files},
                                       "execution_environment": policy.environment_identity(environment)})
     a.dump(output / "status.json", {"status": "prepared", "native_solves_executed": 0})
-    a.emit(output, "Module 2 prepared", seeds=protocol["training_seeds"], cases=len(inputs),
+    a.emit(output, "Module 3 prepared", seeds=protocol["training_seeds"], cases=len(inputs),
            scan_trials=sum(len(j["policy_order"]) for j in a.read(output / "jobs_scan.json")))
     return protocol

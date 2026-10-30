@@ -57,7 +57,7 @@ class FrozenRuntime:
         return bundle
 
     def run_policy(self, job, name, spec, bundle):
-        return policy.run_policy(job, name, spec, bundle,
+        return policy.run_first_attempt_policy(job, name, spec, bundle,
                                  tolerance=self.protocol["tolerance"],
                                  max_cycles=self.protocol["max_cycles"], profile=self.protocol["profile"])
 
@@ -69,7 +69,7 @@ def worker(output, phase, worker_id):
     protocol = a.read(output / "protocol.json")
     if phase == "test" and not (output / "selection_complete.json").is_file():
         raise ValueError("Complete fresh scans and freeze selections before evaluation")
-    run_frozen_worker(output, phase, worker_id, protocol["max_workers"], run_number=2,
+    run_frozen_worker(output, phase, worker_id, protocol["max_workers"], run_number=3,
                       verify=verify, policy=FrozenRuntime(output))
 
 
@@ -96,6 +96,7 @@ def preflight(output):
 
 
 def audit_trial(row, protocol):
+    policy.audit_first_attempt_row(row)
     policy.reject_execution_error(row["outcome"])
     policy.audit_outcome(row["outcome"], tolerance=protocol["tolerance"])
     if row["outcome"].get("controller_update_committed", False):
@@ -154,7 +155,7 @@ def analyze(output):
     jobs = a.read(output / "jobs_test.json")
     protocol = a.read(output / "protocol.json")
     by_key = {trial_key(r): r for r in rows}
-    fields = ("native_continuation_sec", "inclusive_continuation_sec", "native_total_sec", "inclusive_total_sec")
+    fields = ("native_solve_sec", "inclusive_solve_sec", "native_total_sec", "inclusive_total_sec")
     per_seed, per_case = [], []
     for seed in protocol["training_seeds"]:
         base = [j for j in jobs if j["seed"] == seed and j["repeat"] == 0]
@@ -169,6 +170,8 @@ def analyze(output):
                                 for rep in range(protocol["repetitions_per_case"])]
                 case = {"seed": seed, "case_id": job["case_id"], "method": method, "policy": name,
                         "success": all(r["success"] for r in observations),
+                        "failed_repetitions": sum(not r["success"] for r in observations),
+                        "repetitions": len(observations),
                         "recovered": any(r["outcome"].get("fallback_used", False) for r in observations),
                         **{k: statistics.mean(r[k] for r in observations) for k in fields}}
                 cases.append(case)
@@ -178,6 +181,8 @@ def analyze(output):
             per_seed.append({"seed": seed, "method": method, "label": LABELS[method],
                              "defined": complete, "cases": len(available), "expected_cases": len(cases),
                              "failed_cases": sum(not c["success"] for c in available),
+                             "failed_repetitions": sum(c["failed_repetitions"] for c in available),
+                             "total_repetitions": sum(c["repetitions"] for c in available),
                              **{k: sum(c[k] for c in available) if complete else None for k in fields}})
     comparisons = []
     for method in METHODS[:-1]:
@@ -186,7 +191,7 @@ def analyze(output):
             for seed in protocol["training_seeds"]:
                 rr = {r["method"]: r for r in per_seed if r["seed"] == seed}
                 if (rr[method]["defined"] and rr[method][field] > 0
-                        and rr[method]["failed_cases"] == 0 and rr["rl"]["failed_cases"] == 0):
+                        and rr["rl"]["defined"]):
                     values.append(100 * (1 - rr["rl"][field] / rr[method][field]))
             comparisons.append({"comparator": method, "metric": field, "seeds": len(values),
                                 "mean_pct": statistics.mean(values) if values else None,
@@ -199,27 +204,27 @@ def analyze(output):
     a.dump(output / "analysis/summary.json", summary)
     a.write_csv(output / "analysis/per_seed.csv", per_seed)
     a.write_csv(output / "analysis/per_case.csv", per_case)
-    lines = [f"# Module 2 — {protocol['name']}", "",
+    lines = [f"# Module 3 — {protocol['name']}", "",
              f"Training seed labels: {protocol['training_seeds']}. {protocol['test_cases']} paired problems; "
              f"{protocol['repetitions_per_case']} independent evaluation repetitions.", "",
              f"Fresh fixed-weight scan: {len(scans)} trials. Independent evaluation: {len(rows)} trials.",
              f"Evaluation failures: {summary['audit']['evaluation_failures']}; recovered evaluations: {summary['audit']['recovered_evaluations']}.",
-             "Costs include executed recovery. Common primary setup is excluded from continuation costs.",
-             "Fixed choices are successful best-observed grid choices on these evaluation cases, then independently retimed.",
+             "The comparison uses first-attempt native solve time only. Setup, controller overhead and all recovery/fallback work are excluded; no recovery is executed.",
+             "Fixed choices minimize the mean first-attempt native solve time over all 41 weights, irrespective of convergence, then are independently retimed.",
              "", "| Frozen RL compared with | Cost | Mean reduction (%) | Sample SD | Seeds |",
              "|---|---|---:|---:|---:|"]
     for row in comparisons:
         mean = 'undefined' if row['mean_pct'] is None else f"{row['mean_pct']:.2f}"
         sd = '—' if row['sample_sd_pct'] is None else f"{row['sample_sd_pct']:.2f}"
         lines.append(f"| {LABELS[row['comparator']]} | {row['metric']} | {mean} | {sd} | {row['seeds']} |")
-    lines += ["", "A comparator is undefined where the scan found no qualifying successful weight; it is never replaced by a failed minimum.",
-              "Speedup summaries include only seeds where both compared methods complete every evaluation successfully; failure counts remain in the tables and raw records.",
-              "Raw scan/evaluation JSONL files retain per-cycle actions, residuals, timing and recovery outcomes."]
+    lines += ["", "All 100 cases and all 41 scan weights are retained; convergence does not restrict fixed-weight selection.",
+              "Reductions use all configured seeds, including failed first attempts. Failure counts are reported separately.",
+              "Raw scan/evaluation JSONL files retain per-cycle actions, residuals, first-attempt native timing and failure outcomes."]
     (output / "REPORT.md").write_text("\n".join(lines) + "\n")
     from experiments.paper_final.plot_policy import generate
     generate(output)
     with (output / "REPORT.md").open("a") as handle:
-        handle.write("\n[Paper figures](paper_figures/module2_paper_figures.pdf) · [Five-policy weights](paper_figures/matched_policy_weights.png) · [Plot data and provenance](paper_figures/manifest.json)\n")
+        handle.write("\n[Paper figures](paper_figures/module3_paper_figures.pdf) · [Five-policy weights](paper_figures/matched_policy_weights.png) · [Plot data and provenance](paper_figures/manifest.json)\n")
     return summary
 
 
@@ -238,13 +243,13 @@ def run(output, *, scan_only=False):
                 preflight(output)
             workers = a.read(output / "protocol.json")["max_workers"]
             if not (output / "raw/scan/complete.json").is_file():
-                run_frozen_phase(output, "scan", runner_module=RUNNER, run_number=2, workers=workers)
+                run_frozen_phase(output, "scan", runner_module=RUNNER, run_number=3, workers=workers)
             select(output)
             if scan_only:
                 a.dump(output / "status.json", {"status": "scanned", "selections_frozen": True})
                 return
             if not (output / "raw/test/complete.json").is_file():
-                run_frozen_phase(output, "test", runner_module=RUNNER, run_number=2, workers=workers)
+                run_frozen_phase(output, "test", runner_module=RUNNER, run_number=3, workers=workers)
             result = analyze(output)
             a.dump(output / "complete.json", {"at": a.now(), "status": "complete", "audit": result["audit"]})
             a.dump(output / "status.json", {"status": "complete", "audit": result["audit"]})

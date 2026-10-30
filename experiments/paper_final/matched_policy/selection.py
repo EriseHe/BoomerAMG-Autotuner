@@ -1,4 +1,4 @@
-"""Success-constrained fixed comparators from a complete, repeated scan."""
+"""Fixed comparators minimizing first-attempt native solve time, including failures."""
 
 from collections import defaultdict
 import math
@@ -22,7 +22,7 @@ def verify_coverage(rows, jobs):
         for field in ("input_id", "hierarchy_id"):
             if row[field] != expected[key][field]:
                 raise ValueError(f"Trial {field} differs from the frozen plan")
-        if not isinstance(row["success"], bool) or not math.isfinite(row["native_continuation_sec"]) or row["native_continuation_sec"] < 0:
+        if not isinstance(row["success"], bool) or not math.isfinite(row["native_solve_sec"]) or row["native_solve_sec"] < 0:
             raise ValueError("Invalid scan outcome or time")
     if seen != set(expected):
         raise ValueError("Incomplete trial coverage")
@@ -33,23 +33,23 @@ def select_fixed(rows, jobs):
     grouped = defaultdict(list)
     for row in rows:
         grouped[row["seed"], row["case_id"], row["policy"]].append(row)
-    means = {key: (statistics.mean(r["native_continuation_sec"] for r in values),
+    means = {key: (statistics.mean(r["native_solve_sec"] for r in values),
                    all(r["success"] for r in values)) for key, values in grouped.items()}
     result = {}
     for seed in sorted({j["seed"] for j in jobs}):
         cases = sorted({j["case_id"] for j in jobs if j["seed"] == seed})
         weights = sorted({p for j in jobs if j["seed"] == seed for p in j["policy_order"]})
-        valid = [p for p in weights if all(means[seed, c, p][1] for c in cases)]
+        valid = weights
         total = lambda p: sum(means[seed, c, p][0] for c in cases)
         per_case = {}
         for case in cases:
-            eligible = [p for p in weights if means[seed, case, p][1]]
+            eligible = weights
             per_case[str(case)] = min(eligible, key=lambda p: (means[seed, case, p][0], p)) if eligible else None
         result[str(seed)] = {
             "global": min(valid, key=lambda p: (total(p), p)) if valid else None,
             "per_instance": per_case,
             "uncovered_case_ids": [c for c in cases if per_case[str(c)] is None],
-            "global_candidates": [{"policy": p, "native_continuation_sec": total(p),
+            "global_candidates": [{"policy": p, "native_solve_sec": total(p),
                                    "failed_cases": sum(not means[seed, c, p][1] for c in cases)}
                                   for p in weights],
         }
