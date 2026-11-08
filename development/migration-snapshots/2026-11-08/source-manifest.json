@@ -1397,6 +1397,76 @@
       "bytes": 20259,
       "sha256": "fb5ac1d901979ba71e2f8017f20c57590c35da98cc29746ddb1e8cbf5a1856b6",
       "role": "official-data archival exporter; source-only, not paper data"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/archive/20261022_022850/development/rl_overhead_optimization_round2_20261018/baseline/solve/core/episode.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/archive/20261022_022850/development/rl_overhead_optimization_round2_20261018/baseline/solve/core/episode.py",
+      "bytes": 33875,
+      "sha256": "5475713d2d8f1e5948f7afcccb3a11365eedc06391d45e66b12f6986e8787a5f",
+      "role": "exact historical experiment-local source variant found by full ignored-source content review"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/archive/20261022_022850/development/rl_overhead_optimization_round2_20261018/baseline/solve/tests/test_lstdq_scoring_equivalence.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/archive/20261022_022850/development/rl_overhead_optimization_round2_20261018/baseline/solve/tests/test_lstdq_scoring_equivalence.py",
+      "bytes": 5656,
+      "sha256": "cb1eb68fda142a31d9adc1801d935ae51c06aea3ddc9aa87c5afe18b9fdc2d33",
+      "role": "exact historical experiment-local source variant found by full ignored-source content review"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/archive/20261022_022850/development/rl_overhead_optimization_round2_20261018/baseline/solve/tests/test_shared_setup_and_costs.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/archive/20261022_022850/development/rl_overhead_optimization_round2_20261018/baseline/solve/tests/test_shared_setup_and_costs.py",
+      "bytes": 16129,
+      "sha256": "baffd7225b740ab8d2b4a1abdca3c7c374d717d92e980e0dac3cf02da9680777",
+      "role": "exact historical experiment-local source variant found by full ignored-source content review"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/archive/20261022_022850/development/rl_overhead_optimization_20261018/baseline/controller.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/archive/20261022_022850/development/rl_overhead_optimization_20261018/baseline/controller.py",
+      "bytes": 21536,
+      "sha256": "625aff30e70d2c86cd30feae8cfbe999bf4e082bfbec780a033c665925ace175",
+      "role": "exact historical experiment-local source variant found by full ignored-source content review"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/archive/20261022_022850/development/paper_figure_cleanup_20261021_022226/online/plot_online.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/archive/20261022_022850/development/paper_figure_cleanup_20261021_022226/online/plot_online.py",
+      "bytes": 15800,
+      "sha256": "2d9f40fb6cbc4676834abfbd3589cd7b036a11a5df89766cb64e0888c7ad942e",
+      "role": "exact historical experiment-local source variant found by full ignored-source content review"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/archive/20261022_022850/development/paper_figure_cleanup_20261021_022226/matched/plot_policy.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/archive/20261022_022850/development/paper_figure_cleanup_20261021_022226/matched/plot_policy.py",
+      "bytes": 11193,
+      "sha256": "ca9645fb03f1127256165b8cd968d0534805acf7b1fa7688d571a307acbae6ee",
+      "role": "exact historical experiment-local source variant found by full ignored-source content review"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/archive/20261022_022850/main/shared_setup_tolerance_diffusion40_5000_3seeds_20261018/compare_with_official.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/archive/20261022_022850/main/shared_setup_tolerance_diffusion40_5000_3seeds_20261018/compare_with_official.py",
+      "bytes": 6712,
+      "sha256": "cdf91d9ac8f8124fad33c5b5dfb1ba9763c84ae17e690406b1c05370735987af",
+      "role": "exact historical experiment-local source variant found by full ignored-source content review"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/archive/20261022_022850/main/shared_setup_tolerance_diffusion40_5000_3seeds_20261018/audit_shared_setup_overhead.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/archive/20261022_022850/main/shared_setup_tolerance_diffusion40_5000_3seeds_20261018/audit_shared_setup_overhead.py",
+      "bytes": 4455,
+      "sha256": "46a1cf106ff076f7192c8beb17b16c2a29e3f07ab69c75b26fd761fc17d5145a",
+      "role": "exact historical experiment-local source variant found by full ignored-source content review"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/archive/20261022_022850/main/shared_setup_overhead_diffusion40_1000_3seeds_20261018/audit_shared_setup_overhead.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/archive/20261022_022850/main/shared_setup_overhead_diffusion40_1000_3seeds_20261018/audit_shared_setup_overhead.py",
+      "bytes": 4542,
+      "sha256": "fb24cb10c822e9a6f2fdca2a050eb8516100beb610e8a623ecfc8997eebb82c3",
+      "role": "exact historical experiment-local source variant found by full ignored-source content review"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_first_attempt_20261030/validation/variable_flow/run_v3/paper_figures/plot_policy.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_first_attempt_20261030/validation/variable_flow/run_v3/paper_figures/plot_policy.py",
+      "bytes": 10878,
+      "sha256": "14057bad66a2b8d9859f9c9b6013b4360bfd5771a302733a4045c8ef2f09d86b",
+      "role": "exact historical experiment-local source variant found by full ignored-source content review"
     }
   ],
   "duplicate_aliases": [
@@ -1589,6 +1659,31 @@
       "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/hypre/bindings/Makefile",
       "sha256": "6d09f86a80cd2f29f623d7b40c9eaa330bda42c0f81f363bad599b4114183003",
       "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/hypre/bindings/Makefile"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/archive/20261022_022850/development/rl_cycle_bin_removal_20261018/before/solve/tests/test_lstdq_scoring_equivalence.py",
+      "sha256": "cb1eb68fda142a31d9adc1801d935ae51c06aea3ddc9aa87c5afe18b9fdc2d33",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/archive/20261022_022850/development/rl_overhead_optimization_round2_20261018/baseline/solve/tests/test_lstdq_scoring_equivalence.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/archive/20261022_022850/development/rl_cycle_bin_removal_20261018/before/solve/tests/test_shared_setup_and_costs.py",
+      "sha256": "baffd7225b740ab8d2b4a1abdca3c7c374d717d92e980e0dac3cf02da9680777",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/archive/20261022_022850/development/rl_overhead_optimization_round2_20261018/baseline/solve/tests/test_shared_setup_and_costs.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_first_attempt_20261030/validation/variable_flow/full_cycle_run/paper_figures/plot_policy.py",
+      "sha256": "14057bad66a2b8d9859f9c9b6013b4360bfd5771a302733a4045c8ef2f09d86b",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_first_attempt_20261030/validation/variable_flow/run_v3/paper_figures/plot_policy.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_first_attempt_20261030/validation/diffusion/run_v3/paper_figures/plot_policy.py",
+      "sha256": "14057bad66a2b8d9859f9c9b6013b4360bfd5771a302733a4045c8ef2f09d86b",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_first_attempt_20261030/validation/variable_flow/run_v3/paper_figures/plot_policy.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_first_attempt_20261030/validation/diffusion/full_cycle_run/paper_figures/plot_policy.py",
+      "sha256": "14057bad66a2b8d9859f9c9b6013b4360bfd5771a302733a4045c8ef2f09d86b",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_first_attempt_20261030/validation/variable_flow/run_v3/paper_figures/plot_policy.py"
     }
   ],
   "history_reachability": {
@@ -1598,5 +1693,15 @@
     "official-paper-data-precursor": true,
     "detached-original-paper-source": true,
     "module2_execution_source_7bb48b6": true
+  },
+  "ignored_source_coverage": {
+    "all_code_candidates": 18805,
+    "recognized_dependency_paths_excluded": 18071,
+    "nondependency_candidate_paths": 734,
+    "exact_new_preserved_file_matches_before_supplement": 90,
+    "exact_reachable_historical_blob_matches": 629,
+    "supplemental_unique_files": 10,
+    "supplemental_duplicate_aliases": 5,
+    "unaccounted_candidate_paths_after_supplement": 0
   }
 }
