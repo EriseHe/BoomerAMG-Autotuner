@@ -21,6 +21,17 @@ Both Module 1 and Module 2 measure four branches: Default, fixed-setup LSTDQ,
 setup-only LinUCB, and joint LinUCB–LSTDQ. Module 2 starts its own learners and
 can run independently of Modules 1 and 3.
 
+## Official paper measurements
+
+The current paper datasets, per-problem arrays, configurations and checksums
+are published on `main` under [data/](data/README.md). Full raw trajectories,
+checkpoints and execution provenance are available through the exact GitHub
+release links in [the archive manifest](data/archive_manifest.json).
+Module 3 covers both problem families and explicitly selects test repetition 0,
+which reproduces the newest paper figures and comparison table.
+New algorithm changes and unpublished scripts are on
+[`codex/development`](https://github.com/EriseHe/BoomerAMG-Autotuner/tree/codex/development).
+
 ## Code organization
 
 - `setup/`: setup learners, candidate features, failure feedback, and cost targets.

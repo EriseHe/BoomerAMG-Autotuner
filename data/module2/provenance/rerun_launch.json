@@ -1,0 +1,42 @@
+{
+  "created_at": "2026-10-30T19:11:30.225344+00:00",
+  "module": 2,
+  "experiment": "variable_flow_online",
+  "seeds": [
+    4,
+    5,
+    6
+  ],
+  "cases_per_seed": 5000,
+  "branches": [
+    "default_setup_default_solve",
+    "default_setup_lstdq",
+    "bandit_default",
+    "bandit_lstdq"
+  ],
+  "previous_run": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/study/module3/variable_flow_60_batch2",
+  "source_commit": "7bb48b639bde855598aaeeb5093d1f8a82f412fb",
+  "algorithm_and_configuration_unchanged": true,
+  "paired_inputs_identical": true,
+  "native_build_identical": true,
+  "source_files_checked": 95,
+  "source_changes": [
+    "experiments/paper_final/plot_online.py",
+    "experiments/paper_final/run_online.py"
+  ],
+  "source_changes_purpose": "Report/PDF module number only",
+  "run_directory": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/run",
+  "started": true,
+  "started_at": "2026-10-30T19:11:38.054994+00:00",
+  "supervisor_pid": 78892,
+  "command": [
+    "/Users/erisehe/Library/Science/miniforge3/envs/rl/bin/python",
+    "-u",
+    "-m",
+    "experiments.paper_final.run_online",
+    "run",
+    "--output",
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/run"
+  ],
+  "cwd": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/run/source"
+}

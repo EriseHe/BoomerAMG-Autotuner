@@ -1,0 +1,315 @@
+{
+  "repository": "EriseHe/BoomerAMG-Autotuner",
+  "numbering": "Current official paper: Module2 variable-flow online; Module3 matched-policy both families. October28 release uses historical opposite Module2/3 numbering.",
+  "archives": {
+    "module1-advection-40.zip": {
+      "bytes": 1166697169,
+      "sha256": "08ac0cb84e4ac4715fa8407fab6994473f94557edb23e7e393e1c15b6d76af41",
+      "files": 420,
+      "coverage": {
+        "module": 1,
+        "case": "advection_40",
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "online": [
+          1,
+          5000
+        ],
+        "frozen": [
+          5001,
+          6000
+        ],
+        "methods": [
+          "default_setup_default_solve",
+          "default_setup_lstdq",
+          "bandit_default",
+          "bandit_lstdq"
+        ]
+      },
+      "url": "https://github.com/EriseHe/BoomerAMG-Autotuner/releases/download/experiment-data-2026-10-28/module1-advection-40.zip",
+      "release": "experiment-data-2026-10-28",
+      "module": 1,
+      "phases": [
+        "online",
+        "frozen"
+      ],
+      "unchanged_existing_archive": true
+    },
+    "module1-advection-60.zip": {
+      "bytes": 1155059932,
+      "sha256": "7deed1e1fec6f76d81e469a8cc5c968560aa80574ac46b207948b22b391f736f",
+      "files": 420,
+      "coverage": {
+        "module": 1,
+        "case": "advection_60",
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "online": [
+          1,
+          5000
+        ],
+        "frozen": [
+          5001,
+          6000
+        ],
+        "methods": [
+          "default_setup_default_solve",
+          "default_setup_lstdq",
+          "bandit_default",
+          "bandit_lstdq"
+        ]
+      },
+      "url": "https://github.com/EriseHe/BoomerAMG-Autotuner/releases/download/experiment-data-2026-10-28/module1-advection-60.zip",
+      "release": "experiment-data-2026-10-28",
+      "module": 1,
+      "phases": [
+        "online",
+        "frozen"
+      ],
+      "unchanged_existing_archive": true
+    },
+    "module1-advection-80.zip": {
+      "bytes": 1159939215,
+      "sha256": "e9194af7730745ab8dd96c4427a0d4c569a7916d038838b91a774c23d3a184d8",
+      "files": 420,
+      "coverage": {
+        "module": 1,
+        "case": "advection_80",
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "online": [
+          1,
+          5000
+        ],
+        "frozen": [
+          5001,
+          6000
+        ],
+        "methods": [
+          "default_setup_default_solve",
+          "default_setup_lstdq",
+          "bandit_default",
+          "bandit_lstdq"
+        ]
+      },
+      "url": "https://github.com/EriseHe/BoomerAMG-Autotuner/releases/download/experiment-data-2026-10-28/module1-advection-80.zip",
+      "release": "experiment-data-2026-10-28",
+      "module": 1,
+      "phases": [
+        "online",
+        "frozen"
+      ],
+      "unchanged_existing_archive": true
+    },
+    "module1-diffusion-40.zip": {
+      "bytes": 817400000,
+      "sha256": "294b99ff22466afabe253a08f6cb2ddeb7568602ce519c1b8498f580ed8b5c5f",
+      "files": 420,
+      "coverage": {
+        "module": 1,
+        "case": "diffusion_40",
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "online": [
+          1,
+          5000
+        ],
+        "frozen": [
+          5001,
+          6000
+        ],
+        "methods": [
+          "default_setup_default_solve",
+          "default_setup_lstdq",
+          "bandit_default",
+          "bandit_lstdq"
+        ]
+      },
+      "url": "https://github.com/EriseHe/BoomerAMG-Autotuner/releases/download/experiment-data-2026-10-28/module1-diffusion-40.zip",
+      "release": "experiment-data-2026-10-28",
+      "module": 1,
+      "phases": [
+        "online",
+        "frozen"
+      ],
+      "unchanged_existing_archive": true
+    },
+    "module1-diffusion-60.zip": {
+      "bytes": 811759876,
+      "sha256": "beae1f7ca06357d112a37859a2dd93c20a55303a3811cf652d47e0f1bbd82462",
+      "files": 420,
+      "coverage": {
+        "module": 1,
+        "case": "diffusion_60",
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "online": [
+          1,
+          5000
+        ],
+        "frozen": [
+          5001,
+          6000
+        ],
+        "methods": [
+          "default_setup_default_solve",
+          "default_setup_lstdq",
+          "bandit_default",
+          "bandit_lstdq"
+        ]
+      },
+      "url": "https://github.com/EriseHe/BoomerAMG-Autotuner/releases/download/experiment-data-2026-10-28/module1-diffusion-60.zip",
+      "release": "experiment-data-2026-10-28",
+      "module": 1,
+      "phases": [
+        "online",
+        "frozen"
+      ],
+      "unchanged_existing_archive": true
+    },
+    "module1-diffusion-80.zip": {
+      "bytes": 818819139,
+      "sha256": "5df0063cdacca616bcdddbe4210d76ae5292126fd87dd2eb7f86f0c4b75d4db1",
+      "files": 420,
+      "coverage": {
+        "module": 1,
+        "case": "diffusion_80",
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "online": [
+          1,
+          5000
+        ],
+        "frozen": [
+          5001,
+          6000
+        ],
+        "methods": [
+          "default_setup_default_solve",
+          "default_setup_lstdq",
+          "bandit_default",
+          "bandit_lstdq"
+        ]
+      },
+      "url": "https://github.com/EriseHe/BoomerAMG-Autotuner/releases/download/experiment-data-2026-10-28/module1-diffusion-80.zip",
+      "release": "experiment-data-2026-10-28",
+      "module": 1,
+      "phases": [
+        "online",
+        "frozen"
+      ],
+      "unchanged_existing_archive": true
+    },
+    "module2-variable-flow.zip": {
+      "bytes": 1059058878,
+      "sha256": "88aee76102cce16a74a823cea83c545634deef84965049f7ebbc4d10a2982034",
+      "files": 590,
+      "source_bytes": 2768793122,
+      "url": "https://github.com/EriseHe/BoomerAMG-Autotuner/releases/download/official-paper-data-2026-11-08/module2-variable-flow.zip",
+      "release": "official-paper-data-2026-11-08",
+      "module": 2,
+      "coverage": {
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cases_per_seed": 5000,
+        "methods": 4,
+        "selected_measurements": "original seeds 1–3 plus October 30 rerun seeds 4–6"
+      }
+    },
+    "module3-diffusion.zip": {
+      "bytes": 118907230,
+      "sha256": "8d7636537ff123c3a5c1da25119768bbf496dd2c49464c06d30882a157e8b5ea",
+      "files": 230,
+      "source_bytes": 381047289,
+      "url": "https://github.com/EriseHe/BoomerAMG-Autotuner/releases/download/official-paper-data-2026-11-08/module3-diffusion.zip",
+      "release": "official-paper-data-2026-11-08",
+      "module": 3,
+      "coverage": {
+        "family": "diffusion",
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cases_per_seed_policy": 100,
+        "policies": 5,
+        "official_test_repeat_zero_based": 0,
+        "scan_repetitions": 3,
+        "archived_test_repetitions": 3
+      }
+    },
+    "module3-variable-flow.zip": {
+      "bytes": 103617377,
+      "sha256": "9da7de7bbd4f5ba8b4dc3859e63ede06dcaf7aee804df930793ae56340e5d8fe",
+      "files": 230,
+      "source_bytes": 385865037,
+      "url": "https://github.com/EriseHe/BoomerAMG-Autotuner/releases/download/official-paper-data-2026-11-08/module3-variable-flow.zip",
+      "release": "official-paper-data-2026-11-08",
+      "module": 3,
+      "coverage": {
+        "family": "variable-flow",
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cases_per_seed_policy": 100,
+        "policies": 5,
+        "official_test_repeat_zero_based": 0,
+        "scan_repetitions": 3,
+        "archived_test_repetitions": 3
+      }
+    }
+  },
+  "raw_files": 3570,
+  "raw_bytes": 18697595971,
+  "restoration": "Extract chosen ZIPs into one directory containing data/. Every archived member is checksummed in data/raw_files.json. Module1 archives are reused byte-for-byte from the existing release."
+}

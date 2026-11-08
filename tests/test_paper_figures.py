@@ -16,7 +16,7 @@ class MatchedPolicyFigureTests(unittest.TestCase):
         plt.close("all")
 
     def test_released_checkpoint_statistics_and_inputs(self):
-        archive = Path(__file__).resolve().parents[1] / "data/module3/arrays.npz"
+        archive = Path(__file__).resolve().parents[1] / "data/module3/diffusion/arrays.npz"
         with np.load(archive, allow_pickle=False) as data:
             native = data["native_reductions_pct"]
             weights = data["first_repetition_primary_weights"]
@@ -30,7 +30,7 @@ class MatchedPolicyFigureTests(unittest.TestCase):
                          ["matched_policy_savings", "matched_policy_weights"])
         ax = figures[0][1].axes[0]
         self.assertEqual([text.get_text() for text in ax.texts],
-                         ["34.4 ± 0.5", "36.5 ± 0.5", "41.2 ± 2.5", "39.8 ± 1.8"])
+                         ["34.0 ± 0.8", "35.8 ± 0.7", "41.2 ± 1.8", "39.6 ± 1.5"])
         for j, points in enumerate(ax.collections[::2], start=1):
             np.testing.assert_allclose(points.get_offsets()[:, 0], native[:, j])
             segments = ax.containers[j - 1].lines[2][0].get_segments()

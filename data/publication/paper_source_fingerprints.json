@@ -1,0 +1,122 @@
+{
+  "date": "2026-11-08",
+  "paper_repository_head": "084b1ec02e64be859b6aea877a9bfa336bfc18a0",
+  "purpose": "Identify the exact local official paper tables/text/vector figures checked against these datasets; manuscript source is unchanged by publication.",
+  "files": [
+    {
+      "path": "sections/00_abstract.tex",
+      "bytes": 1641,
+      "sha256": "889b436ac9cad74af13c49187229c53d300c633fafbea37022144209fc710904"
+    },
+    {
+      "path": "sections/01_introduction.tex",
+      "bytes": 8221,
+      "sha256": "b669c2da80ab02b3d928b4866dbcfeb257e3975532effb27dc6de664ba4db536"
+    },
+    {
+      "path": "sections/02_problem.tex",
+      "bytes": 9283,
+      "sha256": "cd7bb06c3be1f0e506c743c3668957c30eccbb9ee197189204ba96c1f069b3db"
+    },
+    {
+      "path": "sections/03_setup.tex",
+      "bytes": 15787,
+      "sha256": "f48c97d22b6a482bf32a4ee1aea20e0b700fd509bcd4471d300b677b58cee59f"
+    },
+    {
+      "path": "sections/04_solve.tex",
+      "bytes": 17503,
+      "sha256": "cd2d78dd90b109abcd4c86217d26805a7f4b9ffa8fd47c3294e684fb2d69fb26"
+    },
+    {
+      "path": "sections/05_joint_operation.tex",
+      "bytes": 2792,
+      "sha256": "7c5b6734c5932eec6797dbd2735ef18f3318f74a207cd83e5c6066cc95b2e280"
+    },
+    {
+      "path": "sections/05_theory.tex",
+      "bytes": 6647,
+      "sha256": "14369a94fffa8834d3b8d4b7d972c48b2eca03c3377248fd75b4757722fca5fe"
+    },
+    {
+      "path": "sections/06_experiments.tex",
+      "bytes": 40197,
+      "sha256": "954c9a4bfde74680865cf87bdd67ca4edde2e4d3a9c18cef9809447155a215ed"
+    },
+    {
+      "path": "sections/07_conclusion.tex",
+      "bytes": 1424,
+      "sha256": "34f19e16ad375dc28cd77f85282762ce3a9b30510116c363afd3c18061afb8e2"
+    },
+    {
+      "path": "tables/diffusion_case_rows.tex",
+      "bytes": 337,
+      "sha256": "f090abf63a1d807012f7b77b277bb049527eab4fe2e5b4f78d9e5dab47675ad5"
+    },
+    {
+      "path": "tables/matched_relaxation_rows.tex",
+      "bytes": 415,
+      "sha256": "7698b7122ad3283a2a9fc23040c83b818d75d18480e96f87da5cce50c56ddc6d"
+    },
+    {
+      "path": "tables/online_values.tex",
+      "bytes": 1902,
+      "sha256": "57aa907273aec3d732baac149ac9cec24bcb863ac9c235e699099ba1ce144000"
+    },
+    {
+      "path": "tables/runtime_reduction_rows.tex",
+      "bytes": 943,
+      "sha256": "beaf1b29fd52c911c784d3d1e3e124ef12ec366effa2eb9b7bb6db18fd847f6e"
+    },
+    {
+      "path": "tables/runtime_summary_rows.tex",
+      "bytes": 2123,
+      "sha256": "ab1d3dfd8f07b6b0ae4fb38cd1b62c06f7d3157be44ec4e7e9c059bde298a594"
+    },
+    {
+      "path": "tables/variable_flow_rows.tex",
+      "bytes": 431,
+      "sha256": "d0ec04ec6639c4810abc7ed23136bd11093099a943197e1479c746dbad09fa99"
+    },
+    {
+      "path": "figures/matched_policy_savings.svg",
+      "bytes": 137449,
+      "sha256": "f086a869542ad8452b950c09ed348bc272af6820bc0c9372131e2bd206f5231d"
+    },
+    {
+      "path": "figures/matched_policy_weights.svg",
+      "bytes": 146902,
+      "sha256": "410b869de9003f40e9512a791cead9519c05992e732d0847558bf994c6b9ed1a"
+    },
+    {
+      "path": "figures/period_two_minimax.svg",
+      "bytes": 40274,
+      "sha256": "a5710e5a8d94d8aa1ee6f27193428a5bc29b269cb5d48f67847b8d7c5a352a95"
+    },
+    {
+      "path": "figures/setup_choices_frozen.svg",
+      "bytes": 41291,
+      "sha256": "a62226381ec2f37bd1e22a550429325caa50a9a2132b539fcbdb3093fce5bfe8"
+    },
+    {
+      "path": "figures/matched_policy_savings.png",
+      "bytes": 158865,
+      "sha256": "523ed563f6224603359cbfacb3d4d6f077f76a1653453ff50c5ad1a856ddd487"
+    },
+    {
+      "path": "figures/matched_policy_weights.png",
+      "bytes": 175343,
+      "sha256": "1f64dab88d6fbffd535a12f188b7f710d37ac7e38c8c37605acfc6321fd57fff"
+    },
+    {
+      "path": "figures/period_two_minimax.png",
+      "bytes": 95615,
+      "sha256": "b2dc208b2534ed101eca723ba6616dcc7be0d23e901148018030906457b49d4f"
+    },
+    {
+      "path": "figures/setup_choices_frozen.png",
+      "bytes": 62812,
+      "sha256": "43427e252f9d52573a6858af13c7dec7e203120163676da20de9eb45ccf951b4"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "measured_method_cases": 60000,
+  "passed": true,
+  "seed_audits": {
+    "4": {
+      "activation": {
+        "fixed_controller_steps": 0,
+        "frozen_evaluation": false,
+        "joint_controller_steps": 0,
+        "passed": true,
+        "problem_index": 1,
+        "setup_observations": {
+          "bandit_default": 0,
+          "bandit_lstdq": 0
+        }
+      },
+      "complete_seeded_orders": true,
+      "config_and_checkpoints_unchanged": true,
+      "copied_prefix_rows": 0,
+      "first_start_ns": 585559718332916,
+      "last_end_ns": 594831780127666,
+      "logical_method_cases": 20000,
+      "measured_method_cases": 20000,
+      "passed": true,
+      "serial_execution": true,
+      "worker_pid": 78910
+    },
+    "5": {
+      "activation": {
+        "fixed_controller_steps": 0,
+        "frozen_evaluation": false,
+        "joint_controller_steps": 0,
+        "passed": true,
+        "problem_index": 1,
+        "setup_observations": {
+          "bandit_default": 0,
+          "bandit_lstdq": 0
+        }
+      },
+      "complete_seeded_orders": true,
+      "config_and_checkpoints_unchanged": true,
+      "copied_prefix_rows": 0,
+      "first_start_ns": 585559854348791,
+      "last_end_ns": 595046045762458,
+      "logical_method_cases": 20000,
+      "measured_method_cases": 20000,
+      "passed": true,
+      "serial_execution": true,
+      "worker_pid": 78911
+    },
+    "6": {
+      "activation": {
+        "fixed_controller_steps": 0,
+        "frozen_evaluation": false,
+        "joint_controller_steps": 0,
+        "passed": true,
+        "problem_index": 1,
+        "setup_observations": {
+          "bandit_default": 0,
+          "bandit_lstdq": 0
+        }
+      },
+      "complete_seeded_orders": true,
+      "config_and_checkpoints_unchanged": true,
+      "copied_prefix_rows": 0,
+      "first_start_ns": 585559817452333,
+      "last_end_ns": 594793813174833,
+      "logical_method_cases": 20000,
+      "measured_method_cases": 20000,
+      "passed": true,
+      "serial_execution": true,
+      "worker_pid": 78912
+    }
+  },
+  "total_method_cases": 60000
+}

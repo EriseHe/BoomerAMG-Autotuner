@@ -1,0 +1,90 @@
+{
+  "concurrency": "One single-thread worker per seed; four methods serially in balanced permutation blocks",
+  "continuous_stream": false,
+  "copied_measurements": false,
+  "default_attempts": 1,
+  "default_fallback_attempts": 1,
+  "exact_default": {
+    "P_max_elmts": 4,
+    "agg_Pmx": 0,
+    "agg_interp_type": 4,
+    "agg_num_levels": 0,
+    "agg_tr": 0.0,
+    "coarsen_type": 10,
+    "interp_type": 6,
+    "max_row_sum": 0.9,
+    "strong_threshold": 0.25,
+    "trunc_factor": 0.0
+  },
+  "failure_score_beta": 2.0,
+  "feedback_mode": "adjacent_delayed",
+  "fixed_rl_attempts": 1,
+  "frozen_evaluation": false,
+  "learned_attempts": 3,
+  "learning_start": "Both setup learners and both LSTDQ controllers start cold at input 1",
+  "methods": [
+    "default_setup_default_solve",
+    "default_setup_lstdq",
+    "bandit_default",
+    "bandit_lstdq"
+  ],
+  "name": "Module 2: variable_flow_60",
+  "native_sha256": {
+    "hypre/install/lib/libHYPRE.3.0.0.dylib": "c4ade67c2d6b2d4a3e69554808de3910cd13c42dae93d9312fa4493f89c04e21",
+    "hypre/install/lib/libHYPRE.300.dylib": "c4ade67c2d6b2d4a3e69554808de3910cd13c42dae93d9312fa4493f89c04e21",
+    "hypre/install/lib/libHYPRE.dylib": "c4ade67c2d6b2d4a3e69554808de3910cd13c42dae93d9312fa4493f89c04e21",
+    "hypre/interfaces/libamg_runtime.dylib": "15daee59e89d17a77131e4a092bff431846b0dcbf5a2003b7e21f5447fd65ff3"
+  },
+  "phase": "online",
+  "prepared_at": "2026-10-30T19:11:12.946730+00:00",
+  "recovery": "failure_model_adjacent",
+  "rl_cost_target": "native_cycle",
+  "rl_recovery_cost": false,
+  "rl_update_time_charge": "none; controller overhead is evaluation only",
+  "rl_whole_case_failure_rollback": true,
+  "seeds": [
+    "4",
+    "5",
+    "6"
+  ],
+  "setup_failure_observation_retention": true,
+  "setup_fallback_feedback": "successful_default_only",
+  "shared_prefix": false,
+  "solve_state_encoding": "shared_context",
+  "source_commit": "7bb48b639bde855598aaeeb5093d1f8a82f412fb",
+  "stages": {
+    "4": {
+      "cases": 5000,
+      "config_sha256": "1aa127f2bbfc9cf763b25bcd54aec4881fdc0e4102c691ef4bc3decd356e3c11",
+      "freeze_after": null,
+      "full_stream_sha256": "9a98cd94705795e2f67c99394a78fee8d4d81c8c5c70a74685175b1bbf69dc4e",
+      "inputs_sha256": "5253732b086e1c913e9ef57af492413932b2b1c6608cc23d16bd1be7c2638056",
+      "joint_activation_case": 0,
+      "smoke": false,
+      "source_config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/source/configs/module2/variable_flow_60/seed_4.json",
+      "source_config_sha256": "aae64b11bab6dea6ad8690bedd2e06daa614262ff1e57c2807bb71e5fb895f60"
+    },
+    "5": {
+      "cases": 5000,
+      "config_sha256": "3f02758a1ab2b8b4bbc19f081a985e7cc48cf261a5c7461d7cecc2497a1bc970",
+      "freeze_after": null,
+      "full_stream_sha256": "f91500d5563a74995defa02a3138a852c57bcabc702de3d8a951ed40e18434a9",
+      "inputs_sha256": "7f5448937c916ca75ff7026bffa720e61aebcc75ceceb6578383124f4a64d649",
+      "joint_activation_case": 0,
+      "smoke": false,
+      "source_config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/source/configs/module2/variable_flow_60/seed_5.json",
+      "source_config_sha256": "5102b19dc627adcbadfab6cfca74b76dc3d5934cd4653e310e8792c76f6d17f0"
+    },
+    "6": {
+      "cases": 5000,
+      "config_sha256": "87786043ca3bbf111c5b9c381b460d6fd3df9c773f94e6ce2066d191ce7cc5b9",
+      "freeze_after": null,
+      "full_stream_sha256": "cfcb1d4385088cbd8e723a02d222cc0860a15b577ca219d3e2cec29dc222b6fa",
+      "inputs_sha256": "be68a3966a48392d269d99ec46a301f6c16c5370177e85ff135e3e26f782ce51",
+      "joint_activation_case": 0,
+      "smoke": false,
+      "source_config": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/source/configs/module2/variable_flow_60/seed_6.json",
+      "source_config_sha256": "1ea8a556c73015c8bb152679567ba2c5ca764055fa403ce556dc2b5320a4b03e"
+    }
+  }
+}

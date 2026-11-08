@@ -1,0 +1,1880 @@
+{
+  "1": {
+    "global": "fixed_1.6",
+    "global_candidates": [
+      {
+        "failed_cases": 1,
+        "native_solve_sec": 12.413656333335613,
+        "policy": "fixed_1"
+      },
+      {
+        "failed_cases": 1,
+        "native_solve_sec": 11.852060000003002,
+        "policy": "fixed_1.05"
+      },
+      {
+        "failed_cases": 1,
+        "native_solve_sec": 11.30331933332967,
+        "policy": "fixed_1.1"
+      },
+      {
+        "failed_cases": 1,
+        "native_solve_sec": 10.803379666667421,
+        "policy": "fixed_1.15"
+      },
+      {
+        "failed_cases": 1,
+        "native_solve_sec": 10.472878666665832,
+        "policy": "fixed_1.2"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 10.064747666664852,
+        "policy": "fixed_1.25"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.652351666667304,
+        "policy": "fixed_1.3"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.385628666666712,
+        "policy": "fixed_1.35"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.998989666666578,
+        "policy": "fixed_1.4"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.753734333341722,
+        "policy": "fixed_1.45"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.49770866666539,
+        "policy": "fixed_1.5"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.331851333335566,
+        "policy": "fixed_1.55"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.156146333332066,
+        "policy": "fixed_1.6"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.368055999996862,
+        "policy": "fixed_1.65"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.112781000005903,
+        "policy": "fixed_1.7"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 10.736446999998545,
+        "policy": "fixed_1.75"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 13.446618666665133,
+        "policy": "fixed_1.8"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 17.88625899999027,
+        "policy": "fixed_1.85"
+      },
+      {
+        "failed_cases": 1,
+        "native_solve_sec": 26.4202289999933,
+        "policy": "fixed_1.9"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.509492999994873,
+        "policy": "fixed_1.95"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.489955999999243,
+        "policy": "fixed_2"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.706709666664345,
+        "policy": "fixed_2.05"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.627643333325697,
+        "policy": "fixed_2.1"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.585876999992998,
+        "policy": "fixed_2.15"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.49771333333344,
+        "policy": "fixed_2.2"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.49545099999306,
+        "policy": "fixed_2.25"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.610786666663174,
+        "policy": "fixed_2.3"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.662046666662434,
+        "policy": "fixed_2.35"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.594566333336683,
+        "policy": "fixed_2.4"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.742392666655746,
+        "policy": "fixed_2.45"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.4851883333293,
+        "policy": "fixed_2.5"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.650687666671278,
+        "policy": "fixed_2.55"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.624204333337534,
+        "policy": "fixed_2.6"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.787175333331245,
+        "policy": "fixed_2.65"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.606644333336217,
+        "policy": "fixed_2.7"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.832280999999497,
+        "policy": "fixed_2.75"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.560530333328806,
+        "policy": "fixed_2.8"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.510530666666916,
+        "policy": "fixed_2.85"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.539944333322826,
+        "policy": "fixed_2.9"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.443796666677805,
+        "policy": "fixed_2.95"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.513864000006883,
+        "policy": "fixed_3"
+      }
+    ],
+    "per_instance": {
+      "0": "fixed_1.5",
+      "1": "fixed_1.65",
+      "10": "fixed_1.55",
+      "11": "fixed_1.6",
+      "12": "fixed_1.6",
+      "13": "fixed_1.7",
+      "14": "fixed_1.65",
+      "15": "fixed_1.6",
+      "16": "fixed_1.45",
+      "17": "fixed_1.55",
+      "18": "fixed_1.6",
+      "19": "fixed_1.6",
+      "2": "fixed_1.65",
+      "20": "fixed_1.65",
+      "21": "fixed_1.65",
+      "22": "fixed_1.6",
+      "23": "fixed_1.7",
+      "24": "fixed_1.7",
+      "25": "fixed_1.7",
+      "26": "fixed_1.65",
+      "27": "fixed_1.65",
+      "28": "fixed_1.6",
+      "29": "fixed_1.8",
+      "3": "fixed_1.65",
+      "30": "fixed_1.65",
+      "31": "fixed_1.65",
+      "32": "fixed_1.6",
+      "33": "fixed_1.7",
+      "34": "fixed_1.5",
+      "35": "fixed_1.6",
+      "36": "fixed_1.5",
+      "37": "fixed_1.65",
+      "38": "fixed_1.65",
+      "39": "fixed_1.6",
+      "4": "fixed_1.65",
+      "40": "fixed_1.55",
+      "41": "fixed_1.6",
+      "42": "fixed_1.6",
+      "43": "fixed_1.55",
+      "44": "fixed_1.6",
+      "45": "fixed_1.65",
+      "46": "fixed_1.7",
+      "47": "fixed_1.45",
+      "48": "fixed_1.6",
+      "49": "fixed_1.45",
+      "5": "fixed_1.6",
+      "50": "fixed_1.5",
+      "51": "fixed_1.7",
+      "52": "fixed_1.65",
+      "53": "fixed_1.55",
+      "54": "fixed_1.65",
+      "55": "fixed_1.6",
+      "56": "fixed_1.6",
+      "57": "fixed_1.65",
+      "58": "fixed_1.6",
+      "59": "fixed_1.65",
+      "6": "fixed_1.6",
+      "60": "fixed_1.7",
+      "61": "fixed_1.55",
+      "62": "fixed_1.55",
+      "63": "fixed_1.45",
+      "64": "fixed_1.6",
+      "65": "fixed_1.65",
+      "66": "fixed_1.7",
+      "67": "fixed_1.6",
+      "68": "fixed_1.4",
+      "69": "fixed_1.7",
+      "7": "fixed_1.65",
+      "70": "fixed_1.65",
+      "71": "fixed_1.65",
+      "72": "fixed_1.7",
+      "73": "fixed_1.35",
+      "74": "fixed_1.6",
+      "75": "fixed_1.5",
+      "76": "fixed_1.6",
+      "77": "fixed_1.7",
+      "78": "fixed_1.5",
+      "79": "fixed_1.6",
+      "8": "fixed_1.6",
+      "80": "fixed_1.65",
+      "81": "fixed_1.6",
+      "82": "fixed_1.6",
+      "83": "fixed_1.6",
+      "84": "fixed_1.6",
+      "85": "fixed_1.65",
+      "86": "fixed_1.65",
+      "87": "fixed_1.55",
+      "88": "fixed_1.5",
+      "89": "fixed_1.7",
+      "9": "fixed_1.35",
+      "90": "fixed_1.55",
+      "91": "fixed_1.7",
+      "92": "fixed_1.65",
+      "93": "fixed_1.45",
+      "94": "fixed_1.6",
+      "95": "fixed_1.55",
+      "96": "fixed_1.6",
+      "97": "fixed_1.6",
+      "98": "fixed_1.6",
+      "99": "fixed_1.65"
+    },
+    "uncovered_case_ids": []
+  },
+  "2": {
+    "global": "fixed_1.6",
+    "global_candidates": [
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 12.419911333336662,
+        "policy": "fixed_1"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 11.776911999998067,
+        "policy": "fixed_1.05"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 11.296327333330337,
+        "policy": "fixed_1.1"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 10.76621600000048,
+        "policy": "fixed_1.15"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 10.292371333336835,
+        "policy": "fixed_1.2"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.954696333333898,
+        "policy": "fixed_1.25"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.573644666661684,
+        "policy": "fixed_1.3"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.202346333332793,
+        "policy": "fixed_1.35"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.849871333331516,
+        "policy": "fixed_1.4"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.579385999994647,
+        "policy": "fixed_1.45"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.442987666664706,
+        "policy": "fixed_1.5"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.225131333331724,
+        "policy": "fixed_1.55"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.147556666664938,
+        "policy": "fixed_1.6"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.405055999996836,
+        "policy": "fixed_1.65"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.211087666661138,
+        "policy": "fixed_1.7"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 10.959615000000138,
+        "policy": "fixed_1.75"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 13.795487000005712,
+        "policy": "fixed_1.8"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 18.446828666661602,
+        "policy": "fixed_1.85"
+      },
+      {
+        "failed_cases": 1,
+        "native_solve_sec": 27.12313033333427,
+        "policy": "fixed_1.9"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.327486000003496,
+        "policy": "fixed_1.95"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.4772490000048,
+        "policy": "fixed_2"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.5278909999984,
+        "policy": "fixed_2.05"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.47056966668008,
+        "policy": "fixed_2.1"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.50206999999669,
+        "policy": "fixed_2.15"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.3909760000044,
+        "policy": "fixed_2.2"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.434687000005496,
+        "policy": "fixed_2.25"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.389830666666164,
+        "policy": "fixed_2.3"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.44530333333479,
+        "policy": "fixed_2.35"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.447794666678895,
+        "policy": "fixed_2.4"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.34927100000165,
+        "policy": "fixed_2.45"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.47151566667124,
+        "policy": "fixed_2.5"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.40819399999992,
+        "policy": "fixed_2.55"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.4321723333269,
+        "policy": "fixed_2.6"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.476535000003075,
+        "policy": "fixed_2.65"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.42337433333414,
+        "policy": "fixed_2.7"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.55609633332858,
+        "policy": "fixed_2.75"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.42341799998914,
+        "policy": "fixed_2.8"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.39654666667336,
+        "policy": "fixed_2.85"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.48887700000417,
+        "policy": "fixed_2.9"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.494577333333595,
+        "policy": "fixed_2.95"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 32.35613700001354,
+        "policy": "fixed_3"
+      }
+    ],
+    "per_instance": {
+      "0": "fixed_1.5",
+      "1": "fixed_1.5",
+      "10": "fixed_1.65",
+      "11": "fixed_1.55",
+      "12": "fixed_1.55",
+      "13": "fixed_1.7",
+      "14": "fixed_1.65",
+      "15": "fixed_1.7",
+      "16": "fixed_1.6",
+      "17": "fixed_1.6",
+      "18": "fixed_1.6",
+      "19": "fixed_1.55",
+      "2": "fixed_1.65",
+      "20": "fixed_1.55",
+      "21": "fixed_1.6",
+      "22": "fixed_1.6",
+      "23": "fixed_1.7",
+      "24": "fixed_1.65",
+      "25": "fixed_1.7",
+      "26": "fixed_1.65",
+      "27": "fixed_1.6",
+      "28": "fixed_1.7",
+      "29": "fixed_1.2",
+      "3": "fixed_1.55",
+      "30": "fixed_1.6",
+      "31": "fixed_1.6",
+      "32": "fixed_1.6",
+      "33": "fixed_1.7",
+      "34": "fixed_1.5",
+      "35": "fixed_1.65",
+      "36": "fixed_1.5",
+      "37": "fixed_1.7",
+      "38": "fixed_1.65",
+      "39": "fixed_1.5",
+      "4": "fixed_1.65",
+      "40": "fixed_1.45",
+      "41": "fixed_1.5",
+      "42": "fixed_1.6",
+      "43": "fixed_1.65",
+      "44": "fixed_1.65",
+      "45": "fixed_1.6",
+      "46": "fixed_1.75",
+      "47": "fixed_1.55",
+      "48": "fixed_1.55",
+      "49": "fixed_1.5",
+      "5": "fixed_1.6",
+      "50": "fixed_1.5",
+      "51": "fixed_1.65",
+      "52": "fixed_1.7",
+      "53": "fixed_1.6",
+      "54": "fixed_1.6",
+      "55": "fixed_1.6",
+      "56": "fixed_1.55",
+      "57": "fixed_1.65",
+      "58": "fixed_1.55",
+      "59": "fixed_1.65",
+      "6": "fixed_1.6",
+      "60": "fixed_1.7",
+      "61": "fixed_1.55",
+      "62": "fixed_1.45",
+      "63": "fixed_1.5",
+      "64": "fixed_1.6",
+      "65": "fixed_1.65",
+      "66": "fixed_1.7",
+      "67": "fixed_1.45",
+      "68": "fixed_1.55",
+      "69": "fixed_1.65",
+      "7": "fixed_1.65",
+      "70": "fixed_1.65",
+      "71": "fixed_1.65",
+      "72": "fixed_1.7",
+      "73": "fixed_1.5",
+      "74": "fixed_1.5",
+      "75": "fixed_1.6",
+      "76": "fixed_1.6",
+      "77": "fixed_1.7",
+      "78": "fixed_1.6",
+      "79": "fixed_1.55",
+      "8": "fixed_1.65",
+      "80": "fixed_1.55",
+      "81": "fixed_1.55",
+      "82": "fixed_1.65",
+      "83": "fixed_1.45",
+      "84": "fixed_1.7",
+      "85": "fixed_1.55",
+      "86": "fixed_1.65",
+      "87": "fixed_1.6",
+      "88": "fixed_1.55",
+      "89": "fixed_1.6",
+      "9": "fixed_1.35",
+      "90": "fixed_1.55",
+      "91": "fixed_1.65",
+      "92": "fixed_1.6",
+      "93": "fixed_1.5",
+      "94": "fixed_1.6",
+      "95": "fixed_1.6",
+      "96": "fixed_1.6",
+      "97": "fixed_1.6",
+      "98": "fixed_1.6",
+      "99": "fixed_1.65"
+    },
+    "uncovered_case_ids": []
+  },
+  "3": {
+    "global": "fixed_1.6",
+    "global_candidates": [
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 12.515624999995522,
+        "policy": "fixed_1"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 11.912785999997721,
+        "policy": "fixed_1.05"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 11.340809000004302,
+        "policy": "fixed_1.1"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 10.855147000001008,
+        "policy": "fixed_1.15"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 10.428793333335289,
+        "policy": "fixed_1.2"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.97932033333656,
+        "policy": "fixed_1.25"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.633095333334028,
+        "policy": "fixed_1.3"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.21438566666847,
+        "policy": "fixed_1.35"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.961736333330816,
+        "policy": "fixed_1.4"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.644114000002414,
+        "policy": "fixed_1.45"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.399724333333921,
+        "policy": "fixed_1.5"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.207930999997673,
+        "policy": "fixed_1.55"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.062426333332693,
+        "policy": "fixed_1.6"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.26013299999838,
+        "policy": "fixed_1.65"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.951029000002567,
+        "policy": "fixed_1.7"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 10.592465666668122,
+        "policy": "fixed_1.75"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 13.14724666666329,
+        "policy": "fixed_1.8"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 17.524497666661198,
+        "policy": "fixed_1.85"
+      },
+      {
+        "failed_cases": 1,
+        "native_solve_sec": 25.819501333333964,
+        "policy": "fixed_1.9"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.78466200000281,
+        "policy": "fixed_1.95"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.757718333336477,
+        "policy": "fixed_2"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.878904999994866,
+        "policy": "fixed_2.05"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.867687666666118,
+        "policy": "fixed_2.1"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.658095333340192,
+        "policy": "fixed_2.15"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.757901666675576,
+        "policy": "fixed_2.2"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.7817719999996,
+        "policy": "fixed_2.25"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.75904100000128,
+        "policy": "fixed_2.3"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.93181099999362,
+        "policy": "fixed_2.35"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.701699666661654,
+        "policy": "fixed_2.4"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.83656300000771,
+        "policy": "fixed_2.45"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.926070666659246,
+        "policy": "fixed_2.5"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.781485999990597,
+        "policy": "fixed_2.55"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.959634333334733,
+        "policy": "fixed_2.6"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.746413666667117,
+        "policy": "fixed_2.65"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.836405666666842,
+        "policy": "fixed_2.7"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.813482333337205,
+        "policy": "fixed_2.75"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.711115999990408,
+        "policy": "fixed_2.8"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.85416199999841,
+        "policy": "fixed_2.85"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.772402333334366,
+        "policy": "fixed_2.9"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.934952666666018,
+        "policy": "fixed_2.95"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.822142000004522,
+        "policy": "fixed_3"
+      }
+    ],
+    "per_instance": {
+      "0": "fixed_1.5",
+      "1": "fixed_1.7",
+      "10": "fixed_1.55",
+      "11": "fixed_1.55",
+      "12": "fixed_1.6",
+      "13": "fixed_1.65",
+      "14": "fixed_1.6",
+      "15": "fixed_1.6",
+      "16": "fixed_1.7",
+      "17": "fixed_1.45",
+      "18": "fixed_1.65",
+      "19": "fixed_1.5",
+      "2": "fixed_1.7",
+      "20": "fixed_1.7",
+      "21": "fixed_1.65",
+      "22": "fixed_1.6",
+      "23": "fixed_1.7",
+      "24": "fixed_1.7",
+      "25": "fixed_1.7",
+      "26": "fixed_1.6",
+      "27": "fixed_1.6",
+      "28": "fixed_1.7",
+      "29": "fixed_1.65",
+      "3": "fixed_1.6",
+      "30": "fixed_1.55",
+      "31": "fixed_1.6",
+      "32": "fixed_1.6",
+      "33": "fixed_1.65",
+      "34": "fixed_1.6",
+      "35": "fixed_1.65",
+      "36": "fixed_1.45",
+      "37": "fixed_1.6",
+      "38": "fixed_1.65",
+      "39": "fixed_1.6",
+      "4": "fixed_1.6",
+      "40": "fixed_1.45",
+      "41": "fixed_1.55",
+      "42": "fixed_1.65",
+      "43": "fixed_1.65",
+      "44": "fixed_1.65",
+      "45": "fixed_1.65",
+      "46": "fixed_1.7",
+      "47": "fixed_1.6",
+      "48": "fixed_1.5",
+      "49": "fixed_1.55",
+      "5": "fixed_1.4",
+      "50": "fixed_1.4",
+      "51": "fixed_1.65",
+      "52": "fixed_1.65",
+      "53": "fixed_1.55",
+      "54": "fixed_1.65",
+      "55": "fixed_1.6",
+      "56": "fixed_1.65",
+      "57": "fixed_1.65",
+      "58": "fixed_1.6",
+      "59": "fixed_1.6",
+      "6": "fixed_1.7",
+      "60": "fixed_1.7",
+      "61": "fixed_1.6",
+      "62": "fixed_1.6",
+      "63": "fixed_1.65",
+      "64": "fixed_1.55",
+      "65": "fixed_1.75",
+      "66": "fixed_1.6",
+      "67": "fixed_1.5",
+      "68": "fixed_1.5",
+      "69": "fixed_1.65",
+      "7": "fixed_1.6",
+      "70": "fixed_1.6",
+      "71": "fixed_1.65",
+      "72": "fixed_1.7",
+      "73": "fixed_1.8",
+      "74": "fixed_1.55",
+      "75": "fixed_1.55",
+      "76": "fixed_1.55",
+      "77": "fixed_1.7",
+      "78": "fixed_1.5",
+      "79": "fixed_1.6",
+      "8": "fixed_1.6",
+      "80": "fixed_1.65",
+      "81": "fixed_1.45",
+      "82": "fixed_1.6",
+      "83": "fixed_1.45",
+      "84": "fixed_1.65",
+      "85": "fixed_1.55",
+      "86": "fixed_1.6",
+      "87": "fixed_1.5",
+      "88": "fixed_1.7",
+      "89": "fixed_1.6",
+      "9": "fixed_1.5",
+      "90": "fixed_1.6",
+      "91": "fixed_1.65",
+      "92": "fixed_1.6",
+      "93": "fixed_1.55",
+      "94": "fixed_1.65",
+      "95": "fixed_1.6",
+      "96": "fixed_1.7",
+      "97": "fixed_1.5",
+      "98": "fixed_1.55",
+      "99": "fixed_1.65"
+    },
+    "uncovered_case_ids": []
+  },
+  "4": {
+    "global": "fixed_1.6",
+    "global_candidates": [
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 12.34335966666487,
+        "policy": "fixed_1"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 11.821598000003076,
+        "policy": "fixed_1.05"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 11.328069333329793,
+        "policy": "fixed_1.1"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 10.768643666668186,
+        "policy": "fixed_1.15"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 10.391894999998948,
+        "policy": "fixed_1.2"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.931537666667479,
+        "policy": "fixed_1.25"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.560348000000477,
+        "policy": "fixed_1.3"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.23179633333306,
+        "policy": "fixed_1.35"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.916398666664358,
+        "policy": "fixed_1.4"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.646100333329583,
+        "policy": "fixed_1.45"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.388040333331805,
+        "policy": "fixed_1.5"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.202077000002431,
+        "policy": "fixed_1.55"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.047939666659612,
+        "policy": "fixed_1.6"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.281781666662518,
+        "policy": "fixed_1.65"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.005877666666912,
+        "policy": "fixed_1.7"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 10.55569233333286,
+        "policy": "fixed_1.75"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 13.073873000008977,
+        "policy": "fixed_1.8"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 17.61697566666666,
+        "policy": "fixed_1.85"
+      },
+      {
+        "failed_cases": 2,
+        "native_solve_sec": 25.765715333325,
+        "policy": "fixed_1.9"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.801853999999928,
+        "policy": "fixed_1.95"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.656151666662765,
+        "policy": "fixed_2"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.731823000001302,
+        "policy": "fixed_2.05"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.72094199999975,
+        "policy": "fixed_2.1"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.724954666669326,
+        "policy": "fixed_2.15"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.808710000001597,
+        "policy": "fixed_2.2"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.889953666669086,
+        "policy": "fixed_2.25"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.879766999996598,
+        "policy": "fixed_2.3"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.853194333336607,
+        "policy": "fixed_2.35"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.65895233333582,
+        "policy": "fixed_2.4"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.647510666662104,
+        "policy": "fixed_2.45"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.727722999992956,
+        "policy": "fixed_2.5"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.90137033332905,
+        "policy": "fixed_2.55"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.853116000004306,
+        "policy": "fixed_2.6"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.912743666668035,
+        "policy": "fixed_2.65"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.791612666672734,
+        "policy": "fixed_2.7"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.68661433334209,
+        "policy": "fixed_2.75"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.794255000002423,
+        "policy": "fixed_2.8"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.684855000007744,
+        "policy": "fixed_2.85"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.8207633333446,
+        "policy": "fixed_2.9"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.818653333326203,
+        "policy": "fixed_2.95"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 30.839855666656515,
+        "policy": "fixed_3"
+      }
+    ],
+    "per_instance": {
+      "0": "fixed_1.45",
+      "1": "fixed_1.65",
+      "10": "fixed_1.6",
+      "11": "fixed_1.6",
+      "12": "fixed_1.55",
+      "13": "fixed_1.7",
+      "14": "fixed_1.55",
+      "15": "fixed_1.6",
+      "16": "fixed_1.6",
+      "17": "fixed_1.45",
+      "18": "fixed_1.6",
+      "19": "fixed_1.6",
+      "2": "fixed_1.7",
+      "20": "fixed_1.75",
+      "21": "fixed_1.65",
+      "22": "fixed_1.55",
+      "23": "fixed_1.65",
+      "24": "fixed_1.65",
+      "25": "fixed_1.65",
+      "26": "fixed_1.65",
+      "27": "fixed_1.6",
+      "28": "fixed_1.65",
+      "29": "fixed_1.5",
+      "3": "fixed_1.55",
+      "30": "fixed_1.55",
+      "31": "fixed_1.7",
+      "32": "fixed_1.65",
+      "33": "fixed_1.65",
+      "34": "fixed_1.65",
+      "35": "fixed_1.65",
+      "36": "fixed_1.35",
+      "37": "fixed_1.55",
+      "38": "fixed_1.6",
+      "39": "fixed_1.6",
+      "4": "fixed_1.65",
+      "40": "fixed_1.55",
+      "41": "fixed_1.55",
+      "42": "fixed_1.6",
+      "43": "fixed_1.55",
+      "44": "fixed_1.65",
+      "45": "fixed_1.65",
+      "46": "fixed_1.75",
+      "47": "fixed_1.65",
+      "48": "fixed_1.55",
+      "49": "fixed_1.55",
+      "5": "fixed_1.6",
+      "50": "fixed_1.45",
+      "51": "fixed_1.65",
+      "52": "fixed_1.7",
+      "53": "fixed_1.45",
+      "54": "fixed_1.6",
+      "55": "fixed_1.6",
+      "56": "fixed_1.6",
+      "57": "fixed_1.65",
+      "58": "fixed_1.6",
+      "59": "fixed_1.55",
+      "6": "fixed_1.65",
+      "60": "fixed_1.7",
+      "61": "fixed_1.6",
+      "62": "fixed_1.5",
+      "63": "fixed_1.7",
+      "64": "fixed_1.55",
+      "65": "fixed_1.7",
+      "66": "fixed_1.6",
+      "67": "fixed_1.5",
+      "68": "fixed_1.5",
+      "69": "fixed_1.65",
+      "7": "fixed_1.55",
+      "70": "fixed_1.6",
+      "71": "fixed_1.65",
+      "72": "fixed_1.65",
+      "73": "fixed_1.7",
+      "74": "fixed_1.55",
+      "75": "fixed_1.6",
+      "76": "fixed_1.6",
+      "77": "fixed_1.75",
+      "78": "fixed_1.5",
+      "79": "fixed_1.6",
+      "8": "fixed_1.55",
+      "80": "fixed_1.6",
+      "81": "fixed_1.6",
+      "82": "fixed_1.55",
+      "83": "fixed_1.55",
+      "84": "fixed_1.65",
+      "85": "fixed_1.55",
+      "86": "fixed_1.65",
+      "87": "fixed_1.55",
+      "88": "fixed_1.65",
+      "89": "fixed_1.6",
+      "9": "fixed_1.3",
+      "90": "fixed_1.55",
+      "91": "fixed_1.6",
+      "92": "fixed_1.6",
+      "93": "fixed_1.5",
+      "94": "fixed_1.55",
+      "95": "fixed_1.4",
+      "96": "fixed_1.7",
+      "97": "fixed_1.6",
+      "98": "fixed_1.55",
+      "99": "fixed_1.6"
+    },
+    "uncovered_case_ids": []
+  },
+  "5": {
+    "global": "fixed_1.6",
+    "global_candidates": [
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 12.6706443333341,
+        "policy": "fixed_1"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 12.086173999998364,
+        "policy": "fixed_1.05"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 11.50411866666512,
+        "policy": "fixed_1.1"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 11.028953000003161,
+        "policy": "fixed_1.15"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 10.531109999999778,
+        "policy": "fixed_1.2"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 10.149350000002377,
+        "policy": "fixed_1.25"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.826673000000502,
+        "policy": "fixed_1.3"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.386469333330947,
+        "policy": "fixed_1.35"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.065064333334327,
+        "policy": "fixed_1.4"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.828743666659205,
+        "policy": "fixed_1.45"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.631582666666363,
+        "policy": "fixed_1.5"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.419859999998275,
+        "policy": "fixed_1.55"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.343609999996254,
+        "policy": "fixed_1.6"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 8.738853999999245,
+        "policy": "fixed_1.65"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 9.658560999998405,
+        "policy": "fixed_1.7"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 11.462081999996535,
+        "policy": "fixed_1.75"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 14.434325666670867,
+        "policy": "fixed_1.8"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 19.24273300000175,
+        "policy": "fixed_1.85"
+      },
+      {
+        "failed_cases": 2,
+        "native_solve_sec": 28.16607333333276,
+        "policy": "fixed_1.9"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.8051439999958,
+        "policy": "fixed_1.95"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 34.04280366666759,
+        "policy": "fixed_2"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.78553366667548,
+        "policy": "fixed_2.05"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.735860999997044,
+        "policy": "fixed_2.1"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.81479666666164,
+        "policy": "fixed_2.15"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.70260166668139,
+        "policy": "fixed_2.2"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.813824666671174,
+        "policy": "fixed_2.25"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.87181566666438,
+        "policy": "fixed_2.3"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.64998866665587,
+        "policy": "fixed_2.35"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.7830943333345,
+        "policy": "fixed_2.4"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.81715699999698,
+        "policy": "fixed_2.45"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.82226066667298,
+        "policy": "fixed_2.5"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.65043633333235,
+        "policy": "fixed_2.55"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.56864633332513,
+        "policy": "fixed_2.6"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.824897666651694,
+        "policy": "fixed_2.65"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.80442333333278,
+        "policy": "fixed_2.7"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.61712166667958,
+        "policy": "fixed_2.75"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.84320699999289,
+        "policy": "fixed_2.8"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.70696566667541,
+        "policy": "fixed_2.85"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.672127666663656,
+        "policy": "fixed_2.9"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.72390066666593,
+        "policy": "fixed_2.95"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 33.75989833332633,
+        "policy": "fixed_3"
+      }
+    ],
+    "per_instance": {
+      "0": "fixed_1.55",
+      "1": "fixed_1.6",
+      "10": "fixed_1.6",
+      "11": "fixed_1.6",
+      "12": "fixed_1.65",
+      "13": "fixed_1.65",
+      "14": "fixed_1.6",
+      "15": "fixed_1.7",
+      "16": "fixed_1.55",
+      "17": "fixed_1.55",
+      "18": "fixed_1.6",
+      "19": "fixed_1.5",
+      "2": "fixed_1.65",
+      "20": "fixed_1.55",
+      "21": "fixed_1.55",
+      "22": "fixed_1.6",
+      "23": "fixed_1.7",
+      "24": "fixed_1.6",
+      "25": "fixed_1.6",
+      "26": "fixed_1.65",
+      "27": "fixed_1.6",
+      "28": "fixed_1.35",
+      "29": "fixed_1.55",
+      "3": "fixed_1.6",
+      "30": "fixed_1.6",
+      "31": "fixed_1.65",
+      "32": "fixed_1.6",
+      "33": "fixed_1.65",
+      "34": "fixed_1.6",
+      "35": "fixed_1.35",
+      "36": "fixed_1.45",
+      "37": "fixed_1.65",
+      "38": "fixed_1.6",
+      "39": "fixed_1.5",
+      "4": "fixed_1.65",
+      "40": "fixed_1.6",
+      "41": "fixed_1.4",
+      "42": "fixed_1.55",
+      "43": "fixed_1.5",
+      "44": "fixed_1.55",
+      "45": "fixed_1.6",
+      "46": "fixed_1.7",
+      "47": "fixed_1.6",
+      "48": "fixed_1.45",
+      "49": "fixed_1.55",
+      "5": "fixed_1.55",
+      "50": "fixed_1.45",
+      "51": "fixed_1.7",
+      "52": "fixed_1.65",
+      "53": "fixed_1.4",
+      "54": "fixed_1.55",
+      "55": "fixed_1.6",
+      "56": "fixed_1.5",
+      "57": "fixed_1.65",
+      "58": "fixed_1.6",
+      "59": "fixed_1.6",
+      "6": "fixed_1.6",
+      "60": "fixed_1.7",
+      "61": "fixed_1.6",
+      "62": "fixed_1.55",
+      "63": "fixed_1.4",
+      "64": "fixed_1.55",
+      "65": "fixed_1.6",
+      "66": "fixed_1.7",
+      "67": "fixed_1.45",
+      "68": "fixed_1.45",
+      "69": "fixed_1.65",
+      "7": "fixed_1.65",
+      "70": "fixed_1.65",
+      "71": "fixed_1.65",
+      "72": "fixed_1.65",
+      "73": "fixed_1.45",
+      "74": "fixed_1.45",
+      "75": "fixed_1.6",
+      "76": "fixed_1.6",
+      "77": "fixed_1.4",
+      "78": "fixed_1.4",
+      "79": "fixed_1.6",
+      "8": "fixed_1.6",
+      "80": "fixed_1.6",
+      "81": "fixed_1.55",
+      "82": "fixed_1.6",
+      "83": "fixed_1.4",
+      "84": "fixed_1.7",
+      "85": "fixed_1.5",
+      "86": "fixed_1.65",
+      "87": "fixed_1.55",
+      "88": "fixed_1.55",
+      "89": "fixed_1.6",
+      "9": "fixed_1.8",
+      "90": "fixed_1.55",
+      "91": "fixed_1.7",
+      "92": "fixed_1.7",
+      "93": "fixed_1.5",
+      "94": "fixed_1.6",
+      "95": "fixed_1.6",
+      "96": "fixed_1.65",
+      "97": "fixed_1.5",
+      "98": "fixed_1.65",
+      "99": "fixed_1.55"
+    },
+    "uncovered_case_ids": []
+  },
+  "6": {
+    "global": "fixed_1.6",
+    "global_candidates": [
+      {
+        "failed_cases": 2,
+        "native_solve_sec": 12.446157666670803,
+        "policy": "fixed_1"
+      },
+      {
+        "failed_cases": 2,
+        "native_solve_sec": 11.89854933333916,
+        "policy": "fixed_1.05"
+      },
+      {
+        "failed_cases": 2,
+        "native_solve_sec": 11.375761666663085,
+        "policy": "fixed_1.1"
+      },
+      {
+        "failed_cases": 2,
+        "native_solve_sec": 10.908728333336903,
+        "policy": "fixed_1.15"
+      },
+      {
+        "failed_cases": 2,
+        "native_solve_sec": 10.51616599999786,
+        "policy": "fixed_1.2"
+      },
+      {
+        "failed_cases": 2,
+        "native_solve_sec": 10.15573566666571,
+        "policy": "fixed_1.25"
+      },
+      {
+        "failed_cases": 2,
+        "native_solve_sec": 9.771805999996044,
+        "policy": "fixed_1.3"
+      },
+      {
+        "failed_cases": 2,
+        "native_solve_sec": 9.461047666662534,
+        "policy": "fixed_1.35"
+      },
+      {
+        "failed_cases": 2,
+        "native_solve_sec": 9.201886666658343,
+        "policy": "fixed_1.4"
+      },
+      {
+        "failed_cases": 1,
+        "native_solve_sec": 8.887487000004585,
+        "policy": "fixed_1.45"
+      },
+      {
+        "failed_cases": 1,
+        "native_solve_sec": 8.681096333336711,
+        "policy": "fixed_1.5"
+      },
+      {
+        "failed_cases": 1,
+        "native_solve_sec": 8.450619999998517,
+        "policy": "fixed_1.55"
+      },
+      {
+        "failed_cases": 1,
+        "native_solve_sec": 8.329348333331076,
+        "policy": "fixed_1.6"
+      },
+      {
+        "failed_cases": 1,
+        "native_solve_sec": 8.455925333332202,
+        "policy": "fixed_1.65"
+      },
+      {
+        "failed_cases": 1,
+        "native_solve_sec": 9.201434666671172,
+        "policy": "fixed_1.7"
+      },
+      {
+        "failed_cases": 1,
+        "native_solve_sec": 10.891762999996685,
+        "policy": "fixed_1.75"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 13.542946333335307,
+        "policy": "fixed_1.8"
+      },
+      {
+        "failed_cases": 0,
+        "native_solve_sec": 17.81968366667069,
+        "policy": "fixed_1.85"
+      },
+      {
+        "failed_cases": 1,
+        "native_solve_sec": 26.210975999994442,
+        "policy": "fixed_1.9"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.547678000001486,
+        "policy": "fixed_1.95"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.464684333332276,
+        "policy": "fixed_2"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.410847333339888,
+        "policy": "fixed_2.05"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.42809133333476,
+        "policy": "fixed_2.1"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.454586333343393,
+        "policy": "fixed_2.15"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.3412310000125,
+        "policy": "fixed_2.2"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.531973999995248,
+        "policy": "fixed_2.25"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.366811333327068,
+        "policy": "fixed_2.3"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.569642666659863,
+        "policy": "fixed_2.35"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.42862433332885,
+        "policy": "fixed_2.4"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.29690499999388,
+        "policy": "fixed_2.45"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.44785199999475,
+        "policy": "fixed_2.5"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.421424666667374,
+        "policy": "fixed_2.55"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.43428733333377,
+        "policy": "fixed_2.6"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.3395563333353,
+        "policy": "fixed_2.65"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.454368333330077,
+        "policy": "fixed_2.7"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.44106399999043,
+        "policy": "fixed_2.75"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.337596333322157,
+        "policy": "fixed_2.8"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.371382999998882,
+        "policy": "fixed_2.85"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.355482666665768,
+        "policy": "fixed_2.9"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.32710133331945,
+        "policy": "fixed_2.95"
+      },
+      {
+        "failed_cases": 100,
+        "native_solve_sec": 31.342554999999525,
+        "policy": "fixed_3"
+      }
+    ],
+    "per_instance": {
+      "0": "fixed_1.5",
+      "1": "fixed_1.6",
+      "10": "fixed_1.6",
+      "11": "fixed_1.65",
+      "12": "fixed_1.65",
+      "13": "fixed_1.7",
+      "14": "fixed_1.55",
+      "15": "fixed_1.55",
+      "16": "fixed_1.55",
+      "17": "fixed_1.5",
+      "18": "fixed_1.6",
+      "19": "fixed_1.6",
+      "2": "fixed_1.65",
+      "20": "fixed_1.6",
+      "21": "fixed_1.6",
+      "22": "fixed_1.6",
+      "23": "fixed_1.7",
+      "24": "fixed_1.7",
+      "25": "fixed_1.65",
+      "26": "fixed_1.65",
+      "27": "fixed_1.65",
+      "28": "fixed_1.6",
+      "29": "fixed_1.75",
+      "3": "fixed_1.65",
+      "30": "fixed_1.65",
+      "31": "fixed_1.6",
+      "32": "fixed_1.65",
+      "33": "fixed_1.7",
+      "34": "fixed_1.45",
+      "35": "fixed_1.55",
+      "36": "fixed_1.45",
+      "37": "fixed_1.65",
+      "38": "fixed_1.55",
+      "39": "fixed_1.6",
+      "4": "fixed_1.65",
+      "40": "fixed_1.6",
+      "41": "fixed_1.45",
+      "42": "fixed_1.65",
+      "43": "fixed_1.6",
+      "44": "fixed_1.65",
+      "45": "fixed_1.6",
+      "46": "fixed_1.7",
+      "47": "fixed_1.65",
+      "48": "fixed_1.6",
+      "49": "fixed_1.4",
+      "5": "fixed_1.6",
+      "50": "fixed_1.5",
+      "51": "fixed_1.7",
+      "52": "fixed_1.7",
+      "53": "fixed_1.6",
+      "54": "fixed_1.6",
+      "55": "fixed_1.6",
+      "56": "fixed_1.6",
+      "57": "fixed_1.65",
+      "58": "fixed_1.55",
+      "59": "fixed_1.65",
+      "6": "fixed_1.65",
+      "60": "fixed_1.7",
+      "61": "fixed_1.6",
+      "62": "fixed_1.45",
+      "63": "fixed_1.6",
+      "64": "fixed_1.5",
+      "65": "fixed_1.65",
+      "66": "fixed_1.7",
+      "67": "fixed_1.55",
+      "68": "fixed_1.6",
+      "69": "fixed_1.65",
+      "7": "fixed_1.65",
+      "70": "fixed_1.65",
+      "71": "fixed_1.65",
+      "72": "fixed_1.6",
+      "73": "fixed_1.4",
+      "74": "fixed_1.6",
+      "75": "fixed_1.55",
+      "76": "fixed_1.6",
+      "77": "fixed_1.7",
+      "78": "fixed_1.55",
+      "79": "fixed_1.5",
+      "8": "fixed_1.65",
+      "80": "fixed_1.7",
+      "81": "fixed_1.6",
+      "82": "fixed_1.55",
+      "83": "fixed_1.55",
+      "84": "fixed_1.65",
+      "85": "fixed_1.65",
+      "86": "fixed_1.65",
+      "87": "fixed_1.55",
+      "88": "fixed_1.55",
+      "89": "fixed_1.65",
+      "9": "fixed_1.55",
+      "90": "fixed_1.5",
+      "91": "fixed_1.7",
+      "92": "fixed_1.65",
+      "93": "fixed_1.5",
+      "94": "fixed_1.55",
+      "95": "fixed_1.9",
+      "96": "fixed_1.6",
+      "97": "fixed_1.55",
+      "98": "fixed_1.65",
+      "99": "fixed_1.5"
+    },
+    "uncovered_case_ids": []
+  }
+}

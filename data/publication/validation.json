@@ -1,0 +1,1266 @@
+{
+  "passed": true,
+  "module1": {
+    "online_method_problem_records": 720000,
+    "frozen_method_problem_records": 144000,
+    "all_array_partitions_match_summaries": true,
+    "paper_table_checks": {
+      "runtime_summary_rows": {
+        "path": "/Users/erisehe/Documents/GitHub/SISC-Overleaf/tables/runtime_summary_rows.tex",
+        "rows_checked": 24,
+        "all_match": true,
+        "rows": [
+          {
+            "case": "diffusion_40",
+            "method": "default_setup_default_solve",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "57.4"
+              ],
+              [
+                "24.9"
+              ],
+              [
+                "0.0"
+              ],
+              [],
+              []
+            ],
+            "expected": [
+              [
+                "57.4"
+              ],
+              [
+                "24.9"
+              ],
+              [
+                "0.0"
+              ]
+            ]
+          },
+          {
+            "case": "diffusion_40",
+            "method": "default_setup_lstdq",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "57.4"
+              ],
+              [
+                "17.5"
+              ],
+              [
+                "2.0"
+              ],
+              [
+                "6.5",
+                "0.5"
+              ],
+              [
+                "8.1",
+                "0.7"
+              ]
+            ],
+            "expected": [
+              [
+                "57.4"
+              ],
+              [
+                "17.5"
+              ],
+              [
+                "2.0"
+              ],
+              [
+                "6.5",
+                "0.5"
+              ],
+              [
+                "8.1",
+                "0.7"
+              ]
+            ]
+          },
+          {
+            "case": "diffusion_40",
+            "method": "bandit_default",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "21.9"
+              ],
+              [
+                "40.7"
+              ],
+              [
+                "3.1"
+              ],
+              [
+                "20.2",
+                "0.7"
+              ],
+              [
+                "28.4",
+                "1.3"
+              ]
+            ],
+            "expected": [
+              [
+                "21.9"
+              ],
+              [
+                "40.7"
+              ],
+              [
+                "3.1"
+              ],
+              [
+                "20.2",
+                "0.7"
+              ],
+              [
+                "28.4",
+                "1.3"
+              ]
+            ]
+          },
+          {
+            "case": "diffusion_40",
+            "method": "bandit_lstdq",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "20.7"
+              ],
+              [
+                "25.6"
+              ],
+              [
+                "6.2"
+              ],
+              [
+                "36.1",
+                "1.0"
+              ],
+              [
+                "47.0",
+                "1.7"
+              ]
+            ],
+            "expected": [
+              [
+                "20.7"
+              ],
+              [
+                "25.6"
+              ],
+              [
+                "6.2"
+              ],
+              [
+                "36.1",
+                "1.0"
+              ],
+              [
+                "47.0",
+                "1.7"
+              ]
+            ]
+          },
+          {
+            "case": "diffusion_60",
+            "method": "default_setup_default_solve",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "203.7"
+              ],
+              [
+                "88.4"
+              ],
+              [
+                "0.0"
+              ],
+              [],
+              []
+            ],
+            "expected": [
+              [
+                "203.7"
+              ],
+              [
+                "88.4"
+              ],
+              [
+                "0.0"
+              ]
+            ]
+          },
+          {
+            "case": "diffusion_60",
+            "method": "default_setup_lstdq",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "204.2"
+              ],
+              [
+                "64.6"
+              ],
+              [
+                "2.5"
+              ],
+              [
+                "7.1",
+                "0.6"
+              ],
+              [
+                "9.2",
+                "0.6"
+              ]
+            ],
+            "expected": [
+              [
+                "204.2"
+              ],
+              [
+                "64.6"
+              ],
+              [
+                "2.5"
+              ],
+              [
+                "7.1",
+                "0.6"
+              ],
+              [
+                "9.2",
+                "0.6"
+              ]
+            ]
+          },
+          {
+            "case": "diffusion_60",
+            "method": "bandit_default",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "73.6"
+              ],
+              [
+                "135.7"
+              ],
+              [
+                "3.1"
+              ],
+              [
+                "27.3",
+                "1.1"
+              ],
+              [
+                "32.9",
+                "0.9"
+              ]
+            ],
+            "expected": [
+              [
+                "73.6"
+              ],
+              [
+                "135.7"
+              ],
+              [
+                "3.1"
+              ],
+              [
+                "27.3",
+                "1.1"
+              ],
+              [
+                "32.9",
+                "0.9"
+              ]
+            ]
+          },
+          {
+            "case": "diffusion_60",
+            "method": "bandit_lstdq",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "70.7"
+              ],
+              [
+                "87.9"
+              ],
+              [
+                "6.9"
+              ],
+              [
+                "43.3",
+                "1.3"
+              ],
+              [
+                "49.8",
+                "0.8"
+              ]
+            ],
+            "expected": [
+              [
+                "70.7"
+              ],
+              [
+                "87.9"
+              ],
+              [
+                "6.9"
+              ],
+              [
+                "43.3",
+                "1.3"
+              ],
+              [
+                "49.8",
+                "0.8"
+              ]
+            ]
+          },
+          {
+            "case": "diffusion_80",
+            "method": "default_setup_default_solve",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "514.3"
+              ],
+              [
+                "232.4"
+              ],
+              [
+                "0.0"
+              ],
+              [],
+              []
+            ],
+            "expected": [
+              [
+                "514.3"
+              ],
+              [
+                "232.4"
+              ],
+              [
+                "0.0"
+              ]
+            ]
+          },
+          {
+            "case": "diffusion_80",
+            "method": "default_setup_lstdq",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "515.3"
+              ],
+              [
+                "161.4"
+              ],
+              [
+                "2.8"
+              ],
+              [
+                "9.0",
+                "0.4"
+              ],
+              [
+                "9.8",
+                "0.4"
+              ]
+            ],
+            "expected": [
+              [
+                "515.3"
+              ],
+              [
+                "161.4"
+              ],
+              [
+                "2.8"
+              ],
+              [
+                "9.0",
+                "0.4"
+              ],
+              [
+                "9.8",
+                "0.4"
+              ]
+            ]
+          },
+          {
+            "case": "diffusion_80",
+            "method": "bandit_default",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "208.8"
+              ],
+              [
+                "350.8"
+              ],
+              [
+                "3.8"
+              ],
+              [
+                "24.6",
+                "4.0"
+              ],
+              [
+                "29.9",
+                "2.4"
+              ]
+            ],
+            "expected": [
+              [
+                "208.8"
+              ],
+              [
+                "350.8"
+              ],
+              [
+                "3.8"
+              ],
+              [
+                "24.6",
+                "4.0"
+              ],
+              [
+                "29.9",
+                "2.4"
+              ]
+            ]
+          },
+          {
+            "case": "diffusion_80",
+            "method": "bandit_lstdq",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "178.9"
+              ],
+              [
+                "242.3"
+              ],
+              [
+                "7.9"
+              ],
+              [
+                "42.5",
+                "2.3"
+              ],
+              [
+                "49.1",
+                "1.3"
+              ]
+            ],
+            "expected": [
+              [
+                "178.9"
+              ],
+              [
+                "242.3"
+              ],
+              [
+                "7.9"
+              ],
+              [
+                "42.5",
+                "2.3"
+              ],
+              [
+                "49.1",
+                "1.3"
+              ]
+            ]
+          },
+          {
+            "case": "advection_40",
+            "method": "default_setup_default_solve",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "58.3"
+              ],
+              [
+                "24.6"
+              ],
+              [
+                "0.0"
+              ],
+              [],
+              []
+            ],
+            "expected": [
+              [
+                "58.3"
+              ],
+              [
+                "24.6"
+              ],
+              [
+                "0.0"
+              ]
+            ]
+          },
+          {
+            "case": "advection_40",
+            "method": "default_setup_lstdq",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "58.3"
+              ],
+              [
+                "17.3"
+              ],
+              [
+                "2.2"
+              ],
+              [
+                "6.2",
+                "0.4"
+              ],
+              [
+                "7.9",
+                "0.5"
+              ]
+            ],
+            "expected": [
+              [
+                "58.3"
+              ],
+              [
+                "17.3"
+              ],
+              [
+                "2.2"
+              ],
+              [
+                "6.2",
+                "0.4"
+              ],
+              [
+                "7.9",
+                "0.5"
+              ]
+            ]
+          },
+          {
+            "case": "advection_40",
+            "method": "bandit_default",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "28.7"
+              ],
+              [
+                "42.6"
+              ],
+              [
+                "4.2"
+              ],
+              [
+                "8.9",
+                "2.7"
+              ],
+              [
+                "24.8",
+                "3.2"
+              ]
+            ],
+            "expected": [
+              [
+                "28.7"
+              ],
+              [
+                "42.6"
+              ],
+              [
+                "4.2"
+              ],
+              [
+                "8.9",
+                "2.7"
+              ],
+              [
+                "24.8",
+                "3.2"
+              ]
+            ]
+          },
+          {
+            "case": "advection_40",
+            "method": "bandit_lstdq",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "23.0"
+              ],
+              [
+                "34.7"
+              ],
+              [
+                "8.8"
+              ],
+              [
+                "19.8",
+                "1.3"
+              ],
+              [
+                "37.0",
+                "1.7"
+              ]
+            ],
+            "expected": [
+              [
+                "23.0"
+              ],
+              [
+                "34.7"
+              ],
+              [
+                "8.8"
+              ],
+              [
+                "19.8",
+                "1.3"
+              ],
+              [
+                "37.0",
+                "1.7"
+              ]
+            ]
+          },
+          {
+            "case": "advection_60",
+            "method": "default_setup_default_solve",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "206.9"
+              ],
+              [
+                "87.9"
+              ],
+              [
+                "0.0"
+              ],
+              [],
+              []
+            ],
+            "expected": [
+              [
+                "206.9"
+              ],
+              [
+                "87.9"
+              ],
+              [
+                "0.0"
+              ]
+            ]
+          },
+          {
+            "case": "advection_60",
+            "method": "default_setup_lstdq",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "207.4"
+              ],
+              [
+                "62.2"
+              ],
+              [
+                "2.7"
+              ],
+              [
+                "7.6",
+                "0.7"
+              ],
+              [
+                "9.1",
+                "0.7"
+              ]
+            ],
+            "expected": [
+              [
+                "207.4"
+              ],
+              [
+                "62.2"
+              ],
+              [
+                "2.7"
+              ],
+              [
+                "7.6",
+                "0.7"
+              ],
+              [
+                "9.1",
+                "0.7"
+              ]
+            ]
+          },
+          {
+            "case": "advection_60",
+            "method": "bandit_default",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "100.0"
+              ],
+              [
+                "147.9"
+              ],
+              [
+                "4.3"
+              ],
+              [
+                "14.5",
+                "2.5"
+              ],
+              [
+                "25.6",
+                "2.2"
+              ]
+            ],
+            "expected": [
+              [
+                "100.0"
+              ],
+              [
+                "147.9"
+              ],
+              [
+                "4.3"
+              ],
+              [
+                "14.5",
+                "2.5"
+              ],
+              [
+                "25.6",
+                "2.2"
+              ]
+            ]
+          },
+          {
+            "case": "advection_60",
+            "method": "bandit_lstdq",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "78.1"
+              ],
+              [
+                "115.8"
+              ],
+              [
+                "9.6"
+              ],
+              [
+                "31.0",
+                "2.0"
+              ],
+              [
+                "40.5",
+                "2.1"
+              ]
+            ],
+            "expected": [
+              [
+                "78.1"
+              ],
+              [
+                "115.8"
+              ],
+              [
+                "9.6"
+              ],
+              [
+                "31.0",
+                "2.0"
+              ],
+              [
+                "40.5",
+                "2.1"
+              ]
+            ]
+          },
+          {
+            "case": "advection_80",
+            "method": "default_setup_default_solve",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "521.1"
+              ],
+              [
+                "229.6"
+              ],
+              [
+                "0.0"
+              ],
+              [],
+              []
+            ],
+            "expected": [
+              [
+                "521.1"
+              ],
+              [
+                "229.6"
+              ],
+              [
+                "0.0"
+              ]
+            ]
+          },
+          {
+            "case": "advection_80",
+            "method": "default_setup_lstdq",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "522.0"
+              ],
+              [
+                "159.2"
+              ],
+              [
+                "3.0"
+              ],
+              [
+                "8.9",
+                "0.3"
+              ],
+              [
+                "9.8",
+                "0.3"
+              ]
+            ],
+            "expected": [
+              [
+                "522.0"
+              ],
+              [
+                "159.2"
+              ],
+              [
+                "3.0"
+              ],
+              [
+                "8.9",
+                "0.3"
+              ],
+              [
+                "9.8",
+                "0.3"
+              ]
+            ]
+          },
+          {
+            "case": "advection_80",
+            "method": "bandit_default",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "222.8"
+              ],
+              [
+                "413.9"
+              ],
+              [
+                "4.5"
+              ],
+              [
+                "14.6",
+                "1.6"
+              ],
+              [
+                "23.1",
+                "2.7"
+              ]
+            ],
+            "expected": [
+              [
+                "222.8"
+              ],
+              [
+                "413.9"
+              ],
+              [
+                "4.5"
+              ],
+              [
+                "14.6",
+                "1.6"
+              ],
+              [
+                "23.1",
+                "2.7"
+              ]
+            ]
+          },
+          {
+            "case": "advection_80",
+            "method": "bandit_lstdq",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "201.8"
+              ],
+              [
+                "311.4"
+              ],
+              [
+                "10.6"
+              ],
+              [
+                "30.2",
+                "1.6"
+              ],
+              [
+                "36.8",
+                "1.4"
+              ]
+            ],
+            "expected": [
+              [
+                "201.8"
+              ],
+              [
+                "311.4"
+              ],
+              [
+                "10.6"
+              ],
+              [
+                "30.2",
+                "1.6"
+              ],
+              [
+                "36.8",
+                "1.4"
+              ]
+            ]
+          }
+        ]
+      },
+      "selected_diffusion60_seed3": {
+        "path": "/Users/erisehe/Documents/GitHub/SISC-Overleaf/tables/diffusion_case_rows.tex",
+        "rows_checked": 4,
+        "all_match": true,
+        "rows": [
+          {
+            "method": "default_setup_default_solve",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "204.5"
+              ],
+              [
+                "88.9"
+              ],
+              [
+                "293.4"
+              ],
+              [],
+              [
+                "291.9"
+              ],
+              []
+            ],
+            "expected": [
+              [
+                "204.5"
+              ],
+              [
+                "88.9"
+              ],
+              [
+                "293.4"
+              ],
+              [],
+              [
+                "291.9"
+              ],
+              []
+            ]
+          },
+          {
+            "method": "default_setup_lstdq",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "205.0"
+              ],
+              [
+                "64.1"
+              ],
+              [
+                "271.6"
+              ],
+              [
+                "7.4"
+              ],
+              [
+                "263.9"
+              ],
+              [
+                "9.6"
+              ]
+            ],
+            "expected": [
+              [
+                "205.0"
+              ],
+              [
+                "64.1"
+              ],
+              [
+                "271.6"
+              ],
+              [
+                "7.4"
+              ],
+              [
+                "263.9"
+              ],
+              [
+                "9.6"
+              ]
+            ]
+          },
+          {
+            "method": "bandit_default",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "69.6"
+              ],
+              [
+                "136.4"
+              ],
+              [
+                "209.2"
+              ],
+              [
+                "28.7"
+              ],
+              [
+                "191.6"
+              ],
+              [
+                "34.4"
+              ]
+            ],
+            "expected": [
+              [
+                "69.6"
+              ],
+              [
+                "136.4"
+              ],
+              [
+                "209.2"
+              ],
+              [
+                "28.7"
+              ],
+              [
+                "191.6"
+              ],
+              [
+                "34.4"
+              ]
+            ]
+          },
+          {
+            "method": "bandit_lstdq",
+            "matches_at_display_precision": true,
+            "actual": [
+              [
+                "69.2"
+              ],
+              [
+                "84.4"
+              ],
+              [
+                "160.4"
+              ],
+              [
+                "45.3"
+              ],
+              [
+                "144.1"
+              ],
+              [
+                "50.6"
+              ]
+            ],
+            "expected": [
+              [
+                "69.2"
+              ],
+              [
+                "84.4"
+              ],
+              [
+                "160.4"
+              ],
+              [
+                "45.3"
+              ],
+              [
+                "144.1"
+              ],
+              [
+                "50.6"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "all_2520_raw_file_hashes_in_verified_existing_release": true,
+    "figure4_sources_match_published_measurements": true,
+    "figure5_current_approved_examples": {
+      "case": "diffusion_80",
+      "seed": 5,
+      "inputs": [
+        1563,
+        1564,
+        1565
+      ],
+      "file": "data/module1/online/cycle_examples.json"
+    }
+  },
+  "module2": {
+    "passed": true,
+    "records_independently_read": 120000,
+    "all_5000_problem_indices_complete_and_unique": true,
+    "paired_mkw_inputs_exactly_equal": true,
+    "array_timings_match_source_summaries": true,
+    "paper_retry_failure_counts": {
+      "default_setup_default_solve": [
+        1677,
+        0,
+        0,
+        0
+      ],
+      "default_setup_lstdq": [
+        777,
+        26,
+        0,
+        0
+      ],
+      "bandit_default": [
+        810,
+        62,
+        44,
+        28
+      ],
+      "bandit_lstdq": [
+        1152,
+        138,
+        69,
+        2
+      ]
+    },
+    "common_success_cases": 28323,
+    "official_displayed_full_reduction_pct": {
+      "default_setup_default_solve": {
+        "mean": 0.0,
+        "sample_sd": 0.0
+      },
+      "default_setup_lstdq": {
+        "mean": 9.8,
+        "sample_sd": 5.6
+      },
+      "bandit_default": {
+        "mean": 50.8,
+        "sample_sd": 2.9
+      },
+      "bandit_lstdq": {
+        "mean": 54.1,
+        "sample_sd": 2.1
+      }
+    }
+  },
+  "module3": {
+    "passed": true,
+    "raw_test_rows_independently_read": {
+      "diffusion": 8466,
+      "variable_flow": 8874
+    },
+    "figure6_all_48_seed_points_match_repeat0": true,
+    "figure6_max_marker_error_percentage_points": 1.0602703959250448e-07,
+    "figure6_accessible_annotations_match": [
+      "34.0 ± 0.8",
+      "35.8 ± 0.7",
+      "41.2 ± 1.8",
+      "39.6 ± 1.5",
+      "23.2 ± 4.2",
+      "30.9 ± 3.0",
+      "-3.2 ± 7.4",
+      "23.6 ± 5.8"
+    ],
+    "paper_table_time_reductions_match": {
+      "diffusion": [
+        "39.6 ± 1.5",
+        "8.5 ± 2.1",
+        "5.9 ± 2.0",
+        "-2.8 ± 3.8"
+      ],
+      "variable_flow": [
+        "23.6 ± 5.8",
+        "0.4 ± 6.1",
+        "-10.6 ± 7.0",
+        "25.8 ± 6.0"
+      ]
+    },
+    "paper_first_attempt_failure_counts_match": {
+      "diffusion": [
+        3,
+        1,
+        0,
+        2,
+        1
+      ],
+      "variable_flow": [
+        31,
+        6,
+        1,
+        258,
+        2
+      ]
+    },
+    "figure7_displayed_weights_and_case_order_exact_match": true,
+    "paper_and_source_files_unchanged": true,
+    "original_source_repetition_count": 3,
+    "official_repetition_zero_based": 0,
+    "official_paper_files_sha256": {
+      "sections/06_experiments.tex": "954c9a4bfde74680865cf87bdd67ca4edde2e4d3a9c18cef9809447155a215ed",
+      "tables/matched_relaxation_rows.tex": "7698b7122ad3283a2a9fc23040c83b818d75d18480e96f87da5cce50c56ddc6d",
+      "figures/matched_policy_savings.svg": "f086a869542ad8452b950c09ed348bc272af6820bc0c9372131e2bd206f5231d",
+      "figures/matched_policy_savings.png": "523ed563f6224603359cbfacb3d4d6f077f76a1653453ff50c5ad1a856ddd487",
+      "figures/matched_policy_weights.svg": "410b869de9003f40e9512a791cead9519c05992e732d0847558bf994c6b9ed1a",
+      "figures/matched_policy_weights.png": "1f64dab88d6fbffd535a12f188b7f710d37ac7e38c8c37605acfc6321fd57fff"
+    }
+  },
+  "validation_scope": "Read source records and compare checksums, array sums, paired input order, paper table rounding, vector figure points and displayed trajectories. No solver, experiment, manuscript edit or algorithm change was performed."
+}

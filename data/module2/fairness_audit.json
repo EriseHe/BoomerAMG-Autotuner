@@ -1,314 +1,150 @@
 {
-  "tolerance": 1e-06,
-  "cap_per_attempt": 50,
-  "default_attempt_budget": 1,
-  "learned_attempt_budget": 3,
-  "default_fallback_budget": 1,
-  "all_default_reported_failures_at_50_cycle_cap": true,
-  "default_reported_failure_residual_median": 1.1379422315253675e-06,
-  "default_reported_failure_residual_max": 5.9431825503066045e-06,
-  "both_native_and_rl_paths_apply_cap_before_convergence_at_boundary": true,
-  "boundary_rule_sources": [
-    "adc8cd1d384469559a9bfac004e4569f5bfdf5b7:hypre/interfaces/amg_runtime.c",
-    "adc8cd1d384469559a9bfac004e4569f5bfdf5b7:hypre/interfaces/amg_rl_shared.c"
-  ],
-  "method_totals": {
+  "passed": true,
+  "records_independently_read": 120000,
+  "all_5000_problem_indices_complete_and_unique": true,
+  "paired_mkw_inputs_exactly_equal": true,
+  "array_timings_match_source_summaries": true,
+  "raw_trajectory_hashes": {
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/study/module3/variable_flow_60_batch1/seed_1/trajectories/default_setup_default_solve.jsonl": {
+      "bytes": 12737244,
+      "sha256": "8bda2087da3c167c5e1d34f900788765c69a409ef2a2704fb618c9ee3157e07d"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/study/module3/variable_flow_60_batch1/seed_1/trajectories/default_setup_lstdq.jsonl": {
+      "bytes": 110851396,
+      "sha256": "b189b4ec88c4689c93421f45475e05fed55e0a3f8a806fbe9963d263e7570276"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/study/module3/variable_flow_60_batch1/seed_1/trajectories/bandit_default.jsonl": {
+      "bytes": 74342300,
+      "sha256": "b6be81d0e0342c22f3967ca50dbe40d7160341f21aaa21e8479e0d59ad815192"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/study/module3/variable_flow_60_batch1/seed_1/trajectories/bandit_lstdq.jsonl": {
+      "bytes": 185870888,
+      "sha256": "bad6cc0b0ae08c1133a6a567ee0b8c06989d40bd53032a513f2a993e2cd27a99"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/study/module3/variable_flow_60_batch1/seed_2/trajectories/default_setup_default_solve.jsonl": {
+      "bytes": 12737869,
+      "sha256": "fa61d42873def96abf27cb543953971fc8537d6095a97380280d33219093faca"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/study/module3/variable_flow_60_batch1/seed_2/trajectories/default_setup_lstdq.jsonl": {
+      "bytes": 110266624,
+      "sha256": "ea814801e115457efd1a8716380cb7bb5e7e71fad6033fc62d410356fbe1da3d"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/study/module3/variable_flow_60_batch1/seed_2/trajectories/bandit_default.jsonl": {
+      "bytes": 73612697,
+      "sha256": "0cc617983a63c3c6ff47a7b2873cad933132a5213424f0b0146c9b1cf555fc1b"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/study/module3/variable_flow_60_batch1/seed_2/trajectories/bandit_lstdq.jsonl": {
+      "bytes": 182677042,
+      "sha256": "39edaa0a24862e0d47018ab21a4e4db253adedc027cc60dad393d2913096b222"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/study/module3/variable_flow_60_batch1/seed_3/trajectories/default_setup_default_solve.jsonl": {
+      "bytes": 12738852,
+      "sha256": "340efaca376f3bfc4c68dc00b5e346b2ea1f99c7dd9e01fcd7bbc76320952ad2"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/study/module3/variable_flow_60_batch1/seed_3/trajectories/default_setup_lstdq.jsonl": {
+      "bytes": 120220873,
+      "sha256": "c64ef95c5a7fa00051ee185329126f3285602902061b4fbc3b9a7da4f928e531"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/study/module3/variable_flow_60_batch1/seed_3/trajectories/bandit_default.jsonl": {
+      "bytes": 74197681,
+      "sha256": "694e7c5cc8df3fcb2a46420aae64f3d5bf187b6fd0b9befc90e0d45b5154e7f4"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/study/module3/variable_flow_60_batch1/seed_3/trajectories/bandit_lstdq.jsonl": {
+      "bytes": 162214205,
+      "sha256": "37c715c08b273e8be2968e22291b8c05b0144ccc4967c63e16a0cba24c8722ea"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/run/seed_4/trajectories/default_setup_default_solve.jsonl": {
+      "bytes": 12729503,
+      "sha256": "e2676804d7bf12e01ba9fe4eb24b48c7082c4b6f471158adf734133768f1acc9"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/run/seed_4/trajectories/default_setup_lstdq.jsonl": {
+      "bytes": 111410196,
+      "sha256": "48349e7d685c54c00e6540d535f48807c5aed7c2bfc0716244f0190114c3df9c"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/run/seed_4/trajectories/bandit_default.jsonl": {
+      "bytes": 74402177,
+      "sha256": "de79529b9e6633b2261cfa86b517276a373b31c288ad86a35977086df2b8639a"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/run/seed_4/trajectories/bandit_lstdq.jsonl": {
+      "bytes": 177968014,
+      "sha256": "6805fbfcf474a974fc0254593b4c92b5f3d17ff5726f8b05b5b8ba6506dd6f73"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/run/seed_5/trajectories/default_setup_default_solve.jsonl": {
+      "bytes": 12737725,
+      "sha256": "2a7382e86e10c53afb8d97590d930f68c0b98006fcbf45dfeba7c63431711790"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/run/seed_5/trajectories/default_setup_lstdq.jsonl": {
+      "bytes": 116677120,
+      "sha256": "73b67bead339ee77d28bed516aed8d3ecec473252c42cdb792b78ea7e22b2c6a"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/run/seed_5/trajectories/bandit_default.jsonl": {
+      "bytes": 74393640,
+      "sha256": "4c6ce04b093777e4004c7ed5485b9ad943d0c6fb1d027d5aeea48da9053fa24d"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/run/seed_5/trajectories/bandit_lstdq.jsonl": {
+      "bytes": 190149785,
+      "sha256": "92cc06bcebcab7e302ed0f99ef7dd0f021f9f760ae8e29e241c4acca60b4c9ea"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/run/seed_6/trajectories/default_setup_default_solve.jsonl": {
+      "bytes": 12734020,
+      "sha256": "451ac775ad68e383eabedc76896925100b8ff2a1468352e0e55bc1b68e1aa4bb"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/run/seed_6/trajectories/default_setup_lstdq.jsonl": {
+      "bytes": 110865080,
+      "sha256": "37dbf026d4be3c45a2ccac45c0e7faba8254ff5a07718b202f63f70eb8be68e7"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/run/seed_6/trajectories/bandit_default.jsonl": {
+      "bytes": 73803205,
+      "sha256": "4888583e12a5674f42e1667d5fac77ed8c43333ae1eb73c959d1a80f670ad2b5"
+    },
+    "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/run/seed_6/trajectories/bandit_lstdq.jsonl": {
+      "bytes": 176888143,
+      "sha256": "a3523e34f2d60550ae951f4e31de0c94667e76ec9354b260ddb8e47e54200a47"
+    }
+  },
+  "paper_retry_failure_counts": {
+    "default_setup_default_solve": [
+      1677,
+      0,
+      0,
+      0
+    ],
+    "default_setup_lstdq": [
+      777,
+      26,
+      0,
+      0
+    ],
+    "bandit_default": [
+      810,
+      62,
+      44,
+      28
+    ],
+    "bandit_lstdq": [
+      1152,
+      138,
+      69,
+      2
+    ]
+  },
+  "common_success_cases": 28323,
+  "official_displayed_full_reduction_pct": {
     "default_setup_default_solve": {
-      "cases": 30000,
-      "reported_failures": 1677,
-      "reported_failures_final_residual_at_or_below_tol": 557
+      "mean": 0.0,
+      "sample_sd": 0.0
     },
     "default_setup_lstdq": {
-      "cases": 30000,
-      "reported_failures": 30,
-      "reported_failures_final_residual_at_or_below_tol": 23
+      "mean": 9.8,
+      "sample_sd": 5.6
     },
     "bandit_default": {
-      "cases": 30000,
-      "reported_failures": 24,
-      "reported_failures_final_residual_at_or_below_tol": 6
+      "mean": 50.8,
+      "sample_sd": 2.9
     },
     "bandit_lstdq": {
-      "cases": 30000,
-      "reported_failures": 2,
-      "reported_failures_final_residual_at_or_below_tol": 1
+      "mean": 54.1,
+      "sample_sd": 2.1
     }
-  },
-  "common_success_joint": {
-    "native_reduction_pct": {
-      "mean": 56.47919605305792,
-      "sample_sd": 2.330307463219457
-    },
-    "inclusive_reduction_pct": {
-      "mean": 55.11785756131093,
-      "sample_sd": 2.468256923392096
-    }
-  },
-  "seed_checks": [
-    {
-      "seed": "seed_1",
-      "common_success_cases": 4716,
-      "methods": {
-        "default_setup_default_solve": {
-          "cases": 5000,
-          "reported_failures": 284,
-          "reported_failures_final_residual_at_or_below_tol": 91
-        },
-        "default_setup_lstdq": {
-          "cases": 5000,
-          "reported_failures": 2,
-          "reported_failures_final_residual_at_or_below_tol": 0
-        },
-        "bandit_default": {
-          "cases": 5000,
-          "reported_failures": 8,
-          "reported_failures_final_residual_at_or_below_tol": 1
-        },
-        "bandit_lstdq": {
-          "cases": 5000,
-          "reported_failures": 0,
-          "reported_failures_final_residual_at_or_below_tol": 0
-        }
-      },
-      "common_success_reductions": {
-        "default_setup_default_solve": {
-          "native_reduction_pct": 0.0,
-          "inclusive_reduction_pct": 0.0
-        },
-        "default_setup_lstdq": {
-          "native_reduction_pct": 13.30441447079923,
-          "inclusive_reduction_pct": 12.497059534310505
-        },
-        "bandit_default": {
-          "native_reduction_pct": 50.71858563723537,
-          "inclusive_reduction_pct": 50.257417988063445
-        },
-        "bandit_lstdq": {
-          "native_reduction_pct": 56.094778603880066,
-          "inclusive_reduction_pct": 54.657246356400854
-        }
-      }
-    },
-    {
-      "seed": "seed_2",
-      "common_success_cases": 4710,
-      "methods": {
-        "default_setup_default_solve": {
-          "cases": 5000,
-          "reported_failures": 290,
-          "reported_failures_final_residual_at_or_below_tol": 99
-        },
-        "default_setup_lstdq": {
-          "cases": 5000,
-          "reported_failures": 1,
-          "reported_failures_final_residual_at_or_below_tol": 0
-        },
-        "bandit_default": {
-          "cases": 5000,
-          "reported_failures": 1,
-          "reported_failures_final_residual_at_or_below_tol": 0
-        },
-        "bandit_lstdq": {
-          "cases": 5000,
-          "reported_failures": 0,
-          "reported_failures_final_residual_at_or_below_tol": 0
-        }
-      },
-      "common_success_reductions": {
-        "default_setup_default_solve": {
-          "native_reduction_pct": 0.0,
-          "inclusive_reduction_pct": 0.0
-        },
-        "default_setup_lstdq": {
-          "native_reduction_pct": 13.54422229474852,
-          "inclusive_reduction_pct": 12.743589237879572
-        },
-        "bandit_default": {
-          "native_reduction_pct": 56.75867883538023,
-          "inclusive_reduction_pct": 56.30719507595212
-        },
-        "bandit_lstdq": {
-          "native_reduction_pct": 54.179405532856876,
-          "inclusive_reduction_pct": 52.736970068941545
-        }
-      }
-    },
-    {
-      "seed": "seed_3",
-      "common_success_cases": 4704,
-      "methods": {
-        "default_setup_default_solve": {
-          "cases": 5000,
-          "reported_failures": 296,
-          "reported_failures_final_residual_at_or_below_tol": 101
-        },
-        "default_setup_lstdq": {
-          "cases": 5000,
-          "reported_failures": 11,
-          "reported_failures_final_residual_at_or_below_tol": 10
-        },
-        "bandit_default": {
-          "cases": 5000,
-          "reported_failures": 8,
-          "reported_failures_final_residual_at_or_below_tol": 1
-        },
-        "bandit_lstdq": {
-          "cases": 5000,
-          "reported_failures": 0,
-          "reported_failures_final_residual_at_or_below_tol": 0
-        }
-      },
-      "common_success_reductions": {
-        "default_setup_default_solve": {
-          "native_reduction_pct": 0.0,
-          "inclusive_reduction_pct": 0.0
-        },
-        "default_setup_lstdq": {
-          "native_reduction_pct": -0.7863661777121278,
-          "inclusive_reduction_pct": -1.6949466725566964
-        },
-        "bandit_default": {
-          "native_reduction_pct": 49.494263459292995,
-          "inclusive_reduction_pct": 48.992922290450466
-        },
-        "bandit_lstdq": {
-          "native_reduction_pct": 58.526378071591225,
-          "inclusive_reduction_pct": 57.28328953683042
-        }
-      }
-    },
-    {
-      "seed": "seed_4",
-      "common_success_cases": 4758,
-      "methods": {
-        "default_setup_default_solve": {
-          "cases": 5000,
-          "reported_failures": 242,
-          "reported_failures_final_residual_at_or_below_tol": 82
-        },
-        "default_setup_lstdq": {
-          "cases": 5000,
-          "reported_failures": 5,
-          "reported_failures_final_residual_at_or_below_tol": 3
-        },
-        "bandit_default": {
-          "cases": 5000,
-          "reported_failures": 1,
-          "reported_failures_final_residual_at_or_below_tol": 0
-        },
-        "bandit_lstdq": {
-          "cases": 5000,
-          "reported_failures": 1,
-          "reported_failures_final_residual_at_or_below_tol": 0
-        }
-      },
-      "common_success_reductions": {
-        "default_setup_default_solve": {
-          "native_reduction_pct": 0.0,
-          "inclusive_reduction_pct": 0.0
-        },
-        "default_setup_lstdq": {
-          "native_reduction_pct": 4.334696949537731,
-          "inclusive_reduction_pct": 3.4764734250347207
-        },
-        "bandit_default": {
-          "native_reduction_pct": 49.66776664451083,
-          "inclusive_reduction_pct": 49.20753423009106
-        },
-        "bandit_lstdq": {
-          "native_reduction_pct": 57.78635308991817,
-          "inclusive_reduction_pct": 56.47401531647349
-        }
-      }
-    },
-    {
-      "seed": "seed_5",
-      "common_success_cases": 4707,
-      "methods": {
-        "default_setup_default_solve": {
-          "cases": 5000,
-          "reported_failures": 293,
-          "reported_failures_final_residual_at_or_below_tol": 96
-        },
-        "default_setup_lstdq": {
-          "cases": 5000,
-          "reported_failures": 9,
-          "reported_failures_final_residual_at_or_below_tol": 8
-        },
-        "bandit_default": {
-          "cases": 5000,
-          "reported_failures": 5,
-          "reported_failures_final_residual_at_or_below_tol": 3
-        },
-        "bandit_lstdq": {
-          "cases": 5000,
-          "reported_failures": 0,
-          "reported_failures_final_residual_at_or_below_tol": 0
-        }
-      },
-      "common_success_reductions": {
-        "default_setup_default_solve": {
-          "native_reduction_pct": 0.0,
-          "inclusive_reduction_pct": 0.0
-        },
-        "default_setup_lstdq": {
-          "native_reduction_pct": 8.764281734137324,
-          "inclusive_reduction_pct": 7.911099867113203
-        },
-        "bandit_default": {
-          "native_reduction_pct": 51.49175593119535,
-          "inclusive_reduction_pct": 51.023416866420604
-        },
-        "bandit_lstdq": {
-          "native_reduction_pct": 53.35211514642868,
-          "inclusive_reduction_pct": 51.79275326280914
-        }
-      }
-    },
-    {
-      "seed": "seed_6",
-      "common_success_cases": 4728,
-      "methods": {
-        "default_setup_default_solve": {
-          "cases": 5000,
-          "reported_failures": 272,
-          "reported_failures_final_residual_at_or_below_tol": 88
-        },
-        "default_setup_lstdq": {
-          "cases": 5000,
-          "reported_failures": 2,
-          "reported_failures_final_residual_at_or_below_tol": 2
-        },
-        "bandit_default": {
-          "cases": 5000,
-          "reported_failures": 1,
-          "reported_failures_final_residual_at_or_below_tol": 1
-        },
-        "bandit_lstdq": {
-          "cases": 5000,
-          "reported_failures": 1,
-          "reported_failures_final_residual_at_or_below_tol": 1
-        }
-      },
-      "common_success_reductions": {
-        "default_setup_default_solve": {
-          "native_reduction_pct": 0.0,
-          "inclusive_reduction_pct": 0.0
-        },
-        "default_setup_lstdq": {
-          "native_reduction_pct": 13.209995947258236,
-          "inclusive_reduction_pct": 12.39803167463701
-        },
-        "bandit_default": {
-          "native_reduction_pct": 49.33072815303821,
-          "inclusive_reduction_pct": 48.88491364616191
-        },
-        "bandit_lstdq": {
-          "native_reduction_pct": 58.936145873672494,
-          "inclusive_reduction_pct": 57.762870826410094
-        }
-      }
-    }
-  ],
-  "note": "Both native and RL paths apply the cycle cap before convergence at the boundary. Final-residual counts are reported separately from protocol failure statuses."
+  }
 }

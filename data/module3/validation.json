@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "raw_test_rows_independently_read": {
+    "diffusion": 8466,
+    "variable_flow": 8874
+  },
+  "figure6_all_48_seed_points_match_repeat0": true,
+  "figure6_max_marker_error_percentage_points": 1.0602703959250448e-07,
+  "figure6_accessible_annotations_match": [
+    "34.0 ± 0.8",
+    "35.8 ± 0.7",
+    "41.2 ± 1.8",
+    "39.6 ± 1.5",
+    "23.2 ± 4.2",
+    "30.9 ± 3.0",
+    "-3.2 ± 7.4",
+    "23.6 ± 5.8"
+  ],
+  "paper_table_time_reductions_match": {
+    "diffusion": [
+      "39.6 ± 1.5",
+      "8.5 ± 2.1",
+      "5.9 ± 2.0",
+      "-2.8 ± 3.8"
+    ],
+    "variable_flow": [
+      "23.6 ± 5.8",
+      "0.4 ± 6.1",
+      "-10.6 ± 7.0",
+      "25.8 ± 6.0"
+    ]
+  },
+  "paper_first_attempt_failure_counts_match": {
+    "diffusion": [
+      3,
+      1,
+      0,
+      2,
+      1
+    ],
+    "variable_flow": [
+      31,
+      6,
+      1,
+      258,
+      2
+    ]
+  },
+  "figure7_displayed_weights_and_case_order_exact_match": true,
+  "paper_and_source_files_unchanged": true,
+  "original_source_repetition_count": 3,
+  "official_repetition_zero_based": 0,
+  "official_paper_files_sha256": {
+    "sections/06_experiments.tex": "954c9a4bfde74680865cf87bdd67ca4edde2e4d3a9c18cef9809447155a215ed",
+    "tables/matched_relaxation_rows.tex": "7698b7122ad3283a2a9fc23040c83b818d75d18480e96f87da5cce50c56ddc6d",
+    "figures/matched_policy_savings.svg": "f086a869542ad8452b950c09ed348bc272af6820bc0c9372131e2bd206f5231d",
+    "figures/matched_policy_savings.png": "523ed563f6224603359cbfacb3d4d6f077f76a1653453ff50c5ad1a856ddd487",
+    "figures/matched_policy_weights.svg": "410b869de9003f40e9512a791cead9519c05992e732d0847558bf994c6b9ed1a",
+    "figures/matched_policy_weights.png": "1f64dab88d6fbffd535a12f188b7f710d37ac7e38c8c37605acfc6321fd57fff"
+  }
+}
