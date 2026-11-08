@@ -1,0 +1,19 @@
+{
+  "resource_plan_validated": false,
+  "account_plan": "Free",
+  "region": "us-east-2",
+  "instance_type": null,
+  "instance_count": 1,
+  "max_total_usage_usd": 10,
+  "wall_seconds": 28800,
+  "upload_reserve_seconds": 1800,
+  "disk_gib": 30,
+  "public_ip": null,
+  "hourly_usd": {"ec2": null, "ebs": null, "public_ipv4": null},
+  "post_stop_storage_hours": 24,
+  "other_costs_reserve_usd": 2,
+  "cleanup_plan_confirmed": false,
+  "pricing_sources": [],
+  "rates_checked_utc": null,
+  "note": "Unvalidated template, not a launch approval or price quote. Other reserve must cover source/results storage, requests, transfers and any networking charges; cleanup must bound retained storage."
+}

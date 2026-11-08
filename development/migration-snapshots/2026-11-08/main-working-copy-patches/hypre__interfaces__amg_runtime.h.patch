@@ -1,0 +1,19 @@
+diff --git a/hypre/interfaces/amg_runtime.h b/hypre/interfaces/amg_runtime.h
+index 26f2e82..4a739a1 100644
+--- a/hypre/interfaces/amg_runtime.h
++++ b/hypre/interfaces/amg_runtime.h
+@@ -38,6 +38,14 @@ AMG_API AMGRuntime *amg_runtime_create(
+     double k, double c,
+     double a0, double a1, double a2, double a3);
+ 
++/* Single-rank application systems; CSR and vectors are copied.  Cycle
++ * residuals use ||b|| (or one for a zero RHS), independently of the warm start. */
++AMG_API AMGRuntime *amg_runtime_create_csr(int n, const int *ia, const int *ja,
++    const double *values, const double *rhs, const double *initial_guess);
++AMG_API int amg_runtime_get_solution(AMGRuntime *env, double *out);
++AMG_API int amg_runtime_pcg(AMGRuntime *current, AMGRuntime *hierarchy,
++                           double tol, int max_iter, double *stats);
++
+ AMG_API int amg_runtime_solve(
+     AMGRuntime *env,
+     double strong_threshold, int coarsen_type, int interp_type, double max_row_sum,

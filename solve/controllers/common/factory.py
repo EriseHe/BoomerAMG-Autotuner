@@ -74,6 +74,8 @@ def _shared_protocol_metadata(
     algorithm = asdict(request.algorithm)
     epsilon = request.actions.epsilon
     context_sources = {
+        "spe10_pressure": "pre-solve viscosity ratio, saturation summaries, injected pore volumes and injection rate",
+        "mfem_heat": "pre-solve timestep, conductivity parameters and temperature summaries",
         "material_coefficients": "three normalized log material coefficients from assembly inputs",
         "rs_diffusion": "normalized log diffusion strength; grid and RS flow type fixed per stream",
         "canonical": "shared per-instance canonical setup/solve PDE context",

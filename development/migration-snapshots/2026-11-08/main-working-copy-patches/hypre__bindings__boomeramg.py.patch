@@ -1,0 +1,160 @@
+diff --git a/hypre/bindings/boomeramg.py b/hypre/bindings/boomeramg.py
+index 4c81360..bc20735 100644
+--- a/hypre/bindings/boomeramg.py
++++ b/hypre/bindings/boomeramg.py
+@@ -70,6 +70,15 @@ def _load_native_library() -> None:
+         _D, _D,           # k, c         (7pt coeffs)
+         _D, _D, _D, _D,   # a0, a1, a2, a3  (27pt coeffs)
+     ]
++    library.amg_runtime_create_csr.restype = _VP
++    library.amg_runtime_create_csr.argtypes = [
++        _I, ctypes.POINTER(_I), ctypes.POINTER(_I), ctypes.POINTER(_D),
++        ctypes.POINTER(_D), ctypes.POINTER(_D),
++    ]
++    library.amg_runtime_get_solution.restype = _I
++    library.amg_runtime_get_solution.argtypes = [_VP, ctypes.POINTER(_D)]
++    library.amg_runtime_pcg.restype = _I
++    library.amg_runtime_pcg.argtypes = [_VP, _VP, _D, _I, ctypes.POINTER(_D)]
+ 
+     library.amg_runtime_solve.restype = _I
+     library.amg_runtime_solve.argtypes = [
+@@ -248,7 +257,8 @@ class PrepareResult:
+     # Prepared setup/configuration plus the initial residual computation.
+     setup_runtime_sec: float
+     # Prepared and full-solve paths now expose the same residual convention:
+-    # ||r|| / ||r0||, so the initial relative residual is one.
++    # ||r|| / ||r0|| for generated zero-start systems; application CSR uses
++    # ||r|| / ||b|| so a warm start does not change the accuracy target.
+     initial_residual_norm: float
+     initial_relax_weight: float
+     # Keep the raw norm available for diagnostics without leaking it into
+@@ -280,8 +290,10 @@ def _relative_residual_norm(
+ 
+ 
+ class PreparedAMGEnv:
+-    def __init__(self, env_ptr: int):
++    def __init__(self, env_ptr: int, *, residual_scale=None, solution_out=None):
+         self._env = env_ptr
++        self._residual_scale = residual_scale
++        self._solution_out = solution_out
+         self._absolute_initial_residual_norm = float("nan")
+         self.last_step = StepResult(
+             float("nan"),
+@@ -326,7 +338,7 @@ class PreparedAMGEnv:
+             setup_runtime_sec=float(out_setup.value),
+             initial_residual_norm=_relative_residual_norm(
+                 absolute_initial_residual,
+-                absolute_initial_residual,
++                self._residual_scale if self._residual_scale is not None else absolute_initial_residual,
+             ),
+             initial_relax_weight=float(out_relax_weight.value),
+             absolute_initial_residual_norm=absolute_initial_residual,
+@@ -405,7 +417,7 @@ class PreparedAMGEnv:
+         absolute_residual = float(out_r.value)
+         relative_residual = _relative_residual_norm(
+             absolute_residual,
+-            self._absolute_initial_residual_norm,
++            self._normalization,
+         )
+         self.last_step = StepResult(
+             residual_norm=relative_residual,
+@@ -464,7 +476,12 @@ class PreparedAMGEnv:
+     @property
+     def r0(self) -> float:
+         absolute = self.absolute_r0
+-        return _relative_residual_norm(absolute, absolute)
++        return _relative_residual_norm(absolute, self._normalization)
++
++    @property
++    def _normalization(self) -> float:
++        return (self._residual_scale if self._residual_scale is not None
++                else self._absolute_initial_residual_norm)
+ 
+     @property
+     def absolute_r0(self) -> float:
+@@ -474,7 +491,7 @@ class PreparedAMGEnv:
+     def r(self) -> float:
+         return _relative_residual_norm(
+             self.absolute_r,
+-            self._absolute_initial_residual_norm,
++            self._normalization,
+         )
+ 
+     @property
+@@ -515,8 +532,36 @@ class PreparedAMGEnv:
+ 
+     def close(self) -> None:
+         if self._env:
+-            _lib.amg_runtime_destroy(self._env)
+-            self._env = None
++            try:
++                if self._solution_out is not None:
++                    self.copy_solution_to(self._solution_out)
++            finally:
++                _lib.amg_runtime_destroy(self._env)
++                self._env = None
++
++    def copy_solution_to(self, out):
++        """Copy the current iterate into a writable contiguous float64 vector."""
++        import numpy as np
++        if (not isinstance(out, np.ndarray) or out.shape != (self.n,) or
++                out.dtype != np.float64 or not out.flags.c_contiguous or not out.flags.writeable):
++            raise ValueError("Expected a writable contiguous float64 solution vector")
++        code = _lib.amg_runtime_get_solution(self._env, out.ctypes.data_as(ctypes.POINTER(_D)))
++        if code:
++            raise AMGNativeError(operation="get_solution", code=code)
++
++    def solve_pcg(self, preconditioner, *, tol=1e-6, max_iter=500):
++        """Solve this operator with another live environment's fixed hierarchy.
++
++        The caller must prepare a CG-compatible symmetric hierarchy, retain
++        its environment until completion, and check the final true residual.
++        """
++        stats = (_D * 5)()
++        code = _lib.amg_runtime_pcg(self._env, preconditioner._env, tol, max_iter, stats)
++        if code:
++            raise AMGNativeError(operation="pcg", code=code,
++                                 setup_runtime_sec=stats[0], solve_runtime_sec=stats[1])
++        return dict(setup_sec=stats[0], solve_sec=stats[1], iterations=int(stats[2]),
++                    reported_residual=stats[3], native_error=int(stats[4]))
+ 
+     def __enter__(self):
+         return self
+@@ -590,8 +635,37 @@ def create_env(
+     rhs_seed: int = 42,
+     k: float = 1.0, c: float = 0.0,
+     a0: float = 1.0, a1: float = 1.0, a2: float = 1.0, a3: float = 0.0,
++    matrix=None, rhs=None, initial_guess=None, solution_out=None,
+ ) -> PreparedAMGEnv:
+     _load_native_library()
++    if matrix is not None:
++        import numpy as np
++        from scipy.sparse import csr_matrix
++        matrix = csr_matrix(matrix, dtype=np.float64, copy=True)
++        matrix.sum_duplicates()
++        matrix.sort_indices()
++        n = matrix.shape[0]
++        if matrix.shape != (n, n) or n < 1 or max(n, matrix.nnz) > np.iinfo(np.int32).max:
++            raise ValueError("Application CSR matrix must be nonempty, square, and fit int32")
++        b = np.ascontiguousarray(rhs, dtype=np.float64)
++        x = np.zeros(n) if initial_guess is None else np.ascontiguousarray(initial_guess, dtype=np.float64)
++        if b.shape != (n,) or x.shape != (n,) or not all(np.isfinite(a).all() for a in (matrix.data, b, x)):
++            raise ValueError("Application matrix and vectors must be finite and dimensionally consistent")
++        if solution_out is not None and (not isinstance(solution_out, np.ndarray) or
++                solution_out.shape != (n,) or solution_out.dtype != np.float64 or
++                not solution_out.flags.c_contiguous or not solution_out.flags.writeable):
++            raise ValueError("solution_out must be a writable contiguous float64 vector")
++        ia = np.ascontiguousarray(matrix.indptr, dtype=np.int32)
++        ja = np.ascontiguousarray(matrix.indices, dtype=np.int32)
++        env = _lib.amg_runtime_create_csr(n, ia.ctypes.data_as(ctypes.POINTER(_I)),
++            ja.ctypes.data_as(ctypes.POINTER(_I)), matrix.data.ctypes.data_as(ctypes.POINTER(_D)),
++            b.ctypes.data_as(ctypes.POINTER(_D)), x.ctypes.data_as(ctypes.POINTER(_D)))
++        if not env:
++            raise AMGNativeError(operation="create_csr", code=NativeCode.CREATE_ERROR)
++        return PreparedAMGEnv(env, residual_scale=float(np.linalg.norm(b)) or 1.0,
++                              solution_out=solution_out)
++    if any(v is not None for v in (rhs, initial_guess, solution_out)):
++        raise ValueError("Application vectors require a CSR matrix")
+     env = _lib.amg_runtime_create(
+         nx, ny, nz, stencil, rhs_type, rhs_seed,
+         k, c, a0, a1, a2, a3,

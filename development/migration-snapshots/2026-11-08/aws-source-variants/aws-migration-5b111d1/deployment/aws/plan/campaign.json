@@ -1,0 +1,735 @@
+{
+  "base_commit": "5b111d1f4978865f8b76a989f1b3637121ab7e11",
+  "job_count": 36,
+  "jobs": [
+    {
+      "config": "configs/module1/diffusion_40/seed_1.json",
+      "config_sha256": "ca228b3ed151af2c7e81e709777060779f760585d28b296b2f38efdf292f30d4",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "d3d636d392127444671d58722648c7fdd87f704405924bfe7cd338a5103daa32",
+      "grid": 40,
+      "id": "diffusion_40_seed1",
+      "learning_cases": 5000,
+      "learning_input_sha256": "d69b8bc7bbdaa446cfac1fde2ffba11b55e44b7734bdb6c09049e700f8ed6882",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 1,
+      "suite": "deployment/aws/plan/suites/diffusion_40_seed1.json",
+      "timeout_seconds": 14400
+    },
+    {
+      "config": "configs/module1/diffusion_40/seed_2.json",
+      "config_sha256": "798d55756c15d02aa2f9fdba344a508b4dcd074a5b4efe4d7e81c572ed47a2c9",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "0918418ccc2d963a308013e103c906533e5453eefd014141b9d4c22b89a05534",
+      "grid": 40,
+      "id": "diffusion_40_seed2",
+      "learning_cases": 5000,
+      "learning_input_sha256": "be7cae93b254edc13b53ed16a3cce25135edaa040a6276b792c2d3ff54edc73f",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 2,
+      "suite": "deployment/aws/plan/suites/diffusion_40_seed2.json",
+      "timeout_seconds": 14400
+    },
+    {
+      "config": "configs/module1/diffusion_40/seed_3.json",
+      "config_sha256": "32335b88979c084388f0cd7ac34f8e8afa93407fe9c87ccf9b2ddc6658d1e780",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "0a4aa504afd4e414c0c428bd3b348d16076e68fcc72b700cd0ee1b94cd2f0371",
+      "grid": 40,
+      "id": "diffusion_40_seed3",
+      "learning_cases": 5000,
+      "learning_input_sha256": "c3394f7faf661614e5b7a777b839cdf97f8884a24f2221155cd6d3b4a908ff2c",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 3,
+      "suite": "deployment/aws/plan/suites/diffusion_40_seed3.json",
+      "timeout_seconds": 14400
+    },
+    {
+      "config": "configs/module1/diffusion_40/seed_4.json",
+      "config_sha256": "f2f8e33fa795def20c274f0e735966ed682ff866e1d71334507c978e3ed324ec",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "cd351563c986a4f55a7b71481fe48ad5c23401790cde057e1ae6b645f401a868",
+      "grid": 40,
+      "id": "diffusion_40_seed4",
+      "learning_cases": 5000,
+      "learning_input_sha256": "744e2ae71c2c6a65663b088c94ba665e48b3d79d1674e93b73620488232740e1",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 4,
+      "suite": "deployment/aws/plan/suites/diffusion_40_seed4.json",
+      "timeout_seconds": 14400
+    },
+    {
+      "config": "configs/module1/diffusion_40/seed_5.json",
+      "config_sha256": "7bb2af33730c1a083acf06d37f8d8906d0f86f4ee7f8d069a22317980facefc6",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "e7966a562a0a8e19c76b3188e08996189ec0fab8f7630b6d8bc75ba631461e66",
+      "grid": 40,
+      "id": "diffusion_40_seed5",
+      "learning_cases": 5000,
+      "learning_input_sha256": "336d6c5d021e2702cecf32444af85ec0efdf8d232a0249dd50c8d3e68ae5aab0",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 5,
+      "suite": "deployment/aws/plan/suites/diffusion_40_seed5.json",
+      "timeout_seconds": 14400
+    },
+    {
+      "config": "configs/module1/diffusion_40/seed_6.json",
+      "config_sha256": "10a86875d6ae4444d7e6814f31cb9a91bac284e1f40ad3737f051a9eec1f2dfc",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "ff83df0c82375a14c92cbe78452a76b9f0ed4c4522d974c092591fbaaecc19a0",
+      "grid": 40,
+      "id": "diffusion_40_seed6",
+      "learning_cases": 5000,
+      "learning_input_sha256": "9c26211598e9f2cfc5c3dbae513204a9f8c379bde7866299f9f97806432b12ed",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 6,
+      "suite": "deployment/aws/plan/suites/diffusion_40_seed6.json",
+      "timeout_seconds": 14400
+    },
+    {
+      "config": "configs/module1/diffusion_60/seed_1.json",
+      "config_sha256": "5c2532b1fd4ac838234596d0337942f5b1afce7c23b7477ef9dddfbb8092c5d8",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "8652be3263c362a82faf00e87f072836c82d487128205cb067feff6407248a86",
+      "grid": 60,
+      "id": "diffusion_60_seed1",
+      "learning_cases": 5000,
+      "learning_input_sha256": "e79ce1e088712599abd69a0b6b48cfbea54fbcf6c684b057353bd64af38ec823",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 1,
+      "suite": "deployment/aws/plan/suites/diffusion_60_seed1.json",
+      "timeout_seconds": 21600
+    },
+    {
+      "config": "configs/module1/diffusion_60/seed_2.json",
+      "config_sha256": "63998020390a3f3d29c9669f4d218da26ddafb165266d1218345e02326af7f78",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "2b9dac7b123629ae201569c17f611924ab98fb5a3cedbd84c84bcb4b4c90697e",
+      "grid": 60,
+      "id": "diffusion_60_seed2",
+      "learning_cases": 5000,
+      "learning_input_sha256": "7e1fe1b87108d45207bbc031c9955dcc8309c944b25e99bfba05a2857f500789",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 2,
+      "suite": "deployment/aws/plan/suites/diffusion_60_seed2.json",
+      "timeout_seconds": 21600
+    },
+    {
+      "config": "configs/module1/diffusion_60/seed_3.json",
+      "config_sha256": "89876243a5da66542cc86edd39d2e040cfacc20933b4d2b835944c0e5b77f75d",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "2f7a6f2d03834052ed97983d7b60a892525e437d94bc74c5cfe1bfd5e1826187",
+      "grid": 60,
+      "id": "diffusion_60_seed3",
+      "learning_cases": 5000,
+      "learning_input_sha256": "93b9f0207a5ba8c5f01f93dbd257cc5d66e307be8800bcab04e3d025aed23353",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 3,
+      "suite": "deployment/aws/plan/suites/diffusion_60_seed3.json",
+      "timeout_seconds": 21600
+    },
+    {
+      "config": "configs/module1/diffusion_60/seed_4.json",
+      "config_sha256": "781d7aa7c4b42b0fbe085ffc4c2e6032cac0a0d8e731789e84c2436af53cb825",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "f6aa6c0e2de6dc8275395d9c071f379686c96b10801082c063f2a8781940daf2",
+      "grid": 60,
+      "id": "diffusion_60_seed4",
+      "learning_cases": 5000,
+      "learning_input_sha256": "e4b2b79eeadef429a9f8fc0049bd40e020c731dd232a3ba3b833f14a5ab6345b",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 4,
+      "suite": "deployment/aws/plan/suites/diffusion_60_seed4.json",
+      "timeout_seconds": 21600
+    },
+    {
+      "config": "configs/module1/diffusion_60/seed_5.json",
+      "config_sha256": "0a0086b155481ec4898579149bfeaef500d5f9dd359dff867abb9c7cea367078",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "e697fe2cc1b0b8cc4c1f84e174f0ec1c962d968e51fb8ee8ef4ca0b95e178348",
+      "grid": 60,
+      "id": "diffusion_60_seed5",
+      "learning_cases": 5000,
+      "learning_input_sha256": "3ce773afdf722a5ec458596db0d8ea64ebbd522dddbe8f4acf5871cd5a9053c4",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 5,
+      "suite": "deployment/aws/plan/suites/diffusion_60_seed5.json",
+      "timeout_seconds": 21600
+    },
+    {
+      "config": "configs/module1/diffusion_60/seed_6.json",
+      "config_sha256": "a0ec5209e7f17ca5803629da4d8a29daab0ef4e3026abec01da794e65ff6097d",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "322027a7727a77f6c158a33fb7c076a0d8c7709d4b353f0d815ec71378ed7237",
+      "grid": 60,
+      "id": "diffusion_60_seed6",
+      "learning_cases": 5000,
+      "learning_input_sha256": "05ccbccf7977684a3b82d7f141d23299c3a8a75822ccb63e61589b8d63486b66",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 6,
+      "suite": "deployment/aws/plan/suites/diffusion_60_seed6.json",
+      "timeout_seconds": 21600
+    },
+    {
+      "config": "configs/module1/diffusion_80/seed_1.json",
+      "config_sha256": "d5fd21e0c62326d49e3b38c76a3e2d37855246529abc19be2f1e52e6a959e64c",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "f3b71384125d77d8789c16997892bdd0133ece52721e48000754ba38e0d261d9",
+      "grid": 80,
+      "id": "diffusion_80_seed1",
+      "learning_cases": 5000,
+      "learning_input_sha256": "4a68b2778ff180c556b67599d6a803aaaa348ac849f694784b04bfdb5a9f996e",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 1,
+      "suite": "deployment/aws/plan/suites/diffusion_80_seed1.json",
+      "timeout_seconds": 43200
+    },
+    {
+      "config": "configs/module1/diffusion_80/seed_2.json",
+      "config_sha256": "2a7c63d286fc34f1050c5c78930b7ed9f8df2a5b2c9c89df848db1ad97439df2",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "36e6d6918198dd2fb349c6c7cd879408d2ee42543fae62a9cf362b8a344366ee",
+      "grid": 80,
+      "id": "diffusion_80_seed2",
+      "learning_cases": 5000,
+      "learning_input_sha256": "74ab3efbf832366ec9deb3e9f2b029aed2ab2cf9f9952ee940caeb80bc72c6d0",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 2,
+      "suite": "deployment/aws/plan/suites/diffusion_80_seed2.json",
+      "timeout_seconds": 43200
+    },
+    {
+      "config": "configs/module1/diffusion_80/seed_3.json",
+      "config_sha256": "177b72930796ef396e4a84f6ed3e3b04bcc0a02038e4d8d8f70917fbf2b19888",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "63dd4847ae8788a9ced8de66cfdad9654aa70123a5f99747fafb20a7583a09a5",
+      "grid": 80,
+      "id": "diffusion_80_seed3",
+      "learning_cases": 5000,
+      "learning_input_sha256": "c03c59b0c067522b773f3eaf805e2afd00e2cd364472eafe3f39408db83469e4",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 3,
+      "suite": "deployment/aws/plan/suites/diffusion_80_seed3.json",
+      "timeout_seconds": 43200
+    },
+    {
+      "config": "configs/module1/diffusion_80/seed_4.json",
+      "config_sha256": "9992b7ab0cfde1ef4a766e0539babc0496e42571cbbfb3481e2a08ca032fa5ef",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "2c15a70169cf7caa4ca5f68c0996c8ef7b282533322821a94a29b50732a36060",
+      "grid": 80,
+      "id": "diffusion_80_seed4",
+      "learning_cases": 5000,
+      "learning_input_sha256": "32400cecb4ed27a69bdb63a156bce699d2c9138669b718a0b6783a8c36712568",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 4,
+      "suite": "deployment/aws/plan/suites/diffusion_80_seed4.json",
+      "timeout_seconds": 43200
+    },
+    {
+      "config": "configs/module1/diffusion_80/seed_5.json",
+      "config_sha256": "f5876ff9a0342f6e3458c2ac689261a7cf52e6811b3e176911381b21a6dc2979",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "2fe7c1175f177989bd9c6c85823918483ae210305b9ec0b94ae5c73021951c73",
+      "grid": 80,
+      "id": "diffusion_80_seed5",
+      "learning_cases": 5000,
+      "learning_input_sha256": "e53481fe3f0c8c6be90f0e1e2c125cd3bdbc66f42f2f266e03371d17bab4148e",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 5,
+      "suite": "deployment/aws/plan/suites/diffusion_80_seed5.json",
+      "timeout_seconds": 43200
+    },
+    {
+      "config": "configs/module1/diffusion_80/seed_6.json",
+      "config_sha256": "a69b5a307381cc95f60533881f20358ffd8aea52f21fbf19caa51302ba68f74b",
+      "family": "diffusion",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "99948ce4ca83b293293746b54b3c0e0a7233dd28bf015532e8cc2cac9843b7fe",
+      "grid": 80,
+      "id": "diffusion_80_seed6",
+      "learning_cases": 5000,
+      "learning_input_sha256": "626df9a16771dc85a2804ab0dfe84c6e5d2a42134d6cc9a6572aac066cbe590d",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 6,
+      "suite": "deployment/aws/plan/suites/diffusion_80_seed6.json",
+      "timeout_seconds": 43200
+    },
+    {
+      "config": "configs/module1/advection_40/seed_1.json",
+      "config_sha256": "868bf71e3dc17b009ecb2b5c486a2c43febf1e899fc64dc0c1d6dcdecc550806",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "04425d9ad31d01129f1c5d714c56536b9b4ca2addc6388b33a717bbf0038b738",
+      "grid": 40,
+      "id": "advection_40_seed1",
+      "learning_cases": 5000,
+      "learning_input_sha256": "89f1594faef61990e65c0ac37bddfc2fc01cfa9cfaab32a05b2708cfdeced56f",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 1,
+      "suite": "deployment/aws/plan/suites/advection_40_seed1.json",
+      "timeout_seconds": 14400
+    },
+    {
+      "config": "configs/module1/advection_40/seed_2.json",
+      "config_sha256": "00523d663cc7c2640ea2d43135c51765d00ef8bcef174aafc8b4909c1880da82",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "521adceb464525a28c4622eb917d9798f1dcf61ddd701396e5ed7c642da64da4",
+      "grid": 40,
+      "id": "advection_40_seed2",
+      "learning_cases": 5000,
+      "learning_input_sha256": "9eda411989204395e875a41cd2da934815b18045f7b5a72d7a4a6f9db114d8c9",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 2,
+      "suite": "deployment/aws/plan/suites/advection_40_seed2.json",
+      "timeout_seconds": 14400
+    },
+    {
+      "config": "configs/module1/advection_40/seed_3.json",
+      "config_sha256": "c4889ba972237d24e4047ebcbaf23afd9cc7e7c09f02cd35c4b7eb90f2e9a972",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "1b8548330ace605d04724301f5ca92bad711da5efcc3806654e9caf2ad044a6d",
+      "grid": 40,
+      "id": "advection_40_seed3",
+      "learning_cases": 5000,
+      "learning_input_sha256": "29f5525c24fee7b5f9d14507ca2e5ea33fcbb088093ce7ae8e33cacd49e7e8a4",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 3,
+      "suite": "deployment/aws/plan/suites/advection_40_seed3.json",
+      "timeout_seconds": 14400
+    },
+    {
+      "config": "configs/module1/advection_40/seed_4.json",
+      "config_sha256": "5766cfc15f4d112d05029f07355d7208e01cc2b395076af1c31c640e33611d95",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "1c7e7b3a5243f1d13addc0c98f47c8bd45a8c70f21707edf418ed223f3b01f5c",
+      "grid": 40,
+      "id": "advection_40_seed4",
+      "learning_cases": 5000,
+      "learning_input_sha256": "093d6ab9dd930ac6a17f10baacac80edff0ca10ba29bf91bf7f06e4f04d9fd11",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 4,
+      "suite": "deployment/aws/plan/suites/advection_40_seed4.json",
+      "timeout_seconds": 14400
+    },
+    {
+      "config": "configs/module1/advection_40/seed_5.json",
+      "config_sha256": "5d29658b555a165f3803d0227f3f5e7c14315b7a8b3079d98a3d8b65f9f408f1",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "cd8da122b7ecefeed6fbc7093a29ca18f3792478be9950f8ad4f77ec590b3318",
+      "grid": 40,
+      "id": "advection_40_seed5",
+      "learning_cases": 5000,
+      "learning_input_sha256": "c3f7866f341b204de0b884df00345a5313a35262a2e7788e6edae625732fa4b4",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 5,
+      "suite": "deployment/aws/plan/suites/advection_40_seed5.json",
+      "timeout_seconds": 14400
+    },
+    {
+      "config": "configs/module1/advection_40/seed_6.json",
+      "config_sha256": "f0085c2dd198b168ddd313e87784e9d5d8d768a695cf50affbebb2d16776455f",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "1b3a52e4c1c726982ae14f7fe75d64002e99b92ac2388fdd0d61b7db45cbdf59",
+      "grid": 40,
+      "id": "advection_40_seed6",
+      "learning_cases": 5000,
+      "learning_input_sha256": "9073a1ed9a08b9c9636b3161a616440775040567bff3db3ee80d311eb3054a55",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 6,
+      "suite": "deployment/aws/plan/suites/advection_40_seed6.json",
+      "timeout_seconds": 14400
+    },
+    {
+      "config": "configs/module1/advection_60/seed_1.json",
+      "config_sha256": "740f0c21af9838149f7c86cd35eb9c44c677cdfa888a4c4eafe9ea162f427860",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "b91e43aff134597b12e0e4cacb2d81fe9e5257f2029a40cb59964c0478411fd6",
+      "grid": 60,
+      "id": "advection_60_seed1",
+      "learning_cases": 5000,
+      "learning_input_sha256": "05abc1324ecade29d4215a4f7047a80621411502be0a396022dd39fbb973412f",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 1,
+      "suite": "deployment/aws/plan/suites/advection_60_seed1.json",
+      "timeout_seconds": 21600
+    },
+    {
+      "config": "configs/module1/advection_60/seed_2.json",
+      "config_sha256": "78f7e3e62f1177e5a490812a2d4f08ed334ead54ab38c3215eda280b36a7c590",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "36de659fcaf23e8d0c058831effb59848aa1c85fe23d61cc433db747c172ddc7",
+      "grid": 60,
+      "id": "advection_60_seed2",
+      "learning_cases": 5000,
+      "learning_input_sha256": "36c6c1a417d9b38f5d1cad4bcf8c0852673923a725aafb4d3b75205372b30608",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 2,
+      "suite": "deployment/aws/plan/suites/advection_60_seed2.json",
+      "timeout_seconds": 21600
+    },
+    {
+      "config": "configs/module1/advection_60/seed_3.json",
+      "config_sha256": "8a3f53d5182316b109c7e46fcce705229be1635f5dc7095f18ab42659ed5ccef",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "c4fe8bc88d6c8ae2784b533bafcf1fbd00b6f8078f12e850e8d7a1db3ce0e113",
+      "grid": 60,
+      "id": "advection_60_seed3",
+      "learning_cases": 5000,
+      "learning_input_sha256": "b8605b0e697b06ca3b08510416c2fd4be161e101f8c519fe9a65b12f791a19fc",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 3,
+      "suite": "deployment/aws/plan/suites/advection_60_seed3.json",
+      "timeout_seconds": 21600
+    },
+    {
+      "config": "configs/module1/advection_60/seed_4.json",
+      "config_sha256": "48668c4b0f00e381ce4004f2c76219271646497bad200d65cafcedb4c895ae9e",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "7b2b624429246bc8d84600759c7966243e534718d0f0d9b82ebfb9b742024257",
+      "grid": 60,
+      "id": "advection_60_seed4",
+      "learning_cases": 5000,
+      "learning_input_sha256": "d9187b5e5a02dcf1bc8527e22e9f07363f393c98a9d2c7b34e3222b5f619a19b",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 4,
+      "suite": "deployment/aws/plan/suites/advection_60_seed4.json",
+      "timeout_seconds": 21600
+    },
+    {
+      "config": "configs/module1/advection_60/seed_5.json",
+      "config_sha256": "484a6b8a180c844167553e7893b6c6d575ccfff62c261b217d05c731c816b6f5",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "bb80590065b2ac9b48f1c6b53d99f19720a1e7846fdf2383ebc052dd67102d77",
+      "grid": 60,
+      "id": "advection_60_seed5",
+      "learning_cases": 5000,
+      "learning_input_sha256": "b5c8c80e6438dbf208fad5894af9cf6bb420622d9800f7ba79250298fb2791d4",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 5,
+      "suite": "deployment/aws/plan/suites/advection_60_seed5.json",
+      "timeout_seconds": 21600
+    },
+    {
+      "config": "configs/module1/advection_60/seed_6.json",
+      "config_sha256": "36981d8681d6e1ed65193a33b3f29f467515f6cad8d25dd3d5e0ae591b15ed98",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "d8e9382c0b372a25700fc75a4818e6c37f929faca8860ade40d64f6223d68ff7",
+      "grid": 60,
+      "id": "advection_60_seed6",
+      "learning_cases": 5000,
+      "learning_input_sha256": "ea078d8de9584bf2122174ee1fbb57e8b4a3928d4e3c7ba4c5921a8824d18ae9",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 6,
+      "suite": "deployment/aws/plan/suites/advection_60_seed6.json",
+      "timeout_seconds": 21600
+    },
+    {
+      "config": "configs/module1/advection_80/seed_1.json",
+      "config_sha256": "64dd49f2e76786875be47656701d4f440caea19c11c3021b2c83ca6cfd7455ef",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "a0fc5dcf76a63dfaad63b63a516b8d6588ea052d1bece26c81df8c80ac333718",
+      "grid": 80,
+      "id": "advection_80_seed1",
+      "learning_cases": 5000,
+      "learning_input_sha256": "7285b6958bf0355c6fd225799311e318677440d85117070e296ca22ce5a9612b",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 1,
+      "suite": "deployment/aws/plan/suites/advection_80_seed1.json",
+      "timeout_seconds": 43200
+    },
+    {
+      "config": "configs/module1/advection_80/seed_2.json",
+      "config_sha256": "e412f96f63a06bf8fc8fcf7a05c74b893673e043b3be8302ddc88a8bd760abc1",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "bdbdcee89fb709a3c99fc0f8529dab14c85b15a4c391bfebe1c5ad3425dfc596",
+      "grid": 80,
+      "id": "advection_80_seed2",
+      "learning_cases": 5000,
+      "learning_input_sha256": "1815f54aefb744f31d093b4467f1bbfbbfd3b73e81c70d7859825058a934fcf1",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 2,
+      "suite": "deployment/aws/plan/suites/advection_80_seed2.json",
+      "timeout_seconds": 43200
+    },
+    {
+      "config": "configs/module1/advection_80/seed_3.json",
+      "config_sha256": "c3609a78b17ac19485c3884c3f9ba9581bc175a6cdb2b638246acac9ccd5e95d",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "9ff324b7b0ab9f0f58cc32c1fa9a72f9a1ecb8870c87249fe0a52415c4e8e2fb",
+      "grid": 80,
+      "id": "advection_80_seed3",
+      "learning_cases": 5000,
+      "learning_input_sha256": "6f75a0e2f3db274deacbab17aea08b822d829ee79552705fb10ade9e1ff8788e",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 3,
+      "suite": "deployment/aws/plan/suites/advection_80_seed3.json",
+      "timeout_seconds": 43200
+    },
+    {
+      "config": "configs/module1/advection_80/seed_4.json",
+      "config_sha256": "b524368a3cca85fe010c08f1515d7afced6079cbee0997f4bd3726f800599de6",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "602be4f687f5403b13e63441f50ffbffc1cf65b53a05d5626dc762ece4baab73",
+      "grid": 80,
+      "id": "advection_80_seed4",
+      "learning_cases": 5000,
+      "learning_input_sha256": "1518149a9ca8cc2615206b7b581678b3267f371524829f9da2ec5f21323f88e4",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 4,
+      "suite": "deployment/aws/plan/suites/advection_80_seed4.json",
+      "timeout_seconds": 43200
+    },
+    {
+      "config": "configs/module1/advection_80/seed_5.json",
+      "config_sha256": "a5f8407f437d23ac1fa821c3e802157eb97e0b6c380de3dbb437b01b8d838a60",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "a9b398857b198acd92327ab8ea919bf2afb92469c8cce69332f73154bad2f940",
+      "grid": 80,
+      "id": "advection_80_seed5",
+      "learning_cases": 5000,
+      "learning_input_sha256": "707f2312f5d4c0d510622bbee6584a4ee2f26bef4b128c63a985fa697e623476",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 5,
+      "suite": "deployment/aws/plan/suites/advection_80_seed5.json",
+      "timeout_seconds": 43200
+    },
+    {
+      "config": "configs/module1/advection_80/seed_6.json",
+      "config_sha256": "3247237d3507da323947f28059feffca417b2118048d02aa033a7dc9418cb0a3",
+      "family": "advection",
+      "frozen_cases": 1000,
+      "frozen_input_sha256": "651e3f9bdd9f528ab0a259d13c1db881724c6b1a85905718c03090d8fb93e875",
+      "grid": 80,
+      "id": "advection_80_seed6",
+      "learning_cases": 5000,
+      "learning_input_sha256": "70c15eca5ef630575f2b3bb63568d6b44c6ccbe675e36a8c02af47690079acc3",
+      "methods": [
+        "default_setup_default_solve",
+        "default_setup_lstdq",
+        "bandit_default",
+        "bandit_lstdq"
+      ],
+      "seed": 6,
+      "suite": "deployment/aws/plan/suites/advection_80_seed6.json",
+      "timeout_seconds": 43200
+    }
+  ],
+  "mpi_ranks_per_job": 1,
+  "note": "Timeouts are provisional limits, not measured Linux runtimes",
+  "threads": {
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1"
+  }
+}

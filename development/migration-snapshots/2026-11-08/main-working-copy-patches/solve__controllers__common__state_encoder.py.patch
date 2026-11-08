@@ -1,0 +1,44 @@
+diff --git a/solve/controllers/common/state_encoder.py b/solve/controllers/common/state_encoder.py
+index bd3cd61..81596d1 100644
+--- a/solve/controllers/common/state_encoder.py
++++ b/solve/controllers/common/state_encoder.py
+@@ -4,6 +4,7 @@ import math
+ from typing import Any, Dict, Sequence
+ 
+ import numpy as np
++from problems.application_context import APPLICATION_CONTEXT_FIELDS, validate_application_context
+ from problems.heterogeneous_3d import (
+     STRESS_CONTEXT_FIELDS, context_from_matrix_kwargs, validate_context,
+ )
+@@ -24,6 +25,7 @@ from problems.amg import (
+ CANONICAL_PROBLEM_CONTEXT = "canonical"
+ LEGACY_DIFFUSION_ONLY_CONTEXT = "legacy"
+ PROBLEM_CONTEXT_MODES = (
++    *APPLICATION_CONTEXT_FIELDS,
+     *STRESS_CONTEXT_FIELDS,
+     CANONICAL_PROBLEM_CONTEXT,
+     LEGACY_DIFFUSION_ONLY_CONTEXT,
+@@ -80,7 +82,10 @@ class SolveStateEncoder:
+             raise ValueError(
+                 f"problem_context_mode must be one of {PROBLEM_CONTEXT_MODES}"
+             )
+-        if self.problem_context_mode in STRESS_CONTEXT_FIELDS:
++        if self.problem_context_mode in APPLICATION_CONTEXT_FIELDS:
++            self.problem_context_fields = APPLICATION_CONTEXT_FIELDS[self.problem_context_mode]
++            self.problem_feature_dim = len(self.problem_context_fields) - 1
++        elif self.problem_context_mode in STRESS_CONTEXT_FIELDS:
+             self.problem_context_fields = STRESS_CONTEXT_FIELDS[self.problem_context_mode]
+             self.problem_feature_dim = len(self.problem_context_fields) - 1
+         elif self.problem_context_mode == CANONICAL_PROBLEM_CONTEXT:
+@@ -178,7 +183,10 @@ class SolveStateEncoder:
+                 raise ValueError("The logarithmic native cycle time must be finite")
+         weight = (float(last_weight) - self._weight_center) / self._weight_scale
+ 
+-        if self.problem_context_mode in STRESS_CONTEXT_FIELDS:
++        if self.problem_context_mode in APPLICATION_CONTEXT_FIELDS:
++            resolved_context = validate_application_context(problem_context, self.problem_context_mode)
++            self._cached_problem_features[:] = resolved_context[1:]
++        elif self.problem_context_mode in STRESS_CONTEXT_FIELDS:
+             resolved_context = validate_context(
+                 context_from_matrix_kwargs(mkw) if problem_context is None else problem_context,
+                 self.problem_context_mode,

@@ -1,0 +1,9 @@
+{
+  "name": "AWS singleton advection_60_seed3",
+  "seeds": [
+    {
+      "config": "../../../../configs/module1/advection_60/seed_3.json",
+      "label": "3"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "base_commit": "bf962f2d990f22d2abc94043db0ef4a84aa277fe",
+  "cases_per_job": 6000,
+  "frozen_cases": 1000,
+  "gate": "Seed-1 pair must pass full correctness before seeds 2/3; abort at any failure",
+  "instances": 1,
+  "jobs": [
+    "diffusion_40_seed1",
+    "advection_40_seed1",
+    "diffusion_40_seed2",
+    "advection_40_seed2",
+    "diffusion_40_seed3",
+    "advection_40_seed3"
+  ],
+  "learning_cases": 5000,
+  "max_seed_workers": 1,
+  "maximum_authorized_usage_usd": 10,
+  "method_evaluations_before_retries": 144000,
+  "numerical_threads": 1,
+  "pricing_status": "Exact resource/rate/cleanup plan pending",
+  "purpose": "Build/correctness/memory; Flex timings exploratory, not publishable official timings",
+  "total_paired_inputs": 36000
+}

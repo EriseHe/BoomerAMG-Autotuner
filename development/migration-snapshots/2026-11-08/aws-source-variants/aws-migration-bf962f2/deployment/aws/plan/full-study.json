@@ -1,0 +1,166 @@
+{
+  "approval": "No resources approved or launched",
+  "base_commit": "bf962f2d990f22d2abc94043db0ef4a84aa277fe",
+  "module1": {
+    "frozen_inputs": 36000,
+    "learning_inputs": 180000,
+    "method_evaluations_before_retries": 864000,
+    "singleton_jobs": 36
+  },
+  "module2": {
+    "automatic_launch": false,
+    "barrier": "All six FULL verified source jobs; no smoke/partial/Mac/mixed-revision substitutes",
+    "collection_layout": "COLLECTION_ROOT/diffusion_60_seedN/run/seed_N",
+    "default_training_source": "diffusion_60",
+    "evaluation_cases": 100,
+    "evaluation_repetitions": 3,
+    "execution": "One separate evaluation host/controller, three single-rank workers by default",
+    "extra_scan_case_fraction": 0.1,
+    "extra_scan_repetitions": 2,
+    "fixed_weights": 41,
+    "maximum_evaluation_cells": 9000,
+    "method": "bandit_lstdq",
+    "note": "Identical policy cells are shared; native preflight/recovery add work. No time/price claim.",
+    "planned_fixed_scan_trials": 29520,
+    "policy_roles": [
+      "fixed_w1",
+      "global_best_fixed",
+      "per_case_best_fixed",
+      "periodic",
+      "frozen_lstdq"
+    ],
+    "random_seed": 20261019,
+    "required_files_per_seed": [
+      "experiment_config.json",
+      "checkpoints/bandit_lstdq_final.npz",
+      "checkpoints/bandit_lstdq_final.npz.encoder.json",
+      "final_bandit_states/bandit_lstdq.npz"
+    ],
+    "requires": [
+      "diffusion_60_seed1",
+      "diffusion_60_seed2",
+      "diffusion_60_seed3",
+      "diffusion_60_seed4",
+      "diffusion_60_seed5",
+      "diffusion_60_seed6"
+    ],
+    "scan_repetitions": 1,
+    "scope": "Separate approval and runtime estimate required",
+    "workers_default": 3
+  },
+  "module3": {
+    "automatic_launch": false,
+    "learning_inputs": 30000,
+    "method_evaluations_before_retries": 120000,
+    "requires": [],
+    "runtime_and_cost": "Unmeasured for selected Linux host; not included in Module 1 estimate",
+    "scope": "Additional work outside the 36 Module 1 jobs; separate approval required",
+    "singleton_jobs": [
+      {
+        "config": "configs/module3/variable_flow_60/seed_1.json",
+        "config_sha256": "cf2b16a3608a4d996066eb31ecfe2826cfefc718937f965e8e2f2ca3e5ebf94a",
+        "frozen_cases": 0,
+        "id": "variable_flow_60_seed1",
+        "launchable_by_this_tool": false,
+        "learning_cases": 5000,
+        "methods": [
+          "default_setup_default_solve",
+          "default_setup_lstdq",
+          "bandit_default",
+          "bandit_lstdq"
+        ],
+        "module": 3,
+        "requires": [],
+        "seed": 1
+      },
+      {
+        "config": "configs/module3/variable_flow_60/seed_2.json",
+        "config_sha256": "2407afb6d164d95fcdd3ec38dede28ac04216a5f0ab381e728f385534bb63eb4",
+        "frozen_cases": 0,
+        "id": "variable_flow_60_seed2",
+        "launchable_by_this_tool": false,
+        "learning_cases": 5000,
+        "methods": [
+          "default_setup_default_solve",
+          "default_setup_lstdq",
+          "bandit_default",
+          "bandit_lstdq"
+        ],
+        "module": 3,
+        "requires": [],
+        "seed": 2
+      },
+      {
+        "config": "configs/module3/variable_flow_60/seed_3.json",
+        "config_sha256": "ca9aa77be5840f1f49f79f6ab1c1d14ee8ba8c6ad8ba9ac5bdae57c2a195279d",
+        "frozen_cases": 0,
+        "id": "variable_flow_60_seed3",
+        "launchable_by_this_tool": false,
+        "learning_cases": 5000,
+        "methods": [
+          "default_setup_default_solve",
+          "default_setup_lstdq",
+          "bandit_default",
+          "bandit_lstdq"
+        ],
+        "module": 3,
+        "requires": [],
+        "seed": 3
+      },
+      {
+        "config": "configs/module3/variable_flow_60/seed_4.json",
+        "config_sha256": "e01774c76e272bf9deb1bc2d0af4eb79009713fac5a89544a27fab7f99ba4a2e",
+        "frozen_cases": 0,
+        "id": "variable_flow_60_seed4",
+        "launchable_by_this_tool": false,
+        "learning_cases": 5000,
+        "methods": [
+          "default_setup_default_solve",
+          "default_setup_lstdq",
+          "bandit_default",
+          "bandit_lstdq"
+        ],
+        "module": 3,
+        "requires": [],
+        "seed": 4
+      },
+      {
+        "config": "configs/module3/variable_flow_60/seed_5.json",
+        "config_sha256": "700a84e5b0bf7a9a7c7fdeb859320794563c0ae03838e596c7716ea970be7ff1",
+        "frozen_cases": 0,
+        "id": "variable_flow_60_seed5",
+        "launchable_by_this_tool": false,
+        "learning_cases": 5000,
+        "methods": [
+          "default_setup_default_solve",
+          "default_setup_lstdq",
+          "bandit_default",
+          "bandit_lstdq"
+        ],
+        "module": 3,
+        "requires": [],
+        "seed": 5
+      },
+      {
+        "config": "configs/module3/variable_flow_60/seed_6.json",
+        "config_sha256": "f0fe8713277ff7a01bf013710cf57376f954ce8512bcd7ec57aacf6f6e24c524",
+        "frozen_cases": 0,
+        "id": "variable_flow_60_seed6",
+        "launchable_by_this_tool": false,
+        "learning_cases": 5000,
+        "methods": [
+          "default_setup_default_solve",
+          "default_setup_lstdq",
+          "bandit_default",
+          "bandit_lstdq"
+        ],
+        "module": 3,
+        "requires": [],
+        "seed": 6
+      }
+    ]
+  },
+  "upstream_wrapper": "experiments/run_all.py",
+  "wrapper_sha256": "620ca82298ca395effd264528fad67b2041207fa42cf707c7a0b1e0221c0ab0c",
+  "wrapper_use_on_each_vm": "Do not invoke: it repeats the entire multi-module study"
+}

@@ -1,0 +1,171 @@
+diff --git a/hypre/interfaces/amg_runtime.c b/hypre/interfaces/amg_runtime.c
+index 20f97b3..76d25ae 100644
+--- a/hypre/interfaces/amg_runtime.c
++++ b/hypre/interfaces/amg_runtime.c
+@@ -236,6 +236,8 @@ struct AMGRuntime
+ 
+     HYPRE_BigInt        first_row;
+     HYPRE_BigInt        last_row;
++    double             *initial_guess;
++    double              residual_scale;
+ };
+ 
+ static int _initialized = 0;
+@@ -269,7 +271,8 @@ static void reset_x_to_zero(AMGRuntime *env)
+     HYPRE_BigInt *rows = (HYPRE_BigInt*) malloc((size_t)n * sizeof(HYPRE_BigInt));
+     double *z = (double*) calloc((size_t)n, sizeof(double));
+     for (int i = 0; i < n; i++) rows[i] = env->first_row + i;
+-    HYPRE_IJVectorSetValues(env->ij_x, n, rows, z);
++    HYPRE_IJVectorSetValues(env->ij_x, n, rows,
++                           env->initial_guess ? env->initial_guess : z);
+     HYPRE_IJVectorAssemble(env->ij_x);
+     free(rows);
+     free(z);
+@@ -453,6 +456,130 @@ AMG_API AMGRuntime* amg_runtime_create(
+ }
+ 
+ /* ------------------------------------------------------------------ */
++/* Application CSR import, deliberately restricted to one MPI rank. */
++AMG_API AMGRuntime *amg_runtime_create_csr(int n, const int *ia, const int *ja,
++    const double *values, const double *rhs, const double *initial_guess)
++{
++    _ensure_init();
++    clear_hypre_errors();
++    int ranks;
++    hypre_MPI_Comm_size(hypre_MPI_COMM_WORLD, &ranks);
++    if (ranks != 1 || n <= 0 || !ia || !ja || !values || !rhs ||
++        ia[0] != 0 || ia[n] < 0) return NULL;
++    for (int i = 0; i < n; i++)
++        if (ia[i] > ia[i+1] || !isfinite(rhs[i]) ||
++            (initial_guess && !isfinite(initial_guess[i]))) return NULL;
++    for (int i = 0; i < ia[n]; i++)
++        if (ja[i] < 0 || ja[i] >= n || !isfinite(values[i])) return NULL;
++    AMGRuntime *env = calloc(1, sizeof(*env));
++    HYPRE_BigInt *rows = malloc((size_t)n * sizeof(*rows));
++    HYPRE_BigInt *cols = malloc((size_t)(ia[n] + 1) * sizeof(*cols));
++    HYPRE_Int *counts = malloc((size_t)n * sizeof(*counts));
++    double *zero = calloc((size_t)n, sizeof(*zero));
++    if (!env || !rows || !cols || !counts || !zero) goto fail;
++    env->comm = hypre_MPI_COMM_WORLD;
++    env->local_num_rows = n;
++    env->nnz = ia[n];
++    env->first_row = 0;
++    env->last_row = n-1;
++    env->initial_guess = malloc((size_t)n * sizeof(double));
++    if (!env->initial_guess) goto fail;
++    for (int i = 0; i < n; i++) {
++        rows[i] = i; counts[i] = ia[i+1] - ia[i];
++        env->initial_guess[i] = initial_guess ? initial_guess[i] : 0.0;
++    }
++    for (int i = 0; i < ia[n]; i++) cols[i] = ja[i];
++    HYPRE_IJMatrixCreate(env->comm, 0, n-1, 0, n-1, &env->ij_A);
++    HYPRE_IJMatrixSetObjectType(env->ij_A, HYPRE_PARCSR);
++    HYPRE_IJMatrixSetRowSizes(env->ij_A, counts);
++    HYPRE_IJMatrixInitialize(env->ij_A);
++    HYPRE_IJMatrixSetValues(env->ij_A, n, counts, rows, cols, values);
++    HYPRE_IJMatrixAssemble(env->ij_A);
++    HYPRE_IJMatrixGetObject(env->ij_A, (void**)&env->A);
++    HYPRE_IJVector *vectors[3] = {&env->ij_b, &env->ij_x, &env->ij_r};
++    HYPRE_ParVector *objects[3] = {&env->b, &env->x, &env->r};
++    const double *data[3] = {rhs, env->initial_guess, zero};
++    for (int i = 0; i < 3; i++) {
++        HYPRE_IJVectorCreate(env->comm, 0, n-1, vectors[i]);
++        HYPRE_IJVectorSetObjectType(*vectors[i], HYPRE_PARCSR);
++        HYPRE_IJVectorInitialize(*vectors[i]);
++        HYPRE_IJVectorSetValues(*vectors[i], n, rows, data[i]);
++        HYPRE_IJVectorAssemble(*vectors[i]);
++        HYPRE_IJVectorGetObject(*vectors[i], (void**)objects[i]);
++    }
++    if (HYPRE_GetError()) goto fail;
++    double squared = 0.0;
++    HYPRE_ParVectorInnerProd(env->b, env->b, &squared);
++    env->residual_scale = squared > 0.0 ? sqrt(squared) : 1.0;
++    if (HYPRE_GetError() || !isfinite(env->residual_scale)) goto fail;
++    free(rows); free(cols); free(counts); free(zero);
++    return env;
++fail:
++    free(rows); free(cols); free(counts); free(zero);
++    amg_runtime_destroy(env);
++    clear_hypre_errors();
++    return NULL;
++}
++
++static HYPRE_Int reuse_no_setup(HYPRE_Solver s, HYPRE_ParCSRMatrix a,
++                                HYPRE_ParVector b, HYPRE_ParVector x)
++{
++    (void)s; (void)a; (void)b; (void)x;
++    return 0;
++}
++
++AMG_API int amg_runtime_pcg(AMGRuntime *current, AMGRuntime *hierarchy,
++                           double tol, int max_iter, double *stats)
++{
++    if (!current || !hierarchy || !hierarchy->solver || !stats ||
++        current->local_num_rows != hierarchy->local_num_rows)
++        return AMG_RUNTIME_ERR_INVALID_ARGUMENT;
++    for (int i=0; i<5; i++) stats[i]=0.0;
++    clear_hypre_errors();
++    HYPRE_Solver pcg=NULL;
++    HYPRE_ParCSRPCGCreate(current->comm, &pcg);
++    HYPRE_PCGSetTol(pcg, tol);
++    HYPRE_PCGSetMaxIter(pcg, max_iter);
++    HYPRE_PCGSetTwoNorm(pcg, 1);
++    HYPRE_PCGSetPrintLevel(pcg, 0);
++    HYPRE_PCGSetLogging(pcg, 1);
++    HYPRE_BoomerAMGSetTol(hierarchy->solver, 0.0);
++    HYPRE_BoomerAMGSetMaxIter(hierarchy->solver, 1);
++    /* The outer operator is current->A; the old hierarchy remains an
++     * immutable preconditioner throughout this solve. Its owner stays alive. */
++    HYPRE_ParCSRPCGSetPrecond(pcg, HYPRE_BoomerAMGSolve, reuse_no_setup, hierarchy->solver);
++    double tick=amg_rl_wall_time_sec();
++    int error=HYPRE_ParCSRPCGSetup(pcg, current->A, current->b, current->x);
++    stats[0]=amg_rl_wall_time_sec()-tick;
++    if (!error) {
++        tick=amg_rl_wall_time_sec();
++        error=HYPRE_ParCSRPCGSolve(pcg, current->A, current->b, current->x);
++        stats[1]=amg_rl_wall_time_sec()-tick;
++        stats[4]=error;
++        clear_hypre_errors();
++        HYPRE_Int iterations=0;
++        HYPRE_Real residual=INFINITY;
++        HYPRE_PCGGetNumIterations(pcg, &iterations);
++        HYPRE_PCGGetFinalRelativeResidualNorm(pcg, &residual);
++        stats[2]=iterations; stats[3]=residual;
++    }
++    HYPRE_ParCSRPCGDestroy(pcg);
++    clear_hypre_errors();
++    return (error & ~HYPRE_ERROR_CONV) ? AMG_RUNTIME_ERR_SOLVE : AMG_RUNTIME_OK;
++}
++
++AMG_API int amg_runtime_get_solution(AMGRuntime *env, double *out)
++{
++    if (!env || !out) return AMG_RUNTIME_ERR_INVALID_ARGUMENT;
++    HYPRE_BigInt *rows = malloc((size_t)env->local_num_rows * sizeof(*rows));
++    if (!rows) return AMG_RUNTIME_ERR_CREATE;
++    for (int i = 0; i < env->local_num_rows; i++) rows[i] = env->first_row+i;
++    clear_hypre_errors();
++    int code = HYPRE_IJVectorGetValues(env->ij_x, env->local_num_rows, rows, out);
++    free(rows);
++    return code ? AMG_RUNTIME_ERR_SOLVE : AMG_RUNTIME_OK;
++}
++
+ /*  Solve — full BoomerAMG with configurable setup-phase params        */
+ /*  Use -1 (int) / -1.0 (double) to skip a param.                     */
+ /*  Resets x=0 each call.                                             */
+@@ -712,7 +839,7 @@ AMG_API int amg_runtime_step(
+             env->x,
+             env->r,
+             tol,
+-            env->r0,
++            env->residual_scale > 0.0 ? env->residual_scale : env->r0,
+             max_cycles,
+             &env->cycles_done,
+             relax_weight,
+@@ -766,6 +893,7 @@ AMG_API void amg_runtime_destroy(AMGRuntime *env)
+     if (env->ij_b) HYPRE_IJVectorDestroy(env->ij_b);
+     if (env->ij_A) HYPRE_IJMatrixDestroy(env->ij_A);
+     else if (env->A) HYPRE_ParCSRMatrixDestroy(env->A);
++    free(env->initial_guess);
+     free(env);
+ }
+ 

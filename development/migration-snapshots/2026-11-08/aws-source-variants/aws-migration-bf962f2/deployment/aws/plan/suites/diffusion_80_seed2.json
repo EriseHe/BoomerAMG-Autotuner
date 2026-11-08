@@ -1,0 +1,9 @@
+{
+  "name": "AWS singleton diffusion_80_seed2",
+  "seeds": [
+    {
+      "config": "../../../../configs/module1/diffusion_80/seed_2.json",
+      "label": "2"
+    }
+  ]
+}

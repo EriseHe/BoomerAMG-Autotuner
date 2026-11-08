@@ -1,0 +1,1602 @@
+{
+  "scope": "Isolated clone only; original research working trees untouched. Development source preservation, no paper-data publication or SISC edits.",
+  "clone": "/Users/erisehe/Documents/Codex/2026-11-08/i-am-about-to-s/work/boomer-development-publication",
+  "target_remote": "https://github.com/EriseHe/BoomerAMG-Autotuner.git",
+  "target_branch": "codex/development",
+  "base_commit": "e07b85fb52d0280b4f1d0b375cda83cc56d68a73",
+  "remote_before": "adc8cd1d384469559a9bfac004e4569f5bfdf5b7",
+  "history_actions": [
+    {
+      "label": "archived-public-main",
+      "source_commit": "6164a24ed6b1cc23f85d0b5d4771646d6a8bedc0",
+      "action": "ours-strategy ancestry preservation",
+      "before": "e07b85fb52d0280b4f1d0b375cda83cc56d68a73",
+      "after": "7f8960794fc9a53bd6db31f401580d8d047f5278",
+      "active_tree_unchanged": true,
+      "stdout": "Merge made by the 'ours' strategy.\n"
+    },
+    {
+      "label": "reward-objective-pilot",
+      "source_commit": "67681b39aff25ce56a08de29ec87c107888e337f",
+      "action": "ours-strategy ancestry preservation",
+      "before": "7f8960794fc9a53bd6db31f401580d8d047f5278",
+      "after": "ef25335b8316b125887074709d778016eb04d29e",
+      "active_tree_unchanged": true,
+      "stdout": "Merge made by the 'ours' strategy.\n"
+    },
+    {
+      "label": "module3-and-module2-execution-source",
+      "source_commit": "8fb316cd4000496e2e79410bfc5a3a066a6dcc5f",
+      "action": "ours-strategy ancestry preservation",
+      "before": "ef25335b8316b125887074709d778016eb04d29e",
+      "after": "85c379ee6891a2defb25f1f0a6a55667087f2487",
+      "active_tree_unchanged": true,
+      "stdout": "Merge made by the 'ours' strategy.\n"
+    },
+    {
+      "label": "official-paper-data-precursor",
+      "source_commit": "22f77e3af9e50e5932d6115611efc213224c537c",
+      "action": "already ancestor"
+    },
+    {
+      "label": "detached-original-paper-source",
+      "source_commit": "24a6b21cfe7607d64510b4a93d15006eb90d5681",
+      "action": "ours-strategy ancestry preservation",
+      "before": "85c379ee6891a2defb25f1f0a6a55667087f2487",
+      "after": "73dc84bb93b2a5b6d8b0758ca6b0640ad64b6236",
+      "active_tree_unchanged": true,
+      "stdout": "Merge made by the 'ours' strategy.\n"
+    }
+  ],
+  "files": [
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/paper_final/common/figure_style.py",
+      "destination": "development/migration-snapshots/2026-11-08/main-working-copy/experiments/paper_final/common/figure_style.py",
+      "bytes": 18355,
+      "sha256": "cc02c82286265c3e00506164b7d5d039a22a89f42b60ff8f8dfa32d4ed46b23f",
+      "role": "exact original main-working-copy variant",
+      "original_base": "6164a24ed6b1cc23f85d0b5d4771646d6a8bedc0",
+      "active_source_path": "experiments/paper_final/common/figure_style.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/paper_final/common/figure_style.py",
+      "destination": "experiments/paper_final/common/figure_style.py",
+      "role": "active e07 variant retained; exact WIP stored archivally",
+      "source_sha256": "cc02c82286265c3e00506164b7d5d039a22a89f42b60ff8f8dfa32d4ed46b23f",
+      "active_variant_sha256": "43bbae1cbbfae83ae6b56633a5b7f445166eee60fa4fe9f6fa7422b680e054cb",
+      "reason": "error: patch failed: experiments/paper_final/common/figure_style.py:112\nerror: experiments/paper_final/common/figure_style.py: patch does not apply"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/hypre/bindings/boomeramg.py",
+      "destination": "development/migration-snapshots/2026-11-08/main-working-copy/hypre/bindings/boomeramg.py",
+      "bytes": 24333,
+      "sha256": "368aa56dc0a80be616ff872efd6b5a437f8a86fc53eb151e86cda6da5ef9bd08",
+      "role": "exact original main-working-copy variant",
+      "original_base": "6164a24ed6b1cc23f85d0b5d4771646d6a8bedc0",
+      "active_source_path": "hypre/bindings/boomeramg.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/hypre/bindings/boomeramg.py",
+      "destination": "hypre/bindings/boomeramg.py",
+      "role": "compatible WIP patch applied to active development base",
+      "source_sha256": "368aa56dc0a80be616ff872efd6b5a437f8a86fc53eb151e86cda6da5ef9bd08",
+      "published_variant_sha256": "368aa56dc0a80be616ff872efd6b5a437f8a86fc53eb151e86cda6da5ef9bd08",
+      "check": "git apply --check passed; patch applied without content conflict"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/hypre/interfaces/amg_runtime.c",
+      "destination": "development/migration-snapshots/2026-11-08/main-working-copy/hypre/interfaces/amg_runtime.c",
+      "bytes": 33178,
+      "sha256": "f661dd3f3506acb3ba3b25de34c0f630ab66b216ddfd3519cf941837175dd7d5",
+      "role": "exact original main-working-copy variant",
+      "original_base": "6164a24ed6b1cc23f85d0b5d4771646d6a8bedc0",
+      "active_source_path": "hypre/interfaces/amg_runtime.c"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/hypre/interfaces/amg_runtime.c",
+      "destination": "hypre/interfaces/amg_runtime.c",
+      "role": "compatible WIP patch applied to active development base",
+      "source_sha256": "f661dd3f3506acb3ba3b25de34c0f630ab66b216ddfd3519cf941837175dd7d5",
+      "published_variant_sha256": "f661dd3f3506acb3ba3b25de34c0f630ab66b216ddfd3519cf941837175dd7d5",
+      "check": "git apply --check passed; patch applied without content conflict"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/hypre/interfaces/amg_runtime.h",
+      "destination": "development/migration-snapshots/2026-11-08/main-working-copy/hypre/interfaces/amg_runtime.h",
+      "bytes": 3600,
+      "sha256": "2d9625f1c346b5a5067a0c1c9870bd3203e0599c13b67b7a70f3a767f4c2e377",
+      "role": "exact original main-working-copy variant",
+      "original_base": "6164a24ed6b1cc23f85d0b5d4771646d6a8bedc0",
+      "active_source_path": "hypre/interfaces/amg_runtime.h"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/hypre/interfaces/amg_runtime.h",
+      "destination": "hypre/interfaces/amg_runtime.h",
+      "role": "compatible WIP patch applied to active development base",
+      "source_sha256": "2d9625f1c346b5a5067a0c1c9870bd3203e0599c13b67b7a70f3a767f4c2e377",
+      "published_variant_sha256": "2d9625f1c346b5a5067a0c1c9870bd3203e0599c13b67b7a70f3a767f4c2e377",
+      "check": "git apply --check passed; patch applied without content conflict"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/solve/controllers/common/factory.py",
+      "destination": "development/migration-snapshots/2026-11-08/main-working-copy/solve/controllers/common/factory.py",
+      "bytes": 5347,
+      "sha256": "52a0d0ee79dbd5da35d208eb3a866e0100903a844fd1b078468d85a5e7cbfebf",
+      "role": "exact original main-working-copy variant",
+      "original_base": "6164a24ed6b1cc23f85d0b5d4771646d6a8bedc0",
+      "active_source_path": "solve/controllers/common/factory.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/solve/controllers/common/factory.py",
+      "destination": "solve/controllers/common/factory.py",
+      "role": "compatible WIP patch applied to active development base",
+      "source_sha256": "52a0d0ee79dbd5da35d208eb3a866e0100903a844fd1b078468d85a5e7cbfebf",
+      "published_variant_sha256": "52a0d0ee79dbd5da35d208eb3a866e0100903a844fd1b078468d85a5e7cbfebf",
+      "check": "git apply --check passed; patch applied without content conflict"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/solve/controllers/common/state_encoder.py",
+      "destination": "development/migration-snapshots/2026-11-08/main-working-copy/solve/controllers/common/state_encoder.py",
+      "bytes": 13900,
+      "sha256": "43c3ec7963a53e1fae782d8a7e13853341ee55c60201590db59bd97e285b3b4c",
+      "role": "exact original main-working-copy variant",
+      "original_base": "6164a24ed6b1cc23f85d0b5d4771646d6a8bedc0",
+      "active_source_path": "solve/controllers/common/state_encoder.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/solve/controllers/common/state_encoder.py",
+      "destination": "solve/controllers/common/state_encoder.py",
+      "role": "compatible WIP patch applied to active development base",
+      "source_sha256": "43c3ec7963a53e1fae782d8a7e13853341ee55c60201590db59bd97e285b3b4c",
+      "published_variant_sha256": "43c3ec7963a53e1fae782d8a7e13853341ee55c60201590db59bd97e285b3b4c",
+      "check": "git apply --check passed; patch applied without content conflict"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_online/CONTINUATION.md",
+      "destination": "experiments/application_online/CONTINUATION.md",
+      "bytes": 2635,
+      "sha256": "7ff08e54057538a01540ec49afc1e789488818d78695675868a4f5af6a3770b4",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_online/CONTINUATION.md"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_online/README.md",
+      "destination": "experiments/application_online/README.md",
+      "bytes": 7299,
+      "sha256": "704cac461d029f61c3ee2f375b9ab3bd5ba515810efb468f5ce73c4f6d5e9b06",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_online/README.md"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_online/audit.py",
+      "destination": "experiments/application_online/audit.py",
+      "bytes": 6001,
+      "sha256": "08cc4642c4f5766019270d8ab3d9efe1ea6b5f8b6065eedc3702141d410f7139",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_online/audit.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_online/batch.py",
+      "destination": "experiments/application_online/batch.py",
+      "bytes": 3449,
+      "sha256": "475355260dbb7bc3fe4fd904d7a8655f1c6b469b08ca4eb63f594b0ac8b7f849",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_online/batch.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_online/campaigns.py",
+      "destination": "experiments/application_online/campaigns.py",
+      "bytes": 812,
+      "sha256": "be1304bbf90f4490c674fafd82a6c607aacce35a0f6b3c747e8f645cb6b614b9",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_online/campaigns.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_online/continuation.py",
+      "destination": "experiments/application_online/continuation.py",
+      "bytes": 12521,
+      "sha256": "bd10870d2fe59c2c4e978c17511f557fb78424820f11870fd12c55e55e699ad3",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_online/continuation.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_online/extend_batch.py",
+      "destination": "experiments/application_online/extend_batch.py",
+      "bytes": 3697,
+      "sha256": "8c45a367fc5e656f7a6207e1bdc74d452539a2ea1fd036abee3d945d44f5fa8e",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_online/extend_batch.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_online/heat_stream.cpp",
+      "destination": "experiments/application_online/heat_stream.cpp",
+      "bytes": 3928,
+      "sha256": "8535e0e00cbad674150cae4a9f384b3ea1d2148f3109d684fa1a87f824418ffa",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_online/heat_stream.cpp"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_online/merge_continuation.py",
+      "destination": "experiments/application_online/merge_continuation.py",
+      "bytes": 4441,
+      "sha256": "1dd79e1c9c3bc8cb5c6b0147a7f4543e767b9c5993c0833c102890ec0c2826a3",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_online/merge_continuation.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_online/run.py",
+      "destination": "experiments/application_online/run.py",
+      "bytes": 22523,
+      "sha256": "3b5e08b6ede06d31bb54743eeffd2dc5db3bf015d28f57c375d2958beec86390",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_online/run.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_online/spe10_stream.m",
+      "destination": "experiments/application_online/spe10_stream.m",
+      "bytes": 2542,
+      "sha256": "1f6549eea06608e93edec6128c165760c7e13d97c37233e3c3bd1639ac47f901",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_online/spe10_stream.m"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_online/test_runtime.py",
+      "destination": "experiments/application_online/test_runtime.py",
+      "bytes": 2909,
+      "sha256": "3a52c1962cd6931ff6e9e86c36f390310960f4ca5b24fbe89244d4ec85150399",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_online/test_runtime.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_pilot/README.md",
+      "destination": "experiments/application_pilot/README.md",
+      "bytes": 5646,
+      "sha256": "5f505d4b0ee199404f9718f7f007942351d75b6c0d10fea171cdd4aa72b57e95",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_pilot/README.md"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_pilot/bridge.py",
+      "destination": "experiments/application_pilot/bridge.py",
+      "bytes": 2046,
+      "sha256": "56978fae3c22067804e4711fedb4a1caa41a0f642d633e34a7a6b210793f421e",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_pilot/bridge.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_pilot/build.sh",
+      "destination": "experiments/application_pilot/build.sh",
+      "bytes": 738,
+      "sha256": "b88811cc5b101e2973f06ae0862c2049dd7c169f2b271f515f2e689e687182c4",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_pilot/build.sh"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_pilot/heat.cpp",
+      "destination": "experiments/application_pilot/heat.cpp",
+      "bytes": 2806,
+      "sha256": "40d4940ece175daa35b7fa60ca5e5ada838f4f8f274a9af16d4a5d8144ac4fe3",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_pilot/heat.cpp"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_pilot/make_heat_mesh.py",
+      "destination": "experiments/application_pilot/make_heat_mesh.py",
+      "bytes": 1325,
+      "sha256": "203d14dec3278f02a24117c35936c78486dc9d19ccc43fc1dded62f056db7a3e",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_pilot/make_heat_mesh.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_pilot/native_default.c",
+      "destination": "experiments/application_pilot/native_default.c",
+      "bytes": 4595,
+      "sha256": "3a60d76ede9fc68996a1847ffc9094c5540a60bd8536eb863a940bd02c4b5721",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_pilot/native_default.c"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_pilot/native_default.h",
+      "destination": "experiments/application_pilot/native_default.h",
+      "bytes": 554,
+      "sha256": "1a78c5585a5ace4495280f049d0f36ce02e83960947d5144f9f94dff45e4b009",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_pilot/native_default.h"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_pilot/run_spe10.py",
+      "destination": "experiments/application_pilot/run_spe10.py",
+      "bytes": 2753,
+      "sha256": "1e79409e054e01338a6e546c30014fffeee693be6047939972569c32c1a4fee4",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_pilot/run_spe10.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_pilot/spe10_case.m",
+      "destination": "experiments/application_pilot/spe10_case.m",
+      "bytes": 785,
+      "sha256": "b5036c3fd69f439a179c742b49f0451abbb591e52031ce18752f001a42d519e3",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_pilot/spe10_case.m"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_pilot/spe10_run.m",
+      "destination": "experiments/application_pilot/spe10_run.m",
+      "bytes": 1655,
+      "sha256": "d4ce9a0c9d8a1664f49562825386afe85a34a09900f08bcb8438a21b036834c3",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_pilot/spe10_run.m"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/experiments/application_pilot/summarize.py",
+      "destination": "experiments/application_pilot/summarize.py",
+      "bytes": 4760,
+      "sha256": "3140eee7590758add60acccc655106e1ef0dedbcfbd98ab4d6521891dfc9ea0a",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "experiments/application_pilot/summarize.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/problems/application_context.py",
+      "destination": "problems/application_context.py",
+      "bytes": 862,
+      "sha256": "5c067551a4512b86722cf72479110b542bc7439f6f986ba625b46a081302baf4",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "problems/application_context.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-development/experiments/reward_objective_pilot.py",
+      "destination": "experiments/reward_objective_pilot.py",
+      "bytes": 24326,
+      "sha256": "4a63c72f1ed6cc5bf6e3301bba1a3c691b08e00f8e0a9931e897c07eac21b0db",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-development",
+      "original_relative_path": "experiments/reward_objective_pilot.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/development/tests/test_unified_setup_normalization.py",
+      "destination": "development/tests/test_unified_setup_normalization.py",
+      "bytes": 10320,
+      "sha256": "766014205426e3e883b26a15281566abeeb5f313948b5a10114cecb0498d537f",
+      "role": "active source when cleanly compatible with e07; exact archival variant retained otherwise",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "development/tests/test_unified_setup_normalization.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/results/default_100_calibration_20261104/run.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG/default_100_calibration_20261104/run.py",
+      "bytes": 4303,
+      "sha256": "9314923910a19111ef665ac4c2958467ecba054873e2b479cc9b1cb3746819cc",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "results/default_100_calibration_20261104/run.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/results/application_campaign_pause_20261104/resume.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG/application_campaign_pause_20261104/resume.py",
+      "bytes": 2827,
+      "sha256": "bdf44d415fa9cfee13a1b88e8fd6e432a25d15b1e2b093051f867a83b88ed8f4",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "results/application_campaign_pause_20261104/resume.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG/results/application_campaign_1000_cap100_20261104/heat/diagnostics/probe_snapshot.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG/application_campaign_1000_cap100_20261104/heat/diagnostics/probe_snapshot.py",
+      "bytes": 3371,
+      "sha256": "329c97181cecb37f6915b50b10f98069ddffe6203d1dd6710b38595d6d20b5a6",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG",
+      "original_relative_path": "results/application_campaign_1000_cap100_20261104/heat/diagnostics/probe_snapshot.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module1_diffusion60_restart_5000_3seeds_20261018/compare.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module1_diffusion60_restart_5000_3seeds_20261018/compare.py",
+      "bytes": 8703,
+      "sha256": "4e7f5b07fb10be2e8c139f7a26afd9a6944cab17516be58eace7c537f4308bc0",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module1_diffusion60_restart_5000_3seeds_20261018/compare.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module1_diffusion60_restart_5000_3seeds_20261018/run/paper_figures/plot_online.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module1_diffusion60_restart_5000_3seeds_20261018/run/paper_figures/plot_online.py",
+      "bytes": 27583,
+      "sha256": "80a00afbaba84c0fe69c717c218f6dc4bd4c6883e62ddae61db4a57aa30d49a3",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module1_diffusion60_restart_5000_3seeds_20261018/run/paper_figures/plot_online.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/advection_60_seed_order_45612_20261026_181936/launch.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/advection_60_seed_order_45612_20261026_181936/launch.py",
+      "bytes": 1447,
+      "sha256": "35780b3fbe80ea9244770d73d67b271cb3983446f060b83c0ed86a8fefe79949",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/advection_60_seed_order_45612_20261026_181936/launch.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/rl_cycle_bin_ablation_20261018/benchmark.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/rl_cycle_bin_ablation_20261018/benchmark.py",
+      "bytes": 11998,
+      "sha256": "681fd37cbd4199ccd2363fa6dc981f2e4588b08ba3519ac87ff21a6037b01cf6",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/rl_cycle_bin_ablation_20261018/benchmark.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/rl_cycle_bin_ablation_20261018/ablation_state_encoder.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/rl_cycle_bin_ablation_20261018/ablation_state_encoder.py",
+      "bytes": 13204,
+      "sha256": "b2d8ad685fce070e52edcbfe2ed05c42d1cf28f946ad1d6bd8aa1318224b10a6",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/rl_cycle_bin_ablation_20261018/ablation_state_encoder.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/rl_cycle_bin_ablation_20261018/native_1000_3seeds/run_diagnostic.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/rl_cycle_bin_ablation_20261018/native_1000_3seeds/run_diagnostic.py",
+      "bytes": 15170,
+      "sha256": "938cd966204d17d3ceb58767b3057b93e49751f0b0f6afe8b77d64e30da04bd1",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/rl_cycle_bin_ablation_20261018/native_1000_3seeds/run_diagnostic.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/rl_cycle_bin_ablation_20261018/native_1000_3seeds/ablation_state_encoder.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/rl_cycle_bin_ablation_20261018/native_1000_3seeds/ablation_state_encoder.py",
+      "bytes": 13204,
+      "sha256": "b2d8ad685fce070e52edcbfe2ed05c42d1cf28f946ad1d6bd8aa1318224b10a6",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/rl_cycle_bin_ablation_20261018/native_1000_3seeds/ablation_state_encoder.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/rl_cycle_bin_ablation_20261018/native_1000_3seeds/analyze_windows.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/rl_cycle_bin_ablation_20261018/native_1000_3seeds/analyze_windows.py",
+      "bytes": 4652,
+      "sha256": "ca2a958a673ab039776459a6c6fb296966837913927fcce7720b2b69c7fd18a5",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/rl_cycle_bin_ablation_20261018/native_1000_3seeds/analyze_windows.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/diffusion_60_seed_order_45123_20261025_205509/launch.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/diffusion_60_seed_order_45123_20261025_205509/launch.py",
+      "bytes": 1328,
+      "sha256": "33550f25bfba897d394b1eb188a41eb02069415238f458933f0d07c4a85f5fcd",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/diffusion_60_seed_order_45123_20261025_205509/launch.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/run/paper_figures/plot_online.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module2_variable_flow_rerun_20261030/run/paper_figures/plot_online.py",
+      "bytes": 15957,
+      "sha256": "3cb9d4b1dc261bbd20d7c485d2a845598111961939b0cecb4baed91e4876543f",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module2_variable_flow_rerun_20261030/run/paper_figures/plot_online.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/comparison_older123_rerun456/plot.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module2_variable_flow_rerun_20261030/comparison_older123_rerun456/plot.py",
+      "bytes": 1965,
+      "sha256": "0fefef1def6c64a5433161d03197e40b5210a68a07e9e6c369ebe4ea8dd0e655",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module2_variable_flow_rerun_20261030/comparison_older123_rerun456/plot.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_rerun_20261030/comparison_older123_rerun456/compare.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module2_variable_flow_rerun_20261030/comparison_older123_rerun456/compare.py",
+      "bytes": 6050,
+      "sha256": "8534b3c7a25695c7d47d9e79bbf47f29b1783af2e9416e64d8f40d4950d7d1cf",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module2_variable_flow_rerun_20261030/comparison_older123_rerun456/compare.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/advection_60_seed_order_45612_20261026_134043/launch.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/advection_60_seed_order_45612_20261026_134043/launch.py",
+      "bytes": 1478,
+      "sha256": "41607c3e403ad8b408f2fdb4af6c3e0738b0544b542d9ac0cdce20ef3e65b88f",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/advection_60_seed_order_45612_20261026_134043/launch.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/policy_hierarchy_diagnosis_20261027/analyze_module1.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/policy_hierarchy_diagnosis_20261027/analyze_module1.py",
+      "bytes": 4457,
+      "sha256": "214e0ff5ffa4a7a185d313c4d0fb0c52bab724c4ef7f939223d79320272d23e9",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/policy_hierarchy_diagnosis_20261027/analyze_module1.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/policy_hierarchy_diagnosis_20261027/summarize_findings.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/policy_hierarchy_diagnosis_20261027/summarize_findings.py",
+      "bytes": 4611,
+      "sha256": "605e9009d2751d5ae1604e59246c842ff7548ce18c261f6d52c0d24083c9563b",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/policy_hierarchy_diagnosis_20261027/summarize_findings.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/policy_hierarchy_diagnosis_20261027/analyze_module2.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/policy_hierarchy_diagnosis_20261027/analyze_module2.py",
+      "bytes": 8339,
+      "sha256": "92e6321d6afbd3ee0eb4960027ccec8000b2d7a79feeaa109a76c36a53d44844",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/policy_hierarchy_diagnosis_20261027/analyze_module2.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/publication_update_20261023_231107/check_clean_publication.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/publication_update_20261023_231107/check_clean_publication.py",
+      "bytes": 2962,
+      "sha256": "469b026b4ea6032407c3074b6f344ddbd56ea4eb03a01e2040d22af2ff214ccc",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/publication_update_20261023_231107/check_clean_publication.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/publication_update_20261023_231107/compare_published_algorithm.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/publication_update_20261023_231107/compare_published_algorithm.py",
+      "bytes": 6910,
+      "sha256": "2a43deceb1845a27347061706686f1dae97d4c57914824280ad14715906b66b4",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/publication_update_20261023_231107/compare_published_algorithm.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_variable_flow_periodic_20261028/compare_periodic.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_variable_flow_periodic_20261028/compare_periodic.py",
+      "bytes": 8989,
+      "sha256": "0b7da6b0216cfdc12f1d53d8c07e985ea35fd6918055eef3a8c1182906017258",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module3_variable_flow_periodic_20261028/compare_periodic.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_variable_flow_periodic_20261028/readout.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_variable_flow_periodic_20261028/readout.py",
+      "bytes": 8836,
+      "sha256": "183ae22da14615257c50de3864e3c50e158190587efababe569a353458140639",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module3_variable_flow_periodic_20261028/readout.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_variable_flow_periodic_20261028/heatmaps.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_variable_flow_periodic_20261028/heatmaps.py",
+      "bytes": 6204,
+      "sha256": "e10a29a81522d4c691a4685cb39313c58500d9e9c08baf9a6af16bc6f06ea9c2",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module3_variable_flow_periodic_20261028/heatmaps.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_variable_flow_periodic_20261028/common_periodic_success.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_variable_flow_periodic_20261028/common_periodic_success.py",
+      "bytes": 6901,
+      "sha256": "d97a6d5f23ef4e74ba9247a769e5f39fd0dc21c8d2d384d0a280a8a7182b9ddf",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module3_variable_flow_periodic_20261028/common_periodic_success.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_variable_flow_periodic_20261028/reduction_vs_fixed1.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_variable_flow_periodic_20261028/reduction_vs_fixed1.py",
+      "bytes": 3681,
+      "sha256": "4374a4664884ae3ebc84208a4ede7cc969196d583ce4485c30b315f0ec09daad",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module3_variable_flow_periodic_20261028/reduction_vs_fixed1.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_variable_flow_periodic_20261028/run/diagnostic_runner.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_variable_flow_periodic_20261028/run/diagnostic_runner.py",
+      "bytes": 8989,
+      "sha256": "0b7da6b0216cfdc12f1d53d8c07e985ea35fd6918055eef3a8c1182906017258",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module3_variable_flow_periodic_20261028/run/diagnostic_runner.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/original_two_branch_advection_40_seed1_5000_20261023_194145/launch.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/original_two_branch_advection_40_seed1_5000_20261023_194145/launch.py",
+      "bytes": 2392,
+      "sha256": "bdc098462ca3fe5dd7bb1a038050e66efb2c15bff29bbfa00aa1352b885910e4",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/original_two_branch_advection_40_seed1_5000_20261023_194145/launch.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/original_two_branch_advection_40_seed1_5000_20261023_194145/prepare.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/original_two_branch_advection_40_seed1_5000_20261023_194145/prepare.py",
+      "bytes": 6381,
+      "sha256": "4d9cc1aee3f83692384dc967dd4fd5e82f4e6d42fdfd838d7aed2955aa3bbf28",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/original_two_branch_advection_40_seed1_5000_20261023_194145/prepare.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module1_seed_order_45612_20261025_210255/launch.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module1_seed_order_45612_20261025_210255/launch.py",
+      "bytes": 1526,
+      "sha256": "8b7a3bc93afbd2ed1e7bb9acffd9408f7560957a7ef6c9bd161920a6d1f78bd7",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module1_seed_order_45612_20261025_210255/launch.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/launch.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/modules_2_3_20261027/launch.py",
+      "bytes": 1745,
+      "sha256": "a1f2fad97b8161f03ab2923b48030581e838a3e8513823852048ddc75c42022e",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/modules_2_3_20261027/launch.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/modules_2_3_20261027/validation/run_transition_smoke.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/modules_2_3_20261027/validation/run_transition_smoke.py",
+      "bytes": 6432,
+      "sha256": "766fb77b78411349ced114dc8f7f5300f920279e847bf766600ab4dc407a48dd",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/modules_2_3_20261027/validation/run_transition_smoke.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/advection_60_seed_order_12456_20261026_182046/launch.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/advection_60_seed_order_12456_20261026_182046/launch.py",
+      "bytes": 1447,
+      "sha256": "35780b3fbe80ea9244770d73d67b271cb3983446f060b83c0ed86a8fefe79949",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/advection_60_seed_order_12456_20261026_182046/launch.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/rl_cycle_bin_removal_20261018/validate.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/rl_cycle_bin_removal_20261018/validate.py",
+      "bytes": 4712,
+      "sha256": "95f8313d0bf86f614c42230f9184027e48af411f14c8e4f4206216b8eb9be4cb",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/rl_cycle_bin_removal_20261018/validate.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/rl_overhead_optimization_20261018/benchmark.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/rl_overhead_optimization_20261018/benchmark.py",
+      "bytes": 7944,
+      "sha256": "78baf17db525831761720060aa5eba2d025be5f184b360288f965de78e0217b1",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/rl_overhead_optimization_20261018/benchmark.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/rl_overhead_optimization_20261018/native_100_comparison/run_comparison.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/rl_overhead_optimization_20261018/native_100_comparison/run_comparison.py",
+      "bytes": 5652,
+      "sha256": "598ff35e22d030aac947e5313713c94805cbbc1e4b41b02cdb97b10ee1c7f697",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/rl_overhead_optimization_20261018/native_100_comparison/run_comparison.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/rl_cycle_time_feature_ablation_20261018/native_1000_3seeds/run_diagnostic.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/rl_cycle_time_feature_ablation_20261018/native_1000_3seeds/run_diagnostic.py",
+      "bytes": 14774,
+      "sha256": "7e3ff402e8e03f5ed791157ca746e0e91dc4b6797646d6c51f2e0a8573fd3533",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/rl_cycle_time_feature_ablation_20261018/native_1000_3seeds/run_diagnostic.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/rl_cycle_time_feature_ablation_20261018/native_1000_3seeds/ablation_state_encoder.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/rl_cycle_time_feature_ablation_20261018/native_1000_3seeds/ablation_state_encoder.py",
+      "bytes": 13211,
+      "sha256": "055935cb82bfad30c51a23717de30d9b4581e2dd02be402511254e7b3ca5f76d",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/rl_cycle_time_feature_ablation_20261018/native_1000_3seeds/ablation_state_encoder.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/rl_cycle_time_feature_ablation_20261018/native_1000_3seeds/analyze_windows.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/rl_cycle_time_feature_ablation_20261018/native_1000_3seeds/analyze_windows.py",
+      "bytes": 4652,
+      "sha256": "bbffad6544aae5f8712e34af160d496e31551d24530277b8853b5721abee5140",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/rl_cycle_time_feature_ablation_20261018/native_1000_3seeds/analyze_windows.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/rl_cycle_time_feature_ablation_20261018/native_100_3seeds/run_diagnostic.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/rl_cycle_time_feature_ablation_20261018/native_100_3seeds/run_diagnostic.py",
+      "bytes": 13747,
+      "sha256": "37d28392de98e541f800a0cf8d9b9a33bed3bb1da1b5764ed80023edcf971f3e",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/rl_cycle_time_feature_ablation_20261018/native_100_3seeds/run_diagnostic.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/rl_cycle_time_feature_ablation_20261018/native_100_3seeds/ablation_state_encoder.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/rl_cycle_time_feature_ablation_20261018/native_100_3seeds/ablation_state_encoder.py",
+      "bytes": 13211,
+      "sha256": "055935cb82bfad30c51a23717de30d9b4581e2dd02be402511254e7b3ca5f76d",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/rl_cycle_time_feature_ablation_20261018/native_100_3seeds/ablation_state_encoder.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/joint_layout_20261028/before_setup_feedback.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/joint_layout_20261028/before_setup_feedback.py",
+      "bytes": 12265,
+      "sha256": "091ba6e1a286447a3a986e4355c5538e2d08172fb9235c9eb968389bd9139b3f",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/joint_layout_20261028/before_setup_feedback.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/joint_layout_20261028/before_execution.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/joint_layout_20261028/before_execution.py",
+      "bytes": 8847,
+      "sha256": "220f52e621c84e5937fc387d603313c76a6051cbe51a17290c38d1143848cf70",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/joint_layout_20261028/before_execution.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/joint_layout_20261028/before_protocol.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/joint_layout_20261028/before_protocol.py",
+      "bytes": 314,
+      "sha256": "a23098b7d6032dfac24baaaa1f4909accdbace64165ed9da20f9653ad174d34a",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/joint_layout_20261028/before_protocol.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/five_seed_study_20261025_041644/launch.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/five_seed_study_20261025_041644/launch.py",
+      "bytes": 2096,
+      "sha256": "0ae71f85ea8d6b6ac6c11b233df876100155cc0f9670daa0f9f2b0f2cec876f0",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/five_seed_study_20261025_041644/launch.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_first_attempt_20261030/resume_with_report_fix.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_first_attempt_20261030/resume_with_report_fix.py",
+      "bytes": 2432,
+      "sha256": "e3e30769e9ac48df5f7e19399bff4f10366c004ead5032e5f42a1911259178ad",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module3_first_attempt_20261030/resume_with_report_fix.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_first_attempt_20261030/launch.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_first_attempt_20261030/launch.py",
+      "bytes": 2274,
+      "sha256": "eb2b1413cea51f3b506efeb46f51305815d9a1ee142c1074b6bbda6effccfc81",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module3_first_attempt_20261030/launch.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_first_attempt_20261030/resume_after_selection_check.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_first_attempt_20261030/resume_after_selection_check.py",
+      "bytes": 2330,
+      "sha256": "3d71dcdb66027aacfdec54b95917a08063a0b1e0ce64538ee0bdc0acfe66c5a2",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module3_first_attempt_20261030/resume_after_selection_check.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_first_attempt_20261030/reporting/finalize.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_first_attempt_20261030/reporting/finalize.py",
+      "bytes": 1348,
+      "sha256": "5e3b519c2cdd3edff6c990538b93a3765b9abb39fb61e41db6e67cd3586e4c43",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module3_first_attempt_20261030/reporting/finalize.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_first_attempt_20261030/reporting/plot_policy_report_fix.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_first_attempt_20261030/reporting/plot_policy_report_fix.py",
+      "bytes": 10876,
+      "sha256": "29f4323d8c9649b5f3940eeef6800178e9d5b84adaace6bc037a34b1aa625fb6",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module3_first_attempt_20261030/reporting/plot_policy_report_fix.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_first_attempt_20261030/selection_comparison/compare_before_test.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_first_attempt_20261030/selection_comparison/compare_before_test.py",
+      "bytes": 4900,
+      "sha256": "b5d7ff558b148a8835583fac3d30e0cc03413806b0522ffd991bbb334a13fa9b",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module3_first_attempt_20261030/selection_comparison/compare_before_test.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_first_attempt_20261030/selection_comparison/compare.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_first_attempt_20261030/selection_comparison/compare.py",
+      "bytes": 4065,
+      "sha256": "c666decf560a1bed18c0cc683618803f85d0f08aeb0fa53d6304dfc05f007310",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module3_first_attempt_20261030/selection_comparison/compare.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_first_attempt_20261030/figures_preview/diffusion/draw.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_first_attempt_20261030/figures_preview/diffusion/draw.py",
+      "bytes": 5282,
+      "sha256": "e19e84b19f2d68578432b0da47c778fc952071b033a9553d385ee9c903450d59",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module3_first_attempt_20261030/figures_preview/diffusion/draw.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module3_first_attempt_20261030/figures_final/generate.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module3_first_attempt_20261030/figures_final/generate.py",
+      "bytes": 10185,
+      "sha256": "955f90fafb3552b246487b0be37adb8252b45cf084d0bf9c282fdc80dc18d132",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module3_first_attempt_20261030/figures_final/generate.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/advection_60_seed_order_14562_20261026_182110/launch.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/advection_60_seed_order_14562_20261026_182110/launch.py",
+      "bytes": 1447,
+      "sha256": "35780b3fbe80ea9244770d73d67b271cb3983446f060b83c0ed86a8fefe79949",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/advection_60_seed_order_14562_20261026_182110/launch.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_60_20261028/review_results.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module2_variable_flow_60_20261028/review_results.py",
+      "bytes": 4368,
+      "sha256": "af54eb1683fa800e1b1f3efd03c45b4db2437b6c5ab006398612ea8d311ebe11",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module2_variable_flow_60_20261028/review_results.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_60_20261028/explain_policies.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module2_variable_flow_60_20261028/explain_policies.py",
+      "bytes": 6008,
+      "sha256": "9898e3659bdf59f922878d63bf48fd42ec11d0b14e2e8727fce8b88180731733",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module2_variable_flow_60_20261028/explain_policies.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_60_20261028/diagnose_period_two_failures.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module2_variable_flow_60_20261028/diagnose_period_two_failures.py",
+      "bytes": 6200,
+      "sha256": "321d59c40c82ed964e81d796859639506f8c15d9f7652e028114e1920f887742",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module2_variable_flow_60_20261028/diagnose_period_two_failures.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_variable_flow_60_20261028/run/paper_figures/plot_policy.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module2_variable_flow_60_20261028/run/paper_figures/plot_policy.py",
+      "bytes": 11186,
+      "sha256": "d9c72d669927f10a1d54482e08d5659391d122057ac38b27588452dbccbb9408",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module2_variable_flow_60_20261028/run/paper_figures/plot_policy.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/original_paper_advection_60_20261022_161245/run/paper_figures/plot_online.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/original_paper_advection_60_20261022_161245/run/paper_figures/plot_online.py",
+      "bytes": 27568,
+      "sha256": "f5e39ac2647d19a70636793b0513dcc32b4fca4fbaa8efe5ef3bf07f32527396",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/original_paper_advection_60_20261022_161245/run/paper_figures/plot_online.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_advection_60_20261027_133028/readout_20261028/show_six_seeds.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module2_advection_60_20261027_133028/readout_20261028/show_six_seeds.py",
+      "bytes": 2894,
+      "sha256": "a3c1ab1990f05e04592c6dcdbe8fc7d9026a8cbdad3517a1c3e15d6f10864419",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module2_advection_60_20261027_133028/readout_20261028/show_six_seeds.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_advection_60_20261027_133028/figure_archive/before_331df907/plot_policy.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module2_advection_60_20261027_133028/figure_archive/before_331df907/plot_policy.py",
+      "bytes": 11186,
+      "sha256": "d9c72d669927f10a1d54482e08d5659391d122057ac38b27588452dbccbb9408",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module2_advection_60_20261027_133028/figure_archive/before_331df907/plot_policy.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics/results/module2_advection_60_20261027_133028/run/paper_figures/plot_policy.py",
+      "destination": "development/migration-snapshots/2026-11-08/result-launchers/RLTune-BoomerAMG-diagnostics/module2_advection_60_20261027_133028/run/paper_figures/plot_policy.py",
+      "bytes": 11186,
+      "sha256": "d9c72d669927f10a1d54482e08d5659391d122057ac38b27588452dbccbb9408",
+      "role": "archival script only; not executable runner inputs or paper measurements",
+      "original_root": "/Users/erisehe/Documents/GitHub/RLTune-BoomerAMG-diagnostics",
+      "original_relative_path": "results/module2_advection_60_20261027_133028/run/paper_figures/plot_policy.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/README.md",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/README.md",
+      "bytes": 22732,
+      "sha256": "68ae22bf5a32e4b6f0a688e67805d24de95fe0e5ca74d86b62efb4ca58ca0d30",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/bootstrap.sh",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/bootstrap.sh",
+      "bytes": 6358,
+      "sha256": "0d7a9c895f91594b5f26c9da2ebc4ff373fa29d62fdffc730a67d4de6e95ad56",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/campaign.py",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/campaign.py",
+      "bytes": 27430,
+      "sha256": "43e413f020d7e1ded0c723801cdbabcaca7e5d5a7fc646ddb0a2c468c1694861",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/pilot-budget.template.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/pilot-budget.template.json",
+      "bytes": 691,
+      "sha256": "89eb9e9d08b0239a5b1b6756436484c89ad016454f8f2c5f82b5f207c5ab95ac",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/campaign.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/campaign.json",
+      "bytes": 27926,
+      "sha256": "765dc3093d2083ba107abdce134eb66d1467eb235649980ee1cdf1f493949416",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/full-study.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/full-study.json",
+      "bytes": 5530,
+      "sha256": "73509760ea31f579edff8500de3ba7a26cd078f7c2b719b0c84a8f217d95a654",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed1.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed1.json",
+      "bytes": 170,
+      "sha256": "56f3cbef8e39fe11dde329fc647505e41158a29a46f7c55375dfa481eec3399d",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed2.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed2.json",
+      "bytes": 170,
+      "sha256": "4e369fd13592b0f850d3c65313d01ba15622b590f475e924c7f7d8ab56858dc9",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed3.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed3.json",
+      "bytes": 170,
+      "sha256": "2906cc46a9ffe93e897143b77db9ea6bdf1a856a43fe261ab394e62c3755e451",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed4.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed4.json",
+      "bytes": 170,
+      "sha256": "6d078166f1dce4327b957458d66ed3e595e9ca95c5355b2a183cd94bba28e2d9",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed5.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed5.json",
+      "bytes": 170,
+      "sha256": "5ac74e772a4ada8da7f3b52151e9f845807fe2952bbd2d40bc0e05c5fb965005",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed6.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed6.json",
+      "bytes": 170,
+      "sha256": "19bc700994003a575a88d5aef70318c4c46686a85bf1975d8167f26d649d14fb",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed1.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed1.json",
+      "bytes": 170,
+      "sha256": "3bede5813a6e13337433062e99bb781de75ce6e1a65e39df5ab7ed3e898e3e33",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed2.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed2.json",
+      "bytes": 170,
+      "sha256": "019b3cd2732c12dbc10dd5c36d45d6e4dcdbfaad7031bd2ae7da07c12c49e0ab",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed3.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed3.json",
+      "bytes": 170,
+      "sha256": "a96b5e00fbc2fd1f1c20b4674bb86edc88f7dca34ed633d5e35c1b1cc6402c9b",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed4.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed4.json",
+      "bytes": 170,
+      "sha256": "3d73c84d66f2ed852e106faf5122aeb9023df200469c581de744a96cdd2a649c",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed5.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed5.json",
+      "bytes": 170,
+      "sha256": "dea2909db3a31313029511dd8a0ba7bcd0dd52e6db26ef974191e18d1306a16d",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed6.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed6.json",
+      "bytes": 170,
+      "sha256": "312172a9a7b5c5a515874f85204e2111d255dd336105adb1be8f80359c6a8f44",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed1.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed1.json",
+      "bytes": 170,
+      "sha256": "11dfe3b009b040f0b3409536c3c131c203b822a71869b48c69104bf3b8a66efb",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed2.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed2.json",
+      "bytes": 170,
+      "sha256": "cc56a618536f5cbc572ad4089d43e4f7667e243b9befe080dc34f5add1a6a800",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed3.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed3.json",
+      "bytes": 170,
+      "sha256": "bec8193930174f96cd43e480236dd98805239ea99f668a55a302f7a27c639ac5",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed4.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed4.json",
+      "bytes": 170,
+      "sha256": "6eb1b7c25d280a12f539a3d954b235c242a27063cfd1725610cc8c3f6298b65a",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed5.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed5.json",
+      "bytes": 170,
+      "sha256": "f64c9a631ce397eeedb667e46566aacdc5868c093060a2cd4258766c3f306090",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed6.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed6.json",
+      "bytes": 170,
+      "sha256": "772cd81e005e6ae4010f09b9050247a5fb9c01dfce21d86cac5726945a29025c",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed1.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed1.json",
+      "bytes": 170,
+      "sha256": "f9cf630c3d95c5df431f9eccb741751aaa7efcf85cdd869d1dee65b9f9204f89",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed2.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed2.json",
+      "bytes": 170,
+      "sha256": "66db128400756902d02bb3f9a7434b60156eda4d19e8b1796770e59e1abf9aa1",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed3.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed3.json",
+      "bytes": 170,
+      "sha256": "f1f0bf48d7c1994edd6b155cfbc3914692c293b9598737df22aea17bef20f175",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed4.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed4.json",
+      "bytes": 170,
+      "sha256": "e4f045501a4d409c2ddb9dfcfee920dd8ba108587d125fd9581ab65ac31e1e8a",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed5.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed5.json",
+      "bytes": 170,
+      "sha256": "2bd89dbc58ad99655985139de098aad62d9c5ec3707618a028ee3c5f2a95b1d5",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed6.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed6.json",
+      "bytes": 170,
+      "sha256": "d15fd1ab1d96bd93ab1d913b97e9342fd038e9b10d51c668e2fc46b8b91c6cc1",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed1.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed1.json",
+      "bytes": 170,
+      "sha256": "786ed79c970601512a0ea3589837db8eecbab731e7cd287e4722a4a0a65a240e",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed2.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed2.json",
+      "bytes": 170,
+      "sha256": "7fdbd1d0e9f9f8bd32c3910396c965b8bdf04b93439a2d184c10c17ed487e72f",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed3.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed3.json",
+      "bytes": 170,
+      "sha256": "cc6b435888ab7b57a90725149bd461e4dd01f26507672364e04f63d434a8fbc7",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed4.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed4.json",
+      "bytes": 170,
+      "sha256": "a3517f3e69936a5231050a2207fb66ca6e7fb07f09745867bd25225ed35aed1a",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed5.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed5.json",
+      "bytes": 170,
+      "sha256": "2224cbf8ad9164acb2c1661f24ea0f3849e971c2a2dce284cb2fecc5f3335dee",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed6.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed6.json",
+      "bytes": 170,
+      "sha256": "64c50494cbd67c4dd7872638f4d7f98aabe30eb1ea4044e95a8ef7933a832a18",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed1.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed1.json",
+      "bytes": 170,
+      "sha256": "a63ef492a10a309733425c41fbbf3870c5007be8b338a01238e5810041def41b",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed2.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed2.json",
+      "bytes": 170,
+      "sha256": "e016f8c1d404c7d71e995dcc22d9d9e29878388eba61ed5e9ac8654aca28a47c",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed3.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed3.json",
+      "bytes": 170,
+      "sha256": "db537981334e444bee0fcfa0bbcbb73e01a17ed50e0c484c74b47c207b2ccf2e",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed4.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed4.json",
+      "bytes": 170,
+      "sha256": "c40f53a94470e18b5d73573f19fa5753ae80d5a400c95f9e0c66f0f8eb473b49",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed5.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed5.json",
+      "bytes": 170,
+      "sha256": "1bb1e6efca273d02146a25e4d897768cecd4c7f233d4623eb36202b4d2c35934",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed6.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed6.json",
+      "bytes": 170,
+      "sha256": "d97b8ec07faa8d39b3efaf3f18f5700e105cabd48f29bbcebbb9a6355f5ec3e2",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/serial-plan.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/serial-plan.json",
+      "bytes": 753,
+      "sha256": "3f3430c4c13075a859fcac202f4ee34e0f7700a6854b30c78c2939185487f383",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/serial_pilot.py",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/serial_pilot.py",
+      "bytes": 11995,
+      "sha256": "f407e67ced5c46b1f1bf8e025c567021f8eecd8226ea0e7c6ca652237cc6f7ec",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/test_campaign.py",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/test_campaign.py",
+      "bytes": 13391,
+      "sha256": "955df1b4081136cf30e01210e42bd061ee189ac8a375a028364a9b22b6ecefb0",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/test_serial_pilot.py",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/test_serial_pilot.py",
+      "bytes": 7110,
+      "sha256": "a686540dbb426c05325eb9e3f1dd281b74a84cada4d8dfcb2c69b0cfd0d46377",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/deployment/aws/test_shutdown.py",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/test_shutdown.py",
+      "bytes": 5818,
+      "sha256": "db3aff1b6944c140e314609c9ef3afe9579cef7c1234a0015743287866b50acf",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/experiments/paper_final/run_online.py",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/experiments/paper_final/run_online.py",
+      "bytes": 40340,
+      "sha256": "9daa026c935382a6b98374be448804df0628e4b6d777e30ee98147a9b3e7210e",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-bf962f2/hypre/bindings/Makefile",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/hypre/bindings/Makefile",
+      "bytes": 491,
+      "sha256": "6d09f86a80cd2f29f623d7b40c9eaa330bda42c0f81f363bad599b4114183003",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "bf962f2d990f22d2abc94043db0ef4a84aa277fe"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/README.md",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-5b111d1/deployment/aws/README.md",
+      "bytes": 10784,
+      "sha256": "8861edad886294404f335e4105c7ad62280ea363bd9e3fdafef6b9335b504bdb",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "5b111d1f4978865f8b76a989f1b3637121ab7e11"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/bootstrap.sh",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-5b111d1/deployment/aws/bootstrap.sh",
+      "bytes": 4742,
+      "sha256": "b9c6c38b4e20178eb01a9947509931507ce9edccd3ad5ba8c29b629d8242aca1",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "5b111d1f4978865f8b76a989f1b3637121ab7e11"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/campaign.py",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-5b111d1/deployment/aws/campaign.py",
+      "bytes": 19940,
+      "sha256": "6caab705b1b820a40291ed04471a217d0b39a76b8c2c4d8db978d5d4c665714d",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "5b111d1f4978865f8b76a989f1b3637121ab7e11"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/campaign.json",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-5b111d1/deployment/aws/plan/campaign.json",
+      "bytes": 27842,
+      "sha256": "c18748c94ddc71d07becb34441c5204baf6fc36926f72c5b3fc31bd236e35189",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "5b111d1f4978865f8b76a989f1b3637121ab7e11"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/test_campaign.py",
+      "destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-5b111d1/deployment/aws/test_campaign.py",
+      "bytes": 7582,
+      "sha256": "f777de8fab48b1f74844fa1117a9ccd300b7b64ceba7f863cd3fbb7b7e768909",
+      "role": "historical safe deployment source/configuration; not executed",
+      "original_base": "5b111d1f4978865f8b76a989f1b3637121ab7e11"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-11-08/i-am-about-to-s/work/paper-data-audit/export_official_module2.py",
+      "destination": "development/publication_20261108/export_official_module2.py",
+      "bytes": 7985,
+      "sha256": "d6d90d100d2977f30dfb6b856ede0391ff52a0e5e2ce15e7382ac045bcdcc67e",
+      "role": "official-data archival exporter; source-only, not paper data"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-11-08/i-am-about-to-s/work/paper-data-audit/export_official_module3.py",
+      "destination": "development/publication_20261108/export_official_module3.py",
+      "bytes": 20259,
+      "sha256": "fb5ac1d901979ba71e2f8017f20c57590c35da98cc29746ddb1e8cbf5a1856b6",
+      "role": "official-data archival exporter; source-only, not paper data"
+    }
+  ],
+  "duplicate_aliases": [
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_40_seed1.json",
+      "sha256": "56f3cbef8e39fe11dde329fc647505e41158a29a46f7c55375dfa481eec3399d",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed1.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_40_seed2.json",
+      "sha256": "4e369fd13592b0f850d3c65313d01ba15622b590f475e924c7f7d8ab56858dc9",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed2.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_40_seed3.json",
+      "sha256": "2906cc46a9ffe93e897143b77db9ea6bdf1a856a43fe261ab394e62c3755e451",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed3.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_40_seed4.json",
+      "sha256": "6d078166f1dce4327b957458d66ed3e595e9ca95c5355b2a183cd94bba28e2d9",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed4.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_40_seed5.json",
+      "sha256": "5ac74e772a4ada8da7f3b52151e9f845807fe2952bbd2d40bc0e05c5fb965005",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed5.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_40_seed6.json",
+      "sha256": "19bc700994003a575a88d5aef70318c4c46686a85bf1975d8167f26d649d14fb",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_40_seed6.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_60_seed1.json",
+      "sha256": "3bede5813a6e13337433062e99bb781de75ce6e1a65e39df5ab7ed3e898e3e33",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed1.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_60_seed2.json",
+      "sha256": "019b3cd2732c12dbc10dd5c36d45d6e4dcdbfaad7031bd2ae7da07c12c49e0ab",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed2.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_60_seed3.json",
+      "sha256": "a96b5e00fbc2fd1f1c20b4674bb86edc88f7dca34ed633d5e35c1b1cc6402c9b",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed3.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_60_seed4.json",
+      "sha256": "3d73c84d66f2ed852e106faf5122aeb9023df200469c581de744a96cdd2a649c",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed4.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_60_seed5.json",
+      "sha256": "dea2909db3a31313029511dd8a0ba7bcd0dd52e6db26ef974191e18d1306a16d",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed5.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_60_seed6.json",
+      "sha256": "312172a9a7b5c5a515874f85204e2111d255dd336105adb1be8f80359c6a8f44",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_60_seed6.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_80_seed1.json",
+      "sha256": "11dfe3b009b040f0b3409536c3c131c203b822a71869b48c69104bf3b8a66efb",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed1.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_80_seed2.json",
+      "sha256": "cc56a618536f5cbc572ad4089d43e4f7667e243b9befe080dc34f5add1a6a800",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed2.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_80_seed3.json",
+      "sha256": "bec8193930174f96cd43e480236dd98805239ea99f668a55a302f7a27c639ac5",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed3.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_80_seed4.json",
+      "sha256": "6eb1b7c25d280a12f539a3d954b235c242a27063cfd1725610cc8c3f6298b65a",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed4.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_80_seed5.json",
+      "sha256": "f64c9a631ce397eeedb667e46566aacdc5868c093060a2cd4258766c3f306090",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed5.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/advection_80_seed6.json",
+      "sha256": "772cd81e005e6ae4010f09b9050247a5fb9c01dfce21d86cac5726945a29025c",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/advection_80_seed6.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_40_seed1.json",
+      "sha256": "f9cf630c3d95c5df431f9eccb741751aaa7efcf85cdd869d1dee65b9f9204f89",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed1.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_40_seed2.json",
+      "sha256": "66db128400756902d02bb3f9a7434b60156eda4d19e8b1796770e59e1abf9aa1",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed2.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_40_seed3.json",
+      "sha256": "f1f0bf48d7c1994edd6b155cfbc3914692c293b9598737df22aea17bef20f175",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed3.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_40_seed4.json",
+      "sha256": "e4f045501a4d409c2ddb9dfcfee920dd8ba108587d125fd9581ab65ac31e1e8a",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed4.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_40_seed5.json",
+      "sha256": "2bd89dbc58ad99655985139de098aad62d9c5ec3707618a028ee3c5f2a95b1d5",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed5.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_40_seed6.json",
+      "sha256": "d15fd1ab1d96bd93ab1d913b97e9342fd038e9b10d51c668e2fc46b8b91c6cc1",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_40_seed6.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_60_seed1.json",
+      "sha256": "786ed79c970601512a0ea3589837db8eecbab731e7cd287e4722a4a0a65a240e",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed1.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_60_seed2.json",
+      "sha256": "7fdbd1d0e9f9f8bd32c3910396c965b8bdf04b93439a2d184c10c17ed487e72f",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed2.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_60_seed3.json",
+      "sha256": "cc6b435888ab7b57a90725149bd461e4dd01f26507672364e04f63d434a8fbc7",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed3.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_60_seed4.json",
+      "sha256": "a3517f3e69936a5231050a2207fb66ca6e7fb07f09745867bd25225ed35aed1a",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed4.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_60_seed5.json",
+      "sha256": "2224cbf8ad9164acb2c1661f24ea0f3849e971c2a2dce284cb2fecc5f3335dee",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed5.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_60_seed6.json",
+      "sha256": "64c50494cbd67c4dd7872638f4d7f98aabe30eb1ea4044e95a8ef7933a832a18",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_60_seed6.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_80_seed1.json",
+      "sha256": "a63ef492a10a309733425c41fbbf3870c5007be8b338a01238e5810041def41b",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed1.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_80_seed2.json",
+      "sha256": "e016f8c1d404c7d71e995dcc22d9d9e29878388eba61ed5e9ac8654aca28a47c",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed2.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_80_seed3.json",
+      "sha256": "db537981334e444bee0fcfa0bbcbb73e01a17ed50e0c484c74b47c207b2ccf2e",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed3.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_80_seed4.json",
+      "sha256": "c40f53a94470e18b5d73573f19fa5753ae80d5a400c95f9e0c66f0f8eb473b49",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed4.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_80_seed5.json",
+      "sha256": "1bb1e6efca273d02146a25e4d897768cecd4c7f233d4623eb36202b4d2c35934",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed5.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/deployment/aws/plan/suites/diffusion_80_seed6.json",
+      "sha256": "d97b8ec07faa8d39b3efaf3f18f5700e105cabd48f29bbcebbb9a6355f5ec3e2",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/deployment/aws/plan/suites/diffusion_80_seed6.json"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/experiments/paper_final/run_online.py",
+      "sha256": "9daa026c935382a6b98374be448804df0628e4b6d777e30ee98147a9b3e7210e",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/experiments/paper_final/run_online.py"
+    },
+    {
+      "source": "/Users/erisehe/Documents/Codex/2026-10-23/task-2/aws-migration-5b111d1/hypre/bindings/Makefile",
+      "sha256": "6d09f86a80cd2f29f623d7b40c9eaa330bda42c0f81f363bad599b4114183003",
+      "same_bytes_as_preserved_destination": "development/migration-snapshots/2026-11-08/aws-source-variants/aws-migration-bf962f2/hypre/bindings/Makefile"
+    }
+  ],
+  "history_reachability": {
+    "archived-public-main": true,
+    "reward-objective-pilot": true,
+    "module3-and-module2-execution-source": true,
+    "official-paper-data-precursor": true,
+    "detached-original-paper-source": true,
+    "module2_execution_source_7bb48b6": true
+  }
+}

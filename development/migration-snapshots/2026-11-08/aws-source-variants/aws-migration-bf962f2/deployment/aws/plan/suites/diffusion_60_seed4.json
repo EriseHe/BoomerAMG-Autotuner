@@ -1,0 +1,9 @@
+{
+  "name": "AWS singleton diffusion_60_seed4",
+  "seeds": [
+    {
+      "config": "../../../../configs/module1/diffusion_60/seed_4.json",
+      "label": "4"
+    }
+  ]
+}
